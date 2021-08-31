@@ -9,5 +9,6 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:text="pussy 테스트입니다"/>
 </LinearLayout>
