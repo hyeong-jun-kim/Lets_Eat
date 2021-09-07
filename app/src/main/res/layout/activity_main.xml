@@ -10,34 +10,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/btnRest"
             android:layout_width="208dp"
             android:layout_height="370dp"
+            android:background="@drawable/btn"
             android:layout_gravity="left|top"
+            android:textColor="#000000"
+            android:textSize="20sp"
             android:text="식당" />
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/btnPic"
             android:layout_width="208dp"
             android:layout_height="370dp"
+            android:background="@drawable/btn"
             android:layout_gravity="right|top"
+            android:textColor="#000000"
+            android:textSize="20sp"
             android:text="사진" />
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/btnJumun"
             android:layout_width="208dp"
             android:layout_height="370dp"
+            android:background="@drawable/btn"
             android:layout_gravity="bottom|left"
+            android:textColor="#000000"
+            android:textSize="20sp"
             android:text="주문 내역" />
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/btnMY"
             android:layout_width="208dp"
             android:layout_height="370dp"
+            android:background="@drawable/btn"
             android:layout_gravity="bottom|right"
+            android:textColor="#000000"
+            android:textSize="20sp"
             android:text="MY" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="77dp"
-            android:layout_height="88dp"
-            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/btnQR"
+            android:layout_width="99dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_design"
+            android:text="QR"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </FrameLayout>
 </LinearLayout>
