@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#ED6868"
     android:gravity="center"
-    tools:context=".hwe_won_gaip">
+    tools:context=".RegisterActivity">
     <TextView
         android:id="@+id/title"
         android:layout_width="268dp"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="아이디"
-        android:background="@drawable/hewwongaip"
+        android:background="@drawable/register"
         android:layout_margin="10dp"
         android:textColorHint="#000000"/>
     <EditText
@@ -37,7 +37,7 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:textColorHint="#000000"
-        android:background="@drawable/hewwongaip"
+        android:background="@drawable/register"
         android:hint="비밀번호"/>
     <EditText
         android:layout_width="254dp"
@@ -45,7 +45,7 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:textColorHint="#000000"
-        android:background="@drawable/hewwongaip"
+        android:background="@drawable/register"
         android:hint="이름"/>
     <RadioGroup
         android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:textColorHint="#000000"
-        android:background="@drawable/hewwongaip"
+        android:background="@drawable/register"
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:hint="생년월일(yyMMdd)"/>
@@ -74,7 +74,7 @@
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:textColorHint="#000000"
-        android:background="@drawable/hewwongaip"
+        android:background="@drawable/register"
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:hint="전화번호(-생략)"/>
