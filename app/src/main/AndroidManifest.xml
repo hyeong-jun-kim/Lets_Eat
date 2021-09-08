@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
         <activity
+            android:name=".restaurant_info"
+            android:exported="true" />
+        <activity
             android:name=".Login"
             android:exported="true" />
         <activity android:name=".SplashActivity">
