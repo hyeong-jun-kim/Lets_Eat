@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnQR = findViewById(R.id.btnQR);
+        Button btnRest = findViewById(R.id.btnRest);
+
         Button btnOrder = findViewById(R.id.btnOrder);
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 integrator.setCameraId(0); //후면카메라 설정
                 integrator.setPrompt("식당 QR 코드를 스캔해주세요");
                 integrator.initiateScan(); // QR코드 리더기 실행
+            }
+        });
+
+        btnRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),Rest_List.class);
+                startActivity(intent);
             }
         });
     }

@@ -17,10 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
         <activity android:name=".menu_sample"></activity>
+        <activity android:name=".Rest_List">
+        </activity>
         <activity
-            android:name=".menu.MenuActivity"
+            android:name=".MenuActivity"
             android:exported="true" />
-        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity
             android:name=".restaurant.restaurant_info"
             android:exported="true" />
