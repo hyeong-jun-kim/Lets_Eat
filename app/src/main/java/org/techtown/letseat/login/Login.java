@@ -1,14 +1,16 @@
-package org.techtown.letseat;
+package org.techtown.letseat.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
-public class RegisterActivity extends AppCompatActivity {
+import org.techtown.letseat.R;
 
+public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
     }
 }

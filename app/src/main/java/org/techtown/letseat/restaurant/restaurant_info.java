@@ -1,14 +1,16 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ImageView;
 
-public class Login extends AppCompatActivity {
+import org.techtown.letseat.R;
+
+public class restaurant_info extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_restaurant_info);
     }
 }

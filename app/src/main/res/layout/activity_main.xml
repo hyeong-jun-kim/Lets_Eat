@@ -28,7 +28,7 @@
             android:textSize="20sp"
             android:text="사진" />
         <Button
-            android:id="@+id/btnJumun"
+            android:id="@+id/btnOrder"
             android:layout_width="208dp"
             android:layout_height="370dp"
             android:background="@drawable/btn"

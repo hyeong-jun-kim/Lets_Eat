@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import org.techtown.letseat.menu.MenuActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnQR = findViewById(R.id.btnQR);
-
+        Button btnOrder = findViewById(R.id.btnOrder);
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

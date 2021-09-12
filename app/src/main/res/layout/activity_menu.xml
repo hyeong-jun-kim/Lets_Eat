@@ -4,59 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ED6868"
+    android:background="@drawable/splash_drawable"
     android:orientation="vertical"
-    tools:context=".MenuActivity">
+    tools:context=".menu.MenuActivity">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="328dp"
         android:src="@drawable/image1" />
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="106dp"
-            android:layout_height="106dp"
-            android:src="@drawable/menuimg1"/>
-        <TextView
-            android:layout_width="276dp"
-            android:layout_height="69dp"
-            android:layout_margin="5dp"
-            android:text="마라탕 7000원"
-            android:textColor="#000000"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="106dp"
-            android:layout_height="106dp"
-            android:src="@drawable/menuimg2"/>
-        <TextView
-            android:layout_width="276dp"
-            android:layout_height="69dp"
-            android:layout_margin="5dp"
-            android:text="마라샹궈 8000원"
-            android:textColor="#000000" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="106dp"
-            android:layout_height="106dp"
-            android:src="@drawable/menuimg3"/>
-        <TextView
-            android:layout_width="276dp"
-            android:layout_height="69dp"
-            android:layout_margin="5dp"
-            android:text="꿔바로우 17000원"
-            android:textColor="#000000" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
+
 </LinearLayout>
