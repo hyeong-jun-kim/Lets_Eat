@@ -16,7 +16,6 @@
         android:inputType="textPersonName"
         android:text="검색" />
 
-
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
