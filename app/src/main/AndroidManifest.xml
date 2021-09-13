@@ -16,9 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
-        <activity android:name=".menu_sample"></activity>
-        <activity android:name=".Rest_List">
-        </activity>
+        <activity
+            android:name=".ReviewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".OrderActivity"
+            android:exported="true" />
+        <activity android:name=".menu_sample" />
+        <activity android:name=".Rest_List" />
         <activity
             android:name=".MenuActivity"
             android:exported="true" />
