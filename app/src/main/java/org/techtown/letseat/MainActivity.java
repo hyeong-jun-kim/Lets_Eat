@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnQR = findViewById(R.id.btnQR);
         Button btnRest = findViewById(R.id.btnRest);
+        Button btnMY = findViewById(R.id.btnMY);
 
         Button btnOrder = findViewById(R.id.btnOrder);
         btnQR.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +43,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnMY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MyTab.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
     }
+
+
 }

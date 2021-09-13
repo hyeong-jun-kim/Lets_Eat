@@ -56,7 +56,7 @@
         android:background="#FFFFFF" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/waiting_status_button"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         android:background="#F4A288"

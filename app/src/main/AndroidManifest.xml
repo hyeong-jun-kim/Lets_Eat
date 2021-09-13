@@ -17,10 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
         <activity
+            android:name=".waiting_Layout"
+            android:exported="true" />
+        <activity
             android:name=".MyTab"
             android:exported="true" />
         <activity android:name=".menu_sample" />
-        <activity android:name=".Rest_List"></activity>
+        <activity android:name=".Rest_List" />
         <activity
             android:name=".MenuActivity"
             android:exported="true" />
