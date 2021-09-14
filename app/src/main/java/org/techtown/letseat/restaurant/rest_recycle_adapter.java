@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 

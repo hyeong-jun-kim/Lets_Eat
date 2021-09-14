@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ED6868"
     android:orientation="vertical"
-    tools:context=".MyTab">
+    tools:context=".mytab.MyTab">
 
     <TextView
         android:id="@+id/textView2"

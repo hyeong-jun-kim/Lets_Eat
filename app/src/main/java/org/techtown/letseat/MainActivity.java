@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 
-import org.techtown.letseat.menu.MenuActivity;
+import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.photo.PhotoList;
+import org.techtown.letseat.restaurant.Rest_List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnMY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MyTab.class);
+                Intent intent = new Intent(getApplicationContext(), MyTab.class);
                 startActivity(intent);
             }
         });

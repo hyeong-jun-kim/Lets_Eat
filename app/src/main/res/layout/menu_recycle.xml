@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     android:background="@drawable/gradient"
     android:gravity="center"
-    tools:context=".menu_sample">
+    tools:context=".menu.menu_sample">
 
     <ImageView
         android:id="@+id/image"
@@ -23,7 +23,7 @@
         android:layout_weight="1"
         android:background="@drawable/gradient"
         android:orientation="vertical"
-        tools:context=".menu_sample">
+        tools:context=".menu.menu_sample">
 
         <TextView
             android:id="@+id/name"

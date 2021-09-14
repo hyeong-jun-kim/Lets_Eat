@@ -1,10 +1,13 @@
-package org.techtown.letseat;
+package org.techtown.letseat.mytab;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+
+import org.techtown.letseat.R;
+import org.techtown.letseat.restaurant.rest_recycle_adapter;
 
 public class waiting_Layout extends AppCompatActivity {
 
@@ -13,7 +16,7 @@ public class waiting_Layout extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waiting_layout);
+        setContentView(R.layout.mytab_waiting);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
