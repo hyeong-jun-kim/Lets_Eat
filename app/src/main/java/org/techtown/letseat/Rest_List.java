@@ -14,7 +14,7 @@ public class Rest_List extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_res_list);
+        setContentView(R.layout.res_list_activity);
 
         //recycleView 초기화
         RecyclerView recyclerView = findViewById(R.id.recycler_view);

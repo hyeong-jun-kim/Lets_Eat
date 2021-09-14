@@ -1,6 +1,5 @@
 package org.techtown.letseat.menu;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.activity_menu_sample, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.menu_recycle, viewGroup, false);
 
         return new ViewHolder(itemView);
     }

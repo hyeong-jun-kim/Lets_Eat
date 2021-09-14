@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import org.techtown.letseat.menu.MenuActivity;
+import org.techtown.letseat.photo.PhotoList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnQR = findViewById(R.id.btnQR);
         Button btnRest = findViewById(R.id.btnRest);
-
+        Button btnPhoto = findViewById(R.id.btnPhoto);
         Button btnOrder = findViewById(R.id.btnOrder);
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +39,14 @@ public class MainActivity extends AppCompatActivity {
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Rest_List.class);
+                Intent intent = new Intent(getApplicationContext(), Rest_List.class);
+                startActivity(intent);
+            }
+        });
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PhotoList.class);
                 startActivity(intent);
             }
         });

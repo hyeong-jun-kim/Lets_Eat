@@ -19,7 +19,7 @@
             android:textSize="20sp"
             android:text="식당" />
         <Button
-            android:id="@+id/btnPic"
+            android:id="@+id/btnPhoto"
             android:layout_width="208dp"
             android:layout_height="370dp"
             android:background="@drawable/btn"

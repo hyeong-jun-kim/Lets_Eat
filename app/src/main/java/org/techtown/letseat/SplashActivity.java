@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.splash_activity);
         title = findViewById(R.id.title);
         subtitle = findViewById(R.id.subtitle);
         copyright = findViewById(R.id.copyright);
