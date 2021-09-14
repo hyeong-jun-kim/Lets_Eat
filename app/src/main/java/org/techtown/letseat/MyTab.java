@@ -22,5 +22,14 @@ public class MyTab extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button i_f_button = findViewById(R.id.information_fix_button);
+        i_f_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), information_fix.class);
+                startActivity(intent);
+            }
+        });
     }
 }

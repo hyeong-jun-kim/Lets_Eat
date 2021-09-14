@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
         <activity
+            android:name=".information_fix"
+            android:exported="true" />
+        <activity
             android:name=".waiting_Layout"
             android:exported="true" />
         <activity
