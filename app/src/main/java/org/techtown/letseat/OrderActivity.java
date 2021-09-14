@@ -1,6 +1,8 @@
 package org.techtown.letseat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,8 +13,10 @@ import com.google.android.material.tabs.TabLayout;
 
 public class OrderActivity extends AppCompatActivity {
 
-    private Order_recycle_adapter adapter = new Order_recycle_adapter();
-    private Order_recycle_adapter2 adapter2 = new Order_recycle_adapter2();
+    public FragmentManager fm;
+    FragmentTransaction tran;
+    fragment_order fragment_order;
+    fragment_order2 fragment_order2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +24,10 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        fragment_order = new fragment_order();
+        fragment_order2 = new fragment_order2();
 
-
-        adapter.setItems(new Orderdata().getItems());
-        adapter2.setItems(new Orderdata2().getItems());
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.order_frame,fragment_order).commit();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -44,25 +47,20 @@ public class OrderActivity extends AppCompatActivity {
 
         }) ;
 
-
     }
     private void changeView(int index) {
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerView recyclerView2 = findViewById(R.id.recycler_view2);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        recyclerView2.setAdapter(adapter2);
+        fm = getSupportFragmentManager();
+        tran = fm.beginTransaction();
 
         switch (index) {
             case 0 :
-                recyclerView.setVisibility(View.VISIBLE);
-                recyclerView2.setVisibility(View.INVISIBLE);
+                tran.replace(R.id.order_frame, fragment_order);
+                tran.commit();
                 break ;
             case 1 :
-                recyclerView.setVisibility(View.INVISIBLE);
-                recyclerView2.setVisibility(View.VISIBLE);
+                tran.replace(R.id.order_frame, fragment_order2);
+                tran.commit();
                 break ;
         }
     }
