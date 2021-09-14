@@ -1,4 +1,6 @@
-package org.techtown.letseat;
+package org.techtown.letseat.order;
+
+import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 

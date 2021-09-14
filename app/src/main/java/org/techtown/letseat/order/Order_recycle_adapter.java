@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.order;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import org.techtown.letseat.R;
+import org.techtown.letseat.ReviewActivity;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,7 @@ public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_ad
             btnReview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context,ReviewActivity.class);
+                    Intent intent = new Intent(context, ReviewActivity.class);
                     context.startActivity(intent);
                 }
             });

@@ -34,7 +34,7 @@
             android:name=".ReviewActivity"
             android:exported="true" />
         <activity
-            android:name=".OrderActivity"
+            android:name=".order.OrderActivity"
             android:exported="true" />
         <activity android:name=".menu_sample" />
         <activity android:name=".Rest_List" />

@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import org.techtown.letseat.mytab.MyTab;
+import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.Rest_List;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),OrderActivity.class);
+                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
                 startActivity(intent);
             }
         });

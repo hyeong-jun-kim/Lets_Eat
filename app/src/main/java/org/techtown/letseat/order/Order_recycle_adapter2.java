@@ -1,14 +1,15 @@
-package org.techtown.letseat;
+package org.techtown.letseat.order;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 

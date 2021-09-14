@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.order;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.techtown.letseat.R;
 
 public class fragment_order2 extends Fragment {
     View view;

@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.order;
 
 public class Order_recycle_item {
 

@@ -1,15 +1,14 @@
-package org.techtown.letseat;
+package org.techtown.letseat.order;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
+
+import org.techtown.letseat.R;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -21,7 +20,7 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.order_main);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         fragment_order = new fragment_order();
