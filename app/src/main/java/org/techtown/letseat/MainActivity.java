@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnQR = findViewById(R.id.btnQR);
         Button btnRest = findViewById(R.id.btnRest);
         Button btnPhoto = findViewById(R.id.btnPhoto);
+        Button btnMY = findViewById(R.id.btnMY);
+
         Button btnOrder = findViewById(R.id.btnOrder);
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PhotoList.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMY.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MyTab.class);
                 startActivity(intent);
             }
         });
