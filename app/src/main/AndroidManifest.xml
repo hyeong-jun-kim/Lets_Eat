@@ -39,7 +39,7 @@
         <activity android:name=".menu_sample" />
         <activity android:name=".Rest_List" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".menu.MenuActivity"
             android:exported="true" />
         <activity android:name=".RegisterActivity" />
         <activity
