@@ -66,10 +66,10 @@
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="영업시간   AM 10:00 ~ PM 22:00"
                 android:layout_marginTop="6dp"
+                android:text="영업시간   AM 10:00 ~ PM 22:00"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView11"

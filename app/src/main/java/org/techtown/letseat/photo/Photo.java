@@ -1,15 +1,15 @@
-package org.techtown.letseat.menu;
+package org.techtown.letseat.photo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MenuData implements Parcelable {
+public class Photo implements Parcelable {
 
     public int resId;
     public String title;
     public String review;
-
-    protected MenuData(Parcel in){
+    public Photo(){}
+    protected Photo(Parcel in){
         resId = in.readInt();
         title = in.readString();
         review = in.readString();
@@ -24,14 +24,14 @@ public class MenuData implements Parcelable {
     public int describeContents(){
         return 0;
     }
-    public static final Creator<MenuData> CREATOR = new Creator<MenuData>() {
+    public static final Creator<Photo> CREATOR = new Creator<Photo>() {
         @Override
-        public MenuData createFromParcel(Parcel in) {
-            return new MenuData(in);
+        public Photo createFromParcel(Parcel in) {
+            return new Photo(in);
         }
         @Override
-        public MenuData[] newArray(int size) {
-            return new MenuData[size];
+        public Photo[] newArray(int size) {
+            return new Photo[size];
         }
     };
     public void setresId(int id){

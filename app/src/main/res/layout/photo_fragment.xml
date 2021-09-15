@@ -2,16 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="349dp"
+    android:layout_height="451dp"
     android:background="#FFFFFF"
     tools:context=".photo.PhotoFragment">
 
     <ImageView
         android:id="@+id/photo_view"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:layout_marginTop="18dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/gamzatang"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,20 +21,19 @@
         android:id="@+id/photo_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="119dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/notosansbold"
         android:text="가천대 감자탕"
         android:textColor="#090707"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="411dp"
-        android:layout_height="57dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:background="#FFFFF3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +43,7 @@
         <TextView
             android:id="@+id/rate"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="clip_vertical|fill|top|center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_weight="4"
@@ -55,53 +53,54 @@
             android:scrollbarAlwaysDrawVerticalTrack="false"
             android:text="평점"
             android:textColor="#090707"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/one_star"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/star" />
 
         <ImageView
             android:id="@+id/two_star"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/star" />
 
         <ImageView
             android:id="@+id/three_star"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/star" />
 
         <ImageView
             android:id="@+id/four_star"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/star" />
 
         <ImageView
             android:id="@+id/five_star"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/star" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="414dp"
-        android:layout_height="290dp"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:layout_weight="4"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
             android:id="@+id/photo_review"
@@ -111,7 +110,19 @@
             android:fontFamily="@font/notosansregular"
             android:text="맛이정말 끝내줍니다 ^^"
             android:textColor="#090707"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/photo_cancel"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="65dp"
+        android:background="@drawable/cancel"
+        app:layout_constraintEnd_toStartOf="@+id/photo_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
