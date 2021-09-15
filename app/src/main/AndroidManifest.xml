@@ -17,13 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
         <activity
-            android:name=".information_fix"
+            android:name=".mytab.information_fix"
             android:exported="true" />
         <activity
-            android:name=".waiting_Layout"
+            android:name=".mytab.waiting_Layout"
             android:exported="true" />
         <activity
-            android:name=".MyTab"
+            android:name=".mytab.MyTab"
+            android:exported="true" />
+        <activity android:name=".menu.menu_sample" />
+        <activity android:name=".restaurant.Rest_List" />
+        <activity android:name=".photo.PhotoList"></activity>
+        <activity android:name=".menu.menu_sample" />
+        <activity android:name=".restaurant.Rest_List"></activity>
+        <activity
+            android:name=".ReviewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".order.OrderActivity"
             android:exported="true" />
         <activity android:name=".menu_sample" />
         <activity android:name=".Rest_List" />

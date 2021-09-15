@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".waiting_Layout">
+    tools:context=".mytab.waiting_Layout">
 
     <TextView
         android:id="@+id/textView2"

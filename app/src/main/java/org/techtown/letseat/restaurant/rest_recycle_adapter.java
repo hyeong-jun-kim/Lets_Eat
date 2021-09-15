@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class rest_recycle_adapter extends RecyclerView.Adapter<rest_recycle_adap
     @Override
     public rest_recycle_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rest_recycle, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.res_recycle, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
 
         return viewHolder;

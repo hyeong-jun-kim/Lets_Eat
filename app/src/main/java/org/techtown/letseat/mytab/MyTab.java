@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.mytab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.techtown.letseat.R;
+
 public class MyTab extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_tab);
+        setContentView(R.layout.mytab_main);
 
         Button w_s_button = findViewById(R.id.waiting_status_button);
         w_s_button.setOnClickListener(new View.OnClickListener() {

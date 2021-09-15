@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 
-import org.techtown.letseat.menu.MenuActivity;
+import org.techtown.letseat.mytab.MyTab;
+import org.techtown.letseat.order.OrderActivity;
+import org.techtown.letseat.photo.PhotoList;
+import org.techtown.letseat.restaurant.Rest_List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnQR = findViewById(R.id.btnQR);
         Button btnRest = findViewById(R.id.btnRest);
+        Button btnPhoto = findViewById(R.id.btnPhoto);
         Button btnMY = findViewById(R.id.btnMY);
 
         Button btnOrder = findViewById(R.id.btnOrder);
@@ -39,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Rest_List.class);
+                Intent intent = new Intent(getApplicationContext(), Rest_List.class);
+                startActivity(intent);
+            }
+        });
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PhotoList.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +57,15 @@ public class MainActivity extends AppCompatActivity {
         btnMY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MyTab.class);
+                Intent intent = new Intent(getApplicationContext(), MyTab.class);
+                startActivity(intent);
+            }
+        });
+
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -55,8 +73,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
     }
-
-
 }
