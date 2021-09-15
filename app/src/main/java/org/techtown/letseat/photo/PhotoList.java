@@ -25,7 +25,8 @@ public class PhotoList extends AppCompatActivity {
     private ImageView photo;
     private TextView title;
     private TextView review;
-    private boolean check = false;
+    static public PhotoList photoList;
+    public boolean check = false;
     PhotoFragment photoFragment;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -36,6 +37,7 @@ public class PhotoList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_list_activity);
+        photoList = this;
         init();
         getData();
         fm = getSupportFragmentManager();
@@ -45,10 +47,11 @@ public class PhotoList extends AppCompatActivity {
             @Override
             public void onItemClick(PhotoRecyclerAdapter.ItemViewHolder holder, View view,
                                     int position) {
-                Log.d("ActivityEmpty", ""+getSupportFragmentManager().beginTransaction().isEmpty());
-                if (getSupportFragmentManager().beginTransaction().isEmpty()) {
+                if (!check) {
+                    check = true;
                     photoFragment = new PhotoFragment();
                     ft = fm.beginTransaction();
+                    // 여기에 데이터베이스 정보 넣어야 함
                     photoFragment.setresId(listResId.get(holder.getAdapterPosition()));
                     photoFragment.setTitle("맛집 제목");
                     photoFragment.setReview("아주 맛있어요~~");

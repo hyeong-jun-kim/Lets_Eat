@@ -25,13 +25,7 @@ public class PhotoFragment extends Fragment {
     private int resdId;
     private String title_text;
     private String review_text;
-    public static Fragment newInstance(Photo data){
-        Fragment f = new PhotoFragment();
-        Bundle b = new Bundle();
-        b.putParcelable(Photo.class.getName(), data);
-        f.setArguments(b);
-        return f;
-    }
+    PhotoList photoList;
     public View onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.photo_fragment, container, false);
     }
@@ -46,14 +40,14 @@ public class PhotoFragment extends Fragment {
         photoView.setImageResource(resdId);
         title.setText(title_text);
         review.setText(review_text);
+        photoList = PhotoList.photoList;
         PhotoFragment photoFragment = this;
         cancelButton = view.findViewById(R.id.photo_cancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button", "버튼 눌림");
+                photoList.check = false;
                 getActivity().getSupportFragmentManager().beginTransaction().remove(photoFragment).commit();
-                Log.d("Fragment_Empty", ""+getActivity().getSupportFragmentManager().beginTransaction().isEmpty());
             }
         });
         return view;
