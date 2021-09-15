@@ -2,11 +2,16 @@ package org.techtown.letseat;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -16,7 +21,12 @@ import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.Rest_List;
 
 public class MainActivity extends AppCompatActivity {
+    private ViewPager2 sliderViewPager;
+    private LinearLayout layoutIndicator;
 
+    private int[] images = new int[]{
+            R.drawable.image1,R.drawable.image2,R.drawable.image3
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +36,23 @@ public class MainActivity extends AppCompatActivity {
         Button btnRest = findViewById(R.id.btnRest);
         Button btnPhoto = findViewById(R.id.btnPhoto);
         Button btnMY = findViewById(R.id.btnMY);
-
         Button btnOrder = findViewById(R.id.btnOrder);
+        sliderViewPager = findViewById(R.id.sliderViewPager);
+        layoutIndicator = findViewById(R.id.layoutIndicators);
+
+        sliderViewPager.setOffscreenPageLimit(1);
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+
+        sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                setCurrentIndicator(position);
+            }
+        });
+
+        setupIndicators(images.length);
+
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,5 +98,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    private void setupIndicators(int count) {
+        ImageView[] indicators = new ImageView[count];
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        params.setMargins(16, 8, 16, 8);
+
+        for (int i = 0; i < indicators.length; i++) {
+            indicators[i] = new ImageView(this);
+            indicators[i].setImageDrawable(ContextCompat.getDrawable(this,
+                    R.drawable.bg_indicator_inactive));
+            indicators[i].setLayoutParams(params);
+            layoutIndicator.addView(indicators[i]);
+        }
+        setCurrentIndicator(0);
+    }
+
+    private void setCurrentIndicator(int position) {
+        int childCount = layoutIndicator.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            ImageView imageView = (ImageView) layoutIndicator.getChildAt(i);
+            if (i == position) {
+                imageView.setImageDrawable(ContextCompat.getDrawable(
+                        this,
+                        R.drawable.bg_indicator_active
+                ));
+            } else {
+                imageView.setImageDrawable(ContextCompat.getDrawable(
+                        this,
+                        R.drawable.bg_indicator_inactive
+                ));
+            }
+        }
     }
 }
