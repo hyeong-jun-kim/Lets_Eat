@@ -1,5 +1,6 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant;
 
+import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.rest_recycle_item;
 
 import java.util.ArrayList;
