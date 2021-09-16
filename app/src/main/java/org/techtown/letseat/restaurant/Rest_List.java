@@ -29,11 +29,7 @@ public class Rest_List extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-
         adapter.setItems(new data().getItems());
-
-
-
 
         adapter.setItemClickListner(new OnRestaurantItemClickListner() {
             @Override

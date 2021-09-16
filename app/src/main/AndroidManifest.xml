@@ -27,7 +27,7 @@
             android:exported="true" />
         <activity android:name=".menu.menu_sample" />
         <activity android:name=".restaurant.Rest_List" />
-        <activity android:name=".photo.PhotoList"></activity>
+        <activity android:name=".photo.PhotoList" />
         <activity
             android:name=".ReviewActivity"
             android:exported="true" />
