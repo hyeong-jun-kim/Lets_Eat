@@ -34,11 +34,17 @@
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/rest_recycle.xml" value="0.27876631079478054" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/circle_design.xml" value="0.2935185185185185" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/login_border1.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/main_icon2_border.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/main_icon3_border.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/main_icon4_border.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/main_icon_border.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/mytab_border.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/waiting_status_border.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/font/font.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/font/main_font.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_information_fix.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_menu.xml" value="0.32314814814814813" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_menu_sample.xml" value="0.32314814814814813" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_my_tab.xml" value="0.25" />
@@ -54,6 +60,7 @@
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/menu_activity.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/menu_recycle.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytab_information_fix.xml" value="0.2388888888888889" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytab_main.xml" value="0.2498069498069498" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytab_waiting.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_main.xml" value="0.20222376650451704" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_recycle.xml" value="0.2388888888888889" />

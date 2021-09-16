@@ -15,18 +15,12 @@ import org.techtown.letseat.mytab.MyTab;
 
 public class restaurant_info extends AppCompatActivity {
 
-    private restaurant_info_adapter adapter = new restaurant_info_adapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.res_info_activity);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-
-        adapter.setItems(new restaurant_info_data().getItems());
 
         Button menu_button = findViewById(R.id.menu_button);
         menu_button.setOnClickListener(new View.OnClickListener() {
