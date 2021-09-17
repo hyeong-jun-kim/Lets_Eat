@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.info;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,9 +13,7 @@ import org.techtown.letseat.R;
 import org.techtown.letseat.menu.MenuActivity;
 import org.techtown.letseat.mytab.MyTab;
 
-public class restaurant_info extends AppCompatActivity {
-
-
+public class RestInfoMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
