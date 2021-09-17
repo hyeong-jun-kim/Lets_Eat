@@ -26,6 +26,8 @@
             android:name=".mytab.MyTab"
             android:exported="true" />
         <activity android:name=".menu.menu_sample" />
+        <activity android:name=".restaurant.Rest_List" />
+        <activity android:name=".photo.PhotoList" />
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList"></activity>
         <activity
