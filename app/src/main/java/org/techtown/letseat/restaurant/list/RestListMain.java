@@ -39,6 +39,7 @@ public class Rest_List extends AppCompatActivity {
 
                 rest_recycle_item item = adapter.getItem(position);
 
+
                 if(adapterPosition == 1){
                     Intent intent = new Intent(getApplicationContext(),restaurant_info.class);
                     startActivity(intent);

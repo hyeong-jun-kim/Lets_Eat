@@ -17,10 +17,12 @@ import org.techtown.letseat.ReviewActivity;
 
 import java.util.ArrayList;
 
-public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_adapter.ViewHolder> {
+public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_adapter.ViewHolder>
+implements OnReviewItemClickListner{
 
     private ArrayList<Order_recycle_item> items = new ArrayList<>();
     private Context context;
+    OnReviewItemClickListner listner;
 
     @NonNull
     @Override
@@ -33,6 +35,15 @@ public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_ad
         return viewHolder;
     }
 
+    public void OnItemClick(ViewHolder holder, View view, int position){
+        if(listner != null){
+            listner.OnItemClick(holder,view,position);
+        }
+    }
+    public void setItemClickListner(OnReviewItemClickListner listner){
+        this.listner = listner;
+
+    }
     @Override
     public void onBindViewHolder(@NonNull Order_recycle_adapter.ViewHolder viewHolder, int position) {
 
@@ -72,7 +83,11 @@ public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_ad
 
             btnReview.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listner != null){
+                        listner.OnItemClick(ViewHolder.this,v,position);
+                    }
                     Intent intent = new Intent(context, ReviewActivity.class);
                     context.startActivity(intent);
                 }

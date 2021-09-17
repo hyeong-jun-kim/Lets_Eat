@@ -1,5 +1,6 @@
 package org.techtown.letseat.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ public class fragment_order extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return view;
+
 
     }
 }
