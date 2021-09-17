@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
+import org.techtown.letseat.restaurant.info.RestInfoAdapter;
+import org.techtown.letseat.restaurant.info.RestInfoMain;
 
 import java.util.ArrayList;
 
-public class Rest_List extends AppCompatActivity {
-
-    private rest_recycle_adapter adapter = new rest_recycle_adapter();
-    private restaurant_info_adapter restaurant_info_adapter = new restaurant_info_adapter();
+public class RestListMain extends AppCompatActivity {
+    ArrayList<RestListRecycleItem> items = new RestListData().getItems();
+    private RestListAdapter adapter = new RestListAdapter();
+    private RestInfoAdapter restaurant_info_adapter = new RestInfoAdapter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,23 +32,15 @@ public class Rest_List extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        adapter.setItems(new data().getItems());
-
-
-
-
+        adapter.setItems(items);
         adapter.setItemClickListner(new OnRestaurantItemClickListner() {
             @Override
-            public void OnItemClick(rest_recycle_adapter.ViewHolder holder, View view, int position) {
-
+            public void OnItemClick(RestListAdapter.ViewHolder holder, View view, int position) {
                 int adapterPosition = holder.getAdapterPosition();
-
-                rest_recycle_item item = adapter.getItem(position);
-
-                if(adapterPosition == 1){
-                    Intent intent = new Intent(getApplicationContext(),restaurant_info.class);
-                    startActivity(intent);
-                }
+                RestListRecycleItem item = items.get(adapterPosition);
+                Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
+                intent.putExtra("num", adapterPosition);
+                startActivity(intent);
             }
         });
     }

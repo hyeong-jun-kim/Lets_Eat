@@ -1,6 +1,6 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.info;
 
-public class restaurant_info_item {
+public class RestInfoRecycleItem {
 
     private int src;
     private String title;
@@ -10,7 +10,7 @@ public class restaurant_info_item {
     private String time;
     private String parking;
 
-    public restaurant_info_item(int src, String title, String subtitle, String place, String phonenum, String time, String parking){
+    public RestInfoRecycleItem(int src, String title, String subtitle, String place, String phonenum, String time, String parking){
 
         this.src = src;
         this.title = title;

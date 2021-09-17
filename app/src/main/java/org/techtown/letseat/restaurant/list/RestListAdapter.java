@@ -1,7 +1,5 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.list;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
+import org.techtown.letseat.restaurant.info.RestInfoRecycleItem;
 
 import java.util.ArrayList;
 
-public class rest_recycle_adapter extends RecyclerView.Adapter<rest_recycle_adapter.ViewHolder>
+public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHolder>
         implements OnRestaurantItemClickListner
 {
 
-    private ArrayList<rest_recycle_item> items = new ArrayList<>();
-    private ArrayList<restaurant_info_item> restaurant_info_items = new ArrayList<>();
+    private ArrayList<RestListRecycleItem> items = new ArrayList<>();
+    private ArrayList<RestInfoRecycleItem> RestInfoRecycleItems = new ArrayList<>();
 
     OnRestaurantItemClickListner listner;
 
     @NonNull
     @Override
-    public rest_recycle_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public RestListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.res_recycle, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
@@ -35,9 +34,9 @@ public class rest_recycle_adapter extends RecyclerView.Adapter<rest_recycle_adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull rest_recycle_adapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RestListAdapter.ViewHolder viewHolder, int position) {
 
-        rest_recycle_item item = items.get(position);
+        RestListRecycleItem item = items.get(position);
 
         viewHolder.ivRest.setImageResource(item.getSrc());
         viewHolder.tvName.setText(item.getName());
@@ -52,7 +51,7 @@ public class rest_recycle_adapter extends RecyclerView.Adapter<rest_recycle_adap
         return items.size();
     }
 
-    public void setItems(ArrayList<rest_recycle_item> items) {
+    public void setItems(ArrayList<RestListRecycleItem> items) {
         this.items = items;
     }
 
@@ -66,12 +65,12 @@ public class rest_recycle_adapter extends RecyclerView.Adapter<rest_recycle_adap
         this.listner = listner;
     }
 
-    public rest_recycle_item getItemData(int num){
+    public RestListRecycleItem getItemData(int num){
         return items.get(num);
     }
 
 
-    public rest_recycle_item getItem(int position){
+    public RestListRecycleItem getItem(int position){
         return items.get(position);
     }
 

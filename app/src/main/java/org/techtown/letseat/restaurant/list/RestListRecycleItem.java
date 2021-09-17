@@ -1,13 +1,13 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.list;
 
-public class rest_recycle_item {
+public class RestListRecycleItem {
 
     private int src;
     private String genre;
     private String name;
     private String adress;
 
-    public rest_recycle_item(int src, String genre, String name, String adress) {
+    public RestListRecycleItem(int src, String genre, String name, String adress) {
 
         this.src = src;
         this.genre = genre;

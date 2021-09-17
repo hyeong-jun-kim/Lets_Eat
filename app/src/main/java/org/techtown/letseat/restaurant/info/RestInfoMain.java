@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.info;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,11 +11,13 @@ import android.widget.Button;
 
 import org.techtown.letseat.R;
 import org.techtown.letseat.menu.MenuActivity;
-import org.techtown.letseat.mytab.MyTab;
+import org.techtown.letseat.restaurant.list.RestListRecycleItem;
 
-public class restaurant_info extends AppCompatActivity {
+import java.util.ArrayList;
 
-    private restaurant_info_adapter adapter = new restaurant_info_adapter();
+public class RestInfoMain extends AppCompatActivity {
+
+    private RestInfoAdapter adapter = new RestInfoAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,8 @@ public class restaurant_info extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-        adapter.setItems(new restaurant_info_data().getItems());
+        int adapterPosition = savedInstanceState.getInt("num");
+        adapter.setItems(new RestInfoDataMain().getItems());
 
         Button menu_button = findViewById(R.id.menu_button);
         menu_button.setOnClickListener(new View.OnClickListener() {

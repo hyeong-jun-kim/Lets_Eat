@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.info;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +13,13 @@ import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 
-public class restaurant_info_adapter extends RecyclerView.Adapter<restaurant_info_adapter.ViewHolder> {
+public class RestInfoAdapter extends RecyclerView.Adapter<RestInfoAdapter.ViewHolder> {
 
-    private ArrayList<restaurant_info_item> items = new ArrayList<>();
+    private ArrayList<RestInfoRecycleItem> items = new ArrayList<>();
 
     @NonNull
     @Override
-    public restaurant_info_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RestInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.res_info_recycle, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
 
@@ -27,9 +27,9 @@ public class restaurant_info_adapter extends RecyclerView.Adapter<restaurant_inf
     }
 
     @Override
-    public void onBindViewHolder(@NonNull restaurant_info_adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RestInfoAdapter.ViewHolder holder, int position) {
 
-        restaurant_info_item item = items.get(position);
+        RestInfoRecycleItem item = items.get(position);
 
         holder.restaurant_image.setImageResource(item.getSrc());
         holder.res_title.setText(item.getTitle());
@@ -49,7 +49,7 @@ public class restaurant_info_adapter extends RecyclerView.Adapter<restaurant_inf
     }
 
 
-    public void setItems(ArrayList<restaurant_info_item> items) {
+    public void setItems(ArrayList<RestInfoRecycleItem> items) {
         this.items = items;
     }
 
