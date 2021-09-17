@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant;
+package org.techtown.letseat.restaurant.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
+import org.techtown.letseat.restaurant.info.RestInfoAdapter;
 
 import java.util.ArrayList;
 
-public class Rest_List extends AppCompatActivity {
+public class RestListMain extends AppCompatActivity {
 
-    private rest_recycle_adapter adapter = new rest_recycle_adapter();
-    private restaurant_info_adapter restaurant_info_adapter = new restaurant_info_adapter();
+    private RestListAdapter adapter = new RestListAdapter ();
+    private RestInfoAdapter restaurant_info_adapter = new RestInfoAdapter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,19 +30,19 @@ public class Rest_List extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        adapter.setItems(new data().getItems());
+        adapter.setItems(new RestListData().getItems());
 
         adapter.setItemClickListner(new OnRestaurantItemClickListner() {
             @Override
-            public void OnItemClick(rest_recycle_adapter.ViewHolder holder, View view, int position) {
+            public void OnItemClick(RestListAdapter.ViewHolder holder, View view, int position) {
 
                 int adapterPosition = holder.getAdapterPosition();
 
-                rest_recycle_item item = adapter.getItem(position);
+                RestListRecycleItem item = adapter.getItem(position);
 
 
                 if(adapterPosition == 1){
-                    Intent intent = new Intent(getApplicationContext(),restaurant_info.class);
+                    Intent intent = new Intent(getApplicationContext(),RestIn.class);
                     startActivity(intent);
                 }
             }
