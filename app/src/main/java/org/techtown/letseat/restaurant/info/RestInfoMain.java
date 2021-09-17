@@ -14,8 +14,6 @@ import org.techtown.letseat.menu.MenuActivity;
 import org.techtown.letseat.mytab.MyTab;
 
 public class RestInfoMain extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

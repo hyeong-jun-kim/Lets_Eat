@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.restaurant.info.RestInfoAdapter;
+import org.techtown.letseat.restaurant.info.RestInfoMain;
 
 import java.util.ArrayList;
 
 public class RestListMain extends AppCompatActivity {
 
-    private RestListAdapter adapter = new RestListAdapter ();
-    private RestInfoAdapter restaurant_info_adapter = new RestInfoAdapter();
+    private RestListAdapter adapter = new RestListAdapter();
+    private RestListAdapter restaurant_info_adapter = new RestListAdapter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class RestListMain extends AppCompatActivity {
 
 
                 if(adapterPosition == 1){
-                    Intent intent = new Intent(getApplicationContext(),RestIn.class);
+                    Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                     startActivity(intent);
                 }
             }
