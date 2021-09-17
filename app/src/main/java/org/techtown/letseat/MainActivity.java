@@ -5,24 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
 
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
+    private IntentIntegrator qrScan;
 
     private int[] images = new int[]{
             R.drawable.image1,R.drawable.image2,R.drawable.image3
@@ -39,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnOrder = findViewById(R.id.btnOrder);
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
+        qrScan = new IntentIntegrator(this);
 
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
@@ -59,10 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE); //QR코드만 식별
                 integrator.setCameraId(0); //후면카메라 설정
-                integrator.setPrompt("식당 QR 코드를 스캔해주세요");
+                integrator.setPrompt("QR 코드를 스캔해주세요");
                 integrator.initiateScan(); // QR코드 리더기 실행
             }
         });
+
 
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,10 +105,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "스캔완료", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
+
     private void setupIndicators(int count) {
         ImageView[] indicators = new ImageView[count];
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
