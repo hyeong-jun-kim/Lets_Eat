@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             if (result.getContents() == null) {
                 Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(MainActivity.this, "스캔완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "스캔완료" + result.getContents(), Toast.LENGTH_SHORT).show();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
