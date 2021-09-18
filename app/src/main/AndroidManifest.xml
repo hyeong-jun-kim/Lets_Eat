@@ -27,23 +27,21 @@
             android:exported="true" />
         <activity android:name=".menu.menu_sample" />
         <activity android:name=".restaurant.Rest_List" />
+        <activity android:name=".photo.PhotoList" />
+        <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList"></activity>
-        <activity android:name=".menu.menu_sample" />
-        <activity android:name=".restaurant.Rest_List"></activity>
         <activity
             android:name=".ReviewActivity"
             android:exported="true" />
         <activity
             android:name=".order.OrderActivity"
             android:exported="true" />
-        <activity android:name=".menu_sample" />
-        <activity android:name=".Rest_List" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".menu.MenuActivity"
             android:exported="true" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".login.RegisterActivity" />
         <activity
-            android:name=".restaurant.restaurant_info"
+            android:name=".restaurant.info.RestInfoMain"
             android:exported="true" />
         <activity
             android:name=".login.Login"

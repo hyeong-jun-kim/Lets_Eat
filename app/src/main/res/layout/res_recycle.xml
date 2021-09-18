@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|top">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_item_res_parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="390dp"
+        android:layout_height="245dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="15dp"
         app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
         <ImageView
             android:id="@+id/iv_item_res"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="240dp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center|top"
+            android:scaleType="centerCrop" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:paddingLeft="16dp"
-            android:paddingRight="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:alpha="0.6"
             android:background="@android:color/black"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp">
+
             <TextView
                 android:id="@+id/tv_item_food_genre"
                 android:layout_width="wrap_content"
@@ -34,7 +41,8 @@
                 android:layout_marginBottom="8dp"
                 android:text="Food Genre"
                 android:textColor="@android:color/white"
-                android:textSize="12dp"/>
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/tv_item_res_name"
                 android:layout_width="wrap_content"
@@ -42,13 +50,14 @@
                 android:layout_marginRight="16dp"
                 android:text="Name"
                 android:textColor="@android:color/white"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
+
             <TextView
                 android:id="@+id/tv_item_res_adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Res Address"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

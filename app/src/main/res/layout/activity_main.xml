@@ -6,53 +6,143 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
-            android:id="@+id/btnRest"
-            android:layout_width="208dp"
-            android:layout_height="370dp"
-            android:background="@drawable/btn"
-            android:layout_gravity="left|top"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:text="식당" />
-        <Button
-            android:id="@+id/btnPhoto"
-            android:layout_width="208dp"
-            android:layout_height="370dp"
-            android:background="@drawable/btn"
-            android:layout_gravity="right|top"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:text="사진" />
-        <Button
-            android:id="@+id/btnOrder"
-            android:layout_width="208dp"
-            android:layout_height="370dp"
-            android:background="@drawable/btn"
-            android:layout_gravity="bottom|left"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:text="주문 내역" />
-        <Button
-            android:id="@+id/btnMY"
-            android:layout_width="208dp"
-            android:layout_height="370dp"
-            android:background="@drawable/btn"
-            android:layout_gravity="bottom|right"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:text="MY" />
-        <Button
-            android:id="@+id/btnQR"
-            android:layout_width="99dp"
-            android:layout_height="95dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_design"
-            android:text="QR"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-    </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/sliderViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/viewFadingEdge"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_fading_edge"
+                    app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
+
+                <LinearLayout
+                    android:id="@+id/layoutIndicators"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFadingEdge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnQR"
+                    android:layout_width="99dp"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_design"
+                    android:fontFamily="@font/notosansbold"
+                    android:text="QR"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:columnCount="2"
+                    android:orientation="vertical"
+                    android:rowCount="2">
+
+                    <Button
+                        android:id="@+id/btnRest"
+                        android:layout_width="205dp"
+                        android:layout_height="205dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:background="@drawable/main_icon1_border"
+                        android:drawableTop="@drawable/restaurant"
+                        android:fontFamily="@font/notosansbold"
+                        android:padding="30dp"
+                        android:text="식당"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/btnPhoto"
+                        android:layout_width="205dp"
+                        android:layout_height="205dp"
+                        android:layout_row="0"
+                        android:layout_column="1"
+                        android:background="@drawable/main_icon2_border"
+                        android:drawableTop="@drawable/food"
+                        android:fontFamily="@font/notosansbold"
+                        android:padding="30dp"
+                        android:text="사진"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/btnOrder"
+                        android:layout_width="205dp"
+                        android:layout_height="205dp"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:background="@drawable/main_icon3_border"
+                        android:drawableTop="@drawable/order"
+                        android:fontFamily="@font/notosansbold"
+                        android:padding="30dp"
+                        android:text="주문 내역"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/btnMY"
+                        android:layout_width="205dp"
+                        android:layout_height="205dp"
+                        android:layout_row="1"
+                        android:layout_column="1"
+                        android:background="@drawable/main_icon4_border"
+                        android:drawableTop="@drawable/mytab"
+                        android:fontFamily="@font/notosansbold"
+                        android:padding="30dp"
+                        android:text="MY"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </GridLayout>
+            </FrameLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="오늘의 먹거리!" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="LET's EAT" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="서명진짱" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

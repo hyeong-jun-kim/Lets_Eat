@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,56 +25,55 @@ public class PhotoList extends AppCompatActivity {
     private ImageView photo;
     private TextView title;
     private TextView review;
-    private boolean fragment_switch = false;
+    static public PhotoList photoList;
+    public boolean check = false;
+    PhotoFragment photoFragment;
+    FragmentManager fm;
+    FragmentTransaction ft;
     List<Integer> listResId = Arrays.asList(R.drawable.image1, R.drawable.image2, R.drawable.image3,
-    R.drawable.menuimg1, R.drawable.menuimg2, R.drawable.menuimg3);
+            R.drawable.menuimg1, R.drawable.menuimg2, R.drawable.menuimg3);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_list_activity);
+        photoList = this;
         init();
         getData();
-        FragmentManager fm = getSupportFragmentManager();
-        PhotoFragment photoFragment = (PhotoFragment) fm.findFragmentById(R.id.photoFragment);
-        ViewGroup layout = (ViewGroup) findViewById(R.id.photolayout);
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(fragment_switch == true){
-                    FragmentTransaction ft = fm.beginTransaction();
-                    Fragment fragment = fm.findFragmentById(R.id.photoFragment);
-                    ft.remove(fragment);
-                    fragment_switch = false;
-                }
-            }
-        });
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
         // 사진 클릭할 시 나오는 이벤트
         adapter.setOnItemClicklistener(new OnPhotoItemClickListener() {
             @Override
-            public void onItemClick(PhotoRecyclerAdapter.ItemViewHolder holder, View view, int position) {
-                if(photoFragment == null){
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.add(R.id.photoFragment, new PhotoFragment());
-                    //photoFragment.setPhotoView(listResId.get(holder.getAdapterPosition()));
+            public void onItemClick(PhotoRecyclerAdapter.ItemViewHolder holder, View view,
+                                    int position) {
+                if (!check) {
+                    check = true;
+                    photoFragment = new PhotoFragment();
+                    ft = fm.beginTransaction();
+                    // 여기에 데이터베이스 정보 넣어야 함
+                    photoFragment.setresId(listResId.get(holder.getAdapterPosition()));
                     photoFragment.setTitle("맛집 제목");
-                    photoFragment.setReview("맛집 내용");
-                    fragment_switch = true;
-                    ft.commitNow();
+                    photoFragment.setReview("아주 맛있어요~~");
+                    ft.add(R.id.photoFragment, photoFragment);
+                    ft.commit();
                 }
             }
         });
     }
+
     // 처음 시작 시 리사이클러뷰 세팅하기
-    private void init(){
+    private void init() {
         RecyclerView recyclerView = findViewById(R.id.photoRecyclerView);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new PhotoRecyclerAdapter();
         recyclerView.setAdapter(adapter);
     }
+
     // 처음 시작 시 리사이클러뷰 불러오기
-    private void getData(){
-        for(int i = 0; i < listResId.size(); i++){
+    private void getData() {
+        for (int i = 0; i < listResId.size(); i++) {
             PhotoData data = new PhotoData();
             data.setResId(listResId.get(i));
             adapter.addItem(data);
