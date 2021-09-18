@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import org.techtown.letseat.login.Login;
+
 public class SplashActivity extends AppCompatActivity {
     Animation anim_fade_in_1, anim_fade_in_2;
     TextView title, subtitle, copyright;
@@ -29,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
                 finish();
             }
