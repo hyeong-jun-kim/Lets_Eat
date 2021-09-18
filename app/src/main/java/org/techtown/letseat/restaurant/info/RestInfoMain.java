@@ -12,6 +12,8 @@ import android.widget.Button;
 import org.techtown.letseat.R;
 import org.techtown.letseat.menu.MenuActivity;
 import org.techtown.letseat.mytab.MyTab;
+import org.techtown.letseat.photo.Photo;
+import org.techtown.letseat.photo.PhotoFragment;
 
 public class RestInfoMain extends AppCompatActivity {
     @Override
@@ -21,6 +23,8 @@ public class RestInfoMain extends AppCompatActivity {
 
 
         Button menu_button = findViewById(R.id.menu_button);
+        Button review_button = findViewById(R.id.review_button);
+
         menu_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,5 +32,7 @@ public class RestInfoMain extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }
