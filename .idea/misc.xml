@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Studio/Lets_Eat/app/src/main/res/layout/fragment_order.xml" value="0.1" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.215625" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/bg_indicator_active.xml" value="0.2123076923076923" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/bg_indicator_inactive.xml" value="0.2123076923076923" />
