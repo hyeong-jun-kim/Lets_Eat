@@ -137,6 +137,7 @@
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/review_button"
-        app:layout_constraintVertical_bias="0.159"></com.kakao.usermgmt.LoginButton>
+        app:layout_constraintVertical_bias="0.151"
+        tools:ignore="TouchTargetSizeCheck"></com.kakao.usermgmt.LoginButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
