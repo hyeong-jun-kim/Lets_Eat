@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -18,13 +19,16 @@ import android.widget.Toast;
 import com.kakao.auth.Session;
 import com.kakao.usermgmt.LoginButton;
 
+import org.json.JSONObject;
 import org.techtown.letseat.KaKaoCallBack;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -35,9 +39,9 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    Button button, btn_register, login_button;
+    Button  btn_register, login_button;
     LoginButton kakao_login_button;
-    EditText input_ID, input_PW;
+    EditText input_email, input_password;
 
 
     private KaKaoCallBack kaKaoCallBack;
@@ -48,8 +52,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login_activity);
 
         login_button = findViewById(R.id.login_button);
-        input_ID = findViewById(R.id.input_ID);
-        input_PW = findViewById(R.id.input_PW);
+        input_email = findViewById(R.id.input_email);
+        input_password = findViewById(R.id.input_password);
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,12 +93,12 @@ public class Login extends AppCompatActivity {
     // 서버 연동 파트
     void login(){
         try {
-            String id = input_ID.getText().toString();
-            String pw = input_PW.getText().toString();
-            Log.w("앱에서 보낸값",id+", "+pw);
+            String email = input_email.getText().toString();
+            String password = input_password.getText().toString();
+            Log.w("앱에서 보낸값",email+", "+password);
 
             CustomTask task = new CustomTask();
-            String result = task.execute(id,pw).get();
+            String result = task.execute(email,password).get();
             Log.w("받은값",result);
 
             Intent intent = new Intent(Login.this, MainActivity.class);
@@ -105,44 +109,62 @@ public class Login extends AppCompatActivity {
         }
     }
 
+
+
     class CustomTask extends AsyncTask<String, Void, String> {
-        String sendMsg, receiveMsg;
+
+        InputStream is = null;
+        String result = "";
 
         @Override
         protected String doInBackground(String... strings) {
-            try{
-                String str;
-                URL url = new URL("http://220.70.169.23:8000/letseat/register/normal");
+            try {
+                URL urlCon = new URL("http://220.70.169.23:8000/letseat/register/normal");
+                HttpURLConnection httpCon = (HttpURLConnection) urlCon.openConnection();
 
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                conn.setRequestMethod("POST");                              //데이터를 POST 방식으로 전송합니다.
-                conn.setDoOutput(true);
+                String json = "";
+                Editable email = input_email.getText();
+                Editable password = input_password.getText();
 
-                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-                sendMsg = "id="+strings[0]+"&pw="+strings[1]; // GET방식으로 작성해 POST로 보냄 ex) "id=admin&pwd=1234";
-                osw.write(sendMsg);                           // OutputStreamWriter에 담아 전송
-                osw.flush();
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("email", email);
+                jsonObject.accumulate("password", password);
+                json = jsonObject.toString();
 
-                if(conn.getResponseCode() == conn.HTTP_OK) {
-                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
-                    BufferedReader reader = new BufferedReader(tmp);
-                    StringBuffer buffer = new StringBuffer();
-                    while ((str = reader.readLine()) != null) {
-                        buffer.append(str);
-                    }
-                    receiveMsg = buffer.toString();
-                } else {    // 통신이 실패한 이유를 찍기위한 로그
-                    Log.i("통신 결과", conn.getResponseCode()+"에러");
+                httpCon.setRequestProperty("Accept", "application/json");
+                httpCon.setRequestProperty("Content-type", "application/json");
+
+                httpCon.setDoOutput(true);
+                httpCon.setDoInput(true);
+
+                OutputStream os = httpCon.getOutputStream();
+                os.write(json.getBytes("euc-kr"));
+                os.flush();
+
+                try {
+                    is = httpCon.getInputStream();
+                    if (is != null)
+                        result = "Good work!";
+                    else
+                        result = "Did not work!";
                 }
-            }catch (MalformedURLException e){
-                e.printStackTrace();
-            }catch (IOException e){
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+                finally {
+                    httpCon.disconnect();
+                }
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
-            return receiveMsg;
+            catch (Exception e) {
+                Log.d("InputStream", e.getLocalizedMessage());
+            }
+            return result;
         }
     }
+
 
     public void kakaoError(String msg){
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
