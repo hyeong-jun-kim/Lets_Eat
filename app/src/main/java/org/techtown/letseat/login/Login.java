@@ -24,8 +24,8 @@ import java.security.MessageDigest;
 
 public class Login extends AppCompatActivity {
     Button button;
-    Button kakao_login_button;
-    LoginButton loginButton;
+    LoginButton kakao_login_button;
+    Button create_account_button;
 
     private KaKaoCallBack kaKaoCallBack;
 
@@ -35,19 +35,25 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login_activity);
 
 
-
+        create_account_button = findViewById(R.id.create_account_button);
+        create_account_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Create_Account.class);
+                startActivity(intent);
+            }
+        });
 
         kaKaoCallBack = new KaKaoCallBack();
         Session.getCurrentSession().addCallback(kaKaoCallBack);
         Session.getCurrentSession().checkAndImplicitOpen();
 
-        loginButton = findViewById(R.id.login_button);
+
         kakao_login_button = findViewById(R.id.kakao_login_button);
 
         kakao_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginButton.performClick();
             }
         });
 
