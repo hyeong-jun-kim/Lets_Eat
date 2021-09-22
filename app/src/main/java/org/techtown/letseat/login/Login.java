@@ -85,16 +85,6 @@ public class Login extends AppCompatActivity {
         });
 
         HashKey();
-
-        button = findViewById(R.id.login_button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     // 서버 연동 파트
