@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toStartOf="@+id/button16"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toEndOf="@+id/btnRegister"
-        app:layout_constraintTop_toBottomOf="@+id/button14"
+        app:layout_constraintTop_toBottomOf="@+id/kakao_login_button"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -33,7 +33,7 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button14"
+        app:layout_constraintTop_toBottomOf="@+id/kakao_login_button"
         app:layout_constraintVertical_bias="0.217" />
 
     <Button
@@ -46,7 +46,7 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button14"
+        app:layout_constraintTop_toBottomOf="@+id/kakao_login_button"
         app:layout_constraintVertical_bias="0.217" />
 
     <EditText
@@ -67,8 +67,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.453" />
 
-    <Button
-        android:id="@+id/button14"
+    <com.kakao.usermgmt.LoginButton
+        android:id="@+id/kakao_login_button"
         android:layout_width="338dp"
         android:layout_height="49dp"
         android:layout_marginTop="120dp"
@@ -119,7 +119,7 @@
         android:background="@drawable/circle_roundedgray"
         android:text="로그인"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button14"
+        app:layout_constraintBottom_toTopOf="@+id/kakao_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
