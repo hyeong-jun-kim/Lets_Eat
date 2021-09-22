@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login_activity);
 
 
-        create_account_button = findViewById(R.id.create_account_button);
+        create_account_button = findViewById(R.id.btnRegister);
         create_account_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
 
         HashKey();
 
-        button = findViewById(R.id.review_button);
+        button = findViewById(R.id.login_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
