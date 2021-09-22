@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -51,20 +52,22 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <Button
                     android:id="@+id/btnQR"
-                    android:layout_width="99dp"
-                    android:layout_height="95dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_gravity="center"
                     android:background="@drawable/circle_design"
+                    android:fontFamily="@font/notosansbold"
                     android:text="QR"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
                 <GridLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="359dp"
                     android:layout_height="match_parent"
                     android:columnCount="2"
                     android:orientation="vertical"
@@ -72,42 +75,46 @@
 
                     <Button
                         android:id="@+id/btnRest"
-                        android:layout_width="205dp"
-                        android:layout_height="205dp"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
                         android:layout_row="0"
                         android:layout_column="0"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/main_icon1_border"
                         android:drawableTop="@drawable/restaurant"
-                        android:fontFamily="@font/cookie"
-                        android:padding="20dp"
+                        android:fontFamily="@font/notosansbold"
+                        android:padding="25dp"
                         android:text="식당"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/btnPhoto"
-                        android:layout_width="205dp"
-                        android:layout_height="205dp"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
                         android:layout_row="0"
                         android:layout_column="1"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/main_icon2_border"
                         android:drawableTop="@drawable/food"
-                        android:fontFamily="@font/cookie"
-                        android:padding="20dp"
+                        android:fontFamily="@font/notosansbold"
+                        android:padding="10dp"
                         android:text="사진"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/btnOrder"
-                        android:layout_width="205dp"
-                        android:layout_height="205dp"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
                         android:layout_row="1"
                         android:layout_column="0"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/main_icon3_border"
                         android:drawableTop="@drawable/order"
-                        android:drawablePadding="10dp"
-                        android:fontFamily="@font/cookie"
+                        android:fontFamily="@font/notosansbold"
                         android:padding="20dp"
                         android:text="주문 내역"
                         android:textColor="#000000"
@@ -115,13 +122,16 @@
 
                     <Button
                         android:id="@+id/btnMY"
-                        android:layout_width="205dp"
-                        android:layout_height="205dp"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
                         android:layout_row="1"
                         android:layout_column="1"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/main_icon4_border"
                         android:drawableTop="@drawable/mytab"
-                        android:fontFamily="@font/cookie"
+                        android:fontFamily="@font/notosansbold"
                         android:padding="20dp"
                         android:text="MY"
                         android:textColor="#000000"
@@ -132,6 +142,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginTop="20dp"
                 android:text="오늘의 먹거리!" />
 
             <Button

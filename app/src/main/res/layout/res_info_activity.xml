@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ED6868"
+    android:background="#F6B0B0"
     android:orientation="vertical"
     tools:context=".restaurant.info.RestInfoMain">
 
@@ -31,8 +31,8 @@
             <TextView
                 android:id="@+id/res_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_height="59dp"
+                android:fontFamily="@font/notosansbold"
                 android:text="뼈대있는 가문"
                 android:textAlignment="center"
                 android:textColor="#000000"
@@ -43,51 +43,70 @@
                 android:id="@+id/res_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="-10dp"
+                android:fontFamily="@font/notosansbold"
                 android:text="안녕하세요 구이영 뼈대있는가문 입니다 찾아주셔서 감사합니다."
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="15sp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF" />
+
+
             <TextView
                 android:id="@+id/res_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/notosansbold"
                 android:text="위치   경기도 용인시 수지구 291-2"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/res_phonenum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/notosansbold"
                 android:text="전화번호   031-234-3392"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/res_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/notosansbold"
                 android:text="영업시간   AM 10:00 ~ PM 22:00"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/res_parking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/notosansbold"
                 android:text="주차가능"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
 
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,16 +116,27 @@
 
         <Button
             android:id="@+id/menu_button"
-            android:layout_width="204dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="메뉴" />
+            android:background="@drawable/circle_design"
+            android:drawableRight="@drawable/menu"
+            android:fontFamily="@font/notosansbold"
+            android:text="메뉴"
+            android:textColor="#000000"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/review_button"
-            android:layout_width="204dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="리뷰" />
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/circle_design"
+            android:drawableRight="@drawable/review"
+            android:fontFamily="@font/notosansbold"
+            android:text="리뷰"
+            android:textColor="#000000"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

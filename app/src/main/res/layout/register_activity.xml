@@ -5,90 +5,206 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ED6868"
-    android:gravity="center"
+    android:background="#ffffff"
     tools:context=".login.RegisterActivity">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="268dp"
-        android:layout_height="125dp"
-        android:fontFamily="@font/notosansbold"
-        android:text="Let's Eat"
-        android:textColor="#FFFFFF"
-        android:textSize="50sp"
-        android:layout_gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.706"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
-    <EditText
-        android:layout_width="254dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="아이디"
-        android:background="@drawable/register"
-        android:layout_margin="10dp"
-        android:textColorHint="#000000"/>
-    <EditText
-        android:layout_width="254dp"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="회원가입"
+            android:gravity="center|bottom"
+            android:fontFamily="@font/notosansbold"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFF0000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:textColorHint="#000000"
-        android:background="@drawable/register"
-        android:hint="비밀번호"/>
-    <EditText
-        android:layout_width="254dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:textColorHint="#000000"
-        android:background="@drawable/register"
-        android:hint="이름"/>
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-        <RadioButton
+        android:padding="20dp"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="남"/>
-        <RadioButton
+            android:textColor="#000000"
+            android:text="아이디(이메일)"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosansregular"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_ID"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"
+                    android:hint="이메일 주소"
+                    android:textColorHint="#939393"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:background="@drawable/circle_design2"
+                    android:fontFamily="@font/notosansbold"
+                    android:text="중복확인"
+                    android:textColor="#ED6868" />
+            </FrameLayout>
+        </LinearLayout>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="여"/>
-    </RadioGroup>
-    <EditText
-        android:layout_width="254dp"
-        android:layout_height="wrap_content"
-        android:textColorHint="#000000"
-        android:background="@drawable/register"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:hint="생년월일(yyMMdd)"/>
-    <EditText
-        android:layout_width="254dp"
-        android:layout_height="wrap_content"
-        android:textColorHint="#000000"
-        android:background="@drawable/register"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:hint="전화번호(-생략)"/>
-    <Button
-        android:layout_width="254dp"
-        android:layout_height="27dp"
-        android:layout_gravity="center"
-        android:background="#000000"
-        android:layout_margin="10dp"
-        android:text="확인"/>
-    <Button
-        android:layout_width="254dp"
-        android:layout_height="27dp"
-        android:layout_gravity="center"
-        android:background="#787876"
-        android:text="뒤로" />
+            android:textColor="#000000"
+            android:text="비밀번호"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosansregular"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_PW"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"
+                    android:hint="비밀번호"
+                    android:textColorHint="#939393"
+                    android:textSize="13dp" />
+            </FrameLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="비밀번호 확인"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosansregular"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#939393"
+                    android:hint="비밀번호 확인"
+                    android:textSize="13dp"
+                    android:backgroundTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"/>
+            </FrameLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="이름"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosansregular"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#939393"
+                    android:hint="실명을 입력하세요"
+                    android:textSize="13dp"
+                    android:backgroundTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"/>
+            </FrameLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="생년월일"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosansregular"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#939393"
+                    android:hint="8자리 입력"
+                    android:textSize="13dp"
+                    android:backgroundTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"/>
+            </FrameLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="성별"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosansregular"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#ED6868"
+                android:checked="true"
+                android:fontFamily="@font/notosansregular"
+                android:text="여성"
+                android:textColor="#000000"
+                android:textSize="13dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:buttonTint="#ED6868"
+                android:fontFamily="@font/notosansregular"
+                android:text="남성"
+                android:textColor="#000000"
+                android:textSize="13dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_circle3"
+            android:fontFamily="@font/notosansbold"
+            android:text="회원가입"
+            android:textColor="#ffffff"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
 </LinearLayout>
