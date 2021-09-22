@@ -22,6 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -29,6 +30,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    useLibrary 'org.apache.http.legacy'
+
 }
 
 dependencies {
@@ -50,4 +54,9 @@ dependencies {
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.30.0'
     implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.30.0'
     implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.30.0'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5.1'
+    implementation('org.apache.httpcomponents:httpmime:4.3') {
+        exclude module: "httpclient"
+    }
+
 }

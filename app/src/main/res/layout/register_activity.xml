@@ -43,14 +43,16 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
+                    android:id="@+id/et_ID"
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:textColorHint="#939393"
-                    android:hint="이메일 주소"
-                    android:textSize="13dp"
                     android:backgroundTint="#ED6868"
-                    android:fontFamily="@font/notosansregular"/>
+                    android:fontFamily="@font/notosansregular"
+                    android:hint="이메일 주소"
+                    android:textColorHint="#939393"
+                    android:textSize="13dp" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -76,14 +78,16 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
+                    android:id="@+id/et_PW"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="#939393"
-                    android:hint="비밀번호"
-                    android:textSize="13dp"
                     android:backgroundTint="#ED6868"
-                    android:fontFamily="@font/notosansregular"/>
+                    android:fontFamily="@font/notosansregular"
+                    android:hint="비밀번호"
+                    android:textColorHint="#939393"
+                    android:textSize="13dp" />
             </FrameLayout>
         </LinearLayout>
         <TextView
@@ -169,31 +173,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="13dp"
-                android:fontFamily="@font/notosansregular"
                 android:buttonTint="#ED6868"
                 android:checked="true"
-                android:text="여성"/>
+                android:fontFamily="@font/notosansregular"
+                android:text="여성"
+                android:textColor="#000000"
+                android:textSize="13dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:buttonTint="#ED6868"
+                android:fontFamily="@font/notosansregular"
+                android:text="남성"
                 android:textColor="#000000"
                 android:textSize="13dp"
-                android:layout_marginLeft="60dp"
-                android:fontFamily="@font/notosansregular"
-                android:buttonTint="#ED6868"
-                android:text="남성"/>
+                tools:ignore="TouchTargetSizeCheck" />
         </RadioGroup>
+
         <Button
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="회원가입"
+            android:background="@drawable/round_circle3"
             android:fontFamily="@font/notosansbold"
+            android:text="회원가입"
             android:textColor="#ffffff"
-            android:background="@drawable/round_circle3"/>
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 </LinearLayout>
