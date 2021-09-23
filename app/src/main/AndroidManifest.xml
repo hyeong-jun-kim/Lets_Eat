@@ -39,6 +39,8 @@
         <activity
             android:name=".mytab.MyTab"
             android:exported="true" />
+        <activity android:name=".pay_test.PayActivity" />
+        <activity android:name=".pay_test.Kakao_pay_test" />
         <activity android:name=".menu.menu_sample" />
         <activity android:name=".restaurant.Rest_List" />
         <activity android:name=".photo.PhotoList" />
