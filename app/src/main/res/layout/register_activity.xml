@@ -55,7 +55,6 @@
                         android:textSize="13dp"
                         android:backgroundTint="#ED6868"
                         android:fontFamily="@font/notosansregular"/>
-
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
