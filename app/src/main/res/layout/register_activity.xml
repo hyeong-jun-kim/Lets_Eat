@@ -23,7 +23,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#FFFF0000"/>
+        android:background="#ED6868"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,6 +54,7 @@
                         android:hint="이메일 주소"
                         android:textSize="13dp"
                         android:backgroundTint="#ED6868"
+                        android:id="@+id/register_email"
                         android:fontFamily="@font/notosansregular"/>
                     <Button
                         android:layout_width="wrap_content"
@@ -62,6 +63,7 @@
                         android:background="@drawable/circle_design2"
                         android:fontFamily="@font/notosansbold"
                         android:text="중복확인"
+                        android:id="@+id/register_email_check"
                         android:textColor="#ED6868" />
                 </FrameLayout>
             </LinearLayout>
@@ -86,6 +88,7 @@
                         android:hint="비밀번호"
                         android:textSize="13dp"
                         android:backgroundTint="#ED6868"
+                        android:id="@+id/register_pwd"
                         android:fontFamily="@font/notosansregular"/>
                 </FrameLayout>
             </LinearLayout>
@@ -110,6 +113,7 @@
                         android:hint="비밀번호 확인"
                         android:textSize="13dp"
                         android:backgroundTint="#ED6868"
+                        android:id="@+id/regitser_pwd_check"
                         android:fontFamily="@font/notosansregular"/>
                 </FrameLayout>
             </LinearLayout>
@@ -134,6 +138,7 @@
                         android:hint="실명을 입력하세요"
                         android:textSize="13dp"
                         android:backgroundTint="#ED6868"
+                        android:id="@+id/register_name"
                         android:fontFamily="@font/notosansregular"/>
                 </FrameLayout>
             </LinearLayout>
@@ -158,6 +163,7 @@
                         android:hint="8자리 입력"
                         android:textSize="13dp"
                         android:backgroundTint="#ED6868"
+                        android:id="@+id/register_birthday"
                         android:fontFamily="@font/notosansregular"/>
                 </FrameLayout>
             </LinearLayout>
@@ -171,7 +177,8 @@
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/register_gender">
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -180,6 +187,7 @@
                     android:fontFamily="@font/notosansregular"
                     android:buttonTint="#ED6868"
                     android:checked="true"
+                    android:id="@+id/register_female"
                     android:text="여성"/>
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -189,6 +197,7 @@
                     android:layout_marginLeft="60dp"
                     android:fontFamily="@font/notosansregular"
                     android:buttonTint="#ED6868"
+                    android:id="@+id/register_male"
                     android:text="남성"/>
             </RadioGroup>
             <RadioGroup
@@ -223,5 +232,6 @@
         android:text="회원가입"
         android:fontFamily="@font/notosansbold"
         android:textColor="#ffffff"
+        android:id="@+id/register_birthday_input"
         android:background="@drawable/round_circle3"/>
 </LinearLayout>
