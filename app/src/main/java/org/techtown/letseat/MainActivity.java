@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -26,12 +28,19 @@ import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
+
+    int currentPage = 0;
+
+    Timer timer;
 
     private int[] images = new int[]{
             R.drawable.image1,R.drawable.image2,R.drawable.image3
@@ -50,8 +59,32 @@ public class MainActivity extends AppCompatActivity {
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
 
+
+
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+
+        // 이미지 자동전환
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable(){
+            @Override
+            public void run() {
+                if(currentPage == 3){
+                    currentPage = 0;
+                }
+                sliderViewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 500, 3000);
+
+
 
         sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -104,6 +137,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void fllipperImages(int image){
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(image);
+
+
     }
 
     @Override
