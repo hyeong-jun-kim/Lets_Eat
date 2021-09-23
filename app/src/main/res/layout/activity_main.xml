@@ -140,10 +140,14 @@
             </FrameLayout>
 
             <Button
+                android:id="@+id/pay_test_button"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
-                android:text="오늘의 먹거리!" />
+                android:background="#F4D7D7"
+                android:text="결제 테스트"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <Button
                 android:layout_width="match_parent"

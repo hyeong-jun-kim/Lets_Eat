@@ -149,7 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d("InputStream", e.getLocalizedMessage());
             }
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+
             return result;
         }
         @Override
