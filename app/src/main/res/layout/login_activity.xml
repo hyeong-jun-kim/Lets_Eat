@@ -56,10 +56,10 @@
         android:background="@drawable/round_circle"
         android:ems="10"
         android:hint="비밀번호 입력"
-        android:inputType="numberPassword"
+        android:inputType="text"
         android:paddingLeft="15dp"
-        android:textColorHint="#000000"
         android:textColor="#000000"
+        android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -135,13 +135,13 @@
         android:hint="아이디"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
-        android:textColorHint="#000000"
         android:textColor="#000000"
+        android:textColorHint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/input_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907" />
+        app:layout_constraintVertical_bias="0.911" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
