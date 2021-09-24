@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,9 +41,8 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private String birthday_string, email_string, pwd_string, name_string, pwd_check_string, gender;
-    private TextView birthday;
     private Editable email_edit, pwd_edit, name_edit, pwd_check_edit;
-    private EditText email, pwd, name, pwd_check;
+    private EditText email, pwd, name, pwd_check, birthday;
     private RadioGroup gender_radio;
     private RadioButton male, female;
     Button btn_register, btn_email_check, btn_birthday;
@@ -59,6 +59,9 @@ public class RegisterActivity extends AppCompatActivity {
         gender_radio = findViewById(R.id.register_gender);
         male = findViewById(R.id.register_male);
         female = findViewById(R.id.register_female);
+        birthday.setEnabled(false);
+        pwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        pwd_check.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         btn_birthday = findViewById(R.id.register_birthday_input);
         btn_birthday.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,14 +95,14 @@ public class RegisterActivity extends AppCompatActivity {
                         gender = "female";
                     }
                 }
-                if (email_string == null || pwd_string == null || name_string == null
-                        || birthday_string == null || (!male.isChecked() && !female.isChecked())) {
+                if (email_string.isEmpty() || pwd_string.isEmpty() || name_string.isEmpty()
+                        || birthday_string.isEmpty() || (!male.isChecked() && !female.isChecked())) {
                     Toast.makeText(getApplicationContext(), "email_string: " + email_string + " pwd_string: " + pwd_string +
                             " name_string: " + name_string + "birthday_string: " + birthday_string, Toast.LENGTH_SHORT).show();
                     Log.d("testcase", "email_edit: " + email_edit + " pwd_edit: " + pwd_edit +
                             " name_edit: " + name_edit + "birthday.text: " + birthday.getText().toString());
                 } else if (!pwd_check_string.equals(pwd_string)) {
-                    Toast.makeText(getApplicationContext(), "비밀번호랑 비밀번호 확인란이 일치하지 않스니다. 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "비밀번호랑 비밀번호 확인란이 일치하지 않습니다. 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     sendRegisterRequest();
                 }
@@ -121,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     // 회원가입 POST 요청
     public void sendRegisterRequest() {
-        String url = "http://220.70.169.23:8000/letseat/register/normal";
+        String url = "http://183.100.237.18:8000/letseat/register/normal";
         JSONObject postData = new JSONObject();
         try {
             postData.put("email", email_string);
@@ -159,7 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // 로그인 중복 확인 GET
     public void sendLoginCheckRequest(String email_string, TextView email) {
-        String url = "http://220.70.169.23:8000/letseat/register/email/check?email=" + email_string;
+        String url = "http://183.100.237.18:8000/letseat/register/email/check?email=" + email_string;
         StringRequest request = new StringRequest(
                 Request.Method.GET,
                 url,

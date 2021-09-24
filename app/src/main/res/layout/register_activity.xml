@@ -161,13 +161,15 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/register_birthday"
                         android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
                         android:fontFamily="@font/notosansregular"
-                        android:hint="8자리 입력"
+                        android:hint="생년 월일을 입력하세요"
+                        android:inputType="none"
                         android:textColor="#000000"
                         android:textColorHint="#939393"
                         android:textSize="13dp" />

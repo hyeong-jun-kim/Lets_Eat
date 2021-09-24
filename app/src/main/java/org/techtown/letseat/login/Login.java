@@ -3,12 +3,14 @@ package org.techtown.letseat.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +63,7 @@ public class Login extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
-
+        input_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +103,7 @@ public class Login extends AppCompatActivity {
 
     // 로그인 POST 요청
     void login(){
-            String url = "http://220.70.169.23:8000/letseat/login/normal";
+            String url = "http://183.100.237.18:8000/letseat/login/normal";
             JSONObject postData = new JSONObject();
             try {
                 postData.put("email", email_string);
@@ -116,9 +118,17 @@ public class Login extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override // 응답 잘 받았을 때
                         public void onResponse(JSONObject response) {
+                            // 자동 로그인 값 넣어주기
+                            SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("email", input_email.getText().toString());
+                            editor.putString("pwd", input_password.getText().toString());
+                            editor.commit();
+                            // 화면 전환
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+
                         }
                     },
                     new Response.ErrorListener() {
