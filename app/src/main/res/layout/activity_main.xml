@@ -150,9 +150,13 @@
                 android:textSize="20sp" />
 
             <Button
+                android:id="@+id/map_test"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="LET's EAT" />
+                android:background="#8AB1E1"
+                android:text="네이버 지도 테스트"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <Button
                 android:layout_width="match_parent"
