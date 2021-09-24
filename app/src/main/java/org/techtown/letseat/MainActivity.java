@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,15 +20,22 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
+import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
 
-import static android.content.ContentValues.TAG;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
+
+
+    int currentPage = 0;
+
+    Timer timer;
 
     private int[] images = new int[]{
             R.drawable.image1,R.drawable.image2,R.drawable.image3
@@ -50,8 +54,35 @@ public class MainActivity extends AppCompatActivity {
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
 
+        //결제 테스트
+
+
+
+
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+
+        // 이미지 자동전환
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable(){
+            @Override
+            public void run() {
+                if(currentPage == 3){
+                    currentPage = 0;
+                }
+                sliderViewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 500, 3000);
+
+
 
         sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -104,6 +135,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button pay_test_button = findViewById(R.id.pay_test_button);
+        pay_test_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Kakao_pay_test.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    public void fllipperImages(int image){
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(image);
+
+
     }
 
     @Override

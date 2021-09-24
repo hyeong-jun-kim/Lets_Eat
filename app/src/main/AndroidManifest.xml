@@ -5,17 +5,31 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:name=".KakaoSDKInit"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LetsEat">
+        android:theme="@style/Theme.LetsEat"
+        android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="d8aeb3d2d3af0540824e12d6ba383ba4" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".mytab.information_fix"
             android:exported="true" />
@@ -25,11 +39,13 @@
         <activity
             android:name=".mytab.MyTab"
             android:exported="true" />
+        <activity android:name=".pay_test.PayActivity" />
+        <activity android:name=".pay_test.Kakao_pay_test" />
         <activity android:name=".menu.menu_sample" />
         <activity android:name=".restaurant.Rest_List" />
         <activity android:name=".photo.PhotoList" />
         <activity android:name=".restaurant.list.RestListMain" />
-        <activity android:name=".photo.PhotoList"></activity>
+        <activity android:name=".photo.PhotoList" />
         <activity
             android:name=".ReviewActivity"
             android:exported="true" />
