@@ -3,12 +3,14 @@ package org.techtown.letseat.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -16,10 +18,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.kakao.auth.Session;
 import com.kakao.usermgmt.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.AppHelper;
 import org.techtown.letseat.KaKaoCallBack;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
@@ -39,10 +48,10 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    Button  btn_register, login_button;
-    LoginButton kakao_login_button;
-    EditText input_email, input_password;
-
+    private Button  btn_register, login_button;
+    private LoginButton kakao_login_button;
+    private EditText input_email, input_password;
+    private String email_string, pwd_string;
 
     private KaKaoCallBack kaKaoCallBack;
 
@@ -54,10 +63,12 @@ public class Login extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
-
+        input_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                email_string = input_email.getText().toString();
+                pwd_string = input_password.getText().toString();
                 login();
             }
         });
@@ -90,81 +101,48 @@ public class Login extends AppCompatActivity {
         HashKey();
     }
 
-    // 서버 연동 파트
+    // 로그인 POST 요청
     void login(){
-        try {
-            String email = input_email.getText().toString();
-            String password = input_password.getText().toString();
-            Log.w("앱에서 보낸값",email+", "+password);
-
-            CustomTask task = new CustomTask();
-            String result = task.execute(email,password).get();
-            Log.w("받은값",result);
-
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }catch (Exception e){
-
-        }
-    }
-
-
-
-    class CustomTask extends AsyncTask<String, Void, String> {
-
-        InputStream is = null;
-        String result = "";
-
-        @Override
-        protected String doInBackground(String... strings) {
+            String url = "http://183.100.237.18:8000/letseat/login/normal";
+            JSONObject postData = new JSONObject();
             try {
-                URL urlCon = new URL("http://220.70.169.23:8000/letseat/register/normal");
-                HttpURLConnection httpCon = (HttpURLConnection) urlCon.openConnection();
-
-                String json = "";
-                Editable email = input_email.getText();
-                Editable password = input_password.getText();
-
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.accumulate("email", email);
-                jsonObject.accumulate("password", password);
-                json = jsonObject.toString();
-
-                httpCon.setRequestProperty("Accept", "application/json");
-                httpCon.setRequestProperty("Content-type", "application/json");
-
-                httpCon.setDoOutput(true);
-                httpCon.setDoInput(true);
-
-                OutputStream os = httpCon.getOutputStream();
-                os.write(json.getBytes("euc-kr"));
-                os.flush();
-
-                try {
-                    is = httpCon.getInputStream();
-                    if (is != null)
-                        result = "Good work!";
-                    else
-                        result = "Did not work!";
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    httpCon.disconnect();
-                }
-            }
-            catch (IOException e) {
+                postData.put("email", email_string);
+                postData.put("password", pwd_string);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-            catch (Exception e) {
-                Log.d("InputStream", e.getLocalizedMessage());
-            }
-            return result;
-        }
-    }
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    postData,
+                    new Response.Listener<JSONObject>() {
+                        @Override // 응답 잘 받았을 때
+                        public void onResponse(JSONObject response) {
+                            // 자동 로그인 값 넣어주기
+                            SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("email", input_email.getText().toString());
+                            editor.putString("pwd", input_password.getText().toString());
+                            editor.commit();
+                            // 화면 전환
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
 
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override // 에러 발생 시
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("error",error.toString());
+                            println("아이디나 비밀번호를 다시 확인해주세요.");
+                        }
+                    }
+            );
+            request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+            AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+            AppHelper.requestQueue.add(request);
+    }
 
     public void kakaoError(String msg){
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
@@ -194,5 +172,8 @@ public class Login extends AppCompatActivity {
         }
         catch (Exception e) {
         }
+    }
+    public void println(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 }

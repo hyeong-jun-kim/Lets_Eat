@@ -8,10 +8,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <uses-feature android:name="android.hardware.camera" />
 
+
+
     <application
+        android:usesCleartextTraffic="true"
         android:name=".KakaoSDKInit"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -19,8 +27,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LetsEat"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/Theme.LetsEat">
+        <activity
+            android:name=".Naver_map"
+            android:exported="true" />
+
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -39,9 +50,9 @@
         <activity
             android:name=".mytab.MyTab"
             android:exported="true" />
+        <activity android:name=".pay_test.PayActivity" />
+        <activity android:name=".pay_test.Kakao_pay_test" />
         <activity android:name=".menu.menu_sample" />
-        <activity android:name=".restaurant.Rest_List" />
-        <activity android:name=".photo.PhotoList" />
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList" />
         <activity
