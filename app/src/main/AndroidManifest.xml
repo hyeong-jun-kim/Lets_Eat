@@ -30,7 +30,7 @@
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name=".Naver_map"
+            android:name=".map.Naver_map"
             android:exported="true" />
 
 

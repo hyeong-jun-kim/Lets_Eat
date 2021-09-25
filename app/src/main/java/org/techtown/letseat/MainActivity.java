@@ -1,14 +1,11 @@
 package org.techtown.letseat;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -16,21 +13,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.yanzhenjie.permission.Action;
-import com.yanzhenjie.permission.AndPermission;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
+import org.techtown.letseat.login.Login;
+import org.techtown.letseat.map.Naver_map;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
 
-import java.security.Permission;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Naver_map.class);
+                Intent intent = new Intent(getApplicationContext(), Naver_map.class);
                 startActivity(intent);
             }
         });
@@ -160,6 +158,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //카카오 고유 id
+        TextView tvEmail = findViewById(R.id.tvEmail);
+        Intent intent = getIntent();
+        String strEmail = intent.getStringExtra("email");
+        tvEmail.setText(strEmail);
+
+
+        //카카오 로그아웃
+        Button kakao_logout_button = findViewById(R.id.kakao_logout_button);
+        kakao_logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "정상적으로 로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+
+                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                    @Override
+                    public void onCompleteLogout() {
+                        Intent intent = new Intent(MainActivity.this, Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
     }
 
 
@@ -219,4 +241,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 }
