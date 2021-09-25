@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".restaurant.info.res_info_fragment1"
-    android:background="#FF6F61">
+    android:background="#FFFFFF"
+    tools:context=".restaurant.info.res_info_fragment1">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"/>
 
 </FrameLayout>

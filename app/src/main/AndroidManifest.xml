@@ -61,9 +61,6 @@
         <activity
             android:name=".order.OrderActivity"
             android:exported="true" />
-        <activity
-            android:name=".menu.MenuActivity"
-            android:exported="true" />
         <activity android:name=".login.RegisterActivity" />
         <activity
             android:name=".restaurant.info.RestInfoMain"
