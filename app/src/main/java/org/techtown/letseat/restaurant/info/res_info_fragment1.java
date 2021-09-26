@@ -17,11 +17,6 @@ import org.techtown.letseat.menu.Menu;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link res_info_fragment1#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class res_info_fragment1 extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -31,10 +26,8 @@ public class res_info_fragment1 extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Menu> list = new ArrayList<>();
 
-
     private String mParam1;
     private String mParam2;
-
 
     public res_info_fragment1() {
         // Required empty public constructor
