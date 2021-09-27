@@ -1,38 +1,59 @@
 package org.techtown.letseat.restaurant.info;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+
+import com.google.android.material.tabs.TabLayout;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.menu.MenuActivity;
-import org.techtown.letseat.mytab.MyTab;
-import org.techtown.letseat.photo.Photo;
-import org.techtown.letseat.photo.PhotoFragment;
 
 public class RestInfoMain extends AppCompatActivity {
+    res_info_fragment1 fragment1;
+    res_info_fragment2 fragment2;
+    res_info_fragment3 fragment3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.res_info_activity);
+        setContentView(R.layout.restab_info_activity);
 
+        fragment1 = new res_info_fragment1();
+        fragment2 = new res_info_fragment2();
+        fragment3 = new res_info_fragment3();
 
-        Button menu_button = findViewById(R.id.menu_button);
-        Button review_button = findViewById(R.id.review_button);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
 
-        menu_button.setOnClickListener(new View.OnClickListener() {
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("메뉴"));
+        tabs.addTab(tabs.newTab().setText("정보"));
+        tabs.addTab(tabs.newTab().setText("리뷰"));
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
-                startActivity(intent);
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+
+                if(position == 0){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
+                }
+                else if(position == 1){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment2).commit();
+                }
+                else if(position ==2){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment3).commit();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-
-
     }
 }

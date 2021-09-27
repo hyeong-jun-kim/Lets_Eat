@@ -48,7 +48,7 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button;
+    private Button  btn_register, login_button, sub_login_button;
     private LoginButton kakao_login_button;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
+        sub_login_button = findViewById(R.id.sub_login_button);
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
@@ -84,6 +85,13 @@ public class Login extends AppCompatActivity {
         });
 
 
+        sub_login_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         kaKaoCallBack = new KaKaoCallBack();
         Session.getCurrentSession().addCallback(kaKaoCallBack);

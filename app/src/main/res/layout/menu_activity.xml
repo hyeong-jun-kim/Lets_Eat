@@ -8,11 +8,6 @@
     android:orientation="vertical"
     tools:context=".menu.MenuActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="328dp"
-        android:src="@drawable/image1" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
