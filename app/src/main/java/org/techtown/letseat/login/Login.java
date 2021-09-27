@@ -103,7 +103,7 @@ public class Login extends AppCompatActivity {
 
     // 로그인 POST 요청
     void login(){
-            String url = "http://183.100.237.18:8000/letseat/login/normal";
+            String url = "http://125.132.62.150:8000/letseat/login/normal";
             JSONObject postData = new JSONObject();
             try {
                 postData.put("email", email_string);
