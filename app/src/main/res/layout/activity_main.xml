@@ -149,6 +149,14 @@
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="TextView"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
             <Button
                 android:id="@+id/map_test"
                 android:layout_width="match_parent"
@@ -159,9 +167,14 @@
                 android:textSize="20sp" />
 
             <Button
+                android:id="@+id/kakao_logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="서명진짱" />
+                android:background="#C5EF93"
+                android:text="카카오 로그아웃"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

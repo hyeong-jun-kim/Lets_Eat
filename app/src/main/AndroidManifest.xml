@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat">
         <activity
-            android:name=".Naver_map"
+            android:name=".map.Naver_map"
             android:exported="true" />
 
 
