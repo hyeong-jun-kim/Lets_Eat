@@ -51,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+
         email = findViewById(R.id.register_email);
         pwd = findViewById(R.id.register_pwd);
         pwd_check = findViewById(R.id.regitser_pwd_check);
@@ -180,6 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override // 에러 발생 시
                     public void onErrorResponse(VolleyError error) {
+                        Log.d("Tag_Error",error.toString());
                         println("연결 상태 불량");
                         Log.d("error",error.toString());
                     }
