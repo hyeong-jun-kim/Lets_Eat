@@ -22,7 +22,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.techtown.letseat.login.Login;
-import org.techtown.letseat.map.Naver_map;
+import org.techtown.letseat.map.Map_MainActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Naver_map.class);
+                Intent intent = new Intent(getApplicationContext(), Map_MainActivity.class);
                 startActivity(intent);
             }
         });
