@@ -73,11 +73,12 @@
         android:layout_height="49dp"
         android:layout_marginTop="120dp"
         android:background="@drawable/kakao"
-        android:paddingLeft="16dp"
         android:drawableLeft="@drawable/kakaotalk_image"
+        android:paddingLeft="16dp"
         android:text="카카오로 로그인하기"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,5 +156,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button17"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/kakao_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

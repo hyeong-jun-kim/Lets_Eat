@@ -54,10 +54,13 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button, sub_login_button;
+    private Button  btn_register, login_button, sub_login_button, kakao_login;
     private LoginButton kakao_login_button;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
+
+    static private String kakao_email_string;
+    static private String kakao_pwd_string;
 
     private KaKaoCallBack kaKaoCallBack;
 
@@ -108,9 +111,11 @@ public class Login extends AppCompatActivity {
 
         kakao_login_button = findViewById(R.id.kakao_login_button);
 
-        kakao_login_button.setOnClickListener(new View.OnClickListener() {
+        kakao_login = findViewById(R.id.kakao_login);
+        kakao_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                kakao_login_button.performClick();
             }
         });
 
@@ -176,6 +181,8 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), needsScopeAutority + "에 대한 권한이 허용되지 않았습니다. 개인정보 제공에 동의해주세요.", Toast.LENGTH_SHORT).show(); // 개인정보 제공에 동의해달라는 Toast 메세지 띄움
 
                         // 회원탈퇴 처리
+
+
                         UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
                             @Override
                             public void onFailure(ErrorResult errorResult) {
@@ -200,32 +207,64 @@ public class Login extends AppCompatActivity {
 
                             @Override
                             public void onSuccess(Long result) {
+
                             }
                         });
                     }
 
                     else{
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
-                        if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
-                            intent.putExtra("email", result.getKakaoAccount().getEmail());
-                        else
-                            intent.putExtra("email", "none");
-                        startActivity(intent);
-                        finish();
+                        kakao_email_string = result.getKakaoAccount().getEmail();
+                        kakao_pwd_string = "11";
+                        sendRegisterRequest();
                     }
                 }
-
             });
         }
-
         @Override
         public void onSessionOpenFailed (KakaoException e){
             kakaoError("로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요.");
         }
+
     }
 
     //카카오 로그인 여기까지
+
+    //카카오 이메일 서버에 전송
+    public void sendRegisterRequest() {
+        String url = "http://125.132.62.150:8000/letseat/login/normal";
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("email", kakao_email_string);
+            postData.put("password", kakao_pwd_string);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                postData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Intent intent = new Intent(Login.this,MainActivity.class);
+                        Toast.makeText(getApplicationContext(), "성공!", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        finish();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("error", String.valueOf(error));
+                        Toast.makeText(getApplicationContext(), "실패!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
 
 
     private void HashKey() {
@@ -247,7 +286,7 @@ public class Login extends AppCompatActivity {
 
     // 일반 로그인 POST 요청
     void login(){
-        String url = "http://220.70.169.23:8000/letseat/login/normal";
+        String url = "http://125.132.62.150:8000/letseat/login/normal";
         JSONObject postData = new JSONObject();
         try {
             postData.put("email", email_string);
@@ -279,4 +318,6 @@ public class Login extends AppCompatActivity {
         AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
+
+
 }

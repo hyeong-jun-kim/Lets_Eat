@@ -51,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+
         email = findViewById(R.id.register_email);
         pwd = findViewById(R.id.register_pwd);
         pwd_check = findViewById(R.id.regitser_pwd_check);
@@ -121,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     // 회원가입 POST 요청
     public void sendRegisterRequest() {
-        String url = "http://220.70.169.23:8000/letseat/register/normal";
+        String url = "http://125.132.62.150:8000/letseat/register/normal";
         JSONObject postData = new JSONObject();
         try {
             postData.put("email", email_string);
@@ -159,7 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // 로그인 중복 확인 GET
     public void sendLoginCheckRequest(String email_string, TextView email) {
-        String url = "http://220.70.169.23:8000/letseat/register/email/check?email=" + email_string;
+        String url = "http://125.132.62.150:8000/letseat/register/email/check?email=" + email_string;
         StringRequest request = new StringRequest(
                 Request.Method.GET,
                 url,
@@ -177,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override // 에러 발생 시
                     public void onErrorResponse(VolleyError error) {
+                        Log.d("Tag_Error",error.toString());
                         println("연결 상태 불량");
                     }
                 }
