@@ -140,13 +140,13 @@
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/textView41"
+                        android:id="@+id/place"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingLeft="63dp"
                         android:paddingTop="8dp"
-                        android:text="경기도 용인시 수지구 291-2"
+                        android:text="경기도 평택시 이충동 611-4 이충프라자"
                         android:textColor="#000000" />
                 </LinearLayout>
 
@@ -197,6 +197,20 @@
                         android:text="031-000-0000"
                         android:textColor="#000000" />
                 </LinearLayout>
+
+                <fragment
+                    android:id="@+id/shop_map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="198dp" />
+
+                <TextView
+                    android:id="@+id/sample_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sds"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
 
             </LinearLayout>
         </ScrollView>

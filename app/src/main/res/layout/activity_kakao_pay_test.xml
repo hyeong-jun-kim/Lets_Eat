@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="상품 가격"
+        android:text="100"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button

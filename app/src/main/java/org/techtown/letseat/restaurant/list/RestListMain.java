@@ -41,10 +41,10 @@ public class RestListMain extends AppCompatActivity {
                 RestListRecycleItem item = adapter.getItem(position);
 
 
-                if(adapterPosition == 1){
+
                     Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                     startActivity(intent);
-                }
+
             }
         });
     }
