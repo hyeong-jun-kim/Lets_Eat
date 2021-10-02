@@ -1,15 +1,13 @@
 package org.techtown.letseat.restaurant.list;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,70 +21,25 @@ import org.json.JSONObject;
 import org.techtown.letseat.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
-
+import org.techtown.letseat.restaurant.list.OnRestaurantItemClickListner;
+import org.techtown.letseat.restaurant.list.RestListAdapter;
+import org.techtown.letseat.restaurant.list.RestListRecycleItem;
 
 import java.util.ArrayList;
 
-public class RestListMain extends AppCompatActivity {
+public class RestList_onemanFood extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
-
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
     RecyclerView recyclerView;
-    Button koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.res_list_activity);
-        recyclerView = findViewById(R.id.recycler_view);
+        setContentView(R.layout.activity_rest_list_oneman_food);
 
-        koreanFood_button = findViewById(R.id.koreanFood_button);
-        koreanFood_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RestList_KoreanFood.class);
-                startActivity(intent);
-            }
-        });
-
-        chinaFood_button = findViewById(R.id.chinaFood_button);
-        chinaFood_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RestList_chinaFood.class);
-                startActivity(intent);
-            }
-        });
-
-        japanFood_button = findViewById(R.id.japanFood_button);
-        japanFood_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RestList_japanFood.class);
-                startActivity(intent);
-            }
-        });
-
-        westernFood_Button = findViewById(R.id.westernFood_Button);
-        westernFood_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),RestList_westernFood.class);
-                startActivity(intent);
-            }
-        });
-
-        onemanFood_Button = findViewById(R.id.onemanFood_Button);
-        onemanFood_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RestList_onemanFood.class);
-                startActivity(intent);
-            }
-        });
-
+        recyclerView = findViewById(R.id.recyclerView2);
         get_Restaurant();
     }
 
@@ -132,16 +85,21 @@ public class RestListMain extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         try {
                             String restype,resName,location;
+                            int aloneAble;
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
+
                                 restype = jsonObject.getString("restype");
                                 resName = jsonObject.getString("resName");
                                 location = jsonObject.getString("location");
+                                aloneAble = jsonObject.getInt("aloneAble");
 
+                                if(aloneAble == 1){
+                                    list.add(restype);
+                                    list.add(resName);
+                                    list.add(location);
+                                }
 
-                                list.add(restype);
-                                list.add(resName);
-                                list.add(location);
                             }
 
                             start();
@@ -164,6 +122,4 @@ public class RestListMain extends AppCompatActivity {
         AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
-
-
 }

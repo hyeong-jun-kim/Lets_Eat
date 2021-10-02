@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
 
-
     int currentPage = 0;
 
     Timer timer;

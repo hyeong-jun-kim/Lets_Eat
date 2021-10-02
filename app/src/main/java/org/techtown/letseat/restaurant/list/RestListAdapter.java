@@ -19,6 +19,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 {
 
     private ArrayList<RestListRecycleItem> items = new ArrayList<>();
+
     private ArrayList<RestInfoRecycleItem> RestInfoRecycleItems = new ArrayList<>();
 
     OnRestaurantItemClickListner listner;
@@ -54,6 +55,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
     public void setItems(ArrayList<RestListRecycleItem> items) {
         this.items = items;
     }
+
 
     public void OnItemClick(ViewHolder holder, View view, int position){
         if(listner != null){

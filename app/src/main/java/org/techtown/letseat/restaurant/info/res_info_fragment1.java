@@ -1,13 +1,11 @@
 package org.techtown.letseat.restaurant.info;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +54,7 @@ public class res_info_fragment1 extends Fragment {
 
         View view = inflater.inflate(R.layout.res_info_fragment1, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
         recyclerView.setHasFixedSize(true);
         adapter = new MenuAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
