@@ -13,13 +13,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <uses-feature android:name="android.hardware.camera" />
 
-
-
     <application
-        android:usesCleartextTraffic="true"
         android:name=".KakaoSDKInit"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -27,15 +23,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LetsEat">
+        android:theme="@style/Theme.LetsEat"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".Naver_map"
+            android:name=".restaurant.list.RestList_onemanFood"
             android:exported="true" />
-
+        <activity
+            android:name=".restaurant.list.RestList_westernFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_japanFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_chinaFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_KoreanFood"
+            android:exported="true" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="d8aeb3d2d3af0540824e12d6ba383ba4" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDwi28qhFQzZBAfyCvLbkkPRG5zSEiGmHY" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -52,17 +63,14 @@
             android:exported="true" />
         <activity android:name=".pay_test.PayActivity" />
         <activity android:name=".pay_test.Kakao_pay_test" />
-        <activity android:name=".menu.menu_sample" />
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList" />
+        <activity android:name=".test" />
         <activity
             android:name=".ReviewActivity"
             android:exported="true" />
         <activity
             android:name=".order.OrderActivity"
-            android:exported="true" />
-        <activity
-            android:name=".menu.MenuActivity"
             android:exported="true" />
         <activity android:name=".login.RegisterActivity" />
         <activity
@@ -70,6 +78,9 @@
             android:exported="true" />
         <activity
             android:name=".login.Login"
+            android:exported="true" />
+        <activity
+            android:name=".map.Map_MainActivity"
             android:exported="true" />
         <activity android:name=".SplashActivity">
             <intent-filter>

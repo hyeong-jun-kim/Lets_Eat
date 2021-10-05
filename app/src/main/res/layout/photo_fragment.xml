@@ -111,6 +111,12 @@
             android:text="맛이정말 끝내줍니다 ^^"
             android:textColor="#090707"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/sample_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
     </LinearLayout>
 
     <Button

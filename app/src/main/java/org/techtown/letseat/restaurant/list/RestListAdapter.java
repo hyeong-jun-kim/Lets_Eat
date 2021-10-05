@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.restaurant.info.RestInfoRecycleItem;
+
 
 import java.util.ArrayList;
 
@@ -19,6 +19,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 {
 
     private ArrayList<RestListRecycleItem> items = new ArrayList<>();
+
     private ArrayList<RestInfoRecycleItem> RestInfoRecycleItems = new ArrayList<>();
 
     OnRestaurantItemClickListner listner;
@@ -54,6 +55,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
     public void setItems(ArrayList<RestListRecycleItem> items) {
         this.items = items;
     }
+
 
     public void OnItemClick(ViewHolder holder, View view, int position){
         if(listner != null){
