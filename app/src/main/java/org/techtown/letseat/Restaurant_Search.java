@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant.list;
+package org.techtown.letseat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,26 +19,32 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.util.AppHelper;
-import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
+import org.techtown.letseat.restaurant.list.OnRestaurantItemClickListner;
+import org.techtown.letseat.restaurant.list.RestListAdapter;
+import org.techtown.letseat.restaurant.list.RestListData;
+import org.techtown.letseat.restaurant.list.RestListRecycleItem;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
 import java.util.ArrayList;
 
-public class RestList_onemanFood extends AppCompatActivity {
+public class Restaurant_Search extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
+    String text;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rest_list_oneman_food);
+        setContentView(R.layout.activity_restaurant_search);
+        recyclerView = findViewById(R.id.recycler_view);
 
-        recyclerView = findViewById(R.id.recyclerView2);
+        Intent intent = getIntent();
+        text = intent.getStringExtra("text");
         get_Restaurant();
     }
 
@@ -61,7 +67,8 @@ public class RestList_onemanFood extends AppCompatActivity {
 
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
-                intent.putExtra("aP",adapterPosition);
+                intent.putExtra("aP",position);
+                intent.putExtra("text",text);
                 startActivity(intent);
 
             }
@@ -70,7 +77,7 @@ public class RestList_onemanFood extends AppCompatActivity {
     }
 
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+        String url = "http://125.132.62.150:8000/letseat/store/searchRestaurant?name="+text;
 
 
         JSONArray getData = new JSONArray();
@@ -85,21 +92,21 @@ public class RestList_onemanFood extends AppCompatActivity {
                         try {
                             String restype,resName,location,image;
                             Bitmap bitmap;
+
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
-
                                 restype = jsonObject.getString("restype");
                                 resName = jsonObject.getString("resName");
                                 location = jsonObject.getString("location");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
 
-
-                                list.add(bitmap);
-                                list.add(restype);
-                                list.add(resName);
-                                list.add(location);
-
+                                if(restype.contains(text)||resName.contains(text)||location.contains(text)){
+                                    list.add(bitmap);
+                                    list.add(restype);
+                                    list.add(resName);
+                                    list.add(location);
+                                }
 
                             }
 
@@ -123,4 +130,5 @@ public class RestList_onemanFood extends AppCompatActivity {
         AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
+
 }

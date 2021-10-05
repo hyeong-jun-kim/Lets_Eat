@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 
 public class RestInfoMain extends AppCompatActivity {
@@ -25,6 +25,7 @@ public class RestInfoMain extends AppCompatActivity {
     Res_info_fragment2 fragment2;
     res_info_fragment3 fragment3;
 
+    String string, url;
     TextView res_title;
     int data;
 
@@ -32,6 +33,26 @@ public class RestInfoMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restab_info_activity);
+
+        Intent i = getIntent();
+        if(i.getStringExtra("text").equals("All")){
+            string = i.getStringExtra("text");      //string.value = "All"
+        }
+        else if(i.getStringExtra("text").equals("koreanFood")){
+            string = i.getStringExtra("text");      ////string.value = "koreanFood"
+        }
+        else if(i.getStringExtra("text").equals("chineseFood")){
+            string = i.getStringExtra("text");      ////string.value = "koreanFood"
+        }
+        else if(i.getStringExtra("text").equals("japaneseFood")){
+            string = i.getStringExtra("text");      ////string.value = "koreanFood"
+        }
+        else if(i.getStringExtra("text").equals("westernFood")){
+            string = i.getStringExtra("text");      ////string.value = "koreanFood"
+        }
+        else if(i.getStringExtra("text")!=null){
+            string = i.getStringExtra("text");
+        }
 
         fragment1 = new res_info_fragment1();
         fragment2 = new Res_info_fragment2();
@@ -61,11 +82,56 @@ public class RestInfoMain extends AppCompatActivity {
                 }
                 else if(position == 1){
 
-                    Res_info_fragment2 fragment = new Res_info_fragment2();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("ap",data);
-                    fragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+
+                    if(string.equals("chineseFood")){
+                        Res_info_fragment2 fragment = new Res_info_fragment2();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("ap",data);
+                        bundle.putString("text","chineseFood");
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+                    }
+                    else if(string.equals("koreanFood")){
+                        Res_info_fragment2 fragment = new Res_info_fragment2();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("ap",data);
+                        bundle.putString("text","koreanFood");
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+                    }
+                    else if(string.equals("japaneseFood")){
+                        Res_info_fragment2 fragment = new Res_info_fragment2();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("ap",data);
+                        bundle.putString("text","japaneseFood");
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+                    }
+                    else if(string.equals("westernFood")){
+                        Res_info_fragment2 fragment = new Res_info_fragment2();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("ap",data);
+                        bundle.putString("text","westernFood");
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+                    }
+                    else if(string.equals("All")){
+                        Res_info_fragment2 fragment = new Res_info_fragment2();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("ap",data);
+                        bundle.putString("text","All");
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+                    }
+                    else if(string != null){
+                        Res_info_fragment2 fragment = new Res_info_fragment2();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("ap",data);
+                        bundle.putString("text",string);
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
+                    }   //검색기능
+
 
                 }
                 else if(position ==2){
@@ -87,7 +153,25 @@ public class RestInfoMain extends AppCompatActivity {
         get_Restaurant();
     }
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+
+        if(string.equals("koreanFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=koreanFood";
+        }
+        else if(string.equals("All")){
+            url = "http://125.132.62.150:8000/letseat/store/findAll";
+        }
+        else if(string.equals("chineseFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=chineseFood";
+        }
+        else if(string.equals("japaneseFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=japaneseFood";
+        }
+        else if(string.equals("westernFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
+        }
+        else if(string != null){
+            url = "http://125.132.62.150:8000/letseat/store/searchRestaurant?name="+string;
+        }
 
 
 

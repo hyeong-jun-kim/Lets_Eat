@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,7 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
     int resId;
     private GoogleMap map;
     private TextView place,resinfo,resName,opening_hours,phonenum;
-    String location,s_resinfo,s_resName,s_opening_hours,s_phonenum;;
+    String location,s_resinfo,s_resName,s_opening_hours,s_phonenum, text, url;
 
 
 
@@ -62,12 +61,14 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.shop_map);
         mapFragment.getMapAsync(this);
-        get_Restaurant();
 
         Bundle extra = this.getArguments();
         if (extra != null) {
             resId = extra.getInt("ap");
+            text = extra.getString("text");
+            get_Restaurant();
         }
+
 
         return view;
     }
@@ -151,7 +152,27 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
     };
 
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+
+        if(text.equals("chineseFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=chineseFood";
+        }
+        else if(text.equals("koreanFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=koreanFood";
+        }
+        else if(text.equals("japaneseFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=japaneseFood";
+        }
+        else if(text.equals("westernFood")){
+            url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
+        }
+        else if(text.equals("All")){
+            url = "http://125.132.62.150:8000/letseat/store/findAll";
+        }
+        else if(text !=null){
+            url = "http://125.132.62.150:8000/letseat/store/searchRestaurant?name="+text;
+        }
+
+
 
 
 

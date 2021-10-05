@@ -26,6 +26,9 @@
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Restaurant_Search"
+            android:exported="true" />
+        <activity
             android:name=".restaurant.list.RestList_onemanFood"
             android:exported="true" />
         <activity

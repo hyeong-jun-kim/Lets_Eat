@@ -1,10 +1,12 @@
 package org.techtown.letseat.restaurant.list;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +22,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
+import org.techtown.letseat.Restaurant_Search;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
+import org.techtown.letseat.util.PhotoSave;
 
 
 import java.util.ArrayList;
@@ -31,10 +35,11 @@ public class RestListMain extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
 
+    EditText search_restaurant;
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
     RecyclerView recyclerView;
-    Button koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button;
+    Button koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button, search_btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,11 +47,25 @@ public class RestListMain extends AppCompatActivity {
         setContentView(R.layout.res_list_activity);
         recyclerView = findViewById(R.id.recycler_view);
 
+        search_restaurant = findViewById(R.id.search_restaurant);
+        search_btn = findViewById(R.id.search_btn);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text =  search_restaurant.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Restaurant_Search.class);
+                intent.putExtra("text",text);
+                startActivity(intent);
+            }
+        });
+
+
         koreanFood_button = findViewById(R.id.koreanFood_button);
         koreanFood_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RestList_KoreanFood.class);
+                intent.putExtra("text","koreanFood");
                 startActivity(intent);
             }
         });
@@ -56,6 +75,7 @@ public class RestListMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RestList_chinaFood.class);
+                intent.putExtra("text","chineseFood");
                 startActivity(intent);
             }
         });
@@ -110,6 +130,7 @@ public class RestListMain extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                 intent.putExtra("aP",adapterPosition);
+                intent.putExtra("text","All");
                 startActivity(intent);
 
             }
@@ -131,14 +152,18 @@ public class RestListMain extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String restype,resName,location;
+                            String restype,resName,location,image;
+                            Bitmap bitmap;
+
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 restype = jsonObject.getString("restype");
                                 resName = jsonObject.getString("resName");
                                 location = jsonObject.getString("location");
+                                image = jsonObject.getString("image");
+                                bitmap = PhotoSave.StringToBitmap(image);
 
-
+                                list.add(bitmap);
                                 list.add(restype);
                                 list.add(resName);
                                 list.add(location);

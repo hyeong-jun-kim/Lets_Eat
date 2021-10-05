@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +19,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
+import org.techtown.letseat.util.PhotoSave;
 
 import java.util.ArrayList;
 
@@ -60,6 +62,7 @@ public class RestList_japanFood extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                 intent.putExtra("aP",adapterPosition);
+                intent.putExtra("text","japaneseFood");
                 startActivity(intent);
 
             }
@@ -68,7 +71,7 @@ public class RestList_japanFood extends AppCompatActivity {
     }
 
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+        String url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=japaneseFood";
 
 
         JSONArray getData = new JSONArray();
@@ -81,20 +84,22 @@ public class RestList_japanFood extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String restype,resName,location;
+                            String restype,resName,location,image;
+                            Bitmap bitmap;
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
 
                                 restype = jsonObject.getString("restype");
                                 resName = jsonObject.getString("resName");
                                 location = jsonObject.getString("location");
+                                image = jsonObject.getString("image");
+                                bitmap = PhotoSave.StringToBitmap(image);
 
 
-                                if(restype.equals("japaneseFood")){
-                                    list.add(restype);
-                                    list.add(resName);
-                                    list.add(location);
-                                }
+                                list.add(bitmap);
+                                list.add(restype);
+                                list.add(resName);
+                                list.add(location);
 
                             }
 
