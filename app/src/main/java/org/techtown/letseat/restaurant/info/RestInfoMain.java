@@ -1,8 +1,13 @@
 package org.techtown.letseat.restaurant.info;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -19,11 +24,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.AppHelper;
 import org.techtown.letseat.R;
+import org.techtown.letseat.ViewPagerAdapter;
 
 public class RestInfoMain extends AppCompatActivity {
-    res_info_fragment1 fragment1;
-    Res_info_fragment2 fragment2;
-    res_info_fragment3 fragment3;
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+    private res_info_fragment1 fragment1;
+    private Res_info_fragment2 fragment2;
+    private res_info_fragment3 fragment3;
 
     TextView res_title;
     int data;
@@ -33,56 +43,56 @@ public class RestInfoMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restab_info_activity);
 
+        viewPager = findViewById(R.id.view_pager);
+        viewPager.setOffscreenPageLimit(3);
+
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
         fragment1 = new res_info_fragment1();
         fragment2 = new Res_info_fragment2();
         fragment3 = new res_info_fragment3();
 
-        res_title = findViewById(R.id.res_title);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+        viewPagerAdapter.addFragment(fragment1, "메뉴");
+        viewPagerAdapter.addFragment(fragment2, "정보");
+        viewPagerAdapter.addFragment(fragment3, "리뷰");
 
-        Bundle extras = getIntent().getExtras();
-        data = extras.getInt("aP");
-        Log.d("ds","ds");
+        viewPager.setAdapter(viewPagerAdapter);
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
-
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("메뉴"));
-        tabs.addTab(tabs.newTab().setText("정보"));
-        tabs.addTab(tabs.newTab().setText("리뷰"));
-
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(@NonNull TabLayout.Tab tab) {
+                super.onTabSelected(tab);
                 int position = tab.getPosition();
-
-                if(position == 0){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
-                }
-                else if(position == 1){
+                if(position == 1){
 
                     Res_info_fragment2 fragment = new Res_info_fragment2();
                     Bundle bundle = new Bundle();
                     bundle.putInt("ap",data);
                     fragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).commit();
 
-                }
-                else if(position ==2){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment3).commit();
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                super.onTabUnselected(tab);
 
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                super.onTabReselected(tab);
             }
         });
+
+        res_title = findViewById(R.id.res_title);
+
+        Bundle extras = getIntent().getExtras();
+        data = extras.getInt("aP");
+        Log.d("ds", "ds");
 
         get_Restaurant();
     }
