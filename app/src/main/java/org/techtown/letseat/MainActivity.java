@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
 
-
     int currentPage = 0;
 
     Timer timer;
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Map_MainActivity.class);
+
                 startActivity(intent);
             }
         });

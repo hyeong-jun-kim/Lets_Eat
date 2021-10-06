@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".restaurant.info.res_info_fragment2">
+    tools:context=".restaurant.info.Res_info_fragment2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,12 +29,11 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/resinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:text="test"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -68,13 +67,12 @@
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/textView38"
+                        android:id="@+id/resName"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingLeft="50dp"
                         android:paddingTop="8dp"
-                        android:text="뼈대있는 가문"
                         android:textColor="#000000" />
                 </LinearLayout>
 
@@ -92,37 +90,12 @@
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/textView39"
+                        android:id="@+id/opening_hours"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingLeft="37dp"
                         android:paddingTop="8dp"
-                        android:text="09:00 ~ 22:00"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView36"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:text="휴무일"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:id="@+id/textView40"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:paddingLeft="50dp"
-                        android:paddingTop="8dp"
-                        android:text="연중무휴"
                         android:textColor="#000000" />
                 </LinearLayout>
 
@@ -140,37 +113,12 @@
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/textView41"
+                        android:id="@+id/place"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingLeft="63dp"
                         android:paddingTop="8dp"
-                        android:text="경기도 용인시 수지구 291-2"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView35"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:text="주차여부"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:id="@+id/textView42"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:paddingLeft="38dp"
-                        android:paddingTop="8dp"
-                        android:text="주차가능"
                         android:textColor="#000000" />
                 </LinearLayout>
 
@@ -188,15 +136,20 @@
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/textView43"
+                        android:id="@+id/phonenum"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingLeft="38dp"
                         android:paddingTop="8dp"
-                        android:text="031-000-0000"
                         android:textColor="#000000" />
                 </LinearLayout>
+
+                <fragment
+                    android:id="@+id/shop_map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="198dp" />
 
             </LinearLayout>
         </ScrollView>

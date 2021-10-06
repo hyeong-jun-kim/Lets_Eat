@@ -1,6 +1,6 @@
 package org.techtown.letseat.restaurant.list;
 
-public class RestListRecycleItem {
+public class RestListRecycleItem{
 
     private int src;
     private String genre;

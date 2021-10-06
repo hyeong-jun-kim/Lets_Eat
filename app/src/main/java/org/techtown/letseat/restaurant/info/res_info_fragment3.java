@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import org.techtown.letseat.R;
 import org.techtown.letseat.Review.Reviewdata;
-import org.techtown.letseat.menu.Menu;
 
 import java.util.ArrayList;
 
@@ -55,7 +54,7 @@ public class res_info_fragment3 extends Fragment {
 
         View view = inflater.inflate(R.layout.res_info_fragment3, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
         recyclerView.setHasFixedSize(true);
         adapter = new ReviewAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

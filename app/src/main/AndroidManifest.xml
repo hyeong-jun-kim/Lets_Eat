@@ -26,15 +26,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
-        //android:networkSecurityConfig="@xml/network_security_config"
-
+        <activity
+            android:name=".restaurant.list.RestList_onemanFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_westernFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_japanFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_chinaFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_KoreanFood"
+            android:exported="true" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="d8aeb3d2d3af0540824e12d6ba383ba4" />
-
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDwi28qhFQzZBAfyCvLbkkPRG5zSEiGmHY"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDwi28qhFQzZBAfyCvLbkkPRG5zSEiGmHY" />
 
         <uses-library
             android:name="org.apache.http.legacy"
