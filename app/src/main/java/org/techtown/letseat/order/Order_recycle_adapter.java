@@ -49,11 +49,9 @@ implements OnReviewItemClickListner{
 
         Order_recycle_item item = items.get(position);
 
-        viewHolder.ivRest.setImageResource(item.getSrc());
+        viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvmenuName.setText(item.getMenuName());
-        viewHolder.tvPrice.setText(item.getPrice());
-        viewHolder.tvOrder.setText(item.getOrder());
+
     }
 
     @Override

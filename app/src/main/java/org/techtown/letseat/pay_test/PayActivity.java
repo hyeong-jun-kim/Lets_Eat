@@ -27,7 +27,7 @@ import java.util.Map;
 public class PayActivity extends AppCompatActivity {
 
     static RequestQueue requestQueue;
-    static String productName; // 상품 이름
+    static String productName = "미정"; // 상품 이름
     static String productPrice;
 
     WebView webView;
@@ -39,12 +39,11 @@ public class PayActivity extends AppCompatActivity {
     String tidPin;
     String pgToken;
 
-    public PayActivity() {
+    public PayActivity(){
 
     }
 
-    public PayActivity(String productName, String productPrice) {
-        PayActivity.productName = productName;
+    public PayActivity(String productPrice) {
         PayActivity.productPrice = productPrice;
     }
 

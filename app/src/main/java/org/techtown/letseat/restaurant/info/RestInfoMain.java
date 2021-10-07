@@ -20,14 +20,18 @@ import org.json.JSONObject;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 
+import java.util.ArrayList;
+
 public class RestInfoMain extends AppCompatActivity {
     res_info_fragment1 fragment1;
     Res_info_fragment2 fragment2;
     res_info_fragment3 fragment3;
 
+
+
     String string, url;
     TextView res_title;
-    int data;
+    int data, resId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class RestInfoMain extends AppCompatActivity {
             string = i.getStringExtra("text");
         }
 
+        resId = i.getIntExtra("send_resId",0);
+
         fragment1 = new res_info_fragment1();
         fragment2 = new Res_info_fragment2();
         fragment3 = new res_info_fragment3();
@@ -61,10 +67,13 @@ public class RestInfoMain extends AppCompatActivity {
         res_title = findViewById(R.id.res_title);
 
         Bundle extras = getIntent().getExtras();
-        data = extras.getInt("aP");
+        data = extras.getInt("aP");     //aP = adapterPosition
         Log.d("ds","ds");
 
 
+        Bundle bundle = new Bundle();
+        bundle.putInt("send_resId",resId);
+        fragment1.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
 
         TabLayout tabs = findViewById(R.id.tabs);
@@ -78,6 +87,10 @@ public class RestInfoMain extends AppCompatActivity {
                 int position = tab.getPosition();
 
                 if(position == 0){
+                    fragment1 = new res_info_fragment1();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("send_resId",resId);
+                    fragment1.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
                 }
                 else if(position == 1){
@@ -188,8 +201,8 @@ public class RestInfoMain extends AppCompatActivity {
 
                             JSONObject jsonObject = (JSONObject) response.get(data);
                             String title = jsonObject.getString("resName");
-
                             res_title.setText(title);
+
 
                             Log.d("응답", response.toString());
 

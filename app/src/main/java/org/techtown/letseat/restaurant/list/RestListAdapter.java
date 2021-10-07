@@ -68,10 +68,6 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
         this.listner = listner;
     }
 
-    public RestListRecycleItem getItemData(int num){
-        return items.get(num);
-    }
-
 
     public RestListRecycleItem getItem(int position){
         return items.get(position);

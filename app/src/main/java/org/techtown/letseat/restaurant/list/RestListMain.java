@@ -35,11 +35,14 @@ public class RestListMain extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
 
+    ArrayList<Integer> resIdList = new ArrayList<>();
+
     EditText search_restaurant;
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
     RecyclerView recyclerView;
     Button koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button, search_btn;
+    int resId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -126,11 +129,13 @@ public class RestListMain extends AppCompatActivity {
 
                 RestListRecycleItem item = adapter.getItem(position);
 
-
+                int send_resId = resIdList.get(adapterPosition);
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                 intent.putExtra("aP",adapterPosition);
                 intent.putExtra("text","All");
+                intent.putExtra("send_resId",send_resId);
+
                 startActivity(intent);
 
             }
@@ -162,6 +167,8 @@ public class RestListMain extends AppCompatActivity {
                                 location = jsonObject.getString("location");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
+                                resId = jsonObject.getInt("resId");
+                                resIdList.add(resId);
 
                                 list.add(bitmap);
                                 list.add(restype);

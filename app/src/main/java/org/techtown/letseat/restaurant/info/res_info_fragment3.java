@@ -54,7 +54,7 @@ public class res_info_fragment3 extends Fragment {
 
         View view = inflater.inflate(R.layout.res_info_fragment3, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         adapter = new ReviewAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

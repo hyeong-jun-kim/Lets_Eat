@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -47,8 +49,8 @@ public class Login extends AppCompatActivity {
     private EditText input_email, input_password;
     private String email_string, pwd_string;
 
-    static private String kakao_email_string;
-    static private String kakao_pwd_string;
+    static private String kakao_email_string, kakao_nickName;
+
 
     private KaKaoCallBack kaKaoCallBack;
 
@@ -201,9 +203,9 @@ public class Login extends AppCompatActivity {
                     }
 
                     else{
-                        kakao_email_string = result.getKakaoAccount().getEmail();
-                        kakao_pwd_string = "11";
-                        sendRegisterRequest();
+                        kakao_email_string = result.getKakaoAccount().toString();
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent);
                     }
                 }
             });
@@ -217,13 +219,45 @@ public class Login extends AppCompatActivity {
 
     //카카오 로그인 여기까지
 
+    // 이메일 중복 확인 GET
+    public void sendLoginCheckRequest(String email_string, TextView email) {
+        String url = "http://125.132.62.150:8000/letseat/register/email/check?email=" + email_string;
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override // 응답 잘 받았을 때
+                    public void onResponse(String response) {
+                        if (response.equals("emailCheckFail")) {
+                            println("위 이메일 주소는 사용불가능합니다.");
+                            email.setText("");
+                        } else {
+                            println("사용가능한 이메일입니다.");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override // 에러 발생 시
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Tag_Error",error.toString());
+                        println("연결 상태 불량");
+                        Log.d("error",error.toString());
+                    }
+
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
+
     //카카오 이메일 서버에 전송
     public void sendRegisterRequest() {
         String url = "http://125.132.62.150:8000/letseat/login/normal";
         JSONObject postData = new JSONObject();
         try {
             postData.put("email", kakao_email_string);
-            postData.put("password", kakao_pwd_string);
+            postData.put("name", kakao_nickName);
         }
         catch (JSONException e){
             e.printStackTrace();
@@ -259,7 +293,7 @@ public class Login extends AppCompatActivity {
         try {
             PackageInfo pkinfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
             for (Signature signature : pkinfo.signatures) {
-                MessageDigest messageDigest = MessageDigest.getInstance("SHA");
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
                 messageDigest.update(signature.toByteArray());
                 String result = new String(Base64.encode(messageDigest.digest(), 0));
                 Log.d("해시", result);

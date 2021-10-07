@@ -38,7 +38,7 @@ public class RestList_onemanFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_list_oneman_food);
 
-        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView = findViewById(R.id.recyclerView);
         get_Restaurant();
     }
 

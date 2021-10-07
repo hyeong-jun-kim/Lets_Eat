@@ -39,7 +39,7 @@ public class RestList_chinaFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_list_china_food);
 
-        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView = findViewById(R.id.recyclerView);
         get_Restaurant();
     }
 

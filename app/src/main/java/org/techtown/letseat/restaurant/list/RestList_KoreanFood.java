@@ -38,7 +38,7 @@ public class RestList_KoreanFood extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_list_korean_food);
-        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView = findViewById(R.id.recyclerView);
         get_Restaurant();
         Intent intent = getIntent();
         text = intent.getStringExtra("text");   //koreanFood
