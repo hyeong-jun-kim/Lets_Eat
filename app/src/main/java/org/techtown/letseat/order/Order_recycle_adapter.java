@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.ReviewActivity;
+import org.techtown.letseat.Review.ReviewActivity;
 
 import java.util.ArrayList;
 

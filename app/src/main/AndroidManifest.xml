@@ -13,7 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+
     <uses-feature android:name="android.hardware.camera" />
+
+
 
     <application
         android:name=".KakaoSDKInit"
@@ -46,6 +49,18 @@
         <activity
             android:name=".restaurant.list.RestList_KoreanFood"
             android:exported="true" />
+        <activity
+            android:name=".Review.ReviewActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".Review.ReviewImage1"
+            android:exported="true"/>
+        <activity
+            android:name=".Review.ReviewImage2"
+            android:exported="true"/>
+        <activity
+            android:name=".Review.ReviewImage3"
+            android:exported="true"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -74,9 +89,8 @@
         <activity android:name=".pay_test.Kakao_pay_test" />
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList" />
-        <activity android:name=".test" />
         <activity
-            android:name=".ReviewActivity"
+            android:name=".Review.ReviewActivity"
             android:exported="true" />
         <activity
             android:name=".order.OrderActivity"
