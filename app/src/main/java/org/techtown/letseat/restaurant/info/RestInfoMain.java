@@ -76,7 +76,7 @@ public class RestInfoMain extends AppCompatActivity {
         fragment1.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment1).commit();
 
-        TabLayout tabs = findViewById(R.id.tabs);
+        TabLayout tabs = findViewById(R.id.tab_layout);
         tabs.addTab(tabs.newTab().setText("메뉴"));
         tabs.addTab(tabs.newTab().setText("정보"));
         tabs.addTab(tabs.newTab().setText("리뷰"));

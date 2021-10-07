@@ -62,6 +62,9 @@
             android:name=".mytab.information_fix"
             android:exported="true" />
         <activity
+            android:name=".qr_restActivity"
+            android:exported="true" />
+        <activity
             android:name=".mytab.waiting_Layout"
             android:exported="true" />
         <activity
