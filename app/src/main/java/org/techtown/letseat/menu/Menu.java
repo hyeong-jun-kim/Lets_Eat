@@ -1,20 +1,23 @@
 package org.techtown.letseat.menu;
 
+import android.graphics.Bitmap;
+
 public class Menu {
+    private Bitmap bitmap;
     private String name;
     private String price;
-    private int resId;
 
-    public Menu(String name, String price, int resId){
+    public Menu(Bitmap bitmap, String name, String price){
+        this.bitmap = bitmap;
         this.name = name;
         this.price = price;
-        this.resId = resId;
+
     }
-    public String getName(){
-        return name;
+    public Bitmap getBitmap(){
+        return bitmap;
     }
     public void setName(){
-        this.name = name;
+        this.bitmap = bitmap;
     }
     public String getPrice(){
         return price;
@@ -22,10 +25,10 @@ public class Menu {
     public void setPrice(String price){
         this.price = price;
     }
-    public int getResId(){
-        return resId;
+    public String getName(){
+        return name;
     }
     public void setResId(int resId){
-        this.resId = resId;
+        this.name = name;
     }
 }

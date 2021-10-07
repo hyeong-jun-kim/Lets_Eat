@@ -14,8 +14,8 @@ public class OrderActivity extends AppCompatActivity {
 
     public FragmentManager fm;
     FragmentTransaction tran;
-    fragment_order fragment_order;
-    fragment_order2 fragment_order2;
+    Fragment_order fragment_order;
+    Fragment_order2 fragment_order2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,8 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.order_main);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        fragment_order = new fragment_order();
-        fragment_order2 = new fragment_order2();
+        fragment_order = new Fragment_order();
+        fragment_order2 = new Fragment_order2();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.order_frame,fragment_order).commit();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

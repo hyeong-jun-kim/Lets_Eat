@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ED6868"
     android:orientation="vertical"
-    tools:context=".ReviewActivity" >
+    tools:context=".Review.ReviewActivity" >
 
     <TextView
         android:id="@+id/textView7"
@@ -77,13 +77,13 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView1"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/login_border1"
-            app:srcCompat="@drawable/camera" />
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -92,7 +92,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/login_border1"
-            app:srcCompat="@drawable/camera" />
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -101,7 +101,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/login_border1"
-            app:srcCompat="@drawable/camera" />
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     </LinearLayout>
 

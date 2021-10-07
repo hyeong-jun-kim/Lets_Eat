@@ -55,6 +55,7 @@
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/drawable/waiting_status_border.xml" value="0.29444444444444445" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_create_account.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_information_fix.xml" value="0.2388888888888889" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_kakao_login_user_info.xml" value="0.251171875" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_kakao_pay_test.xml" value="0.2498069498069498" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -66,15 +67,30 @@
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_register.xml" value="0.32314814814814813" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_res_list.xml" value="0.25" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_restaurant_info.xml" value="0.33589743589743587" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_restaurant_search.xml" value="0.22361111111111112" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_splash.xml" value="0.33589743589743587" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_waiting_layout.xml" value="0.25" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/circle_design.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/fragment_order.xml" value="0.129296875" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/fragment_tab_1.xml" value="0.1390625" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/item_fragment_tab_1_2.xml" value="0.21" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/li.xml" value="0.3212962962962963" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/login_activity.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/map_activity_main.xml" value="0.21805555555555556" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/map_main.xml" value="0.21805555555555556" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/map_recycle.xml" value="0.21805555555555556" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/menu_recycle.xml" value="0.33" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/network_security_config.xml" value="0.2498069498069498" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_recycle.xml" value="0.2" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_recycle2.xml" value="0.2498069498069498" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/register_activity.xml" value="0.22430555555555556" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/register_recycle.xml" value="0.22430555555555556" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/res_info_activity.xml" value="0.2498069498069498" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/res_info_fragment1.xml" value="0.25" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/res_info_fragment2.xml" value="0.21805555555555556" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/res_info_recycle.xml" value="0.21805555555555556" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/res_list_activity.xml" value="0.2498069498069498" />
+        <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/res_recycle.xml" value="0.2498069498069498" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/rest_recycle.xml" value="0.32314814814814813" />
         <entry key="..\:/Users/y/AndroidStudioProjects/Lets_Eat/app/src/main/res/xml/network_security_config.xml" value="0.238996138996139" />
         <entry key="..\:/Users/y/StudioProjects/Lets_Eat/app/src/main/res/drawable/circle_design.xml" value="0.1953125" />

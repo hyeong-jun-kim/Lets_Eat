@@ -32,11 +32,9 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
 
         Order_recycle_item item = items.get(position);
 
-        viewHolder.ivRest.setImageResource(item.getSrc());
+
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvmenuName.setText(item.getMenuName());
-        viewHolder.tvPrice.setText(item.getPrice());
-        viewHolder.tvOrder.setText(item.getOrder());
+
     }
 
     @Override

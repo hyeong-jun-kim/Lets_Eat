@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,12 +19,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
-import org.techtown.letseat.restaurant.list.OnRestaurantItemClickListner;
-import org.techtown.letseat.restaurant.list.RestListAdapter;
-import org.techtown.letseat.restaurant.list.RestListRecycleItem;
+import org.techtown.letseat.util.PhotoSave;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class RestList_onemanFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_list_oneman_food);
 
-        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView = findViewById(R.id.recyclerView);
         get_Restaurant();
     }
 
@@ -84,21 +83,23 @@ public class RestList_onemanFood extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String restype,resName,location;
-                            int aloneAble;
+                            String restype,resName,location,image;
+                            Bitmap bitmap;
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
 
                                 restype = jsonObject.getString("restype");
                                 resName = jsonObject.getString("resName");
                                 location = jsonObject.getString("location");
-                                aloneAble = jsonObject.getInt("aloneAble");
+                                image = jsonObject.getString("image");
+                                bitmap = PhotoSave.StringToBitmap(image);
 
-                                if(aloneAble == 1){
-                                    list.add(restype);
-                                    list.add(resName);
-                                    list.add(location);
-                                }
+
+                                list.add(bitmap);
+                                list.add(restype);
+                                list.add(resName);
+                                list.add(location);
+
 
                             }
 

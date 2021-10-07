@@ -30,11 +30,12 @@ public class res_info_fragment3 extends Fragment {
 
         adapter.setItems(new RestItemReviewData().getItems());
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView2);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
 
         return view;
 
     }
+
 }

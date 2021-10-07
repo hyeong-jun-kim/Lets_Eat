@@ -1,6 +1,5 @@
 package org.techtown.letseat.order;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,22 +12,20 @@ import android.view.ViewGroup;
 
 import org.techtown.letseat.R;
 
-public class fragment_order extends Fragment {
+public class Fragment_order2 extends Fragment {
     View view;
-    private Order_recycle_adapter adapter = new Order_recycle_adapter();
+    private Order_recycle_adapter2 adapter2 = new Order_recycle_adapter2();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_order, container, false);
+        view = inflater.inflate(R.layout.fragment_order2, container, false);
 
-        adapter.setItems(new Orderdata().getItems());
+        adapter2.setItems(new Orderdata2().getItems());
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(adapter);
+        RecyclerView recyclerView2 = view.findViewById(R.id.recycler_view2);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView2.setAdapter(adapter2);
 
         return view;
-
-
     }
 }

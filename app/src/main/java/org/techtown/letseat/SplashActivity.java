@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -20,8 +19,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.login.Login;
+import org.techtown.letseat.util.AppHelper;
 
-public class SplashActivity extends AppCompatActivity {
+ public class SplashActivity extends AppCompatActivity {
     Animation anim_fade_in_1, anim_fade_in_2;
     TextView title, subtitle, copyright;
     String email_string, pwd_string;

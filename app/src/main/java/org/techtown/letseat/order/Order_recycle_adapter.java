@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.ReviewActivity;
+import org.techtown.letseat.Review.ReviewActivity;
 
 import java.util.ArrayList;
 
@@ -49,11 +49,9 @@ implements OnReviewItemClickListner{
 
         Order_recycle_item item = items.get(position);
 
-        viewHolder.ivRest.setImageResource(item.getSrc());
+        viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvmenuName.setText(item.getMenuName());
-        viewHolder.tvPrice.setText(item.getPrice());
-        viewHolder.tvOrder.setText(item.getOrder());
+
     }
 
     @Override

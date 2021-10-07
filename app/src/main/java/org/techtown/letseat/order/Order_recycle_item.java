@@ -1,39 +1,25 @@
 package org.techtown.letseat.order;
 
+import android.graphics.Bitmap;
+
 public class Order_recycle_item {
 
-    private int src;
-    private String price;
+    private Bitmap bitmap;
     private String name;
-    private String menuName;
-    private String order;
 
-    public Order_recycle_item(int src, String price, String name, String menuName,String order) {
 
-        this.src = src;
-        this.price = price;
+    public Order_recycle_item(Bitmap bitmap, String name) {
+
+        this.bitmap = bitmap;
         this.name = name;
-        this.menuName = menuName;
-        this.order = order;
 
     }
 
-    public int getSrc() {
-        return src;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
+    public Bitmap getBitmap() {return  bitmap;}
     public String getName() {
         return name;
     }
 
-    public String getMenuName() {
-        return menuName;
-    }
 
-    public String getOrder() {return order; }
 }
 
