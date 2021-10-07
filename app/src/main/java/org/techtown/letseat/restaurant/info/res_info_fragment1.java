@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class res_info_fragment1 extends Fragment {
     private org.techtown.letseat.menu.MenuAdapter adapter = new MenuAdapter();
     private int sum;
     private CheckBox checkBox;
-    private Button pay_button;
+    private ExtendedFloatingActionButton basketBtn;
 
     int resId;
     @Override
@@ -58,8 +59,8 @@ public class res_info_fragment1 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         //결제버튼
-        pay_button = view.findViewById(R.id.pay_button);
-        pay_button.setOnClickListener(new View.OnClickListener() {
+        basketBtn = view.findViewById(R.id.basket_button2);
+        basketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Kakao_pay_test.class);
@@ -90,18 +91,8 @@ public class res_info_fragment1 extends Fragment {
         adapter.setItemClickListner(new OnMenuItemClickListner() {
             @Override
             public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
-                String price = priceList.get(position);
-                checkBox = holder.itemView.findViewById(R.id.checkBox);
-                if(checkBox.isChecked()){
-                    checkBox.setChecked(false);
-                    sum -= Integer.parseInt(price);
-                }
-                else {
-                    checkBox.setChecked(true);
-                    sum += Integer.parseInt(price);
-                }
-            }
 
+            }
         });
 
         //클릭 이벤트

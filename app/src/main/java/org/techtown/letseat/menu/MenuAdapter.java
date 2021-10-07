@@ -65,14 +65,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>imp
         TextView name;
         TextView price;
         ImageView imageView;
-        CheckBox checkBox;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             price = itemView.findViewById(R.id.price);
             imageView = itemView.findViewById(R.id.image);
-            checkBox = itemView.findViewById(R.id.checkBox);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
