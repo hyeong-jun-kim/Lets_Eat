@@ -64,12 +64,12 @@ public class RestInfoMain extends AppCompatActivity {
         fragment2 = new Res_info_fragment2();
         fragment3 = new res_info_fragment3();
 
+
         res_title = findViewById(R.id.res_title);
 
         Bundle extras = getIntent().getExtras();
         data = extras.getInt("aP");     //aP = adapterPosition
         Log.d("ds","ds");
-
 
         Bundle bundle = new Bundle();
         bundle.putInt("send_resId",resId);

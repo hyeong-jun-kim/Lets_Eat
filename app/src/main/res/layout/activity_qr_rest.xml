@@ -71,5 +71,19 @@
             android:background="#FFFFFF"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:ignore="SpeakableTextPresentCheck" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/basket_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_gravity="bottom|right"
+                android:fontFamily="@font/notosansbold"
+                android:backgroundTint="#ED6868"
+                app:icon="@drawable/basket"
+                app:iconTint="@color/white"/>
+        </FrameLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
