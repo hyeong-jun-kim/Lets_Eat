@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,9 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button, sub_login_button, kakao_login;
+    private Button  btn_register, login_button, sub_login_button;
     private LoginButton kakao_login_button;
+    private ImageView fakeKakao;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
 
@@ -62,6 +64,7 @@ public class Login extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
+        fakeKakao = findViewById(R.id.fake_kakao);
 
         // 임시로그인용
         sub_login_button = findViewById(R.id.sub_login_button);
@@ -101,10 +104,9 @@ public class Login extends AppCompatActivity {
 
         kakao_login_button = findViewById(R.id.kakao_login_button);
 
-        kakao_login = findViewById(R.id.kakao_login);
-        kakao_login.setOnClickListener(new View.OnClickListener() {
+        fakeKakao.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 kakao_login_button.performClick();
             }
         });

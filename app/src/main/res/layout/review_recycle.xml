@@ -1,43 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@drawable/gradient"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".menu.menu_sample">
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="235dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="3dp"
-        android:layout_weight="0.3"
-        android:src="@drawable/menuimg1" />
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:fontFamily="@font/notosansregular"
-        android:text="testuser"
+        android:text="Date"
+        android:textSize="10dp"
+        android:paddingBottom="5dp"
         android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/price"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosansregular"
+        android:id="@+id/dateTv"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/notosansregular"
-        android:gravity="center"
-        android:text="review string"
-        android:textColor="#000000"
-        android:textSize="16sp" />
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/userImageIv"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosansregular"
+                android:includeFontPadding="false"
+                android:id="@+id/idTv"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RatingBar
+                    style="?android:ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:stepSize="0.5"
+                    android:progressTint="#ED6868"
+                    android:id="@+id/ratingBar"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosansregular"
+                    android:text="( 3 )"
+                    android:textColor="#000000"
+                    android:textSize="8dp"
+                    android:id="@+id/ratingBarTv"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="400dp"
+                android:layout_height="300dp"
+                android:src="@drawable/gamzatang"
+                android:scaleType="centerCrop"
+                android:id="@+id/reviewImageIv"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ED6868"
+            android:fontFamily="@font/notosansregular"
+            android:text="감자탕 짱"
+            android:textColor="#000000"
+            android:layout_weight="1"
+            android:id="@+id/reviewTv"/>
+    </LinearLayout>
 
 </LinearLayout>
