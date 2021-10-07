@@ -1,5 +1,6 @@
 package org.techtown.letseat.restaurant.list;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,11 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RestListAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         RestListRecycleItem item = items.get(position);
 
-        viewHolder.ivRest.setImageResource(item.getSrc());
+        viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvAdress.setText(item.getAdress());
         viewHolder.tvGenre.setText(item.getGenre());
@@ -67,16 +68,12 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
         this.listner = listner;
     }
 
-    public RestListRecycleItem getItemData(int num){
-        return items.get(num);
-    }
-
 
     public RestListRecycleItem getItem(int position){
         return items.get(position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivRest;
         TextView tvName, tvAdress, tvGenre;
@@ -84,8 +81,8 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
 
-            ivRest = itemView.findViewById(R.id.iv_item_res);
 
+            ivRest = itemView.findViewById(R.id.iv_item_res);
             tvName = itemView.findViewById(R.id.tv_item_res_name);
             tvAdress = itemView.findViewById(R.id.tv_item_res_adress);
             tvGenre = itemView.findViewById(R.id.tv_item_food_genre);
@@ -98,7 +95,6 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
                     if(listner !=null){
                         listner.OnItemClick(ViewHolder.this,v,position);
                     }
-
                 }
             });
 

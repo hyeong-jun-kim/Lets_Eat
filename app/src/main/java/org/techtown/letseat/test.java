@@ -1,6 +1,5 @@
 package org.techtown.letseat;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -15,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.util.AppHelper;
 
 public class test extends AppCompatActivity {
     @Override

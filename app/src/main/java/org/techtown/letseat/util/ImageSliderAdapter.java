@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
+import org.techtown.letseat.R;
 
 public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.MyViewHolder> {
     private Context context;

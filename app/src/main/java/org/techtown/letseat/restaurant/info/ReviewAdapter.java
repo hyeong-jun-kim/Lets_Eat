@@ -26,7 +26,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
-            text = (TextView) view. findViewById(R.id.text);
+            text = (TextView) view. findViewById(R.id.price);
             image = (ImageView) view. findViewById(R.id.image);
         }
     }

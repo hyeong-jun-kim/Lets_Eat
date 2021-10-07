@@ -1,5 +1,7 @@
 package org.techtown.letseat.restaurant.list;
 
+import android.graphics.Bitmap;
+
 import org.techtown.letseat.R;
 
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ public class RestListData {
 
     RestListRecycleItem rest[] = new RestListRecycleItem[100];
 
-    ArrayList<Integer> imageViews = new ArrayList<Integer>();
 
     int p = 0;
 
@@ -19,12 +20,11 @@ public class RestListData {
 
 
 
-        for(int i = 0; i < list.size()/3; i++){
-            imageViews.add(R.drawable.store_sample);
-            rest[i+1] = new RestListRecycleItem(imageViews.get(i),
-                    list.get(p).toString(), (String) list.get(p+1), (String) list.get(p+2));
+        for(int i = 0; i < list.size()/4; i++){
+            rest[i+1] = new RestListRecycleItem((Bitmap) list.get(p),
+                    list.get(p+1).toString(), (String) list.get(p+2), (String) list.get(p+3));
             items.add(rest[i+1]);
-            p += 3;
+            p += 4;
         }
 
 
