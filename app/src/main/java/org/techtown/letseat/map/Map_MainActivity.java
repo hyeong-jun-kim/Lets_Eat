@@ -66,7 +66,7 @@ public class Map_MainActivity extends AppCompatActivity
 
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        String searchText = searchBox.getText().toString();
+        String searchText = searchBox.getText().toString();     //ex) 경기도 성남시
         Geocoder geocoder = new Geocoder(getBaseContext());
         List<Address> addresses = null;
 

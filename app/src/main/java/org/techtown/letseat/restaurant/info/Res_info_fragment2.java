@@ -172,10 +172,6 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
             url = "http://125.132.62.150:8000/letseat/store/searchRestaurant?name="+text;
         }
 
-
-
-
-
         JSONArray getData = new JSONArray();
 
         JsonArrayRequest request = new JsonArrayRequest(
