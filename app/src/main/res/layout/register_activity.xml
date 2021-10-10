@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/register_email"
+                        android:id="@+id/nickName"
                         android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/register_pwd"
+                        android:id="@+id/birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"

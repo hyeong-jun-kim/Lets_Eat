@@ -22,7 +22,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,25 +41,44 @@ public class res_info_fragment1 extends Fragment {
     ArrayList<String> priceList = new ArrayList<>();
     ArrayList list = new ArrayList<>();
     RecyclerView recyclerView;
-    private org.techtown.letseat.menu.MenuAdapter adapter = new MenuAdapter();
+    private MenuAdapter adapter = new MenuAdapter();
     private int sum;
     private CheckBox checkBox;
-    private ExtendedFloatingActionButton basketBtn;
+    private View view;
 
     int resId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.res_info_fragment1, container, false);
-
+        view = inflater.inflate(R.layout.res_info_fragment1, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
+
+        adapter.setItemClickListner(new OnMenuItemClickListner() {
+            @Override
+            public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
+                String price = priceList.get(position);
+                checkBox = holder.itemView.findViewById(R.id.checkBox);
+                if(checkBox.isChecked()){
+                    checkBox.setChecked(false);
+                    sum -= Integer.parseInt(price);
+                }
+                else {
+                    checkBox.setChecked(true);
+                    sum += Integer.parseInt(price);
+                }
+            }
+
+        });
+
+        //클릭 이벤트
         //결제버튼
-        basketBtn = view.findViewById(R.id.basket_button2);
-        basketBtn.setOnClickListener(new View.OnClickListener() {
+        ExtendedFloatingActionButton pay_button = view.findViewById(R.id.pay_button);
+        pay_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Kakao_pay_test.class);
@@ -77,28 +95,9 @@ public class res_info_fragment1 extends Fragment {
             get_MenuData();
         }
 
-
         return view;
     }
 
-    public void start(){
-        //recycleView 초기화
-
-        adapter.setItems(new MenuData().getItems(list));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
-
-        adapter.setItemClickListner(new OnMenuItemClickListner() {
-            @Override
-            public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
-
-            }
-        });
-
-        //클릭 이벤트
-
-
-    }
 
     // 메뉴 리스트 가져오기
     void get_MenuData() {
@@ -131,7 +130,8 @@ public class res_info_fragment1 extends Fragment {
                                 priceList.add(menuPrice);
                             }
 
-                            start();
+                            adapter.setItems(new MenuData().getItems(list));
+                            adapter.notifyDataSetChanged();
 
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {

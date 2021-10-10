@@ -163,7 +163,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/tvEmail"
+                android:id="@+id/textview_address"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:text="TextView"
