@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:background="#FFFFFF"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

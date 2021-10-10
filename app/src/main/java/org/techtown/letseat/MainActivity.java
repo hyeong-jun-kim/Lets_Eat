@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
@@ -99,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
-
-
 
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
