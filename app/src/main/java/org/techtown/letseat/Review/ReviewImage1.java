@@ -10,8 +10,10 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +31,8 @@ import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import android.util.Log;
 import android.view.View;
@@ -64,6 +68,8 @@ public class ReviewImage1 extends AppCompatActivity {
     private Interpreter interpreter;
     private static final String TAG = "ReviewActivity";
     private Uri filePath;
+    public Bitmap image_file;
+    public ByteBuffer input, modelOutput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,9 @@ public class ReviewImage1 extends AppCompatActivity {
         setContentView(R.layout.review_image1);
 
         checkSelfPermission();
+        image_file = null;
+        input = null;
+        modelOutput = null;
         imageView = findViewById(R.id.imageView);
         save_btn = findViewById(R.id.save_btn);
         upload_btn = findViewById(R.id.upload_btn);
@@ -81,6 +90,10 @@ public class ReviewImage1 extends AppCompatActivity {
                 intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, 101);
+                LoadTFliteModel();
+                Image_Compile();
+                ByteBuffer();
+                Labeling();
             }
         });
 
@@ -90,53 +103,6 @@ public class ReviewImage1 extends AppCompatActivity {
                 finish();
             }
         });
-
-        LoadTFliteModel();
-
-        // 입력 데이터에 대한 추론 수행
-        /*Bitmap bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
-        ByteBuffer input = ByteBuffer.allocateDirect(224 * 224 * 3 * 4).order(ByteOrder.nativeOrder());
-        for (int y = 0; y < 224; y++) {
-            for (int x = 0; x < 224; x++) {
-                int px = bitmap.getPixel(x, y);
-
-                // Get channel values from the pixel value.
-                int r = Color.red(px);
-                int g = Color.green(px);
-                int b = Color.blue(px);
-
-                // Normalize channel values to [-1.0, 1.0]. This requirement depends
-                // on the model. For example, some models might require values to be
-                // normalized to the range [0.0, 1.0] instead.
-                float rf = (r - 127) / 255.0f;
-                float gf = (g - 127) / 255.0f;
-                float bf = (b - 127) / 255.0f;
-
-                input.putFloat(rf);
-                input.putFloat(gf);
-                input.putFloat(bf);
-            }
-        }
-
-        // 출력을 포함할 수 있도록 ByteBuffer에 크기 할당, 출력버퍼를 인터프리터의 run() 메서드에 전달
-        int bufferSize = 150 * java.lang.Float.SIZE / java.lang.Byte.SIZE;
-        ByteBuffer modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder());
-        interpreter.run(input, modelOutput);
-
-        // 출력 사용 방법(색인을 색인이 나타내는 라벨에 매핑 가능)
-        modelOutput.rewind();
-        FloatBuffer probabilities = modelOutput.asFloatBuffer();
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open("custom_labels.txt")));
-            for (int i = 0; i < probabilities.capacity(); i++) {
-                String label = reader.readLine();
-                float probability = probabilities.get(i);
-                Log.i(TAG, String.format("%s: %1.4f", label, probability));
-            }
-        } catch (IOException e) {
-            // File not found?
-        }*/
     }
 
     @Override
@@ -183,6 +149,20 @@ public class ReviewImage1 extends AppCompatActivity {
                 case 101:
                     selectedImageUri = data.getData();
                     Glide.with(getApplicationContext()).load(selectedImageUri).apply(RequestOptions.bitmapTransform(option)).into(imageView);
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        ImageDecoder.Source source= ImageDecoder.createSource(getApplicationContext().getContentResolver(), selectedImageUri);
+                        try {
+                            bitmap= ImageDecoder.decodeBitmap(source);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            bitmap= MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), selectedImageUri);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     break;
             }
         }
@@ -209,5 +189,53 @@ public class ReviewImage1 extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void Image_Compile(){
+        Bitmap bitmap = Bitmap.createScaledBitmap(image_file, 224, 224, true);
+        ByteBuffer input = ByteBuffer.allocateDirect(224 * 224 * 3 * 4).order(ByteOrder.nativeOrder());
+        for (int y = 0; y < 224; y++) {
+            for (int x = 0; x < 224; x++) {
+                int px = bitmap.getPixel(x, y);
+
+                // Get channel values from the pixel value.
+                int r = Color.red(px);
+                int g = Color.green(px);
+                int b = Color.blue(px);
+
+                // Normalize channel values to [-1.0, 1.0]. This requirement depends
+                // on the model. For example, some models might require values to be
+                // normalized to the range [0.0, 1.0] instead.
+                float rf = (r - 127) / 255.0f;
+                float gf = (g - 127) / 255.0f;
+                float bf = (b - 127) / 255.0f;
+
+                input.putFloat(rf);
+                input.putFloat(gf);
+                input.putFloat(bf);
+            }
+        }
+    }
+
+    public void ByteBuffer(){
+        int bufferSize = 150 * java.lang.Float.SIZE / java.lang.Byte.SIZE;
+        ByteBuffer modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder());
+        interpreter.run(input, modelOutput);
+    }
+
+    public void Labeling(){
+        modelOutput.rewind();
+        FloatBuffer probabilities = modelOutput.asFloatBuffer();
+        try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(getAssets().open("labels.txt")));
+            for (int i = 0; i < probabilities.capacity(); i++) {
+                String label = reader.readLine();
+                float probability = probabilities.get(i);
+                Log.i(TAG, String.format("%s: %1.4f", label, probability));
+            }
+        } catch (IOException e) {
+            // File not found?
+        }
     }
 }
