@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.kakao.usermgmt.UserManagement;
@@ -66,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
-        Button btnQR = findViewById(R.id.btnQR);
-        Button btnRest = findViewById(R.id.btnRest);
-        Button btnPhoto = findViewById(R.id.btnPhoto);
-        Button btnMY = findViewById(R.id.btnMY);
-        Button btnOrder = findViewById(R.id.btnOrder);
+        FloatingActionButton btnQR = findViewById(R.id.btnQR);
+        ImageButton btnRest = findViewById(R.id.btnRest);
+        ImageButton btnPhoto = findViewById(R.id.btnPhoto);
+        ImageButton btnMY = findViewById(R.id.btnMY);
+        ImageButton btnOrder = findViewById(R.id.btnOrder);
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
