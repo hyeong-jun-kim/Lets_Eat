@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
+        checkRunTimePermission();
+
         Button btnQR = findViewById(R.id.btnQR);
         Button btnRest = findViewById(R.id.btnRest);
         Button btnPhoto = findViewById(R.id.btnPhoto);

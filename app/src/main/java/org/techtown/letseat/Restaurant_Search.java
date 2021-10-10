@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,13 +30,18 @@ import org.techtown.letseat.restaurant.list.RestListRecycleItem;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Restaurant_Search extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
+    private double latitude, longitude;
+    int resId;
+    ArrayList<Integer> resIdList = new ArrayList<>();
     String text;
     RecyclerView recyclerView;
 
@@ -45,6 +53,8 @@ public class Restaurant_Search extends AppCompatActivity {
 
         Intent intent = getIntent();
         text = intent.getStringExtra("text");
+        latitude = intent.getDoubleExtra("latitude",0);
+        longitude = intent.getDoubleExtra("longitude",0);
         get_Restaurant();
     }
 
@@ -64,11 +74,16 @@ public class Restaurant_Search extends AppCompatActivity {
 
                 RestListRecycleItem item = adapter.getItem(position);
 
+                int send_resId = resIdList.get(adapterPosition);
+
 
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                 intent.putExtra("aP",position);
                 intent.putExtra("text",text);
+                intent.putExtra("send_resId",send_resId);
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
 
             }
@@ -100,14 +115,29 @@ public class Restaurant_Search extends AppCompatActivity {
                                 location = jsonObject.getString("location");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
+                                resId = jsonObject.getInt("resId");
 
-                                if(restype.contains(text)||resName.contains(text)||location.contains(text)){
-                                    list.add(bitmap);
-                                    list.add(restype);
-                                    list.add(resName);
-                                    list.add(location);
+                                String searchText = location;
+                                Geocoder geocoder = new Geocoder(getBaseContext());
+                                List<Address> addresses = null;
+                                try {
+                                    addresses = geocoder.getFromLocationName(searchText, 3);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
-
+                                Address address = addresses.get(0);
+                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
+                                double lat = place.latitude;
+                                double lon = place.longitude;
+                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
+                                    if(restype.contains(text)||resName.contains(text)||location.contains(text)){
+                                        list.add(bitmap);
+                                        list.add(restype);
+                                        list.add(resName);
+                                        list.add(location);
+                                        resIdList.add(resId);
+                                    }
+                                }
                             }
 
                             start();

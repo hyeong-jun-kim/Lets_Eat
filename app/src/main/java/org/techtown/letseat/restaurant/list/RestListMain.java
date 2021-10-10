@@ -64,7 +64,6 @@ public class RestListMain extends AppCompatActivity {
     RecyclerView recyclerView;
     Button koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button, search_btn;
     int resId;
-    private TextView textview_address;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +71,6 @@ public class RestListMain extends AppCompatActivity {
         setContentView(R.layout.res_list_activity);
         recyclerView = findViewById(R.id.recycler_view);
 
-        textview_address = (TextView)findViewById(R.id.ttvv);
         Intent intent = getIntent();
         latitude = intent.getDoubleExtra("latitude",0);
         longitude = intent.getDoubleExtra("longitude",0);
@@ -87,6 +85,8 @@ public class RestListMain extends AppCompatActivity {
                 String text =  search_restaurant.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Restaurant_Search.class);
                 intent.putExtra("text",text);
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -98,6 +98,8 @@ public class RestListMain extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RestList_KoreanFood.class);
                 intent.putExtra("text","koreanFood");
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -108,6 +110,8 @@ public class RestListMain extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RestList_chinaFood.class);
                 intent.putExtra("text","chineseFood");
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -117,6 +121,9 @@ public class RestListMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RestList_japanFood.class);
+                intent.putExtra("text","japaneseFood");
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -126,6 +133,9 @@ public class RestListMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RestList_westernFood.class);
+                intent.putExtra("text","westernFood");
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -159,11 +169,14 @@ public class RestListMain extends AppCompatActivity {
                 RestListRecycleItem item = adapter.getItem(position);
 
                 int send_resId = resIdList.get(adapterPosition);
+                Log.d("ds","ds");
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                 intent.putExtra("aP",adapterPosition);
                 intent.putExtra("text","All");
                 intent.putExtra("send_resId",send_resId);
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
 
                 startActivity(intent);
 
@@ -197,7 +210,7 @@ public class RestListMain extends AppCompatActivity {
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
                                 resId = jsonObject.getInt("resId");
-                                resIdList.add(resId);
+
 
                                 String searchText = location;
                                 Geocoder geocoder = new Geocoder(getBaseContext());
@@ -216,10 +229,8 @@ public class RestListMain extends AppCompatActivity {
                                     list.add(restype);
                                     list.add(resName);
                                     list.add(location);
-
+                                    resIdList.add(resId);
                                 }
-                                String s = place.toString();
-                                textview_address.setText(s);
                             }
 
                             start();
