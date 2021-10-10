@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/register_email"
+                        android:id="@+id/nickName"
                         android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
@@ -69,15 +69,6 @@
                         android:textColorHint="#939393"
                         android:textSize="13dp" />
 
-                    <Button
-                        android:id="@+id/register_email_check"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center"
-                        android:background="@drawable/circle_design2"
-                        android:fontFamily="@font/notosansbold"
-                        android:text="중복확인"
-                        android:textColor="#ED6868" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -99,7 +90,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/register_pwd"
+                        android:id="@+id/birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
@@ -108,6 +99,16 @@
                         android:textColor="#000000"
                         android:textColorHint="#939393"
                         android:textSize="13dp" />
+
+                    <Button
+                        android:id="@+id/register_birthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:background="@drawable/circle_design2"
+                        android:fontFamily="@font/notosansbold"
+                        android:text="생일입력"
+                        android:textColor="#ED6868" />
                 </FrameLayout>
             </LinearLayout>
 

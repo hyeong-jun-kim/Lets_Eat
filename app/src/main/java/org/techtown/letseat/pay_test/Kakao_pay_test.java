@@ -52,7 +52,6 @@ public class Kakao_pay_test extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("resId",resId);
                 fragment_order.setArguments(bundle);
-
                 PayActivity payActivity = new PayActivity(Price);
                 Intent intent = new Intent(getApplicationContext(), payActivity.getClass());
                 startActivity(intent);

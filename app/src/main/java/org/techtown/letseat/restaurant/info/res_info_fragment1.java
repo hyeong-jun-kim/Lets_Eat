@@ -41,51 +41,22 @@ public class res_info_fragment1 extends Fragment {
     ArrayList<String> priceList = new ArrayList<>();
     ArrayList list = new ArrayList<>();
     RecyclerView recyclerView;
-    private org.techtown.letseat.menu.MenuAdapter adapter = new MenuAdapter();
+    private MenuAdapter adapter = new MenuAdapter();
     private int sum;
     private CheckBox checkBox;
-    private Button pay_button;
+    private View view;
 
     int resId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.res_info_fragment1, container, false);
-
+        view = inflater.inflate(R.layout.res_info_fragment1, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-
-        //결제버튼
-        pay_button = view.findViewById(R.id.pay_button);
-        pay_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Kakao_pay_test.class);
-                intent.putExtra("Price",String.valueOf(sum));
-                intent.putExtra("resId",resId);
-                startActivity(intent);
-            }
-        });
-
-
-        Bundle extra = this.getArguments();
-        if (extra != null) {
-            resId = extra.getInt("send_resId");     //레스토랑 정보
-            get_MenuData();
-        }
-
-
-        return view;
-    }
-
-    public void start(){
-        //recycleView 초기화
-
-        adapter.setItems(new MenuData().getItems(list));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+
 
         adapter.setItemClickListner(new OnMenuItemClickListner() {
             @Override
@@ -105,9 +76,28 @@ public class res_info_fragment1 extends Fragment {
         });
 
         //클릭 이벤트
+        //결제버튼
+        ExtendedFloatingActionButton pay_button = view.findViewById(R.id.pay_button);
+        pay_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Kakao_pay_test.class);
+                intent.putExtra("Price",String.valueOf(sum));
+                intent.putExtra("resId",resId);
+                startActivity(intent);
+            }
+        });
 
 
+        Bundle extra = this.getArguments();
+        if (extra != null) {
+            resId = extra.getInt("send_resId");     //레스토랑 정보
+            get_MenuData();
+        }
+
+        return view;
     }
+
 
     // 메뉴 리스트 가져오기
     void get_MenuData() {
@@ -140,7 +130,8 @@ public class res_info_fragment1 extends Fragment {
                                 priceList.add(menuPrice);
                             }
 
-                            start();
+                            adapter.setItems(new MenuData().getItems(list));
+                            adapter.notifyDataSetChanged();
 
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
