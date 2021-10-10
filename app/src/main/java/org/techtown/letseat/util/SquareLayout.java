@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;

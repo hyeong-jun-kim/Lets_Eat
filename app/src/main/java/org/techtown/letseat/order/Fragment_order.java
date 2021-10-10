@@ -1,14 +1,17 @@
-package org.techtown.letseat.restaurant.list;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package org.techtown.letseat.order;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -19,51 +22,53 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
+import org.techtown.letseat.restaurant.list.OnRestaurantItemClickListner;
+import org.techtown.letseat.restaurant.list.RestListAdapter;
+import org.techtown.letseat.restaurant.list.RestListData;
+import org.techtown.letseat.restaurant.list.RestListRecycleItem;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
 import java.util.ArrayList;
 
-public class RestList_westernFood extends AppCompatActivity {
+public class Fragment_order extends Fragment {
 
-    ArrayList list = new ArrayList<>();
-    private RestListAdapter adapter = new RestListAdapter();
-    private RestListAdapter restaurant_info_adapter = new RestListAdapter();
+    int resId;
     RecyclerView recyclerView;
+    ArrayList list = new ArrayList<>();
+    private Order_recycle_adapter adapter = new Order_recycle_adapter();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rest_list_western_food);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_order, container, false);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        get_Restaurant();
+
+        Bundle extra = this.getArguments();
+        if (extra != null) {
+            resId = extra.getInt("resId");  //식당의 resId
+            get_Restaurant();
+        }
+
+        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 
     public void start(){
         //recycleView 초기화
 
-        adapter.setItems(new RestListData().getItems(list));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setItems(new Orderdata().getItems(list));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
         //클릭 이벤트
-        adapter.setItemClickListner(new OnRestaurantItemClickListner() {
+        adapter.setItemClickListner(new OnReviewItemClickListner() {
             @Override
-            public void OnItemClick(RestListAdapter.ViewHolder holder, View view, int position) {
-
-                int adapterPosition = holder.getAdapterPosition();
-
-                RestListRecycleItem item = adapter.getItem(position);
-
-
-
-                Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
-                intent.putExtra("aP",adapterPosition);
-                intent.putExtra("text","westernFood");
-                startActivity(intent);
+            public void OnItemClick(Order_recycle_adapter.ViewHolder holder, View view, int position) {
 
             }
         });
@@ -71,7 +76,7 @@ public class RestList_westernFood extends AppCompatActivity {
     }
 
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
+        String url = "http://125.132.62.150:8000/letseat/store/findAll";
 
 
         JSONArray getData = new JSONArray();
@@ -84,22 +89,21 @@ public class RestList_westernFood extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String restype,resName,location,image;
+                            String resName, image;
+                            int get_resId;
                             Bitmap bitmap;
+
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
 
-                                restype = jsonObject.getString("restype");
+                                get_resId = jsonObject.getInt("resId");
                                 resName = jsonObject.getString("resName");
-                                location = jsonObject.getString("location");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
-
-
-                                list.add(bitmap);
-                                list.add(restype);
-                                list.add(resName);
-                                list.add(location);
+                                if(resId == get_resId){
+                                    list.add(bitmap);
+                                    list.add(resName);
+                                }
 
                             }
 
@@ -120,7 +124,7 @@ public class RestList_westernFood extends AppCompatActivity {
                 }
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
 }

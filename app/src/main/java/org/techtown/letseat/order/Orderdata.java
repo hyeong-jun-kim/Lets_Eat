@@ -1,27 +1,29 @@
 package org.techtown.letseat.order;
 
+import android.graphics.Bitmap;
+
 import org.techtown.letseat.R;
+import org.techtown.letseat.restaurant.list.RestListRecycleItem;
 
 import java.util.ArrayList;
 
 public class Orderdata {
 
     ArrayList<Order_recycle_item> items = new ArrayList<>();
+    Order_recycle_item rest[] = new Order_recycle_item[100];
 
-    public ArrayList<Order_recycle_item> getItems() {
+    int p = 0;
 
-        Order_recycle_item order1 = new Order_recycle_item(R.drawable.image1,
-                "9000원", "하오탕", "마라탕","배달완료");
+    public ArrayList<Order_recycle_item> getItems(ArrayList list) {
 
-        Order_recycle_item order2 = new Order_recycle_item(R.drawable.image2,
-                "8000원", "뼈대있는가문", "뼈해장국","배달완료");
+        for(int i = 0; i < list.size()/2; i++){
+            rest[i+1] = new Order_recycle_item((Bitmap) list.get(p),
+                    list.get(p+1).toString());
+            items.add(rest[i+1]);
+            p += 2;
+        }
 
-        Order_recycle_item order3 = new Order_recycle_item(R.drawable.image3,
-                "6000원", "곱순네 순대국", "순대국","배달완료");
 
-        items.add(order1);
-        items.add(order2);
-        items.add(order3);
 
         return items;
     }

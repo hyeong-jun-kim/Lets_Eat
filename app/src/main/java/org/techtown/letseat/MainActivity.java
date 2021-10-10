@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,18 +17,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.techtown.letseat.login.Login;
+import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.map.Map_MainActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
+import org.techtown.letseat.util.AppHelper;
+import org.techtown.letseat.util.ImageSliderAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
 
+    private int ownerId = 1;
     int currentPage = 0;
-
+    private String resName, phoneNumber, openTime, resIntro, businessNumber, restype, location; //qr코드 테스트용
+    int aloneAble;
     Timer timer;
 
     private int[] images = new int[]{
@@ -48,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (AppHelper.requestQueue != null) { //RequestQueue 생성
+            AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
 
         Button btnQR = findViewById(R.id.btnQR);
         Button btnRest = findViewById(R.id.btnRest);
@@ -184,15 +201,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-    public void fllipperImages(int image){
-        ImageView imageView = new ImageView(this);
-        imageView.setBackgroundResource(image);
-
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -201,11 +209,81 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(MainActivity.this, "스캔완료" + result.getContents(), Toast.LENGTH_SHORT).show();
+                try{
+                    JSONObject obj = new JSONObject(result.getContents());
+                    resName = obj.getString("resName");
+                    phoneNumber = obj.getString("phoneNumber");
+                    openTime = obj.getString("openTime");
+                    resIntro = obj.getString("resIntro");
+                    businessNumber = obj.getString("businessNumber");
+                    restype = obj.getString("restype");
+                    location = obj.getString("location");
+                    aloneAble = obj.getInt("aloneAble");
+                    sendRegisterRequest();
+
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
+    public void sendRegisterRequest() {
+        String url = "http://125.132.62.150:8000/letseat/store/register";
+        JSONObject postData = new JSONObject();
+        JSONObject ownerData = new JSONObject();
+        try {
+            ownerData.put("ownerId", ownerId);
+            postData.put("resName", resName);
+            postData.put("phoneNumber", phoneNumber);
+            postData.put("openTime", openTime);
+            postData.put("resIntro", resIntro);
+            postData.put("businessNumber", businessNumber);
+            postData.put("restype", restype);
+            postData.put("location", location);
+            postData.put("aloneAble",aloneAble);
+            postData.put("owner", ownerData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                postData,
+                new Response.Listener<JSONObject>() {
+                    @Override // 응답 잘 받았을 때
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getApplicationContext(), "완료", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override // 에러 발생 시
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("에러", error.toString());
+                        Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
+
+
+
+
+
+    public void fllipperImages(int image){
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(image);
+    }
+
+
 
     private void setupIndicators(int count) {
         ImageView[] indicators = new ImageView[count];
