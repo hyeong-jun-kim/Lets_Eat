@@ -193,7 +193,7 @@ public class ReviewImage1 extends AppCompatActivity {
                         FirebaseModelDownloader interpreter_test = FirebaseModelDownloader.getInstance();
                         File modelFile = model.getFile();
                         if (modelFile != null || interpreter_test != null) {
-                            //interpreter = new Interpreter(modelFile);
+                            interpreter = new Interpreter(modelFile);
                             Log.d("TFLite Model Download","Model Success!");
                         }
                         else{
@@ -228,6 +228,7 @@ public class ReviewImage1 extends AppCompatActivity {
                 input.putFloat(bf);
             }
         }
+        this.input = input;
     }
 
     public void ByteBuffer(){
