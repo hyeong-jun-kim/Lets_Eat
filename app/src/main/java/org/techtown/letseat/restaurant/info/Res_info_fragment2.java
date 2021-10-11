@@ -37,7 +37,7 @@ import java.util.List;
 
 public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
 
-    int resId;
+    int resId, getResId;
     private GoogleMap map;
     private TextView place,resinfo,resName,opening_hours,phonenum;
     String location,s_resinfo,s_resName,s_opening_hours,s_phonenum, text, url;
@@ -64,8 +64,9 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
 
         Bundle extra = this.getArguments();
         if (extra != null) {
-            resId = extra.getInt("ap");
             text = extra.getString("text");
+            resId = extra.getInt("send_resId");
+            Log.d("ds","ds");
             get_Restaurant();
         }
 
@@ -182,25 +183,34 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            int res;
 
-                                JSONObject jsonObject = (JSONObject) response.get(resId);
+                            for(int i = 0; i<response.length(); i++){
+                                JSONObject jsonObject = (JSONObject) response.get(i);
                                 location = jsonObject.getString("location");
                                 s_resinfo = jsonObject.getString("resIntro");
                                 s_resName = jsonObject.getString("resName");
                                 s_opening_hours = jsonObject.getString("openTime");
                                 s_phonenum = jsonObject.getString("phoneNumber");
+                                getResId = jsonObject.getInt("resId");
 
-                                place.setText(location);
-                                resinfo.setText(s_resinfo);
-                                resName.setText(s_resName);
-                                opening_hours.setText(s_opening_hours);
-                                phonenum.setText(s_phonenum);
+                                if(resId == getResId){
+                                    place.setText(location);
+                                    resinfo.setText(s_resinfo);
+                                    resName.setText(s_resName);
+                                    opening_hours.setText(s_opening_hours);
+                                    phonenum.setText(s_phonenum);
 
-                                onMapReady(map);
+                                    onMapReady(map);
 
-                            Log.d("응답", response.toString());
+
+                                    Log.d("응답", response.toString());
+                                 }
+                            }
+
 
                         } catch (JSONException e) {
+                            Log.d("씨발",e.toString());
                             e.printStackTrace();
                         }
                     }

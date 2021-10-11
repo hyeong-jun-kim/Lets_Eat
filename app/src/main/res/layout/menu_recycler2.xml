@@ -48,6 +48,7 @@
                     android:textColor="#000000"
                     android:includeFontPadding="false"
                     android:text="Price" />
+
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

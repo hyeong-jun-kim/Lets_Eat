@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,14 +27,19 @@ import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
 import org.techtown.letseat.util.PhotoSave;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RestList_chinaFood extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
+    private double latitude, longitude;
     RecyclerView recyclerView;
+    int resId;
+    ArrayList<Integer> resIdList = new ArrayList<>();
     String text;
 
     @Override
@@ -41,6 +49,10 @@ public class RestList_chinaFood extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         get_Restaurant();
+        Intent intent = getIntent();
+        text = intent.getStringExtra("text");
+        latitude = intent.getDoubleExtra("latitude",0);
+        longitude = intent.getDoubleExtra("longitude",0);
     }
 
     public void start(){
@@ -59,10 +71,15 @@ public class RestList_chinaFood extends AppCompatActivity {
 
                 RestListRecycleItem item = adapter.getItem(position);
 
+                int send_resId = resIdList.get(adapterPosition);
+
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
                 intent.putExtra("aP",adapterPosition);
                 intent.putExtra("text","chineseFood");
+                intent.putExtra("send_resId",send_resId);
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
 
             }
@@ -94,13 +111,27 @@ public class RestList_chinaFood extends AppCompatActivity {
                                 location = jsonObject.getString("location");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
+                                resId = jsonObject.getInt("resId");
 
-
-                                list.add(bitmap);
-                                list.add(restype);
-                                list.add(resName);
-                                list.add(location);
-
+                                String searchText = location;
+                                Geocoder geocoder = new Geocoder(getBaseContext());
+                                List<Address> addresses = null;
+                                try {
+                                    addresses = geocoder.getFromLocationName(searchText, 3);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Address address = addresses.get(0);
+                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
+                                double lat = place.latitude;
+                                double lon = place.longitude;
+                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
+                                    list.add(bitmap);
+                                    list.add(restype);
+                                    list.add(resName);
+                                    list.add(location);
+                                    resIdList.add(resId);
+                                }
                             }
 
                             start();

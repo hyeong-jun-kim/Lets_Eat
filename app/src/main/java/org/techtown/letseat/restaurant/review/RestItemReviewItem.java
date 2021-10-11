@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant.review;
 
 public class RestItemReviewItem {
 

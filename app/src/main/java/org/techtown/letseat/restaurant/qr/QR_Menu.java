@@ -1,13 +1,13 @@
-package org.techtown.letseat.menu;
+package org.techtown.letseat.restaurant.qr;
 
 import android.graphics.Bitmap;
 
-public class Menu {
+public class QR_Menu {
     private Bitmap bitmap;
     private String name;
     private String price;
 
-    public Menu(Bitmap bitmap, String name, String price){
+    public QR_Menu(Bitmap bitmap, String name, String price){
         this.bitmap = bitmap;
         this.name = name;
         this.price = price;
