@@ -155,7 +155,7 @@ public class ReviewImage1 extends AppCompatActivity {
                             image_file = bitmap;
                             Image_Compile();
                             ByteBuffer();
-                            Labeling();
+                            //Labeling();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -165,7 +165,7 @@ public class ReviewImage1 extends AppCompatActivity {
                             image_file = bitmap;
                             Image_Compile();
                             ByteBuffer();
-                            Labeling();
+                            //Labeling();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
