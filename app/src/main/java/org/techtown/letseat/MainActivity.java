@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MainRecyclerAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHorizontalScrollBarEnabled(false);
         recyclerView.setAdapter(adapter);
 
         prepareData();
