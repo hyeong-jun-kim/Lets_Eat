@@ -11,11 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.RestItemReviewAdapter;
-import org.techtown.letseat.RestItemReviewData;
-import org.techtown.letseat.Review.Reviewdata;
-
-import java.util.ArrayList;
+import org.techtown.letseat.restaurant.review.RestItemReviewAdapter;
+import org.techtown.letseat.restaurant.review.RestItemReviewData;
 
 public class res_info_fragment3 extends Fragment {
 

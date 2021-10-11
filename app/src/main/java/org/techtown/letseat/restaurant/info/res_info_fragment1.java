@@ -12,9 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,7 +27,6 @@ import org.json.JSONObject;
 import org.techtown.letseat.R;
 import org.techtown.letseat.menu.MenuAdapter;
 import org.techtown.letseat.menu.MenuData;
-import org.techtown.letseat.menu.OnMenuItemClickListner;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
@@ -52,13 +49,13 @@ public class res_info_fragment1 extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.res_info_fragment1, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.qr_recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
 
-        adapter.setItemClickListner(new OnMenuItemClickListner() {
+        /*adapter.setItemClickListner(new OnMenuItemClickListner() {
             @Override
             public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
                 String price = priceList.get(position);
@@ -72,8 +69,7 @@ public class res_info_fragment1 extends Fragment {
                     sum += Integer.parseInt(price);
                 }
             }
-
-        });
+        });*/
 
         //클릭 이벤트
         //결제버튼
