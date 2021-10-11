@@ -1,4 +1,6 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant.review;
+
+import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 

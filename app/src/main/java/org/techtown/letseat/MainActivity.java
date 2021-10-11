@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.kakao.usermgmt.UserManagement;
@@ -46,6 +48,7 @@ import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
+import org.techtown.letseat.restaurant.qr.qr_restActivity;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.ImageSliderAdapter;
@@ -85,17 +88,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        checkRunTimePermission();
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
-        Button btnQR = findViewById(R.id.btnQR);
-        Button btnRest = findViewById(R.id.btnRest);
-        Button btnPhoto = findViewById(R.id.btnPhoto);
-        Button btnMY = findViewById(R.id.btnMY);
-        Button btnOrder = findViewById(R.id.btnOrder);
         Button ai_button = findViewById(R.id.ai_test);
+        FloatingActionButton btnQR = findViewById(R.id.btnQR);
+        ImageButton btnRest = findViewById(R.id.btnRest);
+        ImageButton btnPhoto = findViewById(R.id.btnPhoto);
+        ImageButton btnMY = findViewById(R.id.btnMY);
+        ImageButton btnOrder = findViewById(R.id.btnOrder);
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
@@ -237,16 +240,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "스캔완료" + result.getContents(), Toast.LENGTH_SHORT).show();
                 try{
                     JSONObject obj = new JSONObject(result.getContents());
-                    resName = obj.getString("resName");
-                    phoneNumber = obj.getString("phoneNumber");
-                    openTime = obj.getString("openTime");
-                    resIntro = obj.getString("resIntro");
-                    businessNumber = obj.getString("businessNumber");
-                    restype = obj.getString("restype");
-                    location = obj.getString("location");
-                    aloneAble = obj.getInt("aloneAble");
-                    sendRegisterRequest();
-
+                    int resId = obj.getInt("resId");
+                    int tableNumber = obj.getInt("tableNumber");
+                    // qrRest 액티비티 실행
+                    Intent intent = new Intent(getApplicationContext(), qr_restActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("resId", resId);
+                    bundle.putInt("tableNumber",tableNumber);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -256,54 +258,6 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
-    public void sendRegisterRequest() {
-        String url = "http://125.132.62.150:8000/letseat/store/register";
-        JSONObject postData = new JSONObject();
-        JSONObject ownerData = new JSONObject();
-        try {
-            ownerData.put("ownerId", ownerId);
-            postData.put("resName", resName);
-            postData.put("phoneNumber", phoneNumber);
-            postData.put("openTime", openTime);
-            postData.put("resIntro", resIntro);
-            postData.put("businessNumber", businessNumber);
-            postData.put("restype", restype);
-            postData.put("location", location);
-            postData.put("aloneAble",aloneAble);
-            postData.put("owner", ownerData);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                postData,
-                new Response.Listener<JSONObject>() {
-                    @Override // 응답 잘 받았을 때
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "완료", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override // 에러 발생 시
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("에러", error.toString());
-                        Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }
-
-
-
-
-
     public void fllipperImages(int image){
         ImageView imageView = new ImageView(this);
         imageView.setBackgroundResource(image);

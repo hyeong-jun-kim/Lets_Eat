@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -14,7 +16,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
@@ -24,7 +28,9 @@ import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.ViewPagerAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RestInfoMain extends AppCompatActivity {
     res_info_fragment1 fragment1;
@@ -33,10 +39,10 @@ public class RestInfoMain extends AppCompatActivity {
 
     private TabLayout tabs;
     private ViewPager viewPager;
-
-    String string, url;
+    private double latitude, longitude;
+    String string, url, resId;
     TextView res_title;
-    int data, resId;
+    int data, resIdget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +79,10 @@ public class RestInfoMain extends AppCompatActivity {
             string = i.getStringExtra("text");
         }
 
-        resId = i.getIntExtra("send_resId",0);
+        resIdget = i.getIntExtra("send_resId",0);
+
+        latitude = i.getDoubleExtra("latitude",0);
+        longitude = i.getDoubleExtra("longitude",0);
 
         res_title = findViewById(R.id.res_title);
 
@@ -83,51 +92,45 @@ public class RestInfoMain extends AppCompatActivity {
 
 
         Bundle bundle = new Bundle();
-        bundle.putInt("send_resId",resId);
+        bundle.putInt("send_resId",resIdget);
         fragment1.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().commit();
 
         if(string.equals("chineseFood")){
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("ap",data);
             bundle1.putString("text","chineseFood");
+            bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
-            getSupportFragmentManager().beginTransaction().commit();
         }
         else if(string.equals("koreanFood")){
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("ap",data);
             bundle1.putString("text","koreanFood");
+            bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
-            getSupportFragmentManager().beginTransaction().commit();
         }
         else if(string.equals("japaneseFood")){
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("ap",data);
             bundle1.putString("text","japaneseFood");
+            bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
-            getSupportFragmentManager().beginTransaction().commit();
         }
         else if(string.equals("westernFood")){
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("ap",data);
             bundle1.putString("text","westernFood");
+            bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
-            getSupportFragmentManager().beginTransaction().commit();
         }
         else if(string.equals("All")){
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("ap",data);
             bundle1.putString("text","All");
+            bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
-            getSupportFragmentManager().beginTransaction().commit();
         }
         else if(string != null){
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("ap",data);
             bundle1.putString("text",string);
+            bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
-            getSupportFragmentManager().beginTransaction().commit();
         }   //검색기능
 
 
@@ -156,13 +159,11 @@ public class RestInfoMain extends AppCompatActivity {
 
         get_Restaurant();
     }
+
     void get_Restaurant() {
 
         if(string.equals("koreanFood")){
             url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=koreanFood";
-        }
-        else if(string.equals("All")){
-            url = "http://125.132.62.150:8000/letseat/store/findAll";
         }
         else if(string.equals("chineseFood")){
             url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=chineseFood";
@@ -173,13 +174,18 @@ public class RestInfoMain extends AppCompatActivity {
         else if(string.equals("westernFood")){
             url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
         }
+        else if(string.equals("All")){
+            url = "http://125.132.62.150:8000/letseat/store/findAll";
+        }
         else if(string != null){
             url = "http://125.132.62.150:8000/letseat/store/searchRestaurant?name="+string;
         }
 
 
+        Log.d("ds","ds");
 
         JSONArray getData = new JSONArray();
+
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
@@ -189,15 +195,24 @@ public class RestInfoMain extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            for (int i = 0; i<response.length(); i++){
+                                JSONObject jsonObject = (JSONObject)response.get(i);
 
-                            JSONObject jsonObject = (JSONObject) response.get(data);
-                            String title = jsonObject.getString("resName");
-                            res_title.setText(title);
+                                String title = jsonObject.getString("resName");
+                                int resid = jsonObject.getInt("resId");
+
+                                if(resid == resIdget){
+                                    res_title.setText(title);
+                                }
 
 
-                            Log.d("응답", response.toString());
+                                Log.d("응답", response.toString());
+                            }
+
+
 
                         } catch (JSONException e) {
+                            Log.d("씨발",e.toString());
                             e.printStackTrace();
                         }
                     }

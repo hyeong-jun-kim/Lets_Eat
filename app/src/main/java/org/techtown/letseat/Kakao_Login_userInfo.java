@@ -19,9 +19,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.login.Login;
-import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.util.AppHelper;
+import org.techtown.letseat.util.DatePickerFragment2;
 
 public class Kakao_Login_userInfo extends AppCompatActivity {
 

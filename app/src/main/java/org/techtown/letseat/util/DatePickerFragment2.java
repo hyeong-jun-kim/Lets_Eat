@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.util;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import org.techtown.letseat.Kakao_Login_userInfo;
 import org.techtown.letseat.login.RegisterActivity;
 
 import java.util.Calendar;

@@ -55,7 +55,6 @@ import com.google.firebase.ml.modeldownloader.DownloadType;
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader;
 
 import org.techtown.letseat.R;
-import org.tensorflow.lite.Interpreter;
 
 
 public class ReviewImage1 extends AppCompatActivity {
