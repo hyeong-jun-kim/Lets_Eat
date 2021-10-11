@@ -55,6 +55,7 @@ import com.google.firebase.ml.modeldownloader.DownloadType;
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader;
 
 import org.techtown.letseat.R;
+import org.tensorflow.lite.Interpreter;
 
 
 public class ReviewImage1 extends AppCompatActivity {
@@ -139,13 +140,13 @@ public class ReviewImage1 extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-                    Uri selectedImageUri;
-                    MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
-                    super.onActivityResult(requestCode, resultCode, data);
-                    if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-                        switch (requestCode) {
-                            case 101:
-                                selectedImageUri = data.getData();
+        Uri selectedImageUri;
+        MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+            switch (requestCode) {
+                case 101:
+                    selectedImageUri = data.getData();
                     Glide.with(getApplicationContext()).load(selectedImageUri).apply(RequestOptions.bitmapTransform(option)).into(imageView);
                     if (Build.VERSION.SDK_INT >= 29) {
                         ImageDecoder.Source source= ImageDecoder.createSource(getApplicationContext().getContentResolver(), selectedImageUri);
