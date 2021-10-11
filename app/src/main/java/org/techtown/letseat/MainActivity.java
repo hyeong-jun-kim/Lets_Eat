@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.kakao.usermgmt.UserManagement;
@@ -47,7 +45,6 @@ import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
-import org.techtown.letseat.restaurant.qr.qr_restActivity;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.ImageSliderAdapter;
@@ -240,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "연결 오류.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
