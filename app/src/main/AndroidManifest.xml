@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".Kakao_Login_userInfo"
             android:exported="true" />
@@ -91,7 +92,10 @@
         <activity android:name=".photo.PhotoList" />
         <activity
             android:name=".Review.ReviewActivity"
-            android:exported="true" />
+            android:exported="true"/>
+        <activity android:name=".Review.ReviewImage1"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".order.OrderActivity"
             android:exported="true" />

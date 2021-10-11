@@ -2,6 +2,7 @@ package org.techtown.letseat.Review;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -77,6 +78,7 @@ public class ReviewImage1 extends AppCompatActivity {
         setContentView(R.layout.review_image1);
 
         checkSelfPermission();
+        bitmap = null;
         image_file = null;
         input = null;
         modelOutput = null;
@@ -91,9 +93,6 @@ public class ReviewImage1 extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, 101);
                 LoadTFliteModel();
-                Image_Compile();
-                ByteBuffer();
-                Labeling();
             }
         });
 
@@ -141,24 +140,32 @@ public class ReviewImage1 extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Uri selectedImageUri;
-        MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-            switch (requestCode) {
-                case 101:
-                    selectedImageUri = data.getData();
+                    Uri selectedImageUri;
+                    MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
+                    super.onActivityResult(requestCode, resultCode, data);
+                    if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+                        switch (requestCode) {
+                            case 101:
+                                selectedImageUri = data.getData();
                     Glide.with(getApplicationContext()).load(selectedImageUri).apply(RequestOptions.bitmapTransform(option)).into(imageView);
                     if (Build.VERSION.SDK_INT >= 29) {
                         ImageDecoder.Source source= ImageDecoder.createSource(getApplicationContext().getContentResolver(), selectedImageUri);
                         try {
-                            bitmap= ImageDecoder.decodeBitmap(source);
+                            bitmap= ImageDecoder.decodeBitmap(source).copy(Bitmap.Config.RGBA_F16, true);
+                            image_file = bitmap;
+                            Image_Compile();
+                            ByteBuffer();
+                            Labeling();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     } else {
                         try {
                             bitmap= MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), selectedImageUri);
+                            image_file = bitmap;
+                            Image_Compile();
+                            ByteBuffer();
+                            Labeling();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -180,16 +187,22 @@ public class ReviewImage1 extends AppCompatActivity {
                     public void onSuccess(CustomModel model) {
                         // Download complete. Depending on your app, you could enable the ML
                         // feature, or switch from the local model to the remote model, etc.
-                        Log.e("TFLite Model Download","Model Success!");
+                        Log.d("TFLite Model Download","Model Success!");
                         // The CustomModel object contains the local path of the model file,
                         // which you can use to instantiate a TensorFlow Lite interpreter.
+                        FirebaseModelDownloader interpreter_test = FirebaseModelDownloader.getInstance();
                         File modelFile = model.getFile();
-                        if (modelFile != null) {
-                            interpreter = new Interpreter(modelFile);
+                        if (modelFile != null || interpreter_test != null) {
+                            //interpreter = new Interpreter(modelFile);
+                            Log.d("TFLite Model Download","Model Success!");
+                        }
+                        else{
+                            Log.d("TFLite Model Download","Model Fail!");
                         }
                     }
                 });
     }
+
 
     public void Image_Compile(){
         Bitmap bitmap = Bitmap.createScaledBitmap(image_file, 224, 224, true);
@@ -233,6 +246,9 @@ public class ReviewImage1 extends AppCompatActivity {
                 String label = reader.readLine();
                 float probability = probabilities.get(i);
                 Log.i(TAG, String.format("%s: %1.4f", label, probability));
+                String percent = String.valueOf(probability);
+                menu_name.setText(label);
+                accuracy.setText(percent);
             }
         } catch (IOException e) {
             // File not found?

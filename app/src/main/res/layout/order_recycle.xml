@@ -28,14 +28,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
+                    android:id="@+id/tv_item_order_complete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="00/00"
                     android:textColor="@android:color/white"
-                    android:textSize="15dp"
-                    android:id="@+id/tv_item_order_complete"
-                    android:text="00/00 배달완료"/>
+                    android:textSize="15dp" />
                 <ImageView
                     android:id="@+id/iv_item_order_res"
                     android:layout_width="81dp"

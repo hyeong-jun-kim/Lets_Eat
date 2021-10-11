@@ -37,6 +37,7 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.Review.ReviewActivity;
 import org.techtown.letseat.login.Login;
 import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.map.Map_MainActivity;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnPhoto = findViewById(R.id.btnPhoto);
         Button btnMY = findViewById(R.id.btnMY);
         Button btnOrder = findViewById(R.id.btnOrder);
+        Button ai_button = findViewById(R.id.ai_test);
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
@@ -212,6 +214,15 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }
+        });
+
+        // ai 테스트
+        ai_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
+                startActivity(intent);
             }
         });
     }
