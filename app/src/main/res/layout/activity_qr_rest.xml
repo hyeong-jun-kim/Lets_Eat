@@ -29,7 +29,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/qr_res_image"
                         android:layout_width="match_parent"
                         android:layout_height="202dp"
                         android:scaleType="centerCrop"
@@ -49,7 +49,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/res_subtitle"
+                        android:id="@+id/res_tableNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
@@ -61,6 +61,43 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/qr_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                                android:id="@+id/basket_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|right"
+                                android:layout_margin="16dp"
+                                android:backgroundTint="#ED6868"
+                                android:fontFamily="@font/notosansbold"
+                                app:icon="@drawable/basket"
+                                app:iconTint="@color/white" />
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/qr_order_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주문하기(테스트용)" />
+
                 </LinearLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -68,36 +105,5 @@
         </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/qr_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/basket_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:backgroundTint="#ED6868"
-                android:fontFamily="@font/notosansbold"
-                app:icon="@drawable/basket"
-                app:iconTint="@color/white" />
-
-        </FrameLayout>
-
-    </LinearLayout>
 
 </LinearLayout>

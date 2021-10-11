@@ -73,7 +73,7 @@ public class res_info_fragment1 extends Fragment {
 
         //클릭 이벤트
         //결제버튼
-        ExtendedFloatingActionButton pay_button = view.findViewById(R.id.pay_button);
+        /*ExtendedFloatingActionButton pay_button = view.findViewById(R.id.pay_button);
         pay_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +82,7 @@ public class res_info_fragment1 extends Fragment {
                 intent.putExtra("resId",resId);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
         Bundle extra = this.getArguments();

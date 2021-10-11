@@ -238,7 +238,6 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putInt("tableNumber",tableNumber);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
