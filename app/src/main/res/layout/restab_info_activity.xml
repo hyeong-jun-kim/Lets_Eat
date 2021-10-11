@@ -64,12 +64,13 @@
                 app:tabIndicatorColor="#ED6868"
                 tools:ignore="SpeakableTextPresentCheck">
             </com.google.android.material.tabs.TabLayout>
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
         </com.google.android.material.appbar.AppBarLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

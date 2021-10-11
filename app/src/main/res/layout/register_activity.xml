@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/register_email"
+                        android:id="@+id/nickName"
                         android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
@@ -58,7 +58,7 @@
                         android:textColor="#000000"
                         android:textColorHint="#939393"
                         android:textSize="13dp" />
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/register_email_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/register_pwd"
+                        android:id="@+id/birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
@@ -161,19 +161,17 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <EditText
                         android:id="@+id/register_birthday"
                         android:layout_width="290dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#ED6868"
                         android:fontFamily="@font/notosansregular"
-                        android:hint="생년 월일을 입력하세요"
-                        android:inputType="none"
+                        android:hint="8자리 입력"
                         android:textColor="#000000"
                         android:textColorHint="#939393"
                         android:textSize="13dp" />
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/register_birthday_input"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -219,17 +217,18 @@
                     android:textSize="13dp"
                     tools:ignore="TouchTargetSizeCheck" />
             </RadioGroup>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_circle3"
+                android:fontFamily="@font/notosansbold"
+                android:text="회원가입"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
     </ScrollView>
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/round_circle3"
-        android:fontFamily="@font/notosansbold"
-        android:text="회원가입"
-        android:textColor="#ffffff"
-        tools:ignore="TouchTargetSizeCheck" />
 </LinearLayout>

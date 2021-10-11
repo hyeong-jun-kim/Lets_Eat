@@ -26,7 +26,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.util.AppHelper;
-import org.techtown.letseat.DatePickerFragment;
+import org.techtown.letseat.util.DatePickerFragment;
 import org.techtown.letseat.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -42,8 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        email = findViewById(R.id.register_email);
-        pwd = findViewById(R.id.register_pwd);
+        email = findViewById(R.id.nickName);
+        pwd = findViewById(R.id.birthday);
         pwd_check = findViewById(R.id.regitser_pwd_check);
         name = findViewById(R.id.register_name);
         birthday = findViewById(R.id.register_birthday);

@@ -35,6 +35,7 @@ import com.kakao.util.exception.KakaoException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.Kakao_Login_userInfo;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
@@ -49,9 +50,8 @@ public class Login extends AppCompatActivity {
     private LoginButton kakao_login_button;
     private ImageView fakeKakao;
     private EditText input_email, input_password;
-    private String email_string, pwd_string;
+    private String email_string, pwd_string,kakao_email_string;
 
-    static private String kakao_email_string, kakao_nickName;
 
 
     private KaKaoCallBack kaKaoCallBack;
@@ -205,9 +205,8 @@ public class Login extends AppCompatActivity {
                     }
 
                     else{
-                        kakao_email_string = result.getKakaoAccount().toString();
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
+                        kakao_email_string = result.getKakaoAccount().getEmail().toString();
+                        sendLoginCheckRequest();
                     }
                 }
             });
@@ -222,19 +221,23 @@ public class Login extends AppCompatActivity {
     //카카오 로그인 여기까지
 
     // 이메일 중복 확인 GET
-    public void sendLoginCheckRequest(String email_string, TextView email) {
-        String url = "http://125.132.62.150:8000/letseat/register/email/check?email=" + email_string;
+    public void sendLoginCheckRequest() {
+        String url = "http://125.132.62.150:8000/letseat/register/email/check?email=" + kakao_email_string;
         StringRequest request = new StringRequest(
                 Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override // 응답 잘 받았을 때
                     public void onResponse(String response) {
-                        if (response.equals("emailCheckFail")) {
-                            println("위 이메일 주소는 사용불가능합니다.");
-                            email.setText("");
-                        } else {
-                            println("사용가능한 이메일입니다.");
+                        if (response.equals("emailCheckFail")) // 중복된값이 있다는 뜻이있으니까 이미 등록되어있다는뜻
+                        {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else  //DB에 아이디가 없으니까 등록해야함
+                            {
+                            Intent intent = new Intent(getApplicationContext(), Kakao_Login_userInfo.class);
+                            intent.putExtra("send",kakao_email_string);
+                            startActivity(intent);
                         }
                     }
                 },
@@ -253,42 +256,6 @@ public class Login extends AppCompatActivity {
         AppHelper.requestQueue.add(request);
     }
 
-    //카카오 이메일 서버에 전송
-    public void sendRegisterRequest() {
-        String url = "http://125.132.62.150:8000/letseat/login/normal";
-        JSONObject postData = new JSONObject();
-        try {
-            postData.put("email", kakao_email_string);
-            postData.put("name", kakao_nickName);
-        }
-        catch (JSONException e){
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                postData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Intent intent = new Intent(Login.this,MainActivity.class);
-                        Toast.makeText(getApplicationContext(), "성공!", Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                        finish();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error", String.valueOf(error));
-                        Toast.makeText(getApplicationContext(), "실패!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }
 
 
     private void HashKey() {
@@ -302,6 +269,7 @@ public class Login extends AppCompatActivity {
             }
         }
         catch (Exception e) {
+
         }
     }
     public void println(String text) {
