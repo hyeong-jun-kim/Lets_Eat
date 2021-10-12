@@ -92,15 +92,15 @@
 
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/qr_order_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="주문하기(테스트용)" />
-
                 </LinearLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <Button
+                android:id="@+id/qr_order_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="주문하기(테스트용)" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
