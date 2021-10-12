@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -32,6 +33,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -76,12 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private GpsTracker gpsTracker;
-
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {android.Manifest.permission.ACCESS_FINE_LOCATION,
             android.Manifest.permission.ACCESS_COARSE_LOCATION};
-
+    public static int userId = 0;
     private int ownerId = 1;
     int currentPage = 0;
     private String resName, phoneNumber, openTime, resIntro, businessNumber, restype, location; //qr코드 테스트용
@@ -95,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        checkRunTimePermission();
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
 
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
-
         // 이미지 자동전환
         final Handler handler = new Handler();
         final Runnable Update = new Runnable(){
@@ -152,9 +151,10 @@ public class MainActivity extends AppCompatActivity {
                 setCurrentIndicator(position);
             }
         });
-
         setupIndicators(images.length);
-
+        // 유저아이디 가져오기
+        getUserId();
+        // QR 스캔
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -444,5 +444,28 @@ public class MainActivity extends AppCompatActivity {
         return address.getAddressLine(0).toString()+"\n";
 
     }
-
+    public void getUserId(){
+        SharedPreferences pref = getSharedPreferences("email",MODE_PRIVATE);
+        String email = pref.getString("email","");
+        String url = "http://125.132.62.150:8000/letseat/find/userId?email="+email;
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response) {
+                        userId = Integer.parseInt(response);
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "에러", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false);
+        AppHelper.requestQueue = Volley.newRequestQueue(this);
+        AppHelper.requestQueue.add(request);
+    }
 }
