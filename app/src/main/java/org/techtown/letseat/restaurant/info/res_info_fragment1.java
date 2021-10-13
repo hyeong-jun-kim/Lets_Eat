@@ -49,7 +49,7 @@ public class res_info_fragment1 extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.res_info_fragment1, container, false);
-        recyclerView = view.findViewById(R.id.qr_recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

@@ -120,7 +120,9 @@
                             android:fontFamily="@font/notosansregular"
                             android:includeFontPadding="false"/>
                     </LinearLayout>
+
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/qr_order_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
@@ -128,7 +130,6 @@
                         android:fontFamily="@font/notosansbold"
                         android:includeFontPadding="false"
                         android:text="결제하기"
-                        android:id="@+id/orderButton"
                         android:background="@drawable/round_circle3"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
