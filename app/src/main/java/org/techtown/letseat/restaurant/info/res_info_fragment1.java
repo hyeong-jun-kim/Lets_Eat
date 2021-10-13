@@ -61,18 +61,6 @@ public class res_info_fragment1 extends Fragment {
             }
         });*/
 
-        //클릭 이벤트
-        //결제버튼
-        /*ExtendedFloatingActionButton pay_button = view.findViewById(R.id.pay_button);
-        pay_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Kakao_pay_test.class);
-                intent.putExtra("Price",String.valueOf(sum));
-                intent.putExtra("resId",resId);
-                startActivity(intent);
-            }
-        });*/
 
 
         Bundle extra = this.getArguments();

@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:statusBarColor" tools:ignore="DuplicateDefinition">#ED6868</item>
+        <item name="android:colorEdgeEffect">#ED6868</item>
     </style>
 
     <style name="Theme.LetsEat.NoActionBar">

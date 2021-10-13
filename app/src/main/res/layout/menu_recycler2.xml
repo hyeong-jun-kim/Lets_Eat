@@ -48,7 +48,35 @@
                     android:textColor="#000000"
                     android:includeFontPadding="false"
                     android:text="Price" />
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        android:src="@drawable/minus"
+                        app:tint="#ED6868" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="20dp"
+                        android:text="1"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        android:src="@drawable/add2"
+                        app:tint="#ED6868"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
