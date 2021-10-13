@@ -33,7 +33,11 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
         Order_recycle_item item = items.get(position);
 
 
-        viewHolder.tvName.setText(item.getName());
+
+        viewHolder.ivRest.setImageBitmap(item.getBitmap());
+        viewHolder.tvName.setText(item.getResName());
+        viewHolder.tvmenuName.setText(item.getMenuName());
+        viewHolder.tvPrice.setText(item.getPrice());
 
     }
 

@@ -49,9 +49,8 @@ public class Fragment_order extends Fragment {
         Bundle extra = this.getArguments();
         if (extra != null) {
             resId = extra.getInt("resId");  //식당의 resId
-            get_Restaurant();
         }
-
+        get_Restaurant();
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
@@ -76,7 +75,7 @@ public class Fragment_order extends Fragment {
     }
 
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+        String url = "http://125.132.62.150:8000/letseat/store/menu/load?resId=1";
 
 
         JSONArray getData = new JSONArray();
@@ -89,21 +88,23 @@ public class Fragment_order extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String resName, image;
+                            String menuName, image, price;
                             int get_resId;
                             Bitmap bitmap;
 
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
 
-                                get_resId = jsonObject.getInt("resId");
-                                resName = jsonObject.getString("resName");
-                                image = jsonObject.getString("image");
+                                menuName = jsonObject.getString("name");
+                                image = jsonObject.getString("photo");
                                 bitmap = PhotoSave.StringToBitmap(image);
-                                if(resId == get_resId){
+                                price = jsonObject.getString("price");
+
                                     list.add(bitmap);
-                                    list.add(resName);
-                                }
+                                    list.add(menuName);
+                                    list.add(price);
+                                    list.add("resName");
+
 
                             }
 
