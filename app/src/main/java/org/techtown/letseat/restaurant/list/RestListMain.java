@@ -80,7 +80,7 @@ public class RestListMain extends AppCompatActivity {
 
 
         /* search_restaurant = findViewById(R.id.search_restaurant);
-        search_btn = findViewById(R.id.search_btn); */
+        search_btn = findViewById(R.id.search_btn);
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +91,7 @@ public class RestListMain extends AppCompatActivity {
                 intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
-        });
+        }); */
 
 
         koreanFood_button = findViewById(R.id.koreanFood_button);

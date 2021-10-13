@@ -30,7 +30,7 @@
                     android:includeFontPadding="false"
                     android:textColor="#ffffff"
                     android:textSize="20dp"
-                    android:text="LET's EAT"/>
+                    android:text="Let's Eat"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView

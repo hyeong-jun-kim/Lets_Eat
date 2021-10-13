@@ -30,7 +30,7 @@
                 android:includeFontPadding="false"
                 android:textColor="#ED6868"
                 android:textSize="20dp"
-                android:text="LET's EAT"/>
+                android:text="Let's Eat"/>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
@@ -177,10 +177,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center|top"
-                            android:layout_marginTop="20dp"
-                            android:background="#FFFFFF">
+                            android:layout_height="match_parent">
                         </androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
