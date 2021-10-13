@@ -233,11 +233,13 @@ public class Login extends AppCompatActivity {
                         {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
+                            finish();
                         } else  //DB에 아이디가 없으니까 등록해야함
                             {
                             Intent intent = new Intent(getApplicationContext(), Kakao_Login_userInfo.class);
                             intent.putExtra("send",kakao_email_string);
                             startActivity(intent);
+                            finish();
                         }
                     }
                 },
