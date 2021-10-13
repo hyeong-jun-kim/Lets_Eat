@@ -3,6 +3,7 @@ package org.techtown.letseat.restaurant.qr;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,26 +19,50 @@ import java.util.ArrayList;
 
 public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHolder>implements OnMenuItemClickListner {
     ArrayList<QR_Menu> items = new ArrayList<QR_Menu>();
-
     OnMenuItemClickListner listner;
+    int sum = 0;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.menu_recycler2, viewGroup, false);
-
+        qr_restActivity.sumTextView.setText("0");
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         QR_Menu item = items.get(position);
+        qr_restActivity.sumTextView.setText(""+sum);
         viewHolder.name.setText(item.getName());
         viewHolder.price.setText(item.getPrice()+"원");
-        viewHolder.imageView.setImageBitmap(item.getBitmap());
-    }
+        viewHolder.amount.setText("0");
+        viewHolder.upButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = Integer.parseInt(viewHolder.amount.getText().toString());
+                String price_string = viewHolder.price.getText().toString();
+                int price = Integer.parseInt(item.getPrice());
+                sum += price;
+                qr_restActivity.sumTextView.setText(sum+"원");
+                viewHolder.amount.setText(""+(num+1));
+            }
+        });
+        viewHolder.downButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               int num = Integer.parseInt(viewHolder.amount.getText().toString());
+               if(num > 0){
+                   int price = Integer.parseInt(item.getPrice());
+                   sum -= price;
+                   qr_restActivity.sumTextView.setText(sum+"원");
+                   viewHolder.amount.setText(""+(num-1));
+               }
+            }
+        });
 
+    }
     @Override
     public int getItemCount() {
         return items.size();
@@ -64,14 +89,17 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView price;
+        TextView amount;
         ImageView imageView;
+        ImageButton upButton, downButton;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            amount = itemView.findViewById(R.id.amount);
             name = itemView.findViewById(R.id.name);
             price = itemView.findViewById(R.id.price);
             imageView = itemView.findViewById(R.id.image);
-
+            upButton = itemView.findViewById(R.id.up_button);
+            downButton = itemView.findViewById(R.id.down_button);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
