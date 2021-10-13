@@ -93,10 +93,6 @@ public class qr_restActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestOrderList();
-
-                for(int i = 0; i < menus_id.size(); i++){
-                    requestMenuList(1, menus_id.get(i));
-                }
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 DatabaseReference myRef = database.getReference("ownerId_1");
@@ -148,7 +144,8 @@ public class qr_restActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             orderId = response.getInt("orderId");
-                        } catch (JSONException e) {
+                            requestMenuList(1);
+                            } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -168,24 +165,31 @@ public class qr_restActivity extends AppCompatActivity {
         AppHelper.requestQueue.add(request);
     }
     // 메뉴 리스트 보내기
-    void requestMenuList(int amount, int resMenuId){
+    void requestMenuList(int amount){
         String url = "http://125.132.62.150:8000/letseat/order/menu/register";
-        JSONObject postData = new JSONObject();
-        JSONObject orderData = new JSONObject();
-        JSONObject menuData = new JSONObject();
-        try {
-            menuData.put("resMenuId",resMenuId);
-            orderData.put("orderId", orderId);
-            postData.put("orderList",orderData);
-            postData.put("amount",amount);
-            postData.put("resMenu",menuData);
-        }catch (JSONException e){
-            e.printStackTrace();
+        JSONArray menusData = new JSONArray();
+        JSONObject menuPostData = new JSONObject();
+        for(int i = 0; i < menus_id.size(); i++){
+            try {
+                JSONObject postData = new JSONObject();
+                JSONObject orderData = new JSONObject();
+                JSONObject menuData = new JSONObject();
+                menuData.put("resMenuId",menus_id.get(i));
+                orderData.put("orderId", orderId);
+                postData.put("orderList",orderData);
+                postData.put("amount",amount);
+                postData.put("resMenu",menuData);
+                menusData.put(postData);
+                menuPostData.put("orderMenus", menusData);
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
         }
+
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
-                postData,
+                menuPostData,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
