@@ -18,14 +18,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:backgroundTint="#ED6868"
-                app:title="@string/app_name"
+                app:navigationIcon="@drawable/home"
                 app:titleTextColor="#ffffff"
                 app:menu="@menu/main"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
+                style="@style/Widget.MaterialComponents.Toolbar.Primary">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:text="LET'EAT"/>
+            </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,12 +71,49 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <FrameLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-            </FrameLayout>
+                android:text="주변 식당"
+                android:paddingLeft="8dp"
+                android:fontFamily="@font/notosansbold"
+                android:textSize="30dp"
+                android:textColor="#000000"/>
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        android:id="@+id/mainRestRecycler"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="리뷰 사진"
+                android:paddingLeft="8dp"
+                android:fontFamily="@font/notosansbold"
+                android:textSize="30dp"
+                android:textColor="#000000"/>
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/pay_test_button"
                 android:layout_width="match_parent"
@@ -96,6 +145,12 @@
                 android:background="#C5EF93"
                 android:text="카카오 로그아웃"
                 android:textColor="#000000"
+                android:textSize="20sp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#C5EF93"
+                android:visibility="invisible"
                 android:textSize="20sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -173,7 +228,6 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@+id/btnOrder"
                     app:layout_constraintTop_toTopOf="@+id/btnRest" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
         <com.google.android.material.floatingactionbutton.FloatingActionButton

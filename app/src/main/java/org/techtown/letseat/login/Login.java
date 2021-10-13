@@ -3,6 +3,7 @@ package org.techtown.letseat.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -295,6 +296,10 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override // 응답 잘 받았을 때
                     public void onResponse(JSONObject response) {
+                        SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("email",email_string);
+                        editor.commit();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         finish();

@@ -5,11 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -30,6 +33,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -44,6 +48,7 @@ import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.map.Map_MainActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
+import org.techtown.letseat.order.Orderdata;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.restaurant.list.RestListMain;
@@ -53,6 +58,7 @@ import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.ImageSliderAdapter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -64,16 +70,19 @@ public class MainActivity extends AppCompatActivity {
     private IntentIntegrator qrScan;
     private double latitude;
     private double longitude;
+    private RecyclerView recyclerView;
+    private MainRecyclerAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<MainRecyclerData> list = new ArrayList<>();
 
 
 
     private GpsTracker gpsTracker;
-
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {android.Manifest.permission.ACCESS_FINE_LOCATION,
             android.Manifest.permission.ACCESS_COARSE_LOCATION};
-
+    public static int userId = 0;
     private int ownerId = 1;
     int currentPage = 0;
     private String resName, phoneNumber, openTime, resIntro, businessNumber, restype, location; //qr코드 테스트용
@@ -101,11 +110,18 @@ public class MainActivity extends AppCompatActivity {
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
 
+        recyclerView = (RecyclerView) findViewById(R.id.mainRestRecycler);
+        recyclerView.setHasFixedSize(true);
+        adapter = new MainRecyclerAdapter(list);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHorizontalScrollBarEnabled(false);
+        recyclerView.setAdapter(adapter);
 
+        prepareData();
 
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
-
         // 이미지 자동전환
         final Handler handler = new Handler();
         final Runnable Update = new Runnable(){
@@ -135,9 +151,10 @@ public class MainActivity extends AppCompatActivity {
                 setCurrentIndicator(position);
             }
         });
-
         setupIndicators(images.length);
-
+        // 유저아이디 가져오기
+        getUserId();
+        // QR 스캔
         btnQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -238,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putInt("tableNumber",tableNumber);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -385,6 +401,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private void prepareData(){
+        list.clear();
+        list.add(new MainRecyclerData("하오탕",R.drawable.image1));
+        list.add(new MainRecyclerData("하오탕",R.drawable.image2));
+        list.add(new MainRecyclerData("하오탕",R.drawable.image3));
+    }
 
 
     public String getCurrentAddress( double latitude, double longitude) {
@@ -422,5 +444,28 @@ public class MainActivity extends AppCompatActivity {
         return address.getAddressLine(0).toString()+"\n";
 
     }
-
+    public void getUserId(){
+        SharedPreferences pref = getSharedPreferences("email",MODE_PRIVATE);
+        String email = pref.getString("email","");
+        String url = "http://125.132.62.150:8000/letseat/find/userId?email="+email;
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response) {
+                        userId = Integer.parseInt(response);
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "에러", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false);
+        AppHelper.requestQueue = Volley.newRequestQueue(this);
+        AppHelper.requestQueue.add(request);
+    }
 }

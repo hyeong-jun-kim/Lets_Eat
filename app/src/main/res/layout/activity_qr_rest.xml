@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical">
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/CoordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -29,7 +27,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/qr_res_image"
                         android:layout_width="match_parent"
                         android:layout_height="202dp"
                         android:scaleType="centerCrop"
@@ -49,7 +47,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/res_subtitle"
+                        android:id="@+id/res_tableNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
@@ -60,44 +58,85 @@
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="15sp" />
-
                 </LinearLayout>
-
             </com.google.android.material.appbar.CollapsingToolbarLayout>
-
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="bottom"
+                    android:padding="20dp"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="결제 내용 : "
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"
+                            android:gravity="right"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="요청 사항 : "
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"/>
+                    </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:text="결제하기"
+                        android:background="@drawable/round_circle3"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/qr_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
         </androidx.recyclerview.widget.RecyclerView>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/basket_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:backgroundTint="#ED6868"
-                android:fontFamily="@font/notosansbold"
-                app:icon="@drawable/basket"
-                app:iconTint="@color/white" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
