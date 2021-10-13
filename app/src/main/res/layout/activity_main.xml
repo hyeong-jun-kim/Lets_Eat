@@ -20,7 +20,7 @@
                 android:backgroundTint="#ED6868"
                 app:navigationIcon="@drawable/home"
                 app:titleTextColor="#ffffff"
-                app:menu="@menu/main"
+                app:menu="@menu/menumain"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary">
                 <TextView
                     android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
                     android:includeFontPadding="false"
                     android:textColor="#ffffff"
                     android:textSize="20dp"
-                    android:text="LET'EAT"/>
+                    android:text="LET's EAT"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView

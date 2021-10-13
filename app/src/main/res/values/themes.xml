@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:statusBarColor" tools:ignore="DuplicateDefinition">#ED6868</item>
         <item name="android:colorEdgeEffect">#ED6868</item>
+
     </style>
 
     <style name="Theme.LetsEat.NoActionBar">
@@ -24,4 +25,14 @@
 
     <style name="Theme.LetsEat.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- Customize your theme here. -->
+
+    <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#ED6868</item>                                <!-- 배경 -->
+
+        <item name="android:textColorPrimary">#ED6868</item>       <!-- 탭바 선택된 텍스트 -->
+        <item name="android:textColorSecondary">#89000000</item>     <!-- 탭바 텍스트 -->
+
+        <item name="colorAccent">#ED6868</item>                    <!-- 하단 움직이는 바 색-->
+    </style>
+
 </resources>
