@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,8 @@ public class RestListMain extends AppCompatActivity {
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
     RecyclerView recyclerView;
-    Button koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button, search_btn;
+    ImageButton koreanFood_button, chinaFood_button, japanFood_button, westernFood_Button, onemanFood_Button;
+    Button search_btn;
     int resId;
 
     @Override
@@ -77,7 +79,7 @@ public class RestListMain extends AppCompatActivity {
 
 
 
-        search_restaurant = findViewById(R.id.search_restaurant);
+        /* search_restaurant = findViewById(R.id.search_restaurant);
         search_btn = findViewById(R.id.search_btn);
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +91,7 @@ public class RestListMain extends AppCompatActivity {
                 intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
-        });
+        }); */
 
 
         koreanFood_button = findViewById(R.id.koreanFood_button);

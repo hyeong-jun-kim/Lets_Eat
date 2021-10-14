@@ -16,11 +16,11 @@ public class Orderdata {
 
     public ArrayList<Order_recycle_item> getItems(ArrayList list) {
 
-        for(int i = 0; i < list.size()/2; i++){
+        for(int i = 0; i < list.size()/4; i++){
             rest[i+1] = new Order_recycle_item((Bitmap) list.get(p),
-                    list.get(p+1).toString());
+                    list.get(p+1).toString(),list.get(p+2).toString(),list.get(p+3).toString());
             items.add(rest[i+1]);
-            p += 2;
+            p += 4;
         }
 
 

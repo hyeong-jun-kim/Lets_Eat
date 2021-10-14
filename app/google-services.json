@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "3928808317",
+    "firebase_url": "https://let-s-eat-24ef9-default-rtdb.firebaseio.com",
+    "project_id": "let-s-eat-24ef9",
+    "storage_bucket": "let-s-eat-24ef9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3928808317:android:cb8baf6fae286ae7790a14",
+        "android_client_info": {
+          "package_name": "org.techtown.letseat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3928808317-0j0g88u7uaarqtfrct7reu2p61lv2iau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADd06_2eNa1q9pKmkzgpslUosoRh91eRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3928808317-0j0g88u7uaarqtfrct7reu2p61lv2iau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3928808317:android:b6110ac8cbed7735790a14",
+        "android_client_info": {
+          "package_name": "org.techtown.letseat_owner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3928808317-0j0g88u7uaarqtfrct7reu2p61lv2iau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADd06_2eNa1q9pKmkzgpslUosoRh91eRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3928808317-0j0g88u7uaarqtfrct7reu2p61lv2iau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

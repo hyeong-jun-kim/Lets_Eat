@@ -4,14 +4,188 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F6B0B0"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topMain"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="#ffffff"
+            app:navigationIcon="@drawable/home"
+            app:navigationIconTint="#ED6868"
+            android:background="#ffffff"
+            app:menu="@menu/main">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/notosansbold"
+                android:includeFontPadding="false"
+                android:textColor="#ED6868"
+                android:textSize="20dp"
+                android:text="Let's Eat"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:backgroundTint="#ffffff"
+                                android:src="@drawable/koreanfood"
+                                android:id="@+id/koreanFood_button"/>
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/notosansbold"
+                                android:includeFontPadding="false"
+                                android:text="한식"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:backgroundTint="#ffffff"
+                                android:src="@drawable/japanesefood"
+                                android:id="@+id/japanFood_button"/>
+                            <TextView
+                                android:id="@+id/textView12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/notosansbold"
+                                android:includeFontPadding="false"
+                                android:text="일식"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:backgroundTint="#ffffff"
+                                android:src="@drawable/china_food"
+                                android:id="@+id/chinaFood_button"/>
+                            <TextView
+                                android:id="@+id/textView11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/notosansbold"
+                                android:includeFontPadding="false"
+                                android:text="중식"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:backgroundTint="#ffffff"
+                                android:src="@drawable/westernfood"
+                                android:id="@+id/westernFood_Button"/>
+                            <TextView
+                                android:id="@+id/westernfood"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/notosansbold"
+                                android:includeFontPadding="false"
+                                android:text="양식"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:backgroundTint="#ffffff"
+                                android:src="@drawable/oneman_food"
+                                android:id="@+id/onemanFood_Button"/>
+                            <TextView
+                                android:id="@+id/textView13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/notosansbold"
+                                android:includeFontPadding="false"
+                                android:text="혼밥"
+                                android:textColor="#000000"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
+    <!--
 
         <EditText
             android:id="@+id/search_restaurant"
@@ -33,198 +207,6 @@
             android:text="검색" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="87dp"
-                android:background="#FFFFFF"
-                android:fontFamily="@font/notosansbold"
-                android:text="지금 인기있는 식당은?"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20sp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:id="@+id/koreanFood_button"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="24dp"
-                                android:layout_marginLeft="24dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@drawable/rice"
-                                android:rotationX="0"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <TextView
-                                android:id="@+id/textView10"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/notosansbold"
-                                android:text="한식"
-                                android:textColor="#000000"
-                                android:textSize="20sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:id="@+id/chinaFood_button"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="24dp"
-                                android:layout_marginLeft="24dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@drawable/china_food"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <TextView
-                                android:id="@+id/textView11"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/notosansbold"
-                                android:text="중식"
-                                android:textColor="#000000"
-                                android:textSize="20sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:id="@+id/japanFood_button"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="24dp"
-                                android:layout_marginLeft="24dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@drawable/japan_food"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <TextView
-                                android:id="@+id/textView12"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/notosansbold"
-                                android:text="일식"
-                                android:textColor="#000000"
-                                android:textSize="20sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:id="@+id/westernFood_Button"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="24dp"
-                                android:layout_marginLeft="24dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@drawable/westernfood"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <TextView
-                                android:id="@+id/westernfood"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/notosansbold"
-                                android:text="양식"
-                                android:textColor="#000000"
-                                android:textSize="20sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:orientation="vertical">
-
-                            <Button
-                                android:id="@+id/onemanFood_Button"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginStart="24dp"
-                                android:layout_marginLeft="24dp"
-                                android:layout_marginTop="16dp"
-                                android:background="@drawable/oneman_food"
-                                android:textColor="#000000"
-                                android:textSize="20sp"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <TextView
-                                android:id="@+id/textView13"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="35dp"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/notosansbold"
-                                android:text="혼밥"
-                                android:textColor="#000000"
-                                android:textSize="20sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -241,4 +223,4 @@
     </ScrollView>
 
 
-</LinearLayout>
+</LinearLayout> !-->
