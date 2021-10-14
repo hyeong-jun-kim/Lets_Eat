@@ -47,9 +47,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-ml-modeldownloader'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.mlkit:linkfirebase:16.1.0'
+    implementation 'com.google.mlkit:image-labeling-custom:16.3.1'
     implementation 'com.google.android.material:material:1.2.0-alpha06'
     implementation 'com.google.code.gson:gson:2.8.5'
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/libDaumMapAndroid.jar')
     implementation 'de.hdodenhof:circleimageview:3.0.1'

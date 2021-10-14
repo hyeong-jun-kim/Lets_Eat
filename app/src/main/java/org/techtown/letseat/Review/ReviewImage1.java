@@ -82,6 +82,8 @@ public class ReviewImage1 extends AppCompatActivity {
         image_file = null;
         input = null;
         modelOutput = null;
+        menu_name = findViewById(R.id.menu_name);
+        accuracy = findViewById(R.id.accuracy);
         imageView = findViewById(R.id.imageView);
         save_btn = findViewById(R.id.save_btn);
         upload_btn = findViewById(R.id.upload_btn);
@@ -91,8 +93,8 @@ public class ReviewImage1 extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 101);
                 LoadTFliteModel();
+                startActivityForResult(intent, 101);
             }
         });
 
@@ -155,7 +157,7 @@ public class ReviewImage1 extends AppCompatActivity {
                             image_file = bitmap;
                             Image_Compile();
                             ByteBuffer();
-                            //Labeling();
+                            Labeling();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -165,7 +167,7 @@ public class ReviewImage1 extends AppCompatActivity {
                             image_file = bitmap;
                             Image_Compile();
                             ByteBuffer();
-                            //Labeling();
+                            Labeling();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -235,6 +237,7 @@ public class ReviewImage1 extends AppCompatActivity {
         int bufferSize = 150 * java.lang.Float.SIZE / java.lang.Byte.SIZE;
         ByteBuffer modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder());
         interpreter.run(input, modelOutput);
+        this.modelOutput = modelOutput;
     }
 
     public void Labeling(){
@@ -242,7 +245,7 @@ public class ReviewImage1 extends AppCompatActivity {
         FloatBuffer probabilities = modelOutput.asFloatBuffer();
         try {
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open("labels.txt")));
+                    new InputStreamReader(getAssets().open("label.txt")));
             for (int i = 0; i < probabilities.capacity(); i++) {
                 String label = reader.readLine();
                 float probability = probabilities.get(i);
