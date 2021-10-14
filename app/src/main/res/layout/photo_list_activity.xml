@@ -4,144 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".photo.PhotoList">
-
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0"
-                android:background="@drawable/photo_btn"
-                android:fontFamily="@font/notosansbold"
-                android:text="#한식"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0"
-                android:background="@drawable/photo_btn"
-                android:fontFamily="@font/notosansbold"
-                android:text="#중식"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0"
-                android:background="@drawable/photo_btn"
-                android:fontFamily="@font/notosansbold"
-                android:text="#일식"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button27"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0"
-                android:background="@drawable/photo_btn"
-                android:fontFamily="@font/notosansbold"
-                android:text=" #분위기좋은곳"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button28"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0"
-                android:background="@drawable/photo_btn"
-                android:fontFamily="@font/notosansbold"
-                android:text="#카페"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button29"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="0"
-                android:background="@drawable/photo_btn"
-                android:fontFamily="@font/notosansbold"
-                android:text="#술집"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/photoRecyclerView"
-            android:layout_width="402dp"
-            android:layout_height="645dp"
-            android:layout_marginTop="9dp"
-            android:background="#FFFFF3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <FrameLayout
-            android:id="@+id/photoFragment"
-            android:layout_width="349dp"
-            android:layout_height="451dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="102dp"
-            android:layout_marginEnd="26dp"
-            android:layout_marginBottom="102dp"
-            app:layout_constraintBottom_toBottomOf="@+id/photoRecyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/photoRecyclerView"
-            app:layout_constraintStart_toStartOf="@+id/photoRecyclerView"
-            app:layout_constraintTop_toTopOf="@+id/photoRecyclerView">
-
-        </FrameLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ffffff"
+                app:navigationIcon="@drawable/home"
+                app:navigationIconTint="#ED6868"
+                android:background="#ffffff"
+                app:menu="@menu/main">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ED6868"
+                    android:textSize="20dp"
+                    android:text="Let's Eat"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/koreanfoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#한식"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chinesefoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#중식"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/japanesefoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#일식"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/westernfoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#양식"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/onemanfoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#혼밥"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/alcholfoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#술집"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/cafefoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#카페"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/atmospherefeelsogoodfoodChip"
+                        style="@style/Widget.MaterialComponents.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#분위기좋은곳"/>
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/photoRecyclerView"
+                    android:layout_width="402dp"
+                    android:layout_height="645dp"
+                    android:layout_marginTop="9dp"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout> <!-- <FrameLayout
+android:id="@+id/photoFragment"
+android:layout_width="349dp"
+android:layout_height="451dp"
+android:layout_marginStart="27dp"
+android:layout_marginTop="102dp"
+android:layout_marginEnd="26dp"
+android:layout_marginBottom="102dp">
+</FrameLayout>

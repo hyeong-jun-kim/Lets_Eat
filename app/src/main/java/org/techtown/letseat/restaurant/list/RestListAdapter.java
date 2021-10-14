@@ -42,7 +42,6 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 
         viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvAdress.setText(item.getAdress());
         viewHolder.tvGenre.setText(item.getGenre());
 
     }
@@ -76,7 +75,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivRest;
-        TextView tvName, tvAdress, tvGenre;
+        TextView tvName,tvGenre;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -84,7 +83,6 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 
             ivRest = itemView.findViewById(R.id.iv_item_res);
             tvName = itemView.findViewById(R.id.tv_item_res_name);
-            tvAdress = itemView.findViewById(R.id.tv_item_res_adress);
             tvGenre = itemView.findViewById(R.id.tv_item_food_genre);
 
             itemView.setOnClickListener(new View.OnClickListener() {
