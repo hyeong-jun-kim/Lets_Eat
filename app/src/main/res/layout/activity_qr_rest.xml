@@ -127,12 +127,12 @@
                         android:id="@+id/qr_order_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffffff"
-                        android:textSize="15sp"
+                        android:background="@drawable/round_circle3"
                         android:fontFamily="@font/notosansbold"
                         android:includeFontPadding="false"
                         android:text="결제하기"
-                        android:background="@drawable/round_circle3"/>
+                        android:textColor="#ffffff"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
