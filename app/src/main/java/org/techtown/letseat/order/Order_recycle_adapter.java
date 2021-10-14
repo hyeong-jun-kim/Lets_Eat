@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_adapter.ViewHolder>
 implements OnReviewItemClickListner{
 
-    private ArrayList<Order_recycle_item> items = new ArrayList<>();
+    private ArrayList<OrderItem> items = new ArrayList<>();
     private Context context;
     OnReviewItemClickListner listner;
 
@@ -47,7 +47,7 @@ implements OnReviewItemClickListner{
     @Override
     public void onBindViewHolder(@NonNull Order_recycle_adapter.ViewHolder viewHolder, int position) {
 
-        Order_recycle_item item = items.get(position);
+        OrderItem item = items.get(position);
 
         viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getResName());
@@ -61,7 +61,7 @@ implements OnReviewItemClickListner{
         return items.size();
     }
 
-    public void setItems(ArrayList<Order_recycle_item> items) {
+    public void setItems(ArrayList<OrderItem> items) {
         this.items = items;
     }
 

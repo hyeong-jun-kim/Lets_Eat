@@ -51,6 +51,7 @@ import org.techtown.letseat.restaurant.info.Res_info_fragment2;
 import org.techtown.letseat.restaurant.info.res_info_fragment1;
 import org.techtown.letseat.restaurant.info.res_info_fragment3;
 import org.techtown.letseat.util.PhotoSave;
+import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,33 +62,40 @@ public class qr_restActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private int num;
-
     private ArrayList<QR_Menu> list = new ArrayList<>();
     private ArrayList<Integer> menus_id = new ArrayList<>();
     private ImageView resImage;
     private int resId, tableNumber, orderId;
-    private QR_MenuAdapter adapter = new QR_MenuAdapter();
+    private QR_MenuAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
     private AppCompatButton orderButton;
     TextView res_title, res_table;
+    public static TextView sumTextView;
+    public static ArrayList<Integer> selectMenus = new ArrayList<>();
     int data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_rest);
+        sumTextView = findViewById(R.id.sumTextView);
         res_title = findViewById(R.id.res_title);
         res_table = findViewById(R.id.res_tableNumber);
         resImage = findViewById(R.id.qr_res_image);
         orderButton = findViewById(R.id.qr_order_button);
         recyclerView = findViewById(R.id.qr_recyclerView);
+        sumTextView.setText("0원");
+        // 번들 가져오기
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         resId = bundle.getInt("resId");
         tableNumber = bundle.getInt("tableNumber");
+        // 어댑터 설정
+        adapter = new QR_MenuAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        // 주문버튼
         orderButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -95,13 +103,24 @@ public class qr_restActivity extends AppCompatActivity {
                 requestOrderList();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                DatabaseReference myRef = database.getReference("ownerId_1");
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        num = snapshot.getValue(Integer.class);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+                myRef.setValue(num+1);
                 Toast.makeText(getApplicationContext(), "성공적으로 주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                QR_MenuAdapter.sum = 0;
                 finish();
             }
         });
         get_Restaurant();
         get_MenuData();
-
     }
     // 주문 리스트 보내기
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -118,7 +137,9 @@ public class qr_restActivity extends AppCompatActivity {
             userData.put("userId",userId);
             postData.put("orderTime",orderTime);
             postData.put("tableNumber",tableNumber);
+            postData.put("sum",QR_MenuAdapter.sum);
             postData.put("user",userData);
+            postData.put("orderYN","Y");
             postData.put("restaurant",restData);
         }catch (JSONException e){
             e.printStackTrace();
@@ -157,12 +178,14 @@ public class qr_restActivity extends AppCompatActivity {
         String url = "http://125.132.62.150:8000/letseat/order/menu/register";
         JSONArray menusData = new JSONArray();
         JSONObject menuPostData = new JSONObject();
-        for(int i = 0; i < menus_id.size(); i++){
+        ArrayList<String> selectMenus = adapter.getSelectMenu();
+        for(int i = 0; i < selectMenus.size(); i++){
+            int idx = Integer.parseInt(selectMenus.get(i));
             try {
                 JSONObject postData = new JSONObject();
                 JSONObject orderData = new JSONObject();
                 JSONObject menuData = new JSONObject();
-                menuData.put("resMenuId",menus_id.get(i));
+                menuData.put("resMenuId",menus_id.get(idx));
                 orderData.put("orderId", orderId);
                 postData.put("orderList",orderData);
                 postData.put("amount",amount);
