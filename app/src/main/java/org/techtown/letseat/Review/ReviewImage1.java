@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -63,7 +64,8 @@ public class ReviewImage1 extends AppCompatActivity {
     private ImageView imageView;
     private Button upload_btn, save_btn;
     private Bitmap bitmap;
-    private String photoPath, foodName, argmax;
+    private String photoPath, foodName, argmax, label;
+    private float probability;
     private TextView menu_name, accuracy;
     private SharedPreferences sharedPreferences;
     private Interpreter interpreter;
@@ -183,7 +185,7 @@ public class ReviewImage1 extends AppCompatActivity {
                 .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
                 .build();
         FirebaseModelDownloader.getInstance()
-                .getModel("Food-Detector", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions)
+                .getModel("Food-Detector", DownloadType.LOCAL_MODEL, conditions)
                 .addOnSuccessListener(new OnSuccessListener<CustomModel>() {
                     @Override
                     public void onSuccess(CustomModel model) {
@@ -209,8 +211,8 @@ public class ReviewImage1 extends AppCompatActivity {
     public void Image_Compile(){
         Bitmap bitmap = Bitmap.createScaledBitmap(image_file, 224, 224, true);
         ByteBuffer input = ByteBuffer.allocateDirect(224 * 224 * 3 * 4).order(ByteOrder.nativeOrder());
-        for (int y = 0; y < 224; y++) {
-            for (int x = 0; x < 224; x++) {
+        for (int x = 0; x < 224; x++) {
+            for (int y = 0; y < 224; y++) {
                 int px = bitmap.getPixel(x, y);
 
                 // Get channel values from the pixel value.
@@ -221,9 +223,9 @@ public class ReviewImage1 extends AppCompatActivity {
                 // Normalize channel values to [-1.0, 1.0]. This requirement depends
                 // on the model. For example, some models might require values to be
                 // normalized to the range [0.0, 1.0] instead.
-                float rf = (r - 127) / 255.0f;
-                float gf = (g - 127) / 255.0f;
-                float bf = (b - 127) / 255.0f;
+                float rf = r / 255.0f;
+                float gf = g / 255.0f;
+                float bf = b / 255.0f;
 
                 input.putFloat(rf);
                 input.putFloat(gf);
@@ -234,7 +236,7 @@ public class ReviewImage1 extends AppCompatActivity {
     }
 
     public void ByteBuffer(){
-        int bufferSize = 150 * java.lang.Float.SIZE / java.lang.Byte.SIZE;
+        int bufferSize = 152 * java.lang.Float.SIZE / java.lang.Byte.SIZE;
         ByteBuffer modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder());
         interpreter.run(input, modelOutput);
         this.modelOutput = modelOutput;
@@ -246,14 +248,25 @@ public class ReviewImage1 extends AppCompatActivity {
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("label.txt")));
+            ArrayList<String> labels = new ArrayList<>();
+            float max = 0f;
+            int idx = 0;
             for (int i = 0; i < probabilities.capacity(); i++) {
                 String label = reader.readLine();
+                labels.add(label);
                 float probability = probabilities.get(i);
+                if(max < probability){
+                    max = probability;
+                    idx = i;
+                }
                 Log.i(TAG, String.format("%s: %1.4f", label, probability));
-                String percent = String.valueOf(probability);
-                menu_name.setText(label);
-                accuracy.setText(percent);
             }
+            float probability = 100 * probabilities.get(idx);
+            Math.round(probability);
+            String label = labels.get(idx);
+            String percent = String.valueOf(probability);
+            menu_name.setText(label);
+            accuracy.setText(percent);
         } catch (IOException e) {
             // File not found?
         }

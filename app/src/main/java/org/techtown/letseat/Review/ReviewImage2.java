@@ -148,7 +148,7 @@ public class ReviewImage2 extends AppCompatActivity{
 
     public void LoadModel(){
         FirebaseModelSource firebaseModelSource =
-                new FirebaseModelSource.Builder("Food-Detector").build();
+                new FirebaseModelSource.Builder("model2").build();
         CustomRemoteModel remoteModel =
                 new CustomRemoteModel.Builder(firebaseModelSource).build();
 
