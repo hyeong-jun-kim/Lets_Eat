@@ -86,9 +86,7 @@
         <activity android:name=".pay_test.Kakao_pay_test" />
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList" />
-        <activity
-            android:name=".Review.ReviewActivity"
-            android:exported="true" />
+
         <activity
             android:name=".order.OrderActivity"
             android:exported="true" />

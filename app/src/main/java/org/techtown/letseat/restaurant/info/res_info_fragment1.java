@@ -71,6 +71,9 @@ public class res_info_fragment1 extends Fragment {
             }
         });*/
 
+        //클릭 이벤트
+        //결제버튼
+
 
 
         Bundle extra = this.getArguments();

@@ -3,6 +3,7 @@ package org.techtown.letseat.restaurant.qr;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -45,6 +51,7 @@ import org.techtown.letseat.restaurant.info.Res_info_fragment2;
 import org.techtown.letseat.restaurant.info.res_info_fragment1;
 import org.techtown.letseat.restaurant.info.res_info_fragment3;
 import org.techtown.letseat.util.PhotoSave;
+import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,25 +59,32 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class qr_restActivity extends AppCompatActivity {
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private int num;
+
     private ArrayList<QR_Menu> list = new ArrayList<>();
     private ArrayList<Integer> menus_id = new ArrayList<>();
     private ImageView resImage;
     private int resId, tableNumber, orderId;
-    private QR_MenuAdapter adapter = new QR_MenuAdapter();
+    private QR_MenuAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
-    private Button orderButton;
+    private AppCompatButton orderButton;
     TextView res_title, res_table;
+    public static TextView sumTextView;
     int data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_rest);
+        sumTextView = findViewById(R.id.sumTextView);
         res_title = findViewById(R.id.res_title);
         res_table = findViewById(R.id.res_tableNumber);
         resImage = findViewById(R.id.qr_res_image);
         orderButton = findViewById(R.id.qr_order_button);
         recyclerView = findViewById(R.id.qr_recyclerView);
+        adapter = new QR_MenuAdapter();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         resId = bundle.getInt("resId");
@@ -85,12 +99,25 @@ public class qr_restActivity extends AppCompatActivity {
                 requestOrderList();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                DatabaseReference myRef = database.getReference("ownerId_1");
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        num = snapshot.getValue(Integer.class);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+                myRef.setValue(num+1);
+
                 Toast.makeText(getApplicationContext(), "성공적으로 주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
         get_Restaurant();
         get_MenuData();
+
     }
     // 주문 리스트 보내기
     @RequiresApi(api = Build.VERSION_CODES.O)
