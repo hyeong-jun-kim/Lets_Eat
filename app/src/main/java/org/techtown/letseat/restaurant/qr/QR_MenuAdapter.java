@@ -16,11 +16,13 @@ import org.techtown.letseat.menu.MenuAdapter;
 import org.techtown.letseat.menu.OnMenuItemClickListner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHolder>implements OnMenuItemClickListner {
     ArrayList<QR_Menu> items = new ArrayList<QR_Menu>();
+    ArrayList<Integer> selectMenu = new ArrayList<>();
     OnMenuItemClickListner listner;
-    int sum = 0;
+    static public int sum = 0;
 
     @NonNull
     @Override
@@ -42,6 +44,12 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 int num = Integer.parseInt(viewHolder.amount.getText().toString());
+                // 장바구니에 메뉴 넣기
+                if(num == 0){
+                    if(!selectMenu.contains(position)){
+                        selectMenu.add(position);
+                    }
+                }
                 String price_string = viewHolder.price.getText().toString();
                 int price = Integer.parseInt(item.getPrice());
                 sum += price;
@@ -58,6 +66,9 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                    sum -= price;
                    qr_restActivity.sumTextView.setText(sum+"원");
                    viewHolder.amount.setText(""+(num-1));
+               }else{
+                   if(selectMenu.contains(position))
+                       selectMenu.remove(position);
                }
             }
         });
@@ -78,7 +89,10 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
     public QR_Menu getItem(int position){
         return items.get(position);
     }
-
+    // 장바구니 반환
+    public ArrayList<Integer> getSelectMenu(){
+        return selectMenu;
+    }
     @Override
     public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
         if(listner != null){
