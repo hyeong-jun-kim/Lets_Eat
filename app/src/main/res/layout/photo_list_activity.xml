@@ -39,81 +39,86 @@
             android:overScrollMode="never"
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:singleLine="true">
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/koreanfoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#한식"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chinesefoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#중식"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/japanesefoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#일식"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/westernfoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#양식"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/onemanfoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#혼밥"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/alcholfoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#술집"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/cafefoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#카페"/>
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/atmospherefeelsogoodfoodChip"
-                        style="@style/Widget.MaterialComponents.Chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#분위기좋은곳"/>
-                </com.google.android.material.chip.ChipGroup>
-            </HorizontalScrollView>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/photoRecyclerView"
-                    android:layout_width="402dp"
-                    android:layout_height="645dp"
-                    android:layout_marginTop="9dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/koreanfoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#한식"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chinesefoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#중식"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/japanesefoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#일식"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/westernfoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#양식"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/onemanfoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#혼밥"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/alcholfoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#술집"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/cafefoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#카페"/>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/atmospherefeelsogoodfoodChip"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#분위기좋은곳"/>
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/photoRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <FrameLayout
+                            android:id="@+id/photoFragment"
+                            android:layout_width="350dp"
+                            android:layout_height="451dp"
+                            android:layout_gravity="center_horizontal"/>
+                    </FrameLayout>
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</LinearLayout> <!-- <FrameLayout
-android:id="@+id/photoFragment"
-android:layout_width="349dp"
-android:layout_height="451dp"
-android:layout_marginStart="27dp"
-android:layout_marginTop="102dp"
-android:layout_marginEnd="26dp"
-android:layout_marginBottom="102dp">
-</FrameLayout>
+</LinearLayout>
