@@ -37,12 +37,15 @@ public class RestInfoMain extends AppCompatActivity {
     Res_info_fragment2 fragment2;
     res_info_fragment3 fragment3;
 
+
     private TabLayout tabs;
     private ViewPager viewPager;
     private double latitude, longitude;
-    String string, url, resId;
+    String string, url;
     TextView res_title;
     int data, resIdget;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
