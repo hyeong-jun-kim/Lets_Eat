@@ -2,15 +2,14 @@ package org.techtown.letseat.order;
 
 import android.graphics.Bitmap;
 
-public class Order_recycle_item {
+public class OrderItem {
 
     private Bitmap bitmap;
     private String menuName;
     private String price;
     private String resName;
 
-    public Order_recycle_item(Bitmap bitmap, String menuName, String price, String resName) {
-
+    public OrderItem(Bitmap bitmap, String menuName, String price, String resName) {
         this.bitmap = bitmap;
         this.menuName = menuName;
         this.price = price;

@@ -84,7 +84,7 @@ public class qr_restActivity extends AppCompatActivity {
         resImage = findViewById(R.id.qr_res_image);
         orderButton = findViewById(R.id.qr_order_button);
         recyclerView = findViewById(R.id.qr_recyclerView);
-        sumTextView.setText("0");
+        sumTextView.setText("0원");
         // 번들 가져오기
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -114,8 +114,8 @@ public class qr_restActivity extends AppCompatActivity {
                     }
                 });
                 myRef.setValue(num+1);
-
                 Toast.makeText(getApplicationContext(), "성공적으로 주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                QR_MenuAdapter.sum = 0;
                 finish();
             }
         });
@@ -139,6 +139,7 @@ public class qr_restActivity extends AppCompatActivity {
             postData.put("tableNumber",tableNumber);
             postData.put("sum",QR_MenuAdapter.sum);
             postData.put("user",userData);
+            postData.put("orderYN","Y");
             postData.put("restaurant",restData);
         }catch (JSONException e){
             e.printStackTrace();
@@ -177,9 +178,9 @@ public class qr_restActivity extends AppCompatActivity {
         String url = "http://125.132.62.150:8000/letseat/order/menu/register";
         JSONArray menusData = new JSONArray();
         JSONObject menuPostData = new JSONObject();
-        ArrayList<Integer> selectMenus = adapter.getSelectMenu();
+        ArrayList<String> selectMenus = adapter.getSelectMenu();
         for(int i = 0; i < selectMenus.size(); i++){
-            int idx = selectMenus.get(i);
+            int idx = Integer.parseInt(selectMenus.get(i));
             try {
                 JSONObject postData = new JSONObject();
                 JSONObject orderData = new JSONObject();

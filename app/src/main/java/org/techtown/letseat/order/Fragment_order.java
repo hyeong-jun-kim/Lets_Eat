@@ -44,8 +44,6 @@ public class Fragment_order extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
-
-
         Bundle extra = this.getArguments();
         if (extra != null) {
             resId = extra.getInt("resId");  //식당의 resId
@@ -56,14 +54,11 @@ public class Fragment_order extends Fragment {
         recyclerView.setAdapter(adapter);
         return view;
     }
-
     public void start(){
         //recycleView 초기화
-
         adapter.setItems(new Orderdata().getItems(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-
         //클릭 이벤트
         adapter.setItemClickListner(new OnReviewItemClickListner() {
             @Override
@@ -71,15 +66,10 @@ public class Fragment_order extends Fragment {
 
             }
         });
-
     }
-
     void get_Restaurant() {
         String url = "http://125.132.62.150:8000/letseat/store/menu/load?resId=1";
-
-
         JSONArray getData = new JSONArray();
-
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -91,25 +81,18 @@ public class Fragment_order extends Fragment {
                             String menuName, image, price;
                             int get_resId;
                             Bitmap bitmap;
-
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
-
                                 menuName = jsonObject.getString("name");
                                 image = jsonObject.getString("photo");
                                 bitmap = PhotoSave.StringToBitmap(image);
                                 price = jsonObject.getString("price");
-
                                     list.add(bitmap);
                                     list.add(menuName);
                                     list.add(price);
                                     list.add("resName");
-
-
                             }
-
                             start();
-
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
                             Log.d("예외", e.toString());

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_adapter2.ViewHolder> {
 
-    private ArrayList<Order_recycle_item> items = new ArrayList<>();
+    private ArrayList<OrderItem> items = new ArrayList<>();
 
     @NonNull
     @Override
@@ -30,7 +30,7 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
     @Override
     public void onBindViewHolder(@NonNull Order_recycle_adapter2.ViewHolder viewHolder, int position) {
 
-        Order_recycle_item item = items.get(position);
+        OrderItem item = items.get(position);
 
 
 
@@ -46,7 +46,7 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
         return items.size();
     }
 
-    public void setItems(ArrayList<Order_recycle_item> items) {
+    public void setItems(ArrayList<OrderItem> items) {
         this.items = items;
     }
 
