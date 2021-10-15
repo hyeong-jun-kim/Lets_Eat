@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_adapter2.ViewHolder> {
 
-    private ArrayList<OrderItem> items = new ArrayList<>();
+    private ArrayList<OrderItem2> items = new ArrayList<>();
 
     @NonNull
     @Override
@@ -30,14 +30,12 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
     @Override
     public void onBindViewHolder(@NonNull Order_recycle_adapter2.ViewHolder viewHolder, int position) {
 
-        OrderItem item = items.get(position);
-
-
-
+        OrderItem2 item = items.get(position);
         viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getResName());
         viewHolder.tvmenuName.setText(item.getMenuName());
         viewHolder.tvPrice.setText(item.getPrice());
+        viewHolder.tvOrder.setText(item.getOrderTime());
 
     }
 
@@ -46,7 +44,7 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
         return items.size();
     }
 
-    public void setItems(ArrayList<OrderItem> items) {
+    public void setItems(ArrayList<OrderItem2> items) {
         this.items = items;
     }
 
@@ -58,7 +56,6 @@ public class Order_recycle_adapter2 extends RecyclerView.Adapter<Order_recycle_a
 
         ViewHolder(View itemView) {
             super(itemView);
-
             ivRest = itemView.findViewById(R.id.iv_item_order_res);
             tvName = itemView.findViewById(R.id.tv_item_order_name);
             tvmenuName = itemView.findViewById(R.id.tv_item_order_menuName);
