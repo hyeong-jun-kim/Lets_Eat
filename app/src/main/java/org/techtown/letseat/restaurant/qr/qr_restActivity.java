@@ -82,7 +82,6 @@ public class qr_restActivity extends AppCompatActivity {
         res_title = findViewById(R.id.res_title);
         res_table = findViewById(R.id.res_tableNumber);
         resImage = findViewById(R.id.qr_res_image);
-        orderButton = findViewById(R.id.qr_order_button);
         recyclerView = findViewById(R.id.qr_recyclerView);
         sumTextView.setText("0원");
         // 번들 가져오기
@@ -204,6 +203,17 @@ public class qr_restActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        DatabaseReference myRef = database.getReference("ownerId_1");
+                        myRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                num = snapshot.getValue(Integer.class);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                        myRef.setValue(num+1);
                         Log.d("OrderMenu","성공");
                     }
                 },

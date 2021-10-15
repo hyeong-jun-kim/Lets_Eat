@@ -1,12 +1,16 @@
 package org.techtown.letseat;
 
-public class MainRecyclerData {
-    private String restNameTv;
-    private int restIv;
+import android.graphics.Bitmap;
 
-    public MainRecyclerData(String restNameTv, int restIv) {
+import java.util.ArrayList;
+
+public class MainRecyclerData extends ArrayList<MainRecyclerData> {
+    private String restNameTv;
+    private Bitmap bitmap;
+
+    public MainRecyclerData(String restNameTv, Bitmap bitmap) {
         this.restNameTv = restNameTv;
-        this.restIv = restIv;
+        this.bitmap = bitmap;
     }
 
     public String getRestNameTv() {
@@ -17,11 +21,8 @@ public class MainRecyclerData {
         this.restNameTv = restNameTv;
     }
 
-    public int getRestIv() {
-        return restIv;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setRestIv(int restIv) {
-        this.restIv = restIv;
-    }
 }

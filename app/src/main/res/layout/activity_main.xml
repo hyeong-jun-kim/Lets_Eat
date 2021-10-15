@@ -146,12 +146,20 @@
                 android:text="카카오 로그아웃"
                 android:textColor="#000000"
                 android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/ai_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인공지능 테스트" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="#C5EF93"
                 android:visibility="invisible"
                 android:textSize="20sp" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
         <com.google.android.material.bottomappbar.BottomAppBar
@@ -228,6 +236,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@+id/btnOrder"
                     app:layout_constraintTop_toTopOf="@+id/btnRest" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
