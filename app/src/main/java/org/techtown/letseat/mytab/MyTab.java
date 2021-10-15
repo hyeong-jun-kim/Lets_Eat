@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import org.techtown.letseat.R;
 
@@ -25,7 +26,7 @@ public class MyTab extends AppCompatActivity {
             }
         });
 
-        Button i_f_button = findViewById(R.id.information_fix_button);
+        ImageButton i_f_button = findViewById(R.id.information_fix_button);
         i_f_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

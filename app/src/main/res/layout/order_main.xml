@@ -7,25 +7,47 @@
     android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".order.OrderActivity">
-    <com.google.android.material.tabs.TabLayout
-        android:layout_height="wrap_content"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:background="#ED6868"
-        android:id="@+id/tab_layout">
-        <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/tabItem1"
-            android:text="주문내역"/>
-        <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/tabItem2"
-            android:text="준비중"/>
-    </com.google.android.material.tabs.TabLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/order_frame">
-    </FrameLayout>
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ffffff"
+                app:navigationIcon="@drawable/home"
+                app:navigationIconTint="#ED6868"
+                android:background="#ffffff"
+                app:menu="@menu/main">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ED6868"
+                    android:textSize="20dp"
+                    android:text="주문 내역"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/orderTab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:tabSelectedTextColor="#ED6868"
+                app:tabIndicatorColor="#ED6868"
+                tools:ignore="SpeakableTextPresentCheck">
+            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/orderView_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

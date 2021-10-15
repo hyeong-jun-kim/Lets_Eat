@@ -4,127 +4,190 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ED6868"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".mytab.MyTab">
-
-    <TextView
-        android:id="@+id/textView2"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="My"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="313dp"
-            android:layout_height="71dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/human_imoticon"
-            android:drawablePadding="20dp"
-            android:gravity="fill_vertical"
-            android:text="안태현"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/information_fix_button"
-            android:layout_width="wrap_content"
-            android:layout_height="81dp"
-            android:background="#ED6868"
-            android:text="내 정보 수정 >"
-            tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
-
-    <Button
-        android:id="@+id/waiting_status_button"
-        android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:background="#F4A288"
-        android:drawableRight="@drawable/finger"
-        android:gravity="center"
-        android:text="대기현황 보기"
-        android:textSize="36sp"
-        tools:ignore="TextContrastCheck" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#FFFFFF" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="192dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="210dp"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ffffff"
+                app:navigationIcon="@drawable/home"
+                app:navigationIconTint="#ED6868"
+                android:background="#ffffff"
+                app:menu="@menu/main">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ED6868"
+                    android:textSize="20dp"
+                    android:text="My"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ED6868"
-            android:drawableTop="@drawable/coupon"
-            android:padding="35dp"
-            android:text="쿠폰"
-            android:textSize="24sp" />
-
-        <View
-            android:layout_width="4dp"
-            android:layout_height="200dp"
-            android:background="#FFFFFF" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="210dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="#ED6868"
-            android:drawableTop="@drawable/shop"
-            android:padding="25dp"
-            android:text="많이 찾은 가게"
-            android:textSize="24sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#FFFFFF" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/mytab_border"
-        android:text="결제 수단 등록"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/mytab_border"
-        android:text="환경설정"
-        android:textSize="20sp" />
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/image1"
+                            android:id="@+id/userImageIv"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="아이디"
+                            android:textSize="20dp"
+                            android:fontFamily="@font/notosansregular"
+                            android:layout_gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:textColor="#000000"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/textView"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|right">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff"
+                                android:src="@drawable/right"
+                                android:id="@+id/information_fix_button"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/waiting_status_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff"
+                            android:drawableRight="@drawable/right"
+                            android:gravity="center"
+                            android:text="대기현황 보기"
+                            android:textSize="25dp"
+                            tools:ignore="TextContrastCheck" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff"
+                                android:src="@drawable/star2"
+                                app:tint="#ED6868"
+                                android:id="@+id/favoriteBtn"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/notosansregular"
+                                android:includeFontPadding="false"
+                                android:textColor="#000000"
+                                android:textSize="13dp"
+                                android:text="찜 목록"/>
+                        </LinearLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/darker_gray" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff"
+                                android:src="@drawable/reviewmanage"
+                                app:tint="#ED6868"
+                                android:id="@+id/reviewManageBtn"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/notosansregular"
+                                android:includeFontPadding="false"
+                                android:textColor="#000000"
+                                android:textSize="13dp"
+                                android:text="리뷰 관리"/>
+                        </LinearLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/darker_gray" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff"
+                                android:src="@drawable/setting"
+                                android:id="@+id/settingBtn"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/notosansregular"
+                                android:includeFontPadding="false"
+                                android:textColor="#000000"
+                                android:textSize="13dp"
+                                android:text="설정"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
