@@ -99,18 +99,6 @@ public class qr_restActivity extends AppCompatActivity {
                 requestOrderList();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-                DatabaseReference myRef = database.getReference("ownerId_1");
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        num = snapshot.getValue(Integer.class);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                myRef.setValue(num+1);
-
                 Toast.makeText(getApplicationContext(), "성공적으로 주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -197,6 +185,17 @@ public class qr_restActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        DatabaseReference myRef = database.getReference("ownerId_1");
+                        myRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                num = snapshot.getValue(Integer.class);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                        myRef.setValue(num+1);
                         Log.d("OrderMenu","성공");
                     }
                 },
