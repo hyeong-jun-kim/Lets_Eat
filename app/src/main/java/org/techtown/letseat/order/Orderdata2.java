@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Orderdata2 {
 
-    ArrayList<OrderItem> items = new ArrayList<>();
+    ArrayList<OrderItem2> items = new ArrayList<>();
 
-    public ArrayList<OrderItem> getItems() {
+    public ArrayList<OrderItem2> getItems() {
 
 
 

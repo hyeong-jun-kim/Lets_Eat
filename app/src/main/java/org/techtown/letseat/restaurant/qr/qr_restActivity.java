@@ -83,6 +83,7 @@ public class qr_restActivity extends AppCompatActivity {
         res_table = findViewById(R.id.res_tableNumber);
         resImage = findViewById(R.id.qr_res_image);
         recyclerView = findViewById(R.id.qr_recyclerView);
+        orderButton = findViewById(R.id.qr_order_button);
         sumTextView.setText("0원");
         // 번들 가져오기
         Intent intent = getIntent();
