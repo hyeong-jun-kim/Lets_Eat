@@ -1,63 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_item_res_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center|top">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_item_res_parent"
-        android:layout_width="390dp"
-        android:layout_height="245dp"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="15dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
-
-        <ImageView
-            android:id="@+id/iv_item_res"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|top"
-            android:scaleType="centerCrop" />
-
+    android:layout_margin="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:alpha="0.6"
-            android:background="@android:color/black"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp">
-
-            <TextView
-                android:id="@+id/tv_item_food_genre"
-                android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            android:padding="10dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_item_res"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/image1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Food Genre"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/tv_item_res_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:text="Name"
-                android:textColor="@android:color/white"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/tv_item_res_adress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Res Address"
-                android:textColor="@android:color/white" />
+                android:gravity="center|left"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_item_food_genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="가게 종류"
+                    android:fontFamily="@font/notosansregular"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="가게이름"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#000000"
+                    android:id="@+id/tv_item_res_name"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+                    <RatingBar
+                        style="?android:ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:isIndicator="false"
+                        android:max="5"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:stepSize="0.5"
+                        android:progressTint="#ED6868"
+                        android:id="@+id/ratingBar"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosansregular"
+                        android:text="( 4 )"
+                        android:textColor="#000000"
+                        android:textSize="8dp"
+                        android:id="@+id/ratingBarTv"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

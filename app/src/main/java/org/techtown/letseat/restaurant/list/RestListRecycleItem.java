@@ -7,14 +7,12 @@ public class RestListRecycleItem{
     private Bitmap bitmap;
     private String genre;
     private String name;
-    private String adress;
 
-    public RestListRecycleItem(Bitmap bitmap, String genre, String name, String adress) {
+    public RestListRecycleItem(Bitmap bitmap, String genre, String name) {
 
         this.bitmap = bitmap;
         this.genre = genre;
         this.name = name;
-        this.adress = adress;
 
     }
 
@@ -30,7 +28,4 @@ public class RestListRecycleItem{
         return name;
     }
 
-    public String getAdress() {
-        return adress;
-    }
 }

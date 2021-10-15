@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
@@ -35,12 +36,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.Review.ReviewActivity;
@@ -52,11 +55,13 @@ import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.order.Orderdata;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.PhotoList;
+import org.techtown.letseat.restaurant.info.RestInfoMain;
 import org.techtown.letseat.restaurant.list.RestListMain;
 import org.techtown.letseat.restaurant.qr.qr_restActivity;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.ImageSliderAdapter;
+import org.techtown.letseat.util.PhotoSave;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,9 +77,12 @@ public class MainActivity extends AppCompatActivity {
     private double latitude;
     private double longitude;
     private RecyclerView recyclerView;
-    private MainRecyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<MainRecyclerData> list = new ArrayList<>();
+    int resId;
+    ArrayList<Integer> resIdList = new ArrayList<>();
+    MainRecyclerAdapter adapter = new MainRecyclerAdapter();
+    ArrayList<MainRecyclerData> items = new ArrayList<>();
 
 
 
@@ -102,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
+
+
         Button ai_button = findViewById(R.id.ai_test);
         FloatingActionButton btnQR = findViewById(R.id.btnQR);
         ImageButton btnRest = findViewById(R.id.btnRest);
@@ -114,13 +124,25 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.mainRestRecycler);
         recyclerView.setHasFixedSize(true);
-        adapter = new MainRecyclerAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHorizontalScrollBarEnabled(false);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new MainRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
+                int rId = resIdList.get(pos);
+                intent.putExtra("send_resId",rId);
+                intent.putExtra("text","All");
+                startActivity(intent);
+            }
+        });
 
-        prepareData();
+        gpsTracker = new GpsTracker(MainActivity.this);
+        latitude = gpsTracker.getLatitude();
+        longitude = gpsTracker.getLongitude();
+        get_ResData();
 
         sliderViewPager.setOffscreenPageLimit(1);
         sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
@@ -412,11 +434,72 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    private void prepareData(){
-        list.clear();
-        list.add(new MainRecyclerData("하오탕",R.drawable.image1));
-        list.add(new MainRecyclerData("하오탕",R.drawable.image2));
-        list.add(new MainRecyclerData("하오탕",R.drawable.image3));
+    private void get_ResData(){
+        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+
+
+        JSONArray getData = new JSONArray();
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                getData,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            String resName,location,image;
+                            Bitmap bitmap;
+
+                            for(int i = 0; i < response.length(); i++){
+                                JSONObject jsonObject = (JSONObject) response.get(i);
+
+                                resName = jsonObject.getString("resName");
+                                location = jsonObject.getString("location");
+                                image = jsonObject.getString("image");
+                                bitmap = PhotoSave.StringToBitmap(image);
+                                resId = jsonObject.getInt("resId");
+
+
+                                String searchText = location;
+                                Geocoder geocoder = new Geocoder(getBaseContext());
+                                List<Address> addresses = null;
+                                try {
+                                    addresses = geocoder.getFromLocationName(searchText, 3);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Address address = addresses.get(0);
+                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
+                                double lat = place.latitude;
+                                double lon = place.longitude;
+                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
+                                    MainRecyclerData item = new MainRecyclerData(resName,bitmap);
+                                    items.add(item);
+                                    resIdList.add(resId);
+                                }
+                                adapter.setItems(items);
+                                adapter.notifyDataSetChanged();
+                            }
+
+
+                            Log.d("응답", response.toString());
+                        } catch (JSONException e) {
+                            Log.d("예외", e.toString());
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("에러", error.toString());
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
     }
 
 
