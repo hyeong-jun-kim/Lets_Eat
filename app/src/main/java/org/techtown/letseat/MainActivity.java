@@ -33,7 +33,6 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -47,6 +46,7 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.Review.ReviewActivity;
 import org.techtown.letseat.login.Login;
 import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.map.Map_MainActivity;
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        Button ai_button = findViewById(R.id.ai_test);
         FloatingActionButton btnQR = findViewById(R.id.btnQR);
         ImageButton btnRest = findViewById(R.id.btnRest);
         ImageButton btnPhoto = findViewById(R.id.btnPhoto);
@@ -255,6 +256,15 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }
+        });
+
+        // ai 테스트
+        ai_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -58,16 +58,6 @@ public class res_info_fragment1 extends Fragment {
         /*adapter.setItemClickListner(new OnMenuItemClickListner() {
             @Override
             public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
-                String price = priceList.get(position);
-                checkBox = holder.itemView.findViewById(R.id.checkBox);
-                if(checkBox.isChecked()){
-                    checkBox.setChecked(false);
-                    sum -= Integer.parseInt(price);
-                }
-                else {
-                    checkBox.setChecked(true);
-                    sum += Integer.parseInt(price);
-                }
             }
         });*/
 
