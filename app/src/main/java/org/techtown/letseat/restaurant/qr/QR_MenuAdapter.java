@@ -37,6 +37,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         // BindView 초기화
         QR_Menu item = items.get(position);
+        viewHolder.imageView.setImageBitmap(item.getBitmap());
         viewHolder.name.setText(item.getName());
         viewHolder.price.setText(item.getPrice() + "원");
         viewHolder.amount.setText("0");
