@@ -65,7 +65,6 @@ import org.techtown.letseat.util.PhotoSave;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -84,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> resIdList = new ArrayList<>();
     MainRecyclerAdapter adapter = new MainRecyclerAdapter();
     ArrayList<MainRecyclerData> items = new ArrayList<>();
-    ArrayList<Double> differList = new ArrayList<>();
-    ArrayList<MainRecyclerData> arrayList = new ArrayList<>();
+
 
 
     private GpsTracker gpsTracker;
@@ -443,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
                             String resName,location,image;
                             Bitmap bitmap;
 
-                            for(int i = 0; i < response.length(); i++) {
+                            for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
 
                                 resName = jsonObject.getString("resName");
@@ -465,27 +463,14 @@ public class MainActivity extends AppCompatActivity {
                                 LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
                                 double lat = place.latitude;
                                 double lon = place.longitude;
-                                if ((latitude < lat + 0.05 && lat - 0.05 < latitude) || (longitude < lon + 0.07 && lon - 0.07 < longitude)) {
-                                    Double differ = Math.abs(latitude - lat) + Math.abs(longitude - lon);    //현재위치와의 거리차이
-                                    MainRecyclerData item = new MainRecyclerData(differ,resName, bitmap);
+                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
+                                    MainRecyclerData item = new MainRecyclerData(resName,bitmap);
                                     items.add(item);
                                     resIdList.add(resId);
-                                    differList.add(differ);
                                 }
+                                adapter.setItems(items);
+                                adapter.notifyDataSetChanged();
                             }
-
-                            Collections.sort(differList);   //거리기준 오름차순 정렬
-                            for(int p = 0; p < differList.size(); p++) {
-                                for(int q = 0; q < items.size(); q++){
-                                    if(differList.get(p).equals(items.get(q).getDiffer())){
-                                        arrayList.add(items.get(q));        // 거리기준으로 새로만들어진 arraylist
-                                    }
-                                }
-                            }
-                                        adapter.setItems(arrayList);
-                                        adapter.notifyDataSetChanged();
-
-
 
 
                             Log.d("응답", response.toString());

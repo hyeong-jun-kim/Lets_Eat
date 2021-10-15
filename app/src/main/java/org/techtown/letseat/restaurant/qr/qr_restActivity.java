@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -36,7 +35,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 
@@ -62,10 +60,8 @@ import java.util.ArrayList;
 
 public class qr_restActivity extends AppCompatActivity {
 
-
-    DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private int num = 0;
+    private int num;
     private ArrayList<QR_Menu> list = new ArrayList<>();
     private ArrayList<Integer> menus_id = new ArrayList<>();
     private ImageView resImage;
@@ -107,6 +103,17 @@ public class qr_restActivity extends AppCompatActivity {
                 requestOrderList();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                DatabaseReference myRef = database.getReference("ownerId_1");
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        num = snapshot.getValue(Integer.class);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+                myRef.setValue(num+1);
                 Toast.makeText(getApplicationContext(), "성공적으로 주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 QR_MenuAdapter.sum = 0;
                 finish();
@@ -197,9 +204,17 @@ public class qr_restActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        DatabaseReference myRef = mRoootRef.child("ownerId_"+resId);
-                        myRef.setValue(orderId);
-
+                        DatabaseReference myRef = database.getReference("ownerId_1");
+                        myRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                num = snapshot.getValue(Integer.class);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                        myRef.setValue(num+1);
                         Log.d("OrderMenu","성공");
                     }
                 },
