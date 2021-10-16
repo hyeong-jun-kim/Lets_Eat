@@ -98,7 +98,6 @@ public class RestList_onemanFood extends AppCompatActivity {
                                 list.add(bitmap);
                                 list.add(restype);
                                 list.add(resName);
-                                list.add(location);
 
 
                             }
