@@ -59,6 +59,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class qr_restActivity extends AppCompatActivity {
 
@@ -74,7 +75,7 @@ public class qr_restActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private View view;
     private AppCompatButton orderButton;
-    TextView res_title, res_table;
+    TextView res_title, res_table, requestTextView;
     public static TextView sumTextView;
     public static ArrayList<Integer> selectMenus = new ArrayList<>();
     int data;
@@ -88,6 +89,7 @@ public class qr_restActivity extends AppCompatActivity {
         resImage = findViewById(R.id.qr_res_image);
         recyclerView = findViewById(R.id.qr_recyclerView);
         orderButton = findViewById(R.id.qr_order_button);
+        requestTextView = findViewById(R.id.requestTextView);
         sumTextView.setText("0원");
         // 번들 가져오기
         Intent intent = getIntent();
@@ -132,6 +134,7 @@ public class qr_restActivity extends AppCompatActivity {
         LocalDateTime now = LocalDateTime.now();
         String orderTime = now.format(DateTimeFormatter.ofPattern("HH시 mm분 ss초"));
         String url = "http://125.132.62.150:8000/letseat/order/list/register";
+        String request_string = requestTextView.getText().toString();
         JSONObject postData = new JSONObject();
         JSONObject restData = new JSONObject();
         JSONObject userData = new JSONObject();
@@ -144,6 +147,7 @@ public class qr_restActivity extends AppCompatActivity {
             postData.put("sum",QR_MenuAdapter.sum);
             postData.put("user",userData);
             postData.put("orderYN","Y");
+            postData.put("request", request_string);
             postData.put("restaurant",restData);
         }catch (JSONException e){
             e.printStackTrace();
@@ -157,7 +161,7 @@ public class qr_restActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             orderId = response.getInt("orderId");
-                            requestMenuList(1);
+                            requestMenuList();
                             } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -178,11 +182,12 @@ public class qr_restActivity extends AppCompatActivity {
         AppHelper.requestQueue.add(request);
     }
     // 메뉴 리스트 보내기
-    void requestMenuList(int amount){
+    void requestMenuList(){
         String url = "http://125.132.62.150:8000/letseat/order/menu/register";
         JSONArray menusData = new JSONArray();
         JSONObject menuPostData = new JSONObject();
         ArrayList<String> selectMenus = adapter.getSelectMenu();
+        HashMap<Integer, Integer> amount_map = adapter.getAmount_map();
         for(int i = 0; i < selectMenus.size(); i++){
             int idx = Integer.parseInt(selectMenus.get(i));
             try {
@@ -192,7 +197,7 @@ public class qr_restActivity extends AppCompatActivity {
                 menuData.put("resMenuId",menus_id.get(idx));
                 orderData.put("orderId", orderId);
                 postData.put("orderList",orderData);
-                postData.put("amount",amount);
+                postData.put("amount",amount_map.get(idx));
                 postData.put("resMenu",menuData);
                 menusData.put(postData);
                 menuPostData.put("orderMenus", menusData);
