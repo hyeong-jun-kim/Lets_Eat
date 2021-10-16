@@ -22,7 +22,7 @@ public class RestListData {
 
         for(int i = 0; i < list.size()/3; i++){
             rest[i+1] = new RestListRecycleItem((Bitmap) list.get(p),
-                    list.get(p+1).toString(), (String) list.get(p+2) );
+                    list.get(p+1).toString(), (String) list.get(p+2));
             items.add(rest[i+1]);
             p += 3;
         }

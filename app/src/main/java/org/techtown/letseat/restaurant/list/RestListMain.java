@@ -147,6 +147,9 @@ public class RestListMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RestList_onemanFood.class);
+                intent.putExtra("text","westernFood");
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -230,7 +233,6 @@ public class RestListMain extends AppCompatActivity {
                                     list.add(bitmap);
                                     list.add(restype);
                                     list.add(resName);
-                                    list.add(location);
                                     resIdList.add(resId);
                                 }
                             }

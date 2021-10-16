@@ -13,7 +13,6 @@ public class RestListRecycleItem{
         this.bitmap = bitmap;
         this.genre = genre;
         this.name = name;
-
     }
 
     public Bitmap getBitmap() {
@@ -27,5 +26,6 @@ public class RestListRecycleItem{
     public String getName() {
         return name;
     }
+
 
 }
