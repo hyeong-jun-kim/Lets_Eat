@@ -145,8 +145,7 @@ public class ReviewActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(temp) == false) {
-
-            ActivityCompat.requestPermissions(this, temp.trim().split(""), 1);
+            ActivityCompat.requestPermissions(this, temp.trim().split(" "), 1);
         } else {
             Toast.makeText(this, "권한을 모두 허용", Toast.LENGTH_SHORT).show();
         }
