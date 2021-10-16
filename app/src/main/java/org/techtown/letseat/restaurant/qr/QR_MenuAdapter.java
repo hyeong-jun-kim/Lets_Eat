@@ -21,6 +21,8 @@ import java.util.HashMap;
 public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHolder> implements OnMenuItemClickListner {
     ArrayList<QR_Menu> items = new ArrayList<QR_Menu>();
     ArrayList<String> selectMenu = new ArrayList<>();
+    // 음식 갯수 hashmap
+    HashMap<Integer, Integer> amount_map = new HashMap<>();
     OnMenuItemClickListner listner;
     static public int sum = 0;
 
@@ -55,6 +57,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                 sum += price;
                 qr_restActivity.sumTextView.setText(sum + "원");
                 viewHolder.amount.setText("" + (num + 1));
+                amount_map.put(position, num+1);
             }
         });
         viewHolder.downButton.setOnClickListener(new View.OnClickListener() {
@@ -65,17 +68,22 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                     if (num - 1 == 0) {
                         if (selectMenu.contains(""+position))
                             selectMenu.remove(position+"");
+                        if(amount_map.containsKey(position)){
+                            amount_map.remove(position);
+                        }
                     }
                     int price = Integer.parseInt(item.getPrice());
                     sum -= price;
                     qr_restActivity.sumTextView.setText(sum + "원");
                     viewHolder.amount.setText("" + (num - 1));
+                    amount_map.put(position, num-1);
+                }else{
+
                 }
             }
         });
 
     }
-
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
@@ -103,6 +111,9 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
     public ArrayList<String> getSelectMenu() {
         return selectMenu;
     }
+
+    // amount hashMap 반환
+    public HashMap<Integer, Integer> getAmount_map(){return amount_map;}
 
     @Override
     public void OnItemClick(MenuAdapter.ViewHolder holder, View view, int position) {
@@ -135,7 +146,5 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                 }
             });
         }
-
-
     }
 }
