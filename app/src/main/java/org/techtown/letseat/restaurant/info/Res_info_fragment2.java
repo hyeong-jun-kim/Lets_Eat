@@ -166,6 +166,9 @@ public class Res_info_fragment2 extends Fragment implements OnMapReadyCallback {
         else if(text.equals("westernFood")){
             url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
         }
+        else if(text.equals("onemanFood")){
+            url = "http://125.132.62.150:8000/letseat/store/find/aloneAble";
+        }
         else if(text.equals("All")){
             url = "http://125.132.62.150:8000/letseat/store/findAll";
         }

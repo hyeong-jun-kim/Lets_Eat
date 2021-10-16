@@ -75,7 +75,6 @@ public class RestList_chinaFood extends AppCompatActivity {
 
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
-                intent.putExtra("aP",adapterPosition);
                 intent.putExtra("text","chineseFood");
                 intent.putExtra("send_resId",send_resId);
                 intent.putExtra("latitude",latitude);

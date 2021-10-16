@@ -147,6 +147,9 @@ public class RestListMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RestList_onemanFood.class);
+                intent.putExtra("text","westernFood");
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });

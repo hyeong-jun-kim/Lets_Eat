@@ -40,10 +40,9 @@ public class RestInfoMain extends AppCompatActivity {
 
     private TabLayout tabs;
     private ViewPager viewPager;
-    private double latitude, longitude;
     String string, url;
     TextView res_title;
-    int data, resIdget;
+    int resIdget;
 
 
 
@@ -84,13 +83,10 @@ public class RestInfoMain extends AppCompatActivity {
 
         resIdget = i.getIntExtra("send_resId",0);
 
-        latitude = i.getDoubleExtra("latitude",0);
-        longitude = i.getDoubleExtra("longitude",0);
 
         res_title = findViewById(R.id.res_title);
 
         Bundle extras = getIntent().getExtras();
-        data = extras.getInt("aP");     //aP = adapterPosition
         Log.d("ds","ds");
 
 
@@ -120,6 +116,12 @@ public class RestInfoMain extends AppCompatActivity {
         else if(string.equals("westernFood")){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text","westernFood");
+            bundle1.putInt("send_resId",resIdget);
+            fragment2.setArguments(bundle1);
+        }
+        else if(string.equals("onemanFood")){
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("text","onemanFood");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
         }
