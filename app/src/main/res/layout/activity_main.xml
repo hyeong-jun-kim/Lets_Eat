@@ -114,52 +114,12 @@
                         android:scrollbars="horizontal"/>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/pay_test_button"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                android:background="#F4D7D7"
-                android:text="결제 테스트"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-            <TextView
-                android:id="@+id/textview_address"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="TextView"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/map_test"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="#8AB1E1"
-                android:text="네이버 지도 테스트"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/kakao_logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="#C5EF93"
-                android:text="카카오 로그아웃"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/ai_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="인공지능 테스트" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="#C5EF93"
                 android:visibility="invisible"
                 android:textSize="20sp" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
         <com.google.android.material.bottomappbar.BottomAppBar

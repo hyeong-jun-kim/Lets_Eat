@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Button ai_button = findViewById(R.id.ai_test);
         FloatingActionButton btnQR = findViewById(R.id.btnQR);
         ImageButton btnRest = findViewById(R.id.btnRest);
         ImageButton btnPhoto = findViewById(R.id.btnPhoto);
@@ -228,45 +227,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button pay_test_button = findViewById(R.id.pay_test_button);
-        pay_test_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Kakao_pay_test.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
-        //카카오 로그아웃
-        Button kakao_logout_button = findViewById(R.id.kakao_logout_button);
-        kakao_logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "정상적으로 로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
-
-                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-                    @Override
-                    public void onCompleteLogout() {
-                        Intent intent = new Intent(MainActivity.this, Login.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                    }
-                });
-            }
-        });
-
-        // ai 테스트
-        ai_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), ReviewActivity.class);
                 startActivity(intent);
             }
         });
