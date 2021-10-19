@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".WaitingActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ED6868"
+                app:menu="@menu/menumain"
+                app:navigationIcon="@drawable/home"
+                app:titleTextColor="#ffffff">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:text="Let's Eat"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ImageView
+        android:id="@+id/waiting_res_image"
+        android:layout_width="match_parent"
+        android:layout_height="202dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/image2" />
+
+    <TextView
+        android:id="@+id/waiting_res_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:fontFamily="@font/notosansbold"
+        android:gravity="center"
+        android:text="식당이름"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/waiting_res_tableNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:background="#FFFFFF"
+        android:fontFamily="@font/notosansbold"
+        android:gravity="center"
+        android:text="식당 설명"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="#E1DFDF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/waiting_queue_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="105dp"
+            android:fontFamily="@font/notosansbold"
+            android:text="현재 대기열 :"
+            android:textColor="#FF6F68"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/waiting_queue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/notosansbold"
+            android:text="2"
+            android:textColor="#FF6F68"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/waiting_queue_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosansbold"
+            android:text="팀"
+            android:textColor="#FF6F68"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/waiting_person_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/notosansbold"
+            android:text="인원 수 :"
+            android:textColor="#FF6F68"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/round_circle3"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/minus_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:background="#ED6868"
+                android:src="@drawable/minus" />
+
+            <TextView
+                android:id="@+id/person_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="9dp"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/plus_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:background="#ED6868"
+                android:src="@drawable/add3" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/waiting_queue_text4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="@font/notosansbold"
+        android:gravity="center"
+        android:text="입장 순서가 되면"
+        android:textColor="#FF6F68"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/waiting_queue_text5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-30dp"
+        android:fontFamily="@font/notosansbold"
+        android:gravity="center"
+        android:text="알림을 보내드립니다."
+        android:textColor="#FF6F68"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/waiting_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/round_circle3"
+            android:fontFamily="@font/notosansbold"
+            android:includeFontPadding="false"
+            android:text="등록"
+            android:textColor="#FFFFFF" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/waiting_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/round_circle3"
+            android:fontFamily="@font/notosansbold"
+            android:includeFontPadding="false"
+            android:text="취소"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

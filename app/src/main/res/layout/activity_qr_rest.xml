@@ -54,7 +54,7 @@
                         android:background="#FFFFFF"
                         android:fontFamily="@font/notosansbold"
                         android:gravity="center"
-                        android:text="1번 테이블"
+                        android:text="식당 설명"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="15sp" />
