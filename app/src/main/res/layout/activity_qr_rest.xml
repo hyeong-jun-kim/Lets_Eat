@@ -54,7 +54,7 @@
                         android:background="#FFFFFF"
                         android:fontFamily="@font/notosansbold"
                         android:gravity="center"
-                        android:text="1번 테이블"
+                        android:text="식당 설명"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="15sp" />
@@ -112,15 +112,17 @@
                             android:textSize="16sp"
                             android:fontFamily="@font/notosansregular"
                             android:includeFontPadding="false"/>
+
                         <EditText
+                            android:id="@+id/requestTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
                             android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/notosansregular"
-                            android:includeFontPadding="false"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatButton

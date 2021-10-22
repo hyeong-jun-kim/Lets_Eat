@@ -129,7 +129,6 @@ public class RestList_japanFood extends AppCompatActivity {
                                     list.add(bitmap);
                                     list.add(restype);
                                     list.add(resName);
-                                    list.add(location);
                                     resIdList.add(resId);
                                 }
                             }
