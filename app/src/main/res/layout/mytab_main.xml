@@ -46,6 +46,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
                     android:layout_margin="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -60,7 +62,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="아이디"
+                            android:text="tjaudwlscjswo"
                             android:textSize="20dp"
                             android:fontFamily="@font/notosansregular"
                             android:layout_gravity="center_vertical"
@@ -84,6 +86,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
                     android:layout_margin="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -113,6 +117,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
                     android:layout_margin="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
