@@ -104,6 +104,8 @@
         <activity
             android:name=".login.Login"
             android:exported="true" />
+        <activity android:name=".waiting.WaitingActivity"
+            android:exported="true"/>
         <activity
             android:name=".map.Map_MainActivity"
             android:exported="true" />
