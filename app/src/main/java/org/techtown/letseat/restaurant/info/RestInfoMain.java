@@ -77,6 +77,9 @@ public class RestInfoMain extends AppCompatActivity {
         else if(i.getStringExtra("text").equals("westernFood")){
             string = i.getStringExtra("text");      ////string.value = "koreanFood"
         }
+        else if(i.getStringExtra("text").equals("onemanFood")){
+            string = i.getStringExtra("text");      ////string.value = "koreanFood"
+        }
         else if(i.getStringExtra("text")!=null){
             string = i.getStringExtra("text");
         }
@@ -178,6 +181,9 @@ public class RestInfoMain extends AppCompatActivity {
         }
         else if(string.equals("westernFood")){
             url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
+        }
+        else if(string.equals("onemanFood")){
+            url = "http://125.132.62.150:8000/letseat/store/find/aloneAble";
         }
         else if(string.equals("All")){
             url = "http://125.132.62.150:8000/letseat/store/findAll";

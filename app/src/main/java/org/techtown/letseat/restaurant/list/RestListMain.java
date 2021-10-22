@@ -76,7 +76,7 @@ public class RestListMain extends AppCompatActivity {
         Intent intent = getIntent();
         latitude = intent.getDoubleExtra("latitude",0);
         longitude = intent.getDoubleExtra("longitude",0);
-
+        get_Restaurant();
 
 
         /* search_restaurant = findViewById(R.id.search_restaurant);
@@ -154,7 +154,7 @@ public class RestListMain extends AppCompatActivity {
             }
         });
 
-        get_Restaurant();
+
     }
 
     public void start(){
@@ -209,19 +209,15 @@ public class RestListMain extends AppCompatActivity {
 
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
-                                restype = jsonObject.getString("restype");
-                                resName = jsonObject.getString("resName");
+
                                 location = jsonObject.getString("location");
-                                image = jsonObject.getString("image");
-                                bitmap = PhotoSave.StringToBitmap(image);
-                                resId = jsonObject.getInt("resId");
 
 
-                                String searchText = location;
+
                                 Geocoder geocoder = new Geocoder(getBaseContext());
                                 List<Address> addresses = null;
                                 try {
-                                    addresses = geocoder.getFromLocationName(searchText, 3);
+                                    addresses = geocoder.getFromLocationName(location, 3);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -230,6 +226,12 @@ public class RestListMain extends AppCompatActivity {
                                 double lat = place.latitude;
                                 double lon = place.longitude;
                                 if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
+                                    restype = jsonObject.getString("restype");
+                                    resName = jsonObject.getString("resName");
+                                    image = jsonObject.getString("image");
+                                    bitmap = PhotoSave.StringToBitmap(image);
+                                    resId = jsonObject.getInt("resId");
+
                                     list.add(bitmap);
                                     list.add(restype);
                                     list.add(resName);
