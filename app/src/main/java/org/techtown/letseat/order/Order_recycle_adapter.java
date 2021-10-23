@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -69,7 +70,7 @@ implements OnReviewItemClickListner{
 
         ImageView ivRest;
         TextView tvName, tvmenuName, tvPrice, tvOrder;
-        Button btnReview;
+        ImageButton btnReview;
 
         ViewHolder(View itemView) {
             super(itemView);
