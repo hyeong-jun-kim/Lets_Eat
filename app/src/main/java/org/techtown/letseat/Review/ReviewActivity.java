@@ -364,18 +364,6 @@ public class ReviewActivity extends AppCompatActivity {
         }
     }
 
-    public void review_check(){
-        if(edit_review_text.getText().toString() == null){
-            Toast.makeText(this, "리뷰를 작성해주세요", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            review_text = edit_review_text.getText().toString();
-            menu_label = menu_name.getText().toString();
-            accuracy_score = accuracy.getText().toString();
-            String star_score = String.valueOf(review_grade.getRating());
-        }
-    }
-
     public void registerReview(){
         String url = "http://125.132.62.150:8000/letseat/review/register";
         String menuName = menu_name.getText().toString();
