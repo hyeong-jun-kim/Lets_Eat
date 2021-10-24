@@ -53,15 +53,6 @@
         <activity
             android:name=".Review.ReviewActivity"
             android:exported="true" />
-        <activity
-            android:name=".Review.ReviewImage1"
-            android:exported="true" />
-        <activity
-            android:name=".Review.ReviewImage2"
-            android:exported="true" />
-        <activity
-            android:name=".Review.ReviewImage3"
-            android:exported="true" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

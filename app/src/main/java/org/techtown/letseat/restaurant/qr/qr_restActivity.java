@@ -76,6 +76,7 @@ public class qr_restActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private View view;
     private AppCompatButton orderButton;
+    private String title;
     TextView res_title, res_table, requestTextView;
     public static TextView sumTextView;
     public static ArrayList<Integer> selectMenus = new ArrayList<>();
@@ -142,11 +143,13 @@ public class qr_restActivity extends AppCompatActivity {
         int userId = MainActivity.userId;
         try {
             restData.put("resId", resId);
+            restData.put("resName",resId);
             userData.put("userId",userId);
             postData.put("orderTime",orderTime);
             postData.put("tableNumber",tableNumber);
             postData.put("sum",QR_MenuAdapter.sum);
             postData.put("user",userData);
+            postData.put("servingYN","N");
             postData.put("checkYN","N");
             postData.put("orderYN","Y");
             postData.put("request", request_string);
@@ -217,7 +220,6 @@ public class qr_restActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         DatabaseReference myRef = mRoootRef.child("ownerId_"+resId);
                         myRef.setValue(orderId);
-
                         Log.d("OrderMenu","성공");
                     }
                 },
@@ -244,7 +246,6 @@ public class qr_restActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Bitmap bitmap = null;
-                        String title = null;
                         String image = null;
                         try {
                             title = response.getString("resName");

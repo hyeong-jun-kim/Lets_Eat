@@ -55,18 +55,20 @@
                     android:layout_marginRight="16dp"
                     android:text="Name"
                     android:textColor="@android:color/white"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
                 <TextView
                     android:id="@+id/tv_item_order_menuName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Menu Name"
+                    android:textSize="13dp"
                     android:textColor="@android:color/white" />
                 <TextView
                     android:id="@+id/tv_item_order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="price"
+                    android:textSize="13dp"
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </LinearLayout>

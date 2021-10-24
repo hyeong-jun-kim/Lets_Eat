@@ -5,57 +5,47 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.Review.ReviewActivity;
-import org.techtown.letseat.login.Login;
-import org.techtown.letseat.login.RegisterActivity;
-import org.techtown.letseat.map.Map_MainActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
-import org.techtown.letseat.order.Orderdata;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
+import org.techtown.letseat.photo.PhotoData;
 import org.techtown.letseat.photo.PhotoList;
+import org.techtown.letseat.photo.PhotoRecyclerAdapter;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
 import org.techtown.letseat.restaurant.list.RestListMain;
 import org.techtown.letseat.restaurant.qr.qr_restActivity;
@@ -66,6 +56,7 @@ import org.techtown.letseat.util.PhotoSave;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -87,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<MainRecyclerData> items = new ArrayList<>();
     ArrayList<Double> differList = new ArrayList<>();
     ArrayList<MainRecyclerData> arrayList = new ArrayList<>();
+    private PhotoRecyclerAdapter adapter2;
+    List<Integer> listResId = Arrays.asList(R.drawable.image1, R.drawable.image2, R.drawable.image3,
+            R.drawable.menuimg1, R.drawable.menuimg2, R.drawable.menuimg3);
 
 
     private GpsTracker gpsTracker;
@@ -108,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        init();
+        getData();
+
         checkRunTimePermission();
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -538,5 +536,22 @@ public class MainActivity extends AppCompatActivity {
         request.setShouldCache(false);
         AppHelper.requestQueue = Volley.newRequestQueue(this);
         AppHelper.requestQueue.add(request);
+    }
+    // 처음 시작 시 리사이클러뷰 세팅하기
+    private void init() {
+        RecyclerView recyclerView2 = findViewById(R.id.mainphotoRecycler);
+        GridLayoutManager layoutManager2 = new GridLayoutManager(this, 3);
+        recyclerView2.setLayoutManager(layoutManager2);
+        adapter2 = new PhotoRecyclerAdapter();
+        recyclerView2.setAdapter(adapter2);
+    }
+
+    // 처음 시작 시 리사이클러뷰 불러오기
+    private void getData() {
+        for (int i = 0; i < listResId.size(); i++) {
+            PhotoData data = new PhotoData();
+            data.setResId(listResId.get(i));
+            adapter2.addItem(data);
+        }
     }
 }
