@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
 import java.util.HashMap;
@@ -111,6 +113,7 @@ public class PayActivity extends AppCompatActivity {
                 params.put("cancel_url", "https://www.naver.com/cancel"); // 결제 취소시 돌려 받을 url 주소
                 params.put("fail_url", "https://www.naver.com/fali"); // 결제 실패시 돌려 받을 url 주소
                 return params;
+
             }
 
             @Override
