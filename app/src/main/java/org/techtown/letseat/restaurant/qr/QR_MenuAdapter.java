@@ -21,11 +21,10 @@ import java.util.HashMap;
 public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHolder> implements OnMenuItemClickListner {
     ArrayList<QR_Menu> items = new ArrayList<QR_Menu>();
     ArrayList<String> selectMenu = new ArrayList<>();
-    // 음식 갯수 hashmap
     HashMap<Integer, Integer> amount_map = new HashMap<>();
     OnMenuItemClickListner listner;
     static public int sum = 0;
-
+    static public HashMap<Integer, String> menuNames = new HashMap<>();
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -46,6 +45,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
         viewHolder.upButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = viewHolder.name.getText().toString();
                 int num = Integer.parseInt(viewHolder.amount.getText().toString());
                 // 장바구니에 메뉴 넣기
                 if (num >= 0) {
@@ -58,11 +58,13 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                 qr_restActivity.sumTextView.setText(sum + "원");
                 viewHolder.amount.setText("" + (num + 1));
                 amount_map.put(position, num+1);
+                menuNames.put(position, name+(num+1)+"개 ");
             }
         });
         viewHolder.downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = viewHolder.name.getText().toString();
                 int num = Integer.parseInt(viewHolder.amount.getText().toString());
                 if (num > 0) {
                     if (num - 1 == 0) {
@@ -70,6 +72,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                             selectMenu.remove(position+"");
                         if(amount_map.containsKey(position)){
                             amount_map.remove(position);
+                            menuNames.remove(position);
                         }
                     }
                     int price = Integer.parseInt(item.getPrice());
@@ -77,6 +80,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                     qr_restActivity.sumTextView.setText(sum + "원");
                     viewHolder.amount.setText("" + (num - 1));
                     amount_map.put(position, num-1);
+                    menuNames.put(position, name+(num-1)+"개 ");
                 }else{
 
                 }

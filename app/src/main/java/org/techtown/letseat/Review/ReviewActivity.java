@@ -364,7 +364,6 @@ public class ReviewActivity extends AppCompatActivity {
         }
     }
 
-
     public void registerReview(){
         String url = "http://125.132.62.150:8000/letseat/review/register";
         String menuName = menu_name.getText().toString();
