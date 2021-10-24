@@ -220,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MyTab.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });

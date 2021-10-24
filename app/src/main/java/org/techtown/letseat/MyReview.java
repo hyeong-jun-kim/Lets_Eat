@@ -1,4 +1,4 @@
-package org.techtown.letseat.restaurant.info;
+package org.techtown.letseat;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,6 +6,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,40 +43,34 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class res_info_fragment3 extends Fragment {
+public class MyReview extends AppCompatActivity {
 
     ArrayList list = new ArrayList<>();
     ArrayList<Integer> resIdList = new ArrayList<>();
     RecyclerView recyclerView;
-    int resId;
+    int userId;
     String text;
     View view;
     private RestItemReviewAdapter adapter = new RestItemReviewAdapter();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_review);
 
-        view = inflater.inflate(R.layout.res_info_fragment3, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView = findViewById(R.id.recyclerView);
 
-        Bundle extra = this.getArguments();
-        if (extra != null) {
-            text = extra.getString("text");
-            resId = extra.getInt("send_resId");
-            Log.d("ds","ds");
-            get_Restaurant();
-        }
-        return view;
+
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("userId",0);
+
+        get_Restaurant();
 
     }
 
 
     void get_Restaurant() {
-        String url = "http://125.132.62.150:8000/letseat/review/load/res?resId=1";
+        String url = "http://125.132.62.150:8000/letseat/review/load/user?userId="+userId;
 
 
         JSONArray getData = new JSONArray();
@@ -105,15 +100,16 @@ public class res_info_fragment3 extends Fragment {
                                 bitmap = PhotoSave.StringToBitmap(image);
 
 
-                                    list.add(email);
-                                    list.add(rate);
-                                    list.add(content);
-                                    list.add(bitmap);
+                                list.add(email);
+                                list.add(rate);
+                                list.add(content);
+                                list.add(bitmap);
 
                             }
 
                             adapter.setItems(new RestItemReviewData().getItems(list));
-                            adapter.notifyDataSetChanged();
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            recyclerView.setAdapter(adapter);
 
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
@@ -129,8 +125,9 @@ public class res_info_fragment3 extends Fragment {
                     }
                 }
         );
+
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
+        AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext()); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
 }

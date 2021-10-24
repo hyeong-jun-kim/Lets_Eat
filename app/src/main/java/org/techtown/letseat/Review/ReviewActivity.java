@@ -34,6 +34,7 @@ import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import android.util.Log;
@@ -73,7 +74,10 @@ public class ReviewActivity extends AppCompatActivity {
     private Button upload_photo_btn, save_review_btn, cancel_btn;
     private Bitmap bitmap;
     private String accuracy_score;
-    private String review_text,save_image, menu_label, star_score;
+    private String review_text;
+    private String save_image;
+    private String menu_label;
+    private String star_score;
     private String menu = "삼겹살";
     private TextView menu_name, accuracy;
     private Interpreter interpreter;

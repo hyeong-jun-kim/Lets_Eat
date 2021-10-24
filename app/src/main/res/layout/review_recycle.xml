@@ -53,14 +53,6 @@
                     android:stepSize="0.5"
                     android:progressTint="#ED6868"
                     android:id="@+id/ratingBar"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/notosansregular"
-                    android:text="( 3 )"
-                    android:textColor="#000000"
-                    android:textSize="8dp"
-                    android:id="@+id/ratingBarTv"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
