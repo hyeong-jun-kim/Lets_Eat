@@ -10,6 +10,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.util.AppHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
+import org.techtown.letseat.login.Login;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 import android.Manifest;
 import android.content.SharedPreferences;
@@ -35,6 +41,7 @@ import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import android.util.Log;
@@ -77,7 +84,11 @@ public class ReviewActivity extends AppCompatActivity {
     private Button upload_photo_btn, save_review_btn, cancel_btn;
     private Bitmap bitmap;
     private String accuracy_score;
-    private String review_text,save_image, menu_label;
+    private String review_text;
+    private String save_image;
+    private String menu_label;
+    private String star_score;
+    private String menu = "삼겹살";
     private TextView menu_name, accuracy;
     private Interpreter interpreter;
     private static final String TAG = "ReviewActivity";
@@ -92,6 +103,7 @@ public class ReviewActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         resId = bundle.getInt("resId");
         setContentView(R.layout.order_review);
+
         checkSelfPermission();
         bitmap = null;
         image_file = null;
@@ -131,6 +143,53 @@ public class ReviewActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    //리뷰 서버에 보내기
+    public void review_check(){
+        if(edit_review_text.getText().toString() == null){
+            Toast.makeText(this, "리뷰를 작성해주세요", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            review_text = edit_review_text.getText().toString();
+            menu_label = menu_name.getText().toString();
+            accuracy_score = accuracy.getText().toString();
+            star_score = String.valueOf(review_grade.getRating());
+
+            String url = "";
+            JSONObject postData = new JSONObject();
+            try {
+                postData.put("", review_text);  //리뷰 내용 전송
+                postData.put("", menu_label);   //라벨링(음식 이름) 전송
+                postData.put("", star_score);   //별점 전송
+                postData.put("", save_image);   //사진 전송
+                postData.put("", menu);         //가게의 메뉴 이름 전송
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    postData,
+                    new Response.Listener<JSONObject>() {
+                        @Override // 응답 잘 받았을 때
+                        public void onResponse(JSONObject response) {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override // 에러 발생 시
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("error",error.toString());
+                        }
+                    }
+            );
+            request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+            AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+            AppHelper.requestQueue.add(request);
+        }
     }
 
     // Image 파일 입력 onActivityResult까지

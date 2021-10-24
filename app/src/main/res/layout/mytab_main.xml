@@ -152,13 +152,15 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="vertical">
+
                             <ImageButton
+                                android:id="@+id/reviewManageBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
                                 android:src="@drawable/reviewmanage"
                                 app:tint="#ED6868"
-                                android:id="@+id/reviewManageBtn"/>
+                                tools:ignore="TouchTargetSizeCheck" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

@@ -1,6 +1,9 @@
 package org.techtown.letseat.restaurant.review;
 
+import android.graphics.Bitmap;
+
 import org.techtown.letseat.R;
+import org.techtown.letseat.restaurant.list.RestListRecycleItem;
 
 import java.util.ArrayList;
 
@@ -8,20 +11,19 @@ public class RestItemReviewData {
 
     ArrayList<RestItemReviewItem> items = new ArrayList<>();
 
-    public ArrayList<RestItemReviewItem> getItems() {
+    RestItemReviewItem rest[] = new RestItemReviewItem[100];
 
-        RestItemReviewItem order1 = new RestItemReviewItem(R.drawable.image1,
-                "tjaudwlscjswo", "2021/10/28");
+    int p = 0;
 
-        RestItemReviewItem order2 = new RestItemReviewItem(R.drawable.image2,
-                "dksxogus", "2021/10/28");
+    public ArrayList<RestItemReviewItem> getItems(ArrayList list) {
 
-        RestItemReviewItem order3 = new RestItemReviewItem(R.drawable.image3,
-                "rlagudwns", "2021/10/28");
+        for(int i = 0; i < list.size()/4; i++){
+            rest[i+1] = new RestItemReviewItem(list.get(p).toString(),(float)list.get(p+1),list.get(p+2).toString(),
+                    (Bitmap)list.get(p+3));
+            items.add(rest[i+1]);
+            p += 4;
+        }
 
-        items.add(order1);
-        items.add(order2);
-        items.add(order3);
 
         return items;
     }
