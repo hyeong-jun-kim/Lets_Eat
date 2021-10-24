@@ -46,6 +46,7 @@ import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.menu.MenuAdapter;
 import org.techtown.letseat.menu.MenuData;
+import org.techtown.letseat.pay_test.PayActivity;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.ViewPagerAdapter;
@@ -108,7 +109,7 @@ public class qr_restActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestOrderList();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                 startActivity(intent);
                 DatabaseReference myRef = database.getReference("ownerId_1");
                 myRef.addValueEventListener(new ValueEventListener() {
