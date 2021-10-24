@@ -29,8 +29,8 @@ import java.util.Map;
 public class PayActivity extends AppCompatActivity {
 
     static RequestQueue requestQueue;
-    static String productName = "미정"; // 상품 이름
-    static String productPrice = "5000";
+    static String productName; // 상품 이름
+    static String productPrice;
 
     WebView webView;
 
@@ -45,8 +45,9 @@ public class PayActivity extends AppCompatActivity {
 
     }
 
-    public PayActivity(String productPrice) {
-        PayActivity.productPrice = productPrice;
+    public PayActivity(String productPrice, String productName) {
+        this.productPrice = productPrice;
+        this.productName = productName;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,9 +161,15 @@ public class PayActivity extends AppCompatActivity {
             Log.e("Debug", "url" + url);
 
             if (url != null && url.contains("pg_token=")) {
+                if(url.startsWith("https://www.naver.com/success")){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplication(), "결제가 성공적으로 완료되었습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return true;
+                }
                 String pg_Token = url.substring(url.indexOf("pg_token=") + 9);
                 pgToken = pg_Token;
-
                 requestQueue.add(approvalRequest);
 
             } else if (url != null && url.startsWith("intent://")) {
