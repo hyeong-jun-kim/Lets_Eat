@@ -31,7 +31,7 @@ public class PhotoRecyclerAdapter extends RecyclerView.Adapter<PhotoRecyclerAdap
     public int getItemCount() {
         return photoData.size();
     }
-    void addItem(PhotoData data){
+    public void addItem(PhotoData data){
         photoData.add(data);
     }
     public void setOnItemClicklistener(OnPhotoItemClickListener listener){
