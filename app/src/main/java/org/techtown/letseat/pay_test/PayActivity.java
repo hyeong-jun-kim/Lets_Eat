@@ -28,7 +28,7 @@ public class PayActivity extends AppCompatActivity {
 
     static RequestQueue requestQueue;
     static String productName = "미정"; // 상품 이름
-    static String productPrice;
+    static String productPrice = "5000";
 
     WebView webView;
 
