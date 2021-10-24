@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     List<Integer> listResId = Arrays.asList(R.drawable.image1, R.drawable.image2, R.drawable.image3,
             R.drawable.menuimg1, R.drawable.menuimg2, R.drawable.menuimg3);
 
-
     private GpsTracker gpsTracker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
