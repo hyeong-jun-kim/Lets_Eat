@@ -67,14 +67,14 @@ public class res_info_fragment3 extends Fragment {
             text = extra.getString("text");
             resId = extra.getInt("send_resId");
             Log.d("ds","ds");
-            get_Restaurant();
+            get_Review();
         }
         return view;
 
     }
 
 
-    void get_Restaurant() {
+    void get_Review() {
         String url = "http://125.132.62.150:8000/letseat/review/load/res?resId=1";
 
 
