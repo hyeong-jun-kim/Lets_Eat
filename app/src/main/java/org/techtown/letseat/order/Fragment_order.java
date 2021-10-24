@@ -81,7 +81,7 @@ public class Fragment_order extends Fragment {
                                 ArrayList<String> menuList = new ArrayList<String>();
                                 int resId = jsonObject.getInt("resId");
                                 String image = jsonObject.getString("image");
-                                String orderTime = jsonObject.getString("orderTime") + " 서빙 대기중";
+                                String orderTime = jsonObject.getString("servingTime") + " 주문 완료";
                                 String resName = jsonObject.getString("resName");
                                 Bitmap bitmap = PhotoSave.StringToBitmap(image);
                                 JSONArray resMenus = jsonObject.getJSONArray("resMenus");
