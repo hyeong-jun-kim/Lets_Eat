@@ -169,7 +169,7 @@ public class qr_restActivity extends AppCompatActivity {
                         try {
                             orderId = response.getInt("orderId");
                             requestMenuList();
-                            } catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
