@@ -4,6 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 import android.Manifest;
 import android.content.SharedPreferences;
@@ -11,6 +17,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -39,6 +46,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -49,12 +61,15 @@ import com.google.firebase.ml.modeldownloader.CustomModel;
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions;
 import com.google.firebase.ml.modeldownloader.DownloadType;
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader;
+import com.google.gson.JsonObject;
 
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.PhotoSave;
 import org.tensorflow.lite.Interpreter;
 
 public class ReviewActivity extends AppCompatActivity {
+    private int userId = MainActivity.userId;
+    private int resId;
     private Intent intent;
     private ImageView imageView;
     private RatingBar review_grade;
@@ -73,8 +88,10 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        resId = bundle.getInt("resId");
         setContentView(R.layout.order_review);
-
         checkSelfPermission();
         bitmap = null;
         image_file = null;
@@ -103,9 +120,8 @@ public class ReviewActivity extends AppCompatActivity {
         save_review_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-
                 review_check();
-                finish();
+                registerReview();
             }
         });
 
@@ -299,5 +315,53 @@ public class ReviewActivity extends AppCompatActivity {
             accuracy_score = accuracy.getText().toString();
             String star_score = String.valueOf(review_grade.getRating());
         }
+    }
+
+    public void registerReview(){
+        String url = "http://125.132.62.150:8000/letseat/review/register";
+        String menuName = menu_name.getText().toString();
+        String content = review_text;
+        float rate = review_grade.getRating();
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        bitmap = PhotoSave.resize(bitmap, getResources());
+        String image = PhotoSave.BitmapToString(bitmap);
+
+        JSONObject postData = new JSONObject();
+        JSONObject resData = new JSONObject();
+        JSONObject userData = new JSONObject();
+        try {
+            postData.put("menuName", menuName);
+            postData.put("content", content);
+            postData.put("rate", rate);
+            postData.put("image", image);
+            resData.put("resId", resId);
+            userData.put("userId", userId);
+            postData.put("restaurant",resData);
+            postData.put("user",userData);
+        }catch (JSONException e){
+            Log.d("error",e.toString());
+        }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                postData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        finish();
+                        Toast.makeText(getApplicationContext(), "성공적으로 리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ReviewActivity.this, "비정상적인 오류로 인해 리뷰가 등록되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
     }
 }

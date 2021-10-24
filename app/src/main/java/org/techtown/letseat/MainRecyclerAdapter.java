@@ -8,12 +8,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.techtown.letseat.R;
-import org.techtown.letseat.order.Orderdata;
 
 import java.util.ArrayList;
 
