@@ -46,6 +46,7 @@ import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.menu.MenuAdapter;
 import org.techtown.letseat.menu.MenuData;
+import org.techtown.letseat.pay_test.PayActivity;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.ViewPagerAdapter;
@@ -108,7 +109,10 @@ public class qr_restActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestOrderList();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                String sum = String.valueOf(QR_MenuAdapter.sum);
+                String menuName = getMenuNames();
+                PayActivity payActivity = new PayActivity(sum, menuName);
+                Intent intent = new Intent(getApplicationContext(), payActivity.getClass());
                 startActivity(intent);
                 DatabaseReference myRef = database.getReference("ownerId_1");
                 myRef.addValueEventListener(new ValueEventListener() {
@@ -121,7 +125,6 @@ public class qr_restActivity extends AppCompatActivity {
                     }
                 });
                 myRef.setValue(num+1);
-                Toast.makeText(getApplicationContext(), "성공적으로 주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 QR_MenuAdapter.sum = 0;
                 finish();
             }
@@ -166,7 +169,7 @@ public class qr_restActivity extends AppCompatActivity {
                         try {
                             orderId = response.getInt("orderId");
                             requestMenuList();
-                            } catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -320,5 +323,13 @@ public class qr_restActivity extends AppCompatActivity {
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
         AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
+    }
+    public String getMenuNames(){
+        HashMap<Integer,String> menuNames = QR_MenuAdapter.menuNames;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < menuNames.size(); i++){
+            sb.append(menuNames.get(i));
+        }
+        return sb.toString();
     }
 }

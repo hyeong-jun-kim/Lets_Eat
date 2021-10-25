@@ -100,11 +100,24 @@
                 android:fontFamily="@font/notosansbold"
                 android:textSize="30dp"
                 android:textColor="#000000"/>
-            <androidx.recyclerview.widget.RecyclerView
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:id="@+id/mainphotoRecycler"/>
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mainphotoRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal" />
+
+                <FrameLayout
+                    android:id="@+id/photoFragment"
+                    android:layout_width="350dp"
+                    android:layout_height="451dp"
+                    android:layout_gravity="center_horizontal" />
+
+            </FrameLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
