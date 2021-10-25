@@ -51,11 +51,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"/>
+
                     <FrameLayout
                         android:id="@+id/photoFragment"
                         android:layout_width="350dp"
                         android:layout_height="451dp"
-                        android:layout_gravity="center_horizontal"/>
+                        android:layout_gravity="center_horizontal" />
                 </FrameLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

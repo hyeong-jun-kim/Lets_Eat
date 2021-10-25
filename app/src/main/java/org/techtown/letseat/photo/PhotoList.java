@@ -46,39 +46,25 @@ public class PhotoList extends AppCompatActivity {
     PhotoFragment photoFragment;
     FragmentManager fm;
     FragmentTransaction ft;
-    ArrayList list = new ArrayList();
+    ArrayList listResId = new ArrayList<>();
+    String res_name, content;
+    Double get_rate;
+    float rate;
 
-
-    //리스트에있는 이미지들을 불러온이미지들로 바꿔주면되네
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_list_activity);
         photoList = this;
-        init();
-        getData();
+
+
         get_Review();
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         // 사진 클릭할 시 나오는 이벤트
-        adapter.setOnItemClicklistener(new OnPhotoItemClickListener() {
-            @Override
-            public void onItemClick(PhotoRecyclerAdapter.ItemViewHolder holder, View view,
-                                    int position) {
-                if (!check) {
-                    check = true;
-                    photoFragment = new PhotoFragment();
-                    ft = fm.beginTransaction();
-                    // 여기에 데이터베이스 정보 넣어야 함
-                    photoFragment.setresId((Integer) list.get(holder.getAdapterPosition()));
-                    photoFragment.setTitle("맛집 제목");
-                    photoFragment.setReview("아주 맛있어요~~");
-                    ft.add(R.id.photoFragment, photoFragment);
-                    ft.commit();
-                }
-            }
-        });
+
     }
+
     void get_Review() {
         String url = "http://125.132.62.150:8000/letseat/review/load/res?resId=1";
 
@@ -95,16 +81,23 @@ public class PhotoList extends AppCompatActivity {
                         try {
                             String image;
                             Bitmap bitmap;
-                            ArrayList arrayList = new ArrayList();
 
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
+                                JSONObject res_jsonObject = jsonObject.getJSONObject("restaurant");
+
+                                res_name = res_jsonObject.getString("resName");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
+                                content = jsonObject.getString("content");
+                                get_rate = jsonObject.getDouble("rate");
+                                rate = get_rate.floatValue();
 
-                                list.add(bitmap);
-
+                                listResId.add(bitmap);
+                                Log.d("ds","ds");
+                                init();
                             }
+
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
                             Log.d("예외", e.toString());
@@ -131,14 +124,34 @@ public class PhotoList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new PhotoRecyclerAdapter();
         recyclerView.setAdapter(adapter);
+        getData();
     }
 
     // 처음 시작 시 리사이클러뷰 불러오기
     private void getData() {
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < listResId.size(); i++) {
             PhotoData data = new PhotoData();
-            data.setResId((Integer) list.get(i));
+            data.setResId((Bitmap) listResId.get(i));
             adapter.addItem(data);
+
         }
+        adapter.setOnItemClicklistener(new OnPhotoItemClickListener() {
+            @Override
+            public void onItemClick(PhotoRecyclerAdapter.ItemViewHolder holder, View view,
+                                    int position) {
+                if (!check) {
+                    check = true;
+                    photoFragment = new PhotoFragment();
+                    ft = fm.beginTransaction();
+                    // 여기에 데이터베이스 정보 넣어야 함
+                    photoFragment.setresId((Bitmap) listResId.get(holder.getAdapterPosition()));
+                    photoFragment.setTitle(res_name);
+                    photoFragment.setReview(content);
+                    photoFragment.setRate(rate);
+                    ft.add(R.id.photoFragment, photoFragment);
+                    ft.commit();
+                }
+            }
+        });
     }
 }

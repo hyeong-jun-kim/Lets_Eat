@@ -48,6 +48,7 @@ public class PayActivity extends AppCompatActivity {
     public PayActivity(String productPrice, String productName) {
         this.productPrice = productPrice;
         this.productName = productName;
+        Log.d("ds","ds");
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,9 +177,9 @@ public class PayActivity extends AppCompatActivity {
                 try {
                     Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                     Intent existPackage = getPackageManager().getLaunchIntentForPackage(intent.getPackage());
-                    if (existPackage != null) {
-                        startActivity(intent);
-                    }
+
+                    startActivity(intent);
+
                     return true;
                 } catch (Exception e) {
                     e.printStackTrace();
