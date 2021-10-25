@@ -41,6 +41,7 @@
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_main.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_menu.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_menu_sample.xml" value="0.6" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_mytabreview_manage.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_order.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_pay.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_qr_rest.xml" value="0.2528052805280528" />
@@ -55,8 +56,11 @@
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_restaurant_search.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_review.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/activity_splash.xml" value="0.10643115942028986" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/content_mytabreview_manage.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/fragment_first.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/fragment_order.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/fragment_order2.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/fragment_second.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/item_slider.xml" value="0.12318840579710146" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/login_activity.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/main_rest_recycler.xml" value="0.13333333333333333" />
@@ -68,9 +72,10 @@
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytab_information_fix.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytab_main.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytab_waiting.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/mytabreview_recycler.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_main.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_recycle.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_recycle2.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_recycle2.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/order_review.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/photo_fragment.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/photo_list_activity.xml" value="0.16666666666666666" />
@@ -88,7 +93,7 @@
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/rest_recycle.xml" value="0.27876631079478054" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/restab_info_activity.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/review_image1.xml" value="0.18840579710144928" />
-        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/review_recycle.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/review_recycle.xml" value="0.22" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/layout/waiting_activity.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/menu/blank.xml" value="0.1" />
         <entry key="..\:/Users/Charles_Seo/AndroidStudioProjects/Lets_Eat/app/src/main/res/menu/main.xml" value="0.16666666666666666" />

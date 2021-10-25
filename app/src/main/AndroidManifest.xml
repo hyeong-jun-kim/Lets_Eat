@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.techtown.letseat">
+    package="org.techtown.letseat" >
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.hardware.camera.autofocus" />
@@ -21,11 +21,14 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".MytabreviewManage"
+            android:exported="true" />
         <activity
             android:name=".Kakao_Login_userInfo"
             android:exported="true" />
@@ -89,11 +92,11 @@
         <activity android:name=".photo.PhotoList" />
         <activity
             android:name=".Review.ReviewActivity"
-            android:exported="true"/>
-        <activity android:name=".Review.ReviewImage1"
+            android:exported="true" />
+        <activity
+            android:name=".Review.ReviewImage1"
             android:exported="true"
             tools:ignore="DuplicateActivity" />
-
         <activity
             android:name=".order.OrderActivity"
             android:exported="true" />
@@ -104,12 +107,13 @@
         <activity
             android:name=".login.Login"
             android:exported="true" />
-        <activity android:name=".waiting.WaitingActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".waiting.WaitingActivity"
+            android:exported="true" />
         <activity
             android:name=".map.Map_MainActivity"
             android:exported="true" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

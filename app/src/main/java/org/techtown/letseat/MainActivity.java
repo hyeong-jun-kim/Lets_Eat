@@ -3,6 +3,7 @@ package org.techtown.letseat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,6 +23,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,6 +42,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -134,6 +138,30 @@ public class MainActivity extends AppCompatActivity {
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.actionsearch:
+                        Intent settingIntent = new Intent(getApplicationContext(),Restaurant_Search.class);
+                        startActivity(settingIntent);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         recyclerView = (RecyclerView) findViewById(R.id.mainRestRecycler);
         recyclerView.setHasFixedSize(true);

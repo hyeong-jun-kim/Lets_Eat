@@ -13,6 +13,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.techtown.letseat.MainActivity;
+import org.techtown.letseat.MytabreviewManage;
 import org.techtown.letseat.R;
 import org.techtown.letseat.login.Login;
 
@@ -22,6 +23,15 @@ public class MyTab extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mytab_main);
+
+        ImageButton reviewManagebtn = findViewById(R.id.reviewManageBtn);
+        reviewManagebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MytabreviewManage.class);
+                startActivity(intent);
+            }
+        });
 
         Button w_s_button = findViewById(R.id.waiting_status_button);
         w_s_button.setOnClickListener(new View.OnClickListener() {
