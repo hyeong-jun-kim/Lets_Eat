@@ -126,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
-
-
         FloatingActionButton btnQR = findViewById(R.id.btnQR);
         ImageButton btnRest = findViewById(R.id.btnRest);
         ImageButton btnPhoto = findViewById(R.id.btnPhoto);
