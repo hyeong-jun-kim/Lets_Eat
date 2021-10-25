@@ -43,7 +43,7 @@ public class PhotoRecyclerAdapter extends RecyclerView.Adapter<PhotoRecyclerAdap
             listener.onItemClick(holder, view, position);
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    public class ItemViewHolder extends RecyclerView.ViewHolder{
     private ImageView photo;
         public ItemViewHolder(View itemView, final OnPhotoItemClickListener listener) {
             super(itemView);
@@ -59,7 +59,7 @@ public class PhotoRecyclerAdapter extends RecyclerView.Adapter<PhotoRecyclerAdap
             });
         }
         void onBind(PhotoData data){
-            photo.setImageResource(data.getResId());
+            photo.setImageBitmap(data.getResId());
         }
     }
 }

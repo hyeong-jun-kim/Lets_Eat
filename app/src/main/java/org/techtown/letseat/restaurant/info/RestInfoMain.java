@@ -77,6 +77,9 @@ public class RestInfoMain extends AppCompatActivity {
         else if(i.getStringExtra("text").equals("westernFood")){
             string = i.getStringExtra("text");      ////string.value = "koreanFood"
         }
+        else if(i.getStringExtra("text").equals("onemanFood")){
+            string = i.getStringExtra("text");      ////string.value = "koreanFood"
+        }
         else if(i.getStringExtra("text")!=null){
             string = i.getStringExtra("text");
         }
@@ -100,42 +103,49 @@ public class RestInfoMain extends AppCompatActivity {
             bundle1.putString("text","chineseFood");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }
         else if(string.equals("koreanFood")){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text","koreanFood");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }
         else if(string.equals("japaneseFood")){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text","japaneseFood");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }
         else if(string.equals("westernFood")){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text","westernFood");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }
         else if(string.equals("onemanFood")){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text","onemanFood");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }
         else if(string.equals("All")){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text","All");
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }
         else if(string != null){
             Bundle bundle1 = new Bundle();
             bundle1.putString("text",string);
             bundle1.putInt("send_resId",resIdget);
             fragment2.setArguments(bundle1);
+            fragment3.setArguments(bundle1);
         }   //검색기능
 
 
@@ -178,6 +188,9 @@ public class RestInfoMain extends AppCompatActivity {
         }
         else if(string.equals("westernFood")){
             url = "http://125.132.62.150:8000/letseat/store/findRestaurant?restype=westernFood";
+        }
+        else if(string.equals("onemanFood")){
+            url = "http://125.132.62.150:8000/letseat/store/find/aloneAble";
         }
         else if(string.equals("All")){
             url = "http://125.132.62.150:8000/letseat/store/findAll";

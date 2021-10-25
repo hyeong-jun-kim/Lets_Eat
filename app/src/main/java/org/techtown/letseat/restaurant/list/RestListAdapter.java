@@ -1,5 +1,6 @@
 package org.techtown.letseat.restaurant.list;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import org.techtown.letseat.R;
 
@@ -79,7 +82,6 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 
         ViewHolder(View itemView) {
             super(itemView);
-
 
             ivRest = itemView.findViewById(R.id.iv_item_res);
             tvName = itemView.findViewById(R.id.tv_item_res_name);

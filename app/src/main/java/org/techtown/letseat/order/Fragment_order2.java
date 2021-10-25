@@ -89,8 +89,8 @@ public class Fragment_order2 extends Fragment {
                                     JSONObject menu = resMenus.getJSONObject(j);
                                     String menu_name = menu.getString("name");
                                     int price = menu.getInt("price");
-                                        menuList.add(menu_name);
-                                        sum += price;
+                                    menuList.add(menu_name);
+                                    sum += price;
                                 }
                                 JSONArray orderMenus = jsonObject.getJSONArray("orderMenus");
                                 for(int j = 0; j < orderMenus.length(); j++){

@@ -1,41 +1,39 @@
 package org.techtown.letseat.restaurant.review;
 
+import android.graphics.Bitmap;
+
 public class RestItemReviewItem {
 
-    private int src;
-    private String id;
-    private String date;
+    private String email;
+    private String content;
+    private float rate;
+    private Bitmap bitmap;
 
-    public RestItemReviewItem(int src, String id, String date) {
+    public RestItemReviewItem(String email, float rate, String content, Bitmap bitmap){
 
-        this.src = src;
-        this.id= id;
-        this.date = date;
+        this.email = email;
+        this.rate = rate;
+        this.content = content;
+        this.bitmap = bitmap;
+
 
     }
 
-    public int getSrc() {
-        return src;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSrc(int src) {
-        this.src = src;
+    public float getRate() {
+        return rate;
     }
 
-    public String getId() {
-        return id;
+    public String getContent() {
+        return content;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 }
 

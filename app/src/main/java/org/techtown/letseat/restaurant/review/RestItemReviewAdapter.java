@@ -36,9 +36,11 @@ public class RestItemReviewAdapter extends RecyclerView.Adapter<RestItemReviewAd
 
         RestItemReviewItem item = items.get(position);
 
-        viewHolder.userImageIv.setImageResource(item.getSrc());
-        viewHolder.dateTv.setText(item.getDate());
-        viewHolder.idTv.setText(item.getId());
+        viewHolder.reviewImageIv.setImageBitmap(item.getBitmap());
+        viewHolder.reviewTv.setText(item.getContent());
+        viewHolder.ratingBar.setRating(item.getRate());
+        viewHolder.idTv.setText(item.getEmail());
+
     }
 
     @Override

@@ -42,25 +42,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <RatingBar
+                    android:id="@+id/ratingBar"
                     style="?android:ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:isIndicator="false"
+                    android:isIndicator="true"
                     android:max="5"
                     android:numStars="5"
-                    android:rating="3"
-                    android:stepSize="0.5"
                     android:progressTint="#ED6868"
-                    android:id="@+id/ratingBar"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/notosansregular"
-                    android:text="( 3 )"
-                    android:textColor="#000000"
-                    android:textSize="8dp"
-                    android:id="@+id/ratingBarTv"/>
+                    android:rating="3"
+                    android:stepSize="0.5" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

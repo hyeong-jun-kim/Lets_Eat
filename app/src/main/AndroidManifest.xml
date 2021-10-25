@@ -25,6 +25,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MyReview"
+            android:exported="true" />
         android:usesCleartextTraffic="true" >
         <activity
             android:name=".MytabreviewManage"
@@ -52,15 +56,6 @@
             android:exported="true" />
         <activity
             android:name=".Review.ReviewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Review.ReviewImage1"
-            android:exported="true" />
-        <activity
-            android:name=".Review.ReviewImage2"
-            android:exported="true" />
-        <activity
-            android:name=".Review.ReviewImage3"
             android:exported="true" />
 
         <meta-data

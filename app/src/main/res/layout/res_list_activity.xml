@@ -33,36 +33,43 @@
                 android:text="식당"/>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <ImageButton
+                                android:id="@+id/koreanFood_button"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
                                 android:backgroundTint="#ffffff"
-                                android:src="@drawable/koreanfood"
-                                android:id="@+id/koreanFood_button"/>
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/koreanfood" />
+
                             <TextView
                                 android:id="@+id/textView10"
                                 android:layout_width="wrap_content"
@@ -74,18 +81,21 @@
                                 android:textColor="#000000"
                                 android:textSize="15dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <ImageButton
+                                android:id="@+id/japanFood_button"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
                                 android:backgroundTint="#ffffff"
-                                android:src="@drawable/japanesefood"
-                                android:id="@+id/japanFood_button"/>
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/japanesefood" />
+
                             <TextView
                                 android:id="@+id/textView12"
                                 android:layout_width="wrap_content"
@@ -97,18 +107,21 @@
                                 android:textColor="#000000"
                                 android:textSize="15dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <ImageButton
+                                android:id="@+id/chinaFood_button"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
                                 android:backgroundTint="#ffffff"
-                                android:src="@drawable/china_food"
-                                android:id="@+id/chinaFood_button"/>
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/china_food" />
+
                             <TextView
                                 android:id="@+id/textView11"
                                 android:layout_width="wrap_content"
@@ -120,18 +133,21 @@
                                 android:textColor="#000000"
                                 android:textSize="15dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <ImageButton
+                                android:id="@+id/westernFood_Button"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
                                 android:backgroundTint="#ffffff"
-                                android:src="@drawable/westernfood"
-                                android:id="@+id/westernFood_Button"/>
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/westernfood" />
+
                             <TextView
                                 android:id="@+id/westernfood"
                                 android:layout_width="wrap_content"
@@ -143,18 +159,21 @@
                                 android:textColor="#000000"
                                 android:textSize="15dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <ImageButton
+                                android:id="@+id/onemanFood_Button"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
                                 android:backgroundTint="#ffffff"
-                                android:src="@drawable/oneman_food"
-                                android:id="@+id/onemanFood_Button"/>
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/oneman_food" />
+
                             <TextView
                                 android:id="@+id/textView13"
                                 android:layout_width="wrap_content"
@@ -168,18 +187,20 @@
                         </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>
+
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view"
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                        </androidx.recyclerview.widget.RecyclerView>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout>

@@ -6,20 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,18 +26,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,21 +42,16 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.Review.ReviewActivity;
-import org.techtown.letseat.login.Login;
-import org.techtown.letseat.login.RegisterActivity;
-import org.techtown.letseat.map.Map_MainActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
-import org.techtown.letseat.order.Orderdata;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
+import org.techtown.letseat.photo.OnPhotoItemClickListener;
 import org.techtown.letseat.photo.PhotoData;
+import org.techtown.letseat.photo.PhotoFragment;
 import org.techtown.letseat.photo.PhotoList;
 import org.techtown.letseat.photo.PhotoRecyclerAdapter;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
@@ -85,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
     private double latitude;
+    static public MainActivity mainActivity;
     private double longitude;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -96,9 +88,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Double> differList = new ArrayList<>();
     ArrayList<MainRecyclerData> arrayList = new ArrayList<>();
     private PhotoRecyclerAdapter adapter2;
-    List<Integer> listResId = Arrays.asList(R.drawable.image1, R.drawable.image2, R.drawable.image3,
-            R.drawable.menuimg1, R.drawable.menuimg2, R.drawable.menuimg3);
-
+    ArrayList listResId = new ArrayList<>();
+    static public PhotoList photoList;
+    public boolean check = false;
+    PhotoFragment photoFragment;
+    FragmentManager fm;
+    FragmentTransaction ft;
 
     private GpsTracker gpsTracker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -108,8 +103,9 @@ public class MainActivity extends AppCompatActivity {
     public static int userId = 0;
     private int ownerId = 1;
     int currentPage = 0;
-    private String resName, phoneNumber, openTime, resIntro, businessNumber, restype, location; //qr코드 테스트용
-    int aloneAble;
+    private String content, res_name;
+    private Double get_rate;
+    private float rate;
     Timer timer;
 
     private int[] images = new int[]{
@@ -119,9 +115,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity = this;
 
-        init();
-        getData();
+        get_Review();
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
 
         checkRunTimePermission();
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
@@ -259,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MyTab.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -584,14 +583,85 @@ public class MainActivity extends AppCompatActivity {
         recyclerView2.setLayoutManager(layoutManager2);
         adapter2 = new PhotoRecyclerAdapter();
         recyclerView2.setAdapter(adapter2);
+        getData();
     }
 
     // 처음 시작 시 리사이클러뷰 불러오기
     private void getData() {
         for (int i = 0; i < listResId.size(); i++) {
             PhotoData data = new PhotoData();
-            data.setResId(listResId.get(i));
+            data.setResId((Bitmap) listResId.get(i));
             adapter2.addItem(data);
         }
+        adapter2.setOnItemClicklistener(new OnPhotoItemClickListener() {
+            @Override
+            public void onItemClick(PhotoRecyclerAdapter.ItemViewHolder holder, View view,
+                                    int position) {
+                if (!check) {
+                    check = true;
+                    photoFragment = new PhotoFragment();
+                    ft = fm.beginTransaction();
+                    // 여기에 데이터베이스 정보 넣어야 함
+                    photoFragment.setresId((Bitmap) listResId.get(holder.getAdapterPosition()));
+                    photoFragment.setTitle(res_name);
+                    photoFragment.setReview(content);
+                    photoFragment.setRate(rate);
+                    ft.add(R.id.photoFragment, photoFragment);
+                    ft.commit();
+                }
+            }
+        });
+    }
+
+    void get_Review() {
+        String url = "http://125.132.62.150:8000/letseat/review/load/res?resId=1";
+
+
+        JSONArray getData = new JSONArray();
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                getData,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            String image;
+                            Bitmap bitmap;
+
+                            for(int i = 0; i < response.length(); i++){
+                                JSONObject jsonObject = (JSONObject) response.get(i);
+                                JSONObject res_jsonObject = jsonObject.getJSONObject("restaurant");
+
+                                res_name = res_jsonObject.getString("resName");
+                                image = jsonObject.getString("image");
+                                bitmap = PhotoSave.StringToBitmap(image);
+                                content = jsonObject.getString("content");
+                                get_rate = jsonObject.getDouble("rate");
+                                rate = get_rate.floatValue();
+
+                                listResId.add(bitmap);
+                                Log.d("ds","ds");
+                                init();
+                            }
+
+                            Log.d("응답", response.toString());
+                        } catch (JSONException e) {
+                            Log.d("예외", e.toString());
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("에러", error.toString());
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext()); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
     }
 }
