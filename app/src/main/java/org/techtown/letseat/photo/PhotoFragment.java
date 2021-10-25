@@ -24,7 +24,6 @@ public class PhotoFragment extends Fragment {
     private ImageView photoView;
     private TextView title;
     private TextView review;
-    private TextView sample_text;
     private Button cancelButton;
     private Bitmap resdId;
     private String title_text;
@@ -51,14 +50,12 @@ public class PhotoFragment extends Fragment {
         mainActivity = MainActivity.mainActivity;
         PhotoFragment photoFragment = this;
         cancelButton = view.findViewById(R.id.photo_cancel);
-        sample_text = view.findViewById(R.id.sample_text);
         ratingBar2 = view.findViewById(R.id.ratingBar2);
         ratingBar2.setRating(resrate);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             int resId = bundle.getInt("aP");
-            sample_text.setText(resId);
         }
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

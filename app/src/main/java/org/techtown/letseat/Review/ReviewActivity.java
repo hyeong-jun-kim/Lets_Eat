@@ -132,7 +132,6 @@ public class ReviewActivity extends AppCompatActivity {
         save_review_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                review_check();
                 registerReview();
             }
         });
