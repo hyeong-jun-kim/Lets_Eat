@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.techtown.letseat" >
+    package="org.techtown.letseat">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.hardware.camera.autofocus" />
@@ -27,9 +27,20 @@
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".settingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".idActivity"
+            android:exported="true" />
+        <activity
+            android:name=".passwordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".zzimActivity"
+            android:exported="true" />
+        <activity
             android:name=".MyReview"
             android:exported="true" />
-        android:usesCleartextTraffic="true" >
         <activity
             android:name=".MytabreviewManage"
             android:exported="true" />
@@ -111,7 +122,7 @@
         <activity
             android:name=".map.Map_MainActivity"
             android:exported="true" />
-        <activity android:name=".SplashActivity" >
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

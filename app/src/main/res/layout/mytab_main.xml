@@ -100,20 +100,41 @@
                             android:layout_height="wrap_content"
                             android:background="#ffffff"
                             android:drawableRight="@drawable/right"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"
                             android:gravity="center"
                             android:text="대기현황 보기"
                             android:textSize="25dp"
                             tools:ignore="TextContrastCheck" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/kakao_logout_button"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="#C5EF93"
-                    android:text="카카오 로그아웃"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="16dp">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/kakao_logout_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff"
+                            android:gravity="center"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/notosansregular"
+                            android:includeFontPadding="false"
+                            android:drawableStart="@drawable/power"
+                            android:text="카카오 로그아웃"
+                            android:textColor="#000000"
+                            android:textSize="25sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

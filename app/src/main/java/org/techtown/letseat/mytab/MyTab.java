@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ import org.techtown.letseat.MytabreviewManage;
 import org.techtown.letseat.R;
 import org.techtown.letseat.RestSearch2;
 import org.techtown.letseat.login.Login;
+import org.techtown.letseat.settingActivity;
+import org.techtown.letseat.zzimActivity;
 
 public class MyTab extends AppCompatActivity {
 
@@ -54,6 +57,23 @@ public class MyTab extends AppCompatActivity {
                         break;
                 }
                 return true;
+            }
+        });
+
+        ImageButton settingBtn = findViewById(R.id.settingBtn);
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), settingActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton favoriteBtn = findViewById(R.id.favoriteBtn);
+        favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), zzimActivity.class);
+                startActivity(intent);
             }
         });
 
