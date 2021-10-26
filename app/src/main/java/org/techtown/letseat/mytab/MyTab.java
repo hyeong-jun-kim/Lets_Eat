@@ -1,14 +1,17 @@
 package org.techtown.letseat.mytab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
@@ -16,6 +19,7 @@ import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.MyReview;
 import org.techtown.letseat.MytabreviewManage;
 import org.techtown.letseat.R;
+import org.techtown.letseat.RestSearch2;
 import org.techtown.letseat.login.Login;
 
 public class MyTab extends AppCompatActivity {
@@ -29,6 +33,29 @@ public class MyTab extends AppCompatActivity {
 
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId",0);
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.actionsearch:
+                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        startActivity(settingIntent);
+                        break;
+                }
+                return true;
+            }
+        });
 
         ImageButton reviewManageBtn = findViewById(R.id.reviewManageBtn);
         reviewManageBtn.setOnClickListener(new View.OnClickListener() {

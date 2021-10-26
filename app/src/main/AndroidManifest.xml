@@ -34,6 +34,9 @@
             android:name=".MytabreviewManage"
             android:exported="true" />
         <activity
+            android:name=".RestSearch2"
+            android:exported="true" />
+        <activity
             android:name=".Kakao_Login_userInfo"
             android:exported="true" />
         <activity

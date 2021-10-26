@@ -22,7 +22,6 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
-import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.OnPhotoItemClickListener;
 import org.techtown.letseat.photo.PhotoData;
 import org.techtown.letseat.photo.PhotoFragment;
@@ -64,7 +62,6 @@ import org.techtown.letseat.util.PhotoSave;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -137,20 +134,12 @@ public class MainActivity extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.topMain);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent homeIntent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(homeIntent);
-            }
-        });
-
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.actionsearch:
-                        Intent settingIntent = new Intent(getApplicationContext(),Restaurant_Search.class);
+                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
                         startActivity(settingIntent);
                         break;
                 }

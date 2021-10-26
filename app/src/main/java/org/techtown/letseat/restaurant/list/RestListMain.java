@@ -10,6 +10,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,11 +33,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
+import org.techtown.letseat.RestSearch2;
 import org.techtown.letseat.Restaurant_Search;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
@@ -78,20 +82,28 @@ public class RestListMain extends AppCompatActivity {
         longitude = intent.getDoubleExtra("longitude",0);
         get_Restaurant();
 
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
 
-        /* search_restaurant = findViewById(R.id.search_restaurant);
-        search_btn = findViewById(R.id.search_btn);
-        search_btn.setOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                String text =  search_restaurant.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Restaurant_Search.class);
-                intent.putExtra("text",text);
-                intent.putExtra("latitude",latitude);
-                intent.putExtra("longitude",longitude);
-                startActivity(intent);
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(homeIntent);
             }
-        }); */
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.actionsearch:
+                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        startActivity(settingIntent);
+                        break;
+                }
+                return true;
+            }
+        });
 
 
         koreanFood_button = findViewById(R.id.koreanFood_button);

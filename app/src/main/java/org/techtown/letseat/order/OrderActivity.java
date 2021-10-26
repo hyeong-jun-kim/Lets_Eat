@@ -1,15 +1,22 @@
 package org.techtown.letseat.order;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.RestSearch2;
 import org.techtown.letseat.restaurant.info.Res_info_fragment2;
 import org.techtown.letseat.restaurant.info.res_info_fragment1;
 import org.techtown.letseat.restaurant.info.res_info_fragment3;
@@ -35,6 +42,29 @@ public class OrderActivity extends AppCompatActivity {
 
         fragment_order = new Fragment_order();
         fragment_order2 = new Fragment_order2();
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.actionsearch:
+                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        startActivity(settingIntent);
+                        break;
+                }
+                return true;
+            }
+        });
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(fragment_order,"주문 내역");
