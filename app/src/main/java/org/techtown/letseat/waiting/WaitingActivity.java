@@ -1,14 +1,21 @@
 package org.techtown.letseat.waiting;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.RestSearch2;
 
 public class WaitingActivity extends AppCompatActivity {
     private TextView waiting_queue, person_number;
@@ -31,6 +38,15 @@ public class WaitingActivity extends AppCompatActivity {
         waiting_btn2 = findViewById(R.id.waiting_btn2);
 
         person_number.setText(person);
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         minus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
