@@ -64,6 +64,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.ml.modeldownloader.CustomModel;
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions;
 import com.google.firebase.ml.modeldownloader.DownloadType;
@@ -119,6 +120,14 @@ public class ReviewActivity extends AppCompatActivity {
         save_review_btn = findViewById(R.id.save_review_btn);
         cancel_btn = findViewById(R.id.cancel_btn);
         upload_photo_btn = findViewById(R.id.upload_photo_btn);
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         upload_photo_btn.setOnClickListener(new View.OnClickListener() {
             @Override

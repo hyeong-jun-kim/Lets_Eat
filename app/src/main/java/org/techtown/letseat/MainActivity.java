@@ -3,6 +3,7 @@ package org.techtown.letseat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -23,6 +24,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -39,6 +41,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -50,7 +53,6 @@ import org.techtown.letseat.login.Login;
 import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
-import org.techtown.letseat.pay_test.Kakao_pay_test;
 import org.techtown.letseat.photo.OnPhotoItemClickListener;
 import org.techtown.letseat.photo.PhotoData;
 import org.techtown.letseat.photo.PhotoFragment;
@@ -67,7 +69,6 @@ import org.techtown.letseat.waiting.WaitingActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -142,6 +143,22 @@ public class MainActivity extends AppCompatActivity {
         sliderViewPager = findViewById(R.id.sliderViewPager);
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.actionsearch:
+                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        startActivity(settingIntent);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         recyclerView = (RecyclerView) findViewById(R.id.mainRestRecycler);
         recyclerView.setHasFixedSize(true);

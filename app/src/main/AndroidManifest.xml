@@ -27,7 +27,25 @@
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".settingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".idActivity"
+            android:exported="true" />
+        <activity
+            android:name=".passwordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".zzimActivity"
+            android:exported="true" />
+        <activity
             android:name=".MyReview"
+            android:exported="true" />
+        <activity
+            android:name=".MytabreviewManage"
+            android:exported="true" />
+        <activity
+            android:name=".RestSearch2"
             android:exported="true" />
         <activity
             android:name=".Kakao_Login_userInfo"

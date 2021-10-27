@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:backgroundTint="#ED6868"
-                app:navigationIcon="@drawable/home"
                 app:titleTextColor="#ffffff"
                 app:menu="@menu/menumain"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary">

@@ -1,10 +1,18 @@
 package org.techtown.letseat.mytab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,6 +23,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
+import org.techtown.letseat.RestSearch2;
+import org.techtown.letseat.restaurant.list.RestListAdapter;
 
 public class waiting_Layout extends AppCompatActivity {
     TextView peopleNum;
@@ -52,5 +62,15 @@ public class waiting_Layout extends AppCompatActivity {
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
         AppHelper.requestQueue.add(request);
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 }

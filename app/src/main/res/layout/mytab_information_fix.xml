@@ -20,8 +20,7 @@
                 android:backgroundTint="#ffffff"
                 app:navigationIcon="@drawable/back"
                 app:navigationIconTint="#ED6868"
-                android:background="#ffffff"
-                app:menu="@menu/main">
+                android:background="#ffffff">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,7 +80,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="#ffffff"
-                                    android:src="@drawable/right"/>
+                                    android:src="@drawable/right"
+                                    android:id="@+id/idIb"/>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -134,7 +134,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="#ffffff"
-                                    android:src="@drawable/right"/>
+                                    android:src="@drawable/right"
+                                    android:id="@+id/passwordIb"/>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>

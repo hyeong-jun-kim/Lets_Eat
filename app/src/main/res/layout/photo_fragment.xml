@@ -64,7 +64,8 @@
             android:numStars="5"
             android:progressTint="#ED6868"
             android:rating="3"
-            android:stepSize="0.5" />
+            android:stepSize="0.5"
+            android:secondaryProgressTint="#ED6868"/>
 
     </LinearLayout>
 
@@ -90,7 +91,7 @@
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/photo_cancel"
         android:layout_width="25dp"
         android:layout_height="25dp"
