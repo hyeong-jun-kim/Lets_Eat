@@ -4,10 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -16,9 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
@@ -27,10 +21,6 @@ import org.json.JSONObject;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.ViewPagerAdapter;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RestInfoMain extends AppCompatActivity {
     res_info_fragment1 fragment1;
@@ -87,7 +77,7 @@ public class RestInfoMain extends AppCompatActivity {
         resIdget = i.getIntExtra("send_resId",0);
 
 
-        res_title = findViewById(R.id.res_title);
+        res_title = findViewById(R.id.waiting);
 
         Bundle extras = getIntent().getExtras();
         Log.d("ds","ds");

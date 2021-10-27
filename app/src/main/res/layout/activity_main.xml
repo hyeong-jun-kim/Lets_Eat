@@ -9,7 +9,15 @@
     tools:context=".MainActivity">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">v
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="101dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="#ED6868"
+            android:visibility="gone" />
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -79,6 +87,7 @@
                 android:fontFamily="@font/notosansbold"
                 android:textSize="30dp"
                 android:textColor="#000000"/>
+
             <androidx.core.widget.NestedScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

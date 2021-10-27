@@ -46,7 +46,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
@@ -67,35 +67,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Menu Name"
-                    android:textSize="13dp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/tv_item_order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="price"
-                    android:textSize="13dp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="13dp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="3"
-                android:gravity="center|right">
+                android:gravity="center">
 
                 <ImageButton
                     android:id="@+id/btnReview"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/ic_baseline_edit_24"
-                    android:text="리뷰하기"
                     android:fontFamily="@font/notosansbold"
                     android:includeFontPadding="false"
+                    android:text="리뷰하기"
                     android:textColor="@android:color/white"
                     android:textSize="15dp"
-                    tools:ignore="TextContrastCheck" />
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

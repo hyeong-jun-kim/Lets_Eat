@@ -11,6 +11,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -33,6 +34,7 @@ import java.util.List;
 
 public class RestList_onemanFood extends AppCompatActivity {
 
+    ProgressBar progressBar;
     ArrayList list = new ArrayList<>();
     private RestListAdapter adapter = new RestListAdapter();
     private RestListAdapter restaurant_info_adapter = new RestListAdapter();
@@ -47,7 +49,8 @@ public class RestList_onemanFood extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_list_oneman_food);
-
+        progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView = findViewById(R.id.recyclerView);
         get_Restaurant();
         Intent intent = getIntent();
@@ -62,7 +65,7 @@ public class RestList_onemanFood extends AppCompatActivity {
         adapter.setItems(new RestListData().getItems(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
+        progressBar.setVisibility(View.INVISIBLE);
         //클릭 이벤트
         adapter.setItemClickListner(new OnRestaurantItemClickListner() {
             @Override

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -37,6 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PhotoList extends AppCompatActivity {
+    ProgressBar progressBar;
     private PhotoRecyclerAdapter adapter;
     private ImageView photo;
     private TextView title;
@@ -46,7 +48,10 @@ public class PhotoList extends AppCompatActivity {
     PhotoFragment photoFragment;
     FragmentManager fm;
     FragmentTransaction ft;
-    ArrayList listResId = new ArrayList<>();
+    ArrayList reviewImageList = new ArrayList<>();
+    ArrayList reviewNameList = new ArrayList<>();
+    ArrayList contentList = new ArrayList<>();
+    ArrayList rateList = new ArrayList<>();
     String res_name, content;
     Double get_rate;
     float rate;
@@ -56,7 +61,8 @@ public class PhotoList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_list_activity);
         photoList = this;
-
+        progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
 
         get_Review();
         fm = getSupportFragmentManager();
@@ -93,11 +99,13 @@ public class PhotoList extends AppCompatActivity {
                                 get_rate = jsonObject.getDouble("rate");
                                 rate = get_rate.floatValue();
 
-                                listResId.add(bitmap);
+                                reviewNameList.add(res_name);
+                                reviewImageList.add(bitmap);
+                                contentList.add(content);
+                                rateList.add(rate);
                                 Log.d("ds","ds");
-                                init();
                             }
-
+                            init();
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
                             Log.d("예외", e.toString());
@@ -129,11 +137,11 @@ public class PhotoList extends AppCompatActivity {
 
     // 처음 시작 시 리사이클러뷰 불러오기
     private void getData() {
-        for (int i = 0; i < listResId.size(); i++) {
+        for (int i = 0; i < reviewImageList.size(); i++) {
             PhotoData data = new PhotoData();
-            data.setResId((Bitmap) listResId.get(i));
+            data.setResId((Bitmap) reviewImageList.get(i));
             adapter.addItem(data);
-
+            progressBar.setVisibility(View.INVISIBLE);
         }
         adapter.setOnItemClicklistener(new OnPhotoItemClickListener() {
             @Override
@@ -144,10 +152,10 @@ public class PhotoList extends AppCompatActivity {
                     photoFragment = new PhotoFragment();
                     ft = fm.beginTransaction();
                     // 여기에 데이터베이스 정보 넣어야 함
-                    photoFragment.setresId((Bitmap) listResId.get(holder.getAdapterPosition()));
-                    photoFragment.setTitle(res_name);
-                    photoFragment.setReview(content);
-                    photoFragment.setRate(rate);
+                    photoFragment.setresId((Bitmap) reviewImageList.get(holder.getAdapterPosition()));
+                    photoFragment.setTitle((String) reviewNameList.get(holder.getAdapterPosition()));
+                    photoFragment.setReview((String) contentList.get(holder.getAdapterPosition()));
+                    photoFragment.setRate((Float) rateList.get(holder.getAdapterPosition()));
                     ft.add(R.id.photoFragment, photoFragment);
                     ft.commit();
                 }

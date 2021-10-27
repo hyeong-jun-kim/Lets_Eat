@@ -86,7 +86,7 @@
                         android:orientation="vertical"
                         android:padding="16dp">
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/userName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -113,7 +113,7 @@
                             android:includeFontPadding="false"
                             android:textSize="20dp" />
                         <TextView
-                            android:id="@+id/res_title"
+                            android:id="@+id/waiting"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -127,20 +127,9 @@
                             android:layout_height="1dp"
                             android:layout_marginTop="10dp"
                             android:background="@android:color/darker_gray" />
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:text="고객님의 대기시간은 약 35분입니다."
-                            android:textColor="#000000"
-                            android:fontFamily="@font/notosansregular"
-                            android:includeFontPadding="false"
-                            android:textSize="20dp" />
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/peopleNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -150,7 +139,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/res_place"
+                            android:id="@+id/time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"

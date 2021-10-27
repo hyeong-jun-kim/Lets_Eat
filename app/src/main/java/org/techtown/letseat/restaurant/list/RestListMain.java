@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,8 +52,10 @@ import java.util.Locale;
 
 public class RestListMain extends AppCompatActivity {
 
+    ProgressBar progressBar;
     ArrayList list = new ArrayList<>();
 
+    MainActivity mainActivity;
     ArrayList<Integer> resIdList = new ArrayList<>();
     private double latitude;
     private double longitude;
@@ -72,11 +75,15 @@ public class RestListMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.res_list_activity);
         recyclerView = findViewById(R.id.recycler_view);
+        progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
         latitude = intent.getDoubleExtra("latitude",0);
         longitude = intent.getDoubleExtra("longitude",0);
         get_Restaurant();
+
+        mainActivity = new MainActivity();
 
 
         /* search_restaurant = findViewById(R.id.search_restaurant);
@@ -156,13 +163,17 @@ public class RestListMain extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
     public void start(){
         //recycleView 초기화
 
         adapter.setItems(new RestListData().getItems(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        progressBar.setVisibility(View.INVISIBLE);
 
         //클릭 이벤트
         adapter.setItemClickListner(new OnRestaurantItemClickListner() {

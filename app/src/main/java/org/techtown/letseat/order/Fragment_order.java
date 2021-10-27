@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,6 +36,7 @@ import org.techtown.letseat.util.PhotoSave;
 import java.util.ArrayList;
 
 public class Fragment_order extends Fragment {
+    ProgressBar progressBar;
     private int userId = MainActivity.userId;
     RecyclerView recyclerView;
     ArrayList<OrderItem> items = new ArrayList<OrderItem>();
@@ -44,6 +46,8 @@ public class Fragment_order extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
         AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
+        progressBar = view.findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
@@ -55,6 +59,7 @@ public class Fragment_order extends Fragment {
         adapter.setItems(items);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        progressBar.setVisibility(View.INVISIBLE);
         //클릭 이벤트
         adapter.setItemClickListner(new OnReviewItemClickListner() {
             @Override

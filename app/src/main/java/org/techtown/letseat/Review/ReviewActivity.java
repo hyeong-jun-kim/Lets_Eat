@@ -75,6 +75,7 @@ import org.techtown.letseat.util.PhotoSave;
 import org.tensorflow.lite.Interpreter;
 
 public class ReviewActivity extends AppCompatActivity {
+    private final int GET_GALLERY_IMAGE = 200;
     private int userId = MainActivity.userId;
     private int resId;
     private Intent intent;
@@ -88,6 +89,7 @@ public class ReviewActivity extends AppCompatActivity {
     private String save_image;
     private String menu_label;
     private String star_score;
+    private String content;
     private String menu = "삼겹살";
     private TextView menu_name, accuracy;
     private Interpreter interpreter;
@@ -121,11 +123,10 @@ public class ReviewActivity extends AppCompatActivity {
         upload_photo_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
                 LoadTFliteModel();
-                startActivityForResult(intent, 101);
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
 
@@ -184,9 +185,9 @@ public class ReviewActivity extends AppCompatActivity {
         Uri selectedImageUri;
         MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             switch (requestCode) {
-                case 101:
+                case GET_GALLERY_IMAGE:
                     selectedImageUri = data.getData();
                     Glide.with(getApplicationContext()).load(selectedImageUri).apply(RequestOptions.bitmapTransform(option)).into(imageView);
                     if (Build.VERSION.SDK_INT >= 29) {
@@ -319,7 +320,7 @@ public class ReviewActivity extends AppCompatActivity {
     public void registerReview(){
         String url = "http://125.132.62.150:8000/letseat/review/register";
         String menuName = menu_name.getText().toString();
-        String content = review_text;
+        String content = edit_review_text.getText().toString();
         float rate = review_grade.getRating();
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();

@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -26,12 +28,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
@@ -42,6 +46,8 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.login.Login;
+import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.pay_test.Kakao_pay_test;
@@ -57,6 +63,7 @@ import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.ImageSliderAdapter;
 import org.techtown.letseat.util.PhotoSave;
+import org.techtown.letseat.waiting.WaitingActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,6 +75,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    ProgressBar progressBar;
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
@@ -84,13 +92,15 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Double> differList = new ArrayList<>();
     ArrayList<MainRecyclerData> arrayList = new ArrayList<>();
     private PhotoRecyclerAdapter adapter2;
-    ArrayList listResId = new ArrayList<>();
+    ArrayList reviewImageList = new ArrayList<>();
+    ArrayList reviewNameList = new ArrayList<>();
+    ArrayList contentList = new ArrayList<>();
+    ArrayList rateList = new ArrayList<>();
     static public PhotoList photoList;
     public boolean check = false;
     PhotoFragment photoFragment;
     FragmentManager fm;
     FragmentTransaction ft;
-
     private GpsTracker gpsTracker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -112,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivity = this;
-
+        progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
         get_Review();
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
@@ -121,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
-
 
 
         FloatingActionButton btnQR = findViewById(R.id.btnQR);
@@ -262,7 +272,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), WaitingActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -275,7 +287,42 @@ public class MainActivity extends AppCompatActivity {
         imageView.setBackgroundResource(image);
     }
 
+    // 웨이팅 POST 요청
+    public void sendWaiting() {
+        String url = "http://125.132.62.150:8000/letseat/waiting/register";
+        JSONObject resData = new JSONObject();
+        JSONObject userData = new JSONObject();
+        JSONObject postData = new JSONObject();
+        try {
+            resData.put("resId", 1);
+            userData.put("userId", 1);
+            postData.put("restaurant",resData);
+            postData.put("user",userData);
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                postData,
+                new Response.Listener<JSONObject>() {
+                    @Override // 응답 잘 받았을 때
+                    public void onResponse(JSONObject response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override // 에러 발생 시
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "아이고.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
 
     private void setupIndicators(int count) {
         ImageView[] indicators = new ImageView[count];
@@ -465,9 +512,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                                         adapter.setItems(arrayList);
                                         adapter.notifyDataSetChanged();
-
-
-
+                                        progressBar.setVisibility(View.INVISIBLE);
 
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
@@ -560,9 +605,9 @@ public class MainActivity extends AppCompatActivity {
 
     // 처음 시작 시 리사이클러뷰 불러오기
     private void getData() {
-        for (int i = 0; i < listResId.size(); i++) {
+        for (int i = 0; i < reviewImageList.size(); i++) {
             PhotoData data = new PhotoData();
-            data.setResId((Bitmap) listResId.get(i));
+            data.setResId((Bitmap) reviewImageList.get(i));
             adapter2.addItem(data);
         }
         adapter2.setOnItemClicklistener(new OnPhotoItemClickListener() {
@@ -574,10 +619,10 @@ public class MainActivity extends AppCompatActivity {
                     photoFragment = new PhotoFragment();
                     ft = fm.beginTransaction();
                     // 여기에 데이터베이스 정보 넣어야 함
-                    photoFragment.setresId((Bitmap) listResId.get(holder.getAdapterPosition()));
-                    photoFragment.setTitle(res_name);
-                    photoFragment.setReview(content);
-                    photoFragment.setRate(rate);
+                    photoFragment.setresId((Bitmap) reviewImageList.get(holder.getAdapterPosition()));
+                    photoFragment.setTitle((String) reviewNameList.get(holder.getAdapterPosition()));
+                    photoFragment.setReview((String) contentList.get(holder.getAdapterPosition()));
+                    photoFragment.setRate((Float) rateList.get(holder.getAdapterPosition()));
                     ft.add(R.id.photoFragment, photoFragment);
                     ft.commit();
                 }
@@ -613,11 +658,13 @@ public class MainActivity extends AppCompatActivity {
                                 get_rate = jsonObject.getDouble("rate");
                                 rate = get_rate.floatValue();
 
-                                listResId.add(bitmap);
+                                reviewNameList.add(res_name);
+                                reviewImageList.add(bitmap);
+                                contentList.add(content);
+                                rateList.add(rate);
                                 Log.d("ds","ds");
-                                init();
                             }
-
+                            init();
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
                             Log.d("예외", e.toString());

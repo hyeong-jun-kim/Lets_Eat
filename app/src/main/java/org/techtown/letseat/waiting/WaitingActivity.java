@@ -1,14 +1,26 @@
 package org.techtown.letseat.waiting;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.techtown.letseat.R;
+import org.techtown.letseat.util.AppHelper;
 
 public class WaitingActivity extends AppCompatActivity {
     private TextView waiting_queue, person_number;
@@ -30,27 +42,28 @@ public class WaitingActivity extends AppCompatActivity {
         waiting_btn1 = findViewById(R.id.waiting_btn1);
         waiting_btn2 = findViewById(R.id.waiting_btn2);
 
-        person_number.setText(person);
+        person_number.setText(""+person);
 
         minus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                person++;
-                person_number.setText(person);
+                person--;
+                person_number.setText(""+person);
             }
         });
 
         plus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                person--;
-                person_number.setText(person);
+                person++;
+                person_number.setText(""+person);
             }
         });
 
         waiting_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sendWaiting();
                 finish();
             }
         });
@@ -58,8 +71,53 @@ public class WaitingActivity extends AppCompatActivity {
         waiting_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "취소되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
+    }
+    // 웨이팅 POST 요청
+    public void sendWaiting() {
+        String url = "http://125.132.62.150:8000/letseat/waiting/register";
+        JSONObject resData = new JSONObject();
+        JSONObject userData = new JSONObject();
+        JSONObject postData = new JSONObject();
+        try {
+            resData.put("resId", 1);
+            userData.put("userId", 2);
+            postData.put("restaurant",resData);
+            postData.put("user",userData);
+            postData.put("peopleNum",2);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                postData,
+                new Response.Listener<JSONObject>() {
+                    @Override // 응답 잘 받았을 때
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String date = response.getString("date");
+                            int peopleNum = response.getInt("peopleNum");
+                            Intent intent = new Intent(getApplicationContext(),)
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override // 에러 발생 시
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "오류발생", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
     }
 }
