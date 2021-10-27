@@ -1,6 +1,7 @@
 package org.techtown.letseat.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +24,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.RestSearch2;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.DatePickerFragment;
 import org.techtown.letseat.R;
@@ -53,6 +57,15 @@ public class RegisterActivity extends AppCompatActivity {
         birthday.setEnabled(false);
         pwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         pwd_check.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         btn_birthday = findViewById(R.id.register_birthday_input);
         btn_birthday.setOnClickListener(new View.OnClickListener() {
             @Override

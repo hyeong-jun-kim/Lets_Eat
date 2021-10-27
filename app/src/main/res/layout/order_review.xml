@@ -167,6 +167,7 @@
                         android:gravity="center|center_horizontal"
                         android:numStars="5"
                         android:stepSize="1"
+                        android:secondaryProgressTint="#ED6868"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                 </LinearLayout>
