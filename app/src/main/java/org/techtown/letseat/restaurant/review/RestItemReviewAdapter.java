@@ -40,6 +40,7 @@ public class RestItemReviewAdapter extends RecyclerView.Adapter<RestItemReviewAd
         viewHolder.reviewTv.setText(item.getContent());
         viewHolder.ratingBar.setRating(item.getRate());
         viewHolder.idTv.setText(item.getEmail());
+        viewHolder.dateTv.setText(item.getDate());
 
     }
 

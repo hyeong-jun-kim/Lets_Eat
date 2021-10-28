@@ -48,7 +48,7 @@ public class res_info_fragment3 extends Fragment {
     ArrayList<Integer> resIdList = new ArrayList<>();
     RecyclerView recyclerView;
     int resId;
-    String text;
+    String text,date;
     View view;
     private RestItemReviewAdapter adapter = new RestItemReviewAdapter();
 
@@ -98,6 +98,7 @@ public class res_info_fragment3 extends Fragment {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 JSONObject userobject = jsonObject.getJSONObject("user");
                                 email = userobject.getString("email");//user 이메일
+                                date = jsonObject.getString("date");
                                 getrate = jsonObject.getDouble("rate");   //별점
                                 rate = getrate.floatValue();   //별점 float형으로 변환
                                 content = jsonObject.getString("content");
@@ -109,6 +110,7 @@ public class res_info_fragment3 extends Fragment {
                                     list.add(rate);
                                     list.add(content);
                                     list.add(bitmap);
+                                    list.add(date);
 
                             }
 

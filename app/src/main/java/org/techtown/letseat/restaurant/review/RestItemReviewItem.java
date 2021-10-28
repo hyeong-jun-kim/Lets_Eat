@@ -8,14 +8,15 @@ public class RestItemReviewItem {
     private String content;
     private float rate;
     private Bitmap bitmap;
+    private String date;
 
-    public RestItemReviewItem(String email, float rate, String content, Bitmap bitmap){
+    public RestItemReviewItem(String email, float rate, String content, Bitmap bitmap,String date){
 
         this.email = email;
         this.rate = rate;
         this.content = content;
         this.bitmap = bitmap;
-
+        this.date = date;
 
     }
 
@@ -35,5 +36,6 @@ public class RestItemReviewItem {
         return bitmap;
     }
 
+    public String getDate() {return date;}
 }
 

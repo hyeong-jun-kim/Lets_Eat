@@ -68,7 +68,7 @@
                                 android:includeFontPadding="false"
                                 android:textSize="13dp" />
                             <TextView
-                                android:id="@+id/textView5"
+                                android:id="@+id/waitingIdtv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="17"
@@ -85,7 +85,7 @@
                         android:orientation="vertical"
                         android:padding="16dp">
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/nametv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -112,7 +112,7 @@
                             android:includeFontPadding="false"
                             android:textSize="20dp" />
                         <TextView
-                            android:id="@+id/res_title"
+                            android:id="@+id/waitingNumbertv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -126,20 +126,9 @@
                             android:layout_height="1dp"
                             android:layout_marginTop="10dp"
                             android:background="@android:color/darker_gray" />
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:text="고객님의 대기시간은 약 35분입니다."
-                            android:textColor="#000000"
-                            android:fontFamily="@font/notosansregular"
-                            android:includeFontPadding="false"
-                            android:textSize="20dp" />
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/peopleNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -149,7 +138,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/res_place"
+                            android:id="@+id/datetv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"

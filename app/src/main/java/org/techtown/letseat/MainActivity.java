@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,12 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -28,23 +36,32 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.login.Login;
+import org.techtown.letseat.login.RegisterActivity;
 import org.techtown.letseat.mytab.MyTab;
 import org.techtown.letseat.order.OrderActivity;
 import org.techtown.letseat.photo.OnPhotoItemClickListener;
@@ -59,6 +76,7 @@ import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.ImageSliderAdapter;
 import org.techtown.letseat.util.PhotoSave;
+import org.techtown.letseat.waiting.WaitingActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,6 +87,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    ProgressBar progressBar;
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
@@ -85,13 +105,15 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Double> differList = new ArrayList<>();
     ArrayList<MainRecyclerData> arrayList = new ArrayList<>();
     private PhotoRecyclerAdapter adapter2;
-    ArrayList listResId = new ArrayList<>();
+    ArrayList reviewImageList = new ArrayList<>();
+    ArrayList reviewNameList = new ArrayList<>();
+    ArrayList contentList = new ArrayList<>();
+    ArrayList rateList = new ArrayList<>();
     static public PhotoList photoList;
     public boolean check = false;
     PhotoFragment photoFragment;
     FragmentManager fm;
     FragmentTransaction ft;
-
     private GpsTracker gpsTracker;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -113,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivity = this;
-
+        progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
         get_Review();
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
@@ -122,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         if (AppHelper.requestQueue != null) { //RequestQueue 생성
             AppHelper.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
+
 
         FloatingActionButton btnQR = findViewById(R.id.btnQR);
         ImageButton btnRest = findViewById(R.id.btnRest);
@@ -140,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.actionsearch:
                         Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        settingIntent.putExtra("latitude",latitude);
+                        settingIntent.putExtra("longitude",longitude);
                         startActivity(settingIntent);
                         break;
                 }
@@ -277,7 +303,10 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "씨발", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), WaitingActivity.class);
+                    intent.putExtra("resId",resId);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -289,7 +318,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = new ImageView(this);
         imageView.setBackgroundResource(image);
     }
-
 
 
     private void setupIndicators(int count) {
@@ -480,9 +508,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                                         adapter.setItems(arrayList);
                                         adapter.notifyDataSetChanged();
-
-
-
+                                        progressBar.setVisibility(View.INVISIBLE);
 
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
@@ -550,7 +576,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         userId = Integer.parseInt(response);
+                        FBuser();
                     }
+
                 },
                 new Response.ErrorListener(){
                     @Override
@@ -562,6 +590,49 @@ public class MainActivity extends AppCompatActivity {
         request.setShouldCache(false);
         AppHelper.requestQueue = Volley.newRequestQueue(this);
         AppHelper.requestQueue.add(request);
+    }
+    public void FBuser(){   // 파이어베이스에 유저등록
+        DatabaseReference myRef = database.getReference("userId_"+userId);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 데이터 값이 변했을 때마다 작동, text 안에 받아온 데이터 문자열을 넣어줌
+                try{
+                    int num = dataSnapshot.getValue(Integer.class);
+                    Log.d("ds","ds");
+                    if(num != 0){
+                        //푸쉬알림
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(),0,
+                                new Intent(getApplicationContext(),MainActivity.class),0);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "default");
+                        builder.setSmallIcon(R.mipmap.ic_launcher);
+                        builder.setContentTitle("알림");
+                        builder.setContentText("입장 가능합니다.");
+                        builder.setContentIntent(contentIntent);
+                        builder.setAutoCancel(true);
+                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        }
+                        notificationManager.notify(1, builder.build());
+                        myRef.setValue(0);
+                    }
+                    else {
+
+                    }
+                }catch(Exception e){
+                    myRef.setValue(0);      //처음유저등록했을때
+                    Log.d("ds","ds");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 에러가 날 때 작동
+            }
+        });
     }
     // 처음 시작 시 리사이클러뷰 세팅하기
     private void init() {
@@ -575,9 +646,9 @@ public class MainActivity extends AppCompatActivity {
 
     // 처음 시작 시 리사이클러뷰 불러오기
     private void getData() {
-        for (int i = 0; i < listResId.size(); i++) {
+        for (int i = 0; i < reviewImageList.size(); i++) {
             PhotoData data = new PhotoData();
-            data.setResId((Bitmap) listResId.get(i));
+            data.setResId((Bitmap) reviewImageList.get(i));
             adapter2.addItem(data);
         }
         adapter2.setOnItemClicklistener(new OnPhotoItemClickListener() {
@@ -589,10 +660,10 @@ public class MainActivity extends AppCompatActivity {
                     photoFragment = new PhotoFragment();
                     ft = fm.beginTransaction();
                     // 여기에 데이터베이스 정보 넣어야 함
-                    photoFragment.setresId((Bitmap) listResId.get(holder.getAdapterPosition()));
-                    photoFragment.setTitle(res_name);
-                    photoFragment.setReview(content);
-                    photoFragment.setRate(rate);
+                    photoFragment.setresId((Bitmap) reviewImageList.get(holder.getAdapterPosition()));
+                    photoFragment.setTitle((String) reviewNameList.get(holder.getAdapterPosition()));
+                    photoFragment.setReview((String) contentList.get(holder.getAdapterPosition()));
+                    photoFragment.setRate((Float) rateList.get(holder.getAdapterPosition()));
                     ft.add(R.id.photoFragment, photoFragment);
                     ft.commit();
                 }
@@ -628,11 +699,13 @@ public class MainActivity extends AppCompatActivity {
                                 get_rate = jsonObject.getDouble("rate");
                                 rate = get_rate.floatValue();
 
-                                listResId.add(bitmap);
+                                reviewNameList.add(res_name);
+                                reviewImageList.add(bitmap);
+                                contentList.add(content);
+                                rateList.add(rate);
                                 Log.d("ds","ds");
-                                init();
                             }
-
+                            init();
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
                             Log.d("예외", e.toString());

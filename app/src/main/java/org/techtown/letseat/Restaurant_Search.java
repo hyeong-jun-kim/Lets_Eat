@@ -75,15 +75,15 @@ public class Restaurant_Search extends AppCompatActivity {
                 RestListRecycleItem item = adapter.getItem(position);
 
                 int send_resId = resIdList.get(adapterPosition);
-
-
+                Log.d("ds","ds");
 
                 Intent intent = new Intent(getApplicationContext(), RestInfoMain.class);
-                intent.putExtra("aP",position);
-                intent.putExtra("text",text);
+                intent.putExtra("aP",adapterPosition);
+                intent.putExtra("text","All");
                 intent.putExtra("send_resId",send_resId);
                 intent.putExtra("latitude",latitude);
                 intent.putExtra("longitude",longitude);
+
                 startActivity(intent);
 
             }
@@ -110,18 +110,15 @@ public class Restaurant_Search extends AppCompatActivity {
 
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
-                                restype = jsonObject.getString("restype");
-                                resName = jsonObject.getString("resName");
-                                location = jsonObject.getString("location");
-                                image = jsonObject.getString("image");
-                                bitmap = PhotoSave.StringToBitmap(image);
-                                resId = jsonObject.getInt("resId");
 
-                                String searchText = location;
+                                location = jsonObject.getString("location");
+
+
+
                                 Geocoder geocoder = new Geocoder(getBaseContext());
                                 List<Address> addresses = null;
                                 try {
-                                    addresses = geocoder.getFromLocationName(searchText, 3);
+                                    addresses = geocoder.getFromLocationName(location, 3);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -130,13 +127,16 @@ public class Restaurant_Search extends AppCompatActivity {
                                 double lat = place.latitude;
                                 double lon = place.longitude;
                                 if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
-                                    if(restype.contains(text)||resName.contains(text)||location.contains(text)){
-                                        list.add(bitmap);
-                                        list.add(restype);
-                                        list.add(resName);
-                                        list.add(location);
-                                        resIdList.add(resId);
-                                    }
+                                    restype = jsonObject.getString("restype");
+                                    resName = jsonObject.getString("resName");
+                                    image = jsonObject.getString("image");
+                                    bitmap = PhotoSave.StringToBitmap(image);
+                                    resId = jsonObject.getInt("resId");
+
+                                    list.add(bitmap);
+                                    list.add(restype);
+                                    list.add(resName);
+                                    resIdList.add(resId);
                                 }
                             }
 

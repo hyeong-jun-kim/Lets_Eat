@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,6 +36,7 @@ import org.techtown.letseat.util.PhotoSave;
 import java.util.ArrayList;
 
 public class Fragment_order2 extends Fragment {
+    ProgressBar progressBar;
     View view;
     private int userId = MainActivity.userId;
     private Order_recycle_adapter2 adapter2 = new Order_recycle_adapter2();
@@ -54,6 +56,8 @@ public class Fragment_order2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_order2, container, false);
+        progressBar = view.findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
         adapter2.setItems(new Orderdata2().getItems());
         recyclerView2 = view.findViewById(R.id.recycler_view2);
         recyclerView2.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -126,5 +130,6 @@ public class Fragment_order2 extends Fragment {
     public void start(){
         adapter2.setItems(waiting_orders);
         adapter2.notifyDataSetChanged();;
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

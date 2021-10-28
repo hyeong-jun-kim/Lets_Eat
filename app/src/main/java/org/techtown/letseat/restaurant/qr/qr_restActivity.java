@@ -4,23 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +23,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 
@@ -44,19 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
-import org.techtown.letseat.menu.MenuAdapter;
-import org.techtown.letseat.menu.MenuData;
 import org.techtown.letseat.pay_test.PayActivity;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
-import org.techtown.letseat.ViewPagerAdapter;
-import org.techtown.letseat.restaurant.info.Res_info_fragment2;
-import org.techtown.letseat.restaurant.info.res_info_fragment1;
-import org.techtown.letseat.restaurant.info.res_info_fragment3;
 import org.techtown.letseat.util.PhotoSave;
-import org.w3c.dom.Text;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -66,7 +48,6 @@ public class qr_restActivity extends AppCompatActivity {
 
 
     DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     private int num = 0;
     private ArrayList<QR_Menu> list = new ArrayList<>();
     private ArrayList<Integer> menus_id = new ArrayList<>();
@@ -86,7 +67,7 @@ public class qr_restActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_rest);
         sumTextView = findViewById(R.id.sumTextView);
-        res_title = findViewById(R.id.res_title);
+        res_title = findViewById(R.id.waitingNumbertv);
         res_table = findViewById(R.id.res_tableNumber);
         resImage = findViewById(R.id.qr_res_image);
         recyclerView = findViewById(R.id.qr_recyclerView);
@@ -114,17 +95,6 @@ public class qr_restActivity extends AppCompatActivity {
                 PayActivity payActivity = new PayActivity(sum, menuName);
                 Intent intent = new Intent(getApplicationContext(), payActivity.getClass());
                 startActivity(intent);
-                DatabaseReference myRef = database.getReference("ownerId_1");
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        num = snapshot.getValue(Integer.class);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                myRef.setValue(num+1);
                 QR_MenuAdapter.sum = 0;
                 finish();
             }
@@ -220,7 +190,7 @@ public class qr_restActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        DatabaseReference myRef = mRoootRef.child("ownerId_"+resId);
+                        DatabaseReference myRef = mRoootRef.child("ownerId_1");
                         myRef.setValue(orderId);
                         Log.d("OrderMenu","성공");
                     }
