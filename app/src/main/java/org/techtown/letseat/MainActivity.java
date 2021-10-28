@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,7 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -21,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -43,6 +49,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -76,6 +87,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
     ProgressBar progressBar;
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
@@ -152,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.actionsearch:
                         Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        settingIntent.putExtra("latitude",latitude);
+                        settingIntent.putExtra("longitude",longitude);
                         startActivity(settingIntent);
                         break;
                 }
@@ -290,6 +304,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } catch (JSONException e) {
                     Intent intent = new Intent(getApplicationContext(), WaitingActivity.class);
+                    intent.putExtra("resId",resId);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -304,42 +319,6 @@ public class MainActivity extends AppCompatActivity {
         imageView.setBackgroundResource(image);
     }
 
-    // 웨이팅 POST 요청
-    public void sendWaiting() {
-        String url = "http://125.132.62.150:8000/letseat/waiting/register";
-        JSONObject resData = new JSONObject();
-        JSONObject userData = new JSONObject();
-        JSONObject postData = new JSONObject();
-        try {
-            resData.put("resId", 1);
-            userData.put("userId", 1);
-            postData.put("restaurant",resData);
-            postData.put("user",userData);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                postData,
-                new Response.Listener<JSONObject>() {
-                    @Override // 응답 잘 받았을 때
-                    public void onResponse(JSONObject response) {
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override // 에러 발생 시
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "아이고.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }
 
     private void setupIndicators(int count) {
         ImageView[] indicators = new ImageView[count];
@@ -597,7 +576,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         userId = Integer.parseInt(response);
+                        FBuser();
                     }
+
                 },
                 new Response.ErrorListener(){
                     @Override
@@ -609,6 +590,49 @@ public class MainActivity extends AppCompatActivity {
         request.setShouldCache(false);
         AppHelper.requestQueue = Volley.newRequestQueue(this);
         AppHelper.requestQueue.add(request);
+    }
+    public void FBuser(){   // 파이어베이스에 유저등록
+        DatabaseReference myRef = database.getReference("userId_"+userId);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 데이터 값이 변했을 때마다 작동, text 안에 받아온 데이터 문자열을 넣어줌
+                try{
+                    int num = dataSnapshot.getValue(Integer.class);
+                    Log.d("ds","ds");
+                    if(num != 0){
+                        //푸쉬알림
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(),0,
+                                new Intent(getApplicationContext(),MainActivity.class),0);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "default");
+                        builder.setSmallIcon(R.mipmap.ic_launcher);
+                        builder.setContentTitle("알림");
+                        builder.setContentText("입장 가능합니다.");
+                        builder.setContentIntent(contentIntent);
+                        builder.setAutoCancel(true);
+                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        }
+                        notificationManager.notify(1, builder.build());
+                        myRef.setValue(0);
+                    }
+                    else {
+
+                    }
+                }catch(Exception e){
+                    myRef.setValue(0);      //처음유저등록했을때
+                    Log.d("ds","ds");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 에러가 날 때 작동
+            }
+        });
     }
     // 처음 시작 시 리사이클러뷰 세팅하기
     private void init() {

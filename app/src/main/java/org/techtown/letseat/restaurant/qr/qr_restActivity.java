@@ -48,7 +48,6 @@ public class qr_restActivity extends AppCompatActivity {
 
 
     DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     private int num = 0;
     private ArrayList<QR_Menu> list = new ArrayList<>();
     private ArrayList<Integer> menus_id = new ArrayList<>();
@@ -68,7 +67,7 @@ public class qr_restActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_rest);
         sumTextView = findViewById(R.id.sumTextView);
-        res_title = findViewById(R.id.waiting);
+        res_title = findViewById(R.id.waitingNumbertv);
         res_table = findViewById(R.id.res_tableNumber);
         resImage = findViewById(R.id.qr_res_image);
         recyclerView = findViewById(R.id.qr_recyclerView);
@@ -96,17 +95,6 @@ public class qr_restActivity extends AppCompatActivity {
                 PayActivity payActivity = new PayActivity(sum, menuName);
                 Intent intent = new Intent(getApplicationContext(), payActivity.getClass());
                 startActivity(intent);
-                DatabaseReference myRef = database.getReference("ownerId_1");
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        num = snapshot.getValue(Integer.class);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                myRef.setValue(num+1);
                 QR_MenuAdapter.sum = 0;
                 finish();
             }

@@ -91,28 +91,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosansbold"
-                        android:text="현재 대기열 :"
+                        android:text="휴대폰 번호:"
                         android:textColor="#FF6F68"
                         android:textSize="24sp" />
 
-                    <TextView
-                        android:id="@+id/waiting_queue"
+                    <EditText
+                        android:id="@+id/editTextPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:fontFamily="@font/notosansbold"
-                        android:text="2"
-                        android:textColor="#FF6F68"
-                        android:textSize="24sp" />
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="phone" />
 
-                    <TextView
-                        android:id="@+id/waiting_queue_text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosansbold"
-                        android:text="팀"
-                        android:textColor="#FF6F68"
-                        android:textSize="24sp" />
                 </LinearLayout>
 
                 <LinearLayout

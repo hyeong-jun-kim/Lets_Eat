@@ -1,39 +1,45 @@
 package org.techtown.letseat.waiting;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
-import org.techtown.letseat.RestSearch2;
 
 public class WaitingActivity extends AppCompatActivity {
+
+    DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
+    int num;
     private TextView waiting_queue, person_number;
     private Button waiting_btn1, waiting_btn2;
     private ImageButton minus_btn, plus_btn;
     private int person = 1;
+    EditText editTextPhone;
+    String phoneNum;
 
 
     @Override
@@ -42,7 +48,7 @@ public class WaitingActivity extends AppCompatActivity {
         setContentView(R.layout.waiting_activity);
 
 
-        waiting_queue = findViewById(R.id.waiting_queue);
+        editTextPhone = findViewById(R.id.editTextPhone);
         person_number = findViewById(R.id.person_number);
         minus_btn = findViewById(R.id.minus_btn);
         plus_btn = findViewById(R.id.plus_btn);
@@ -76,14 +82,17 @@ public class WaitingActivity extends AppCompatActivity {
             }
         });
 
+        //등록버튼
         waiting_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendWaiting();
+                phoneNum = editTextPhone.getText().toString();
+                getWaiting_num();
                 finish();
             }
         });
 
+        //닫기버튼
         waiting_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +100,30 @@ public class WaitingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void getWaiting_num(){
+        String url = "http://125.132.62.150:8000/letseat/waiting/res/get/lastWaiting?resId=1";
+
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        num = Integer.parseInt(response);
+                        sendWaiting();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("에러", error.toString());
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
     }
     // 웨이팅 POST 요청
     public void sendWaiting() {
@@ -100,10 +133,11 @@ public class WaitingActivity extends AppCompatActivity {
         JSONObject postData = new JSONObject();
         try {
             resData.put("resId", 1);
-            userData.put("userId", 2);
+            userData.put("userId", 1);
             postData.put("restaurant",resData);
             postData.put("user",userData);
-            postData.put("peopleNum",2);
+            postData.put("peopleNum",person);
+            postData.put("phoneNumber",phoneNum);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -115,13 +149,10 @@ public class WaitingActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override // 응답 잘 받았을 때
                     public void onResponse(JSONObject response) {
-                        try {
-                            String date = response.getString("date");
-                            int peopleNum = response.getInt("peopleNum");
-                            Intent intent = new Intent(getApplicationContext(),)
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                            DatabaseReference myRef = mRoootRef.child("waiting_ownerId_1");
+                            myRef.setValue(num);
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
                         Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 },

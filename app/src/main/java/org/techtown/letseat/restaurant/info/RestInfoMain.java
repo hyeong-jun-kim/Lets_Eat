@@ -77,7 +77,7 @@ public class RestInfoMain extends AppCompatActivity {
         resIdget = i.getIntExtra("send_resId",0);
 
 
-        res_title = findViewById(R.id.waiting);
+        res_title = findViewById(R.id.waitingNumbertv);
 
         Bundle extras = getIntent().getExtras();
         Log.d("ds","ds");

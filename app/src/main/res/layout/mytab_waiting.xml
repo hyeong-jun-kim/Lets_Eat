@@ -68,7 +68,7 @@
                                 android:includeFontPadding="false"
                                 android:textSize="13dp" />
                             <TextView
-                                android:id="@+id/textView5"
+                                android:id="@+id/waitingIdtv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="17"
@@ -85,7 +85,7 @@
                         android:orientation="vertical"
                         android:padding="16dp">
                         <TextView
-                            android:id="@+id/userName"
+                            android:id="@+id/nametv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -112,7 +112,7 @@
                             android:includeFontPadding="false"
                             android:textSize="20dp" />
                         <TextView
-                            android:id="@+id/waiting"
+                            android:id="@+id/waitingNumbertv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -138,7 +138,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/time"
+                            android:id="@+id/datetv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
