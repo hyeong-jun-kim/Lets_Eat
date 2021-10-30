@@ -208,7 +208,7 @@ public class ReviewActivity extends AppCompatActivity {
                             ByteBuffer();
                             Labeling();
                             Resources res = getResources();
-                            Bitmap change_image_size = PhotoSave.resize(image_file,res);
+                            Bitmap change_image_size = PhotoSave.reviewResize(image_file,res);
                             save_image = PhotoSave.BitmapToString(change_image_size);
 
                         } catch (IOException e) {
@@ -222,7 +222,7 @@ public class ReviewActivity extends AppCompatActivity {
                             ByteBuffer();
                             Labeling();
                             Resources res = getResources();
-                            Bitmap change_image_size = PhotoSave.resize(image_file,res);
+                            Bitmap change_image_size = PhotoSave.reviewResize(image_file,res);
                             save_image = PhotoSave.BitmapToString(change_image_size);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -333,7 +333,7 @@ public class ReviewActivity extends AppCompatActivity {
         float rate = review_grade.getRating();
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-        bitmap = PhotoSave.resize(bitmap, getResources());
+        bitmap = PhotoSave.reviewResize(bitmap, getResources());
         String image = PhotoSave.BitmapToString(bitmap);
 
         JSONObject postData = new JSONObject();

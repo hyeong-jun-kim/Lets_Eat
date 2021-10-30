@@ -2,19 +2,19 @@ package org.techtown.letseat;
 
 import java.util.ArrayList;
 
-public class mytabreviewdata {
+public class MyTabreViewData {
 
-    ArrayList<mytabreviewitem> items = new ArrayList<>();
+    ArrayList<MyTabreViewItem> items = new ArrayList<>();
 
-    public ArrayList<mytabreviewitem> getItems() {
+    public ArrayList<MyTabreViewItem> getItems() {
 
-        mytabreviewitem order1 = new mytabreviewitem(
+        MyTabreViewItem order1 = new MyTabreViewItem(
                 "뼈대있는가문", "2021/10/28","감자탕 大");
 
-        mytabreviewitem order2 = new mytabreviewitem(
+        MyTabreViewItem order2 = new MyTabreViewItem(
                 "뼈대있는가문", "2021/10/30","감자탕 小");
 
-        mytabreviewitem order3 = new mytabreviewitem(
+        MyTabreViewItem order3 = new MyTabreViewItem(
                 "뼈대있는가문", "2021/12/1", "감자탕 中");
 
         items.add(order1);

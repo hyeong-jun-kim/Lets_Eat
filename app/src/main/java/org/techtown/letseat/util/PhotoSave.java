@@ -9,7 +9,6 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 public class PhotoSave {
-
     /**
      * 사진 크기 조정
      */
@@ -19,6 +18,11 @@ public class PhotoSave {
         return bm;
     }
 
+    public static Bitmap reviewResize(Bitmap bm, Resources res){
+        Configuration config = res.getConfiguration();
+        bm = Bitmap.createScaledBitmap(bm, 500, 500, true);
+        return bm;
+    }
     /*
      * String형을 BitMap으로 변환시켜주는 함수
      * */

@@ -1,11 +1,11 @@
 package org.techtown.letseat;
 
-public class mytabreviewitem {
+public class MyTabreViewItem {
 
     private String id;
     private String date, MenuTv;
 
-    public mytabreviewitem(String id, String date, String MenuTv) {
+    public MyTabreViewItem(String id, String date, String MenuTv) {
 
         this.id= id;
         this.date = date;

@@ -7,12 +7,12 @@ import android.view.View;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-public class settingActivity extends AppCompatActivity {
+public class PasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_password);
 
         MaterialToolbar toolbar = findViewById(R.id.topMain);
 

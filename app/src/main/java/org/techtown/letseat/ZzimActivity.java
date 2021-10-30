@@ -7,12 +7,12 @@ import android.view.View;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-public class passwordActivity extends AppCompatActivity {
+public class ZzimActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password);
+        setContentView(R.layout.activity_zzim);
 
         MaterialToolbar toolbar = findViewById(R.id.topMain);
 

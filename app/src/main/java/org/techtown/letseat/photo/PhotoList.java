@@ -98,11 +98,8 @@ public class PhotoList extends AppCompatActivity {
     }
 
     void get_Review() {
-        String url = "http://125.132.62.150:8000/letseat/review/load/res?resId=1";
-
-
+        String url = "http://125.132.62.150:8000/letseat/review/load/all";
         JSONArray getData = new JSONArray();
-
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -113,11 +110,9 @@ public class PhotoList extends AppCompatActivity {
                         try {
                             String image;
                             Bitmap bitmap;
-
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 JSONObject res_jsonObject = jsonObject.getJSONObject("restaurant");
-
                                 res_name = res_jsonObject.getString("resName");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);

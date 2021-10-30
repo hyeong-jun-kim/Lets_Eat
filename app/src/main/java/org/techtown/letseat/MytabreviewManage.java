@@ -9,11 +9,8 @@ import android.view.View;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-import org.techtown.letseat.restaurant.review.RestItemReviewAdapter;
-import org.techtown.letseat.restaurant.review.RestItemReviewData;
-
 public class MytabreviewManage extends AppCompatActivity {
-    private mytabitemreviewadapter adapter = new mytabitemreviewadapter();
+    private MytabItemRevieAdapter adapter = new MytabItemRevieAdapter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +25,7 @@ public class MytabreviewManage extends AppCompatActivity {
             }
         });
 
-        adapter.setItems(new mytabreviewdata().getItems());
+        adapter.setItems(new MyTabreViewData().getItems());
 
         RecyclerView recyclerView = findViewById(R.id.myTabReviewrecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(MytabreviewManage.this));
