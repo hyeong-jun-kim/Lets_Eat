@@ -65,6 +65,7 @@ public class qr_restActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        QR_MenuAdapter.menuNames.clear();
         setContentView(R.layout.activity_qr_rest);
         sumTextView = findViewById(R.id.sumTextView);
         res_title = findViewById(R.id.waitingNumbertv);
@@ -89,6 +90,10 @@ public class qr_restActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                if(QR_MenuAdapter.sum == 0){
+                    Toast.makeText(qr_restActivity.this, "메뉴를 고른뒤에 주문하실 수 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 requestOrderList();
                 String sum = String.valueOf(QR_MenuAdapter.sum);
                 String menuName = getMenuNames();
