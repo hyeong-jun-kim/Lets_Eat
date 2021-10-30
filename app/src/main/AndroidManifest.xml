@@ -27,16 +27,16 @@
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".settingActivity"
+            android:name=".SettingActivity"
             android:exported="true" />
         <activity
-            android:name=".idActivity"
+            android:name=".IdActivity"
             android:exported="true" />
         <activity
-            android:name=".passwordActivity"
+            android:name=".PasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".zzimActivity"
+            android:name=".ZzimActivity"
             android:exported="true" />
         <activity
             android:name=".MyReview"
@@ -84,7 +84,7 @@
             android:required="false" />
 
         <activity
-            android:name=".mytab.information_fix"
+            android:name=".mytab.Information_Fix"
             android:exported="true" />
         <activity
             android:name=".restaurant.qr.qr_restActivity"

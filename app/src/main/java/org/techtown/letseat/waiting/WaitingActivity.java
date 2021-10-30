@@ -87,7 +87,7 @@ public class WaitingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 phoneNum = editTextPhone.getText().toString();
-                getWaiting_num();
+                sendWaiting();
                 finish();
             }
         });
@@ -100,30 +100,6 @@ public class WaitingActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-    public void getWaiting_num(){
-        String url = "http://125.132.62.150:8000/letseat/waiting/res/get/lastWaiting?resId=1";
-
-        StringRequest request = new StringRequest(
-                Request.Method.GET,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        num = Integer.parseInt(response);
-                        sendWaiting();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("에러", error.toString());
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
     }
     // 웨이팅 POST 요청
     public void sendWaiting() {
@@ -149,11 +125,17 @@ public class WaitingActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override // 응답 잘 받았을 때
                     public void onResponse(JSONObject response) {
+                        int waitingId;
+                        try {
+                            waitingId = response.getInt("waitingId");
                             DatabaseReference myRef = mRoootRef.child("waiting_ownerId_1");
-                            myRef.setValue(num);
+                            myRef.setValue(waitingId);
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {

@@ -83,14 +83,12 @@ public class PayActivity extends AppCompatActivity {
                 // 결제가 성공 했다면 돌려받는 JSON객체를 파싱함.
                 JsonParser parser = new JsonParser();
                 JsonElement element = parser.parse(response);
-
                 // get("받을 Key")로 Json 데이터를 받음
                 // - 결제 요청에 필요한 next_redirect_mobile_url, tid를 파싱
                 String url = element.getAsJsonObject().get("next_redirect_mobile_url").getAsString();
                 String tid = element.getAsJsonObject().get("tid").getAsString();
                 Log.e("Debug", "url : " + url);
                 Log.e("Debug", "tid : " + tid);
-
                 webView.loadUrl(url);
                 tidPin = tid;
             }
