@@ -1,13 +1,10 @@
 package org.techtown.letseat.restaurant.list;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,15 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,18 +34,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.RestSearch2;
-import org.techtown.letseat.Restaurant_Search;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 import org.techtown.letseat.restaurant.info.RestInfoMain;
-import org.techtown.letseat.util.GpsTracker;
 import org.techtown.letseat.util.PhotoSave;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class RestListMain extends AppCompatActivity {
 
@@ -78,7 +68,7 @@ public class RestListMain extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.res_list_activity);
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.review_recycler_view);
         progressBar = findViewById(R.id.loading);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -182,6 +172,7 @@ public class RestListMain extends AppCompatActivity {
         adapter.setItems(new RestListData().getItems(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        progressBar.setVisibility(View.INVISIBLE);
 
         //클릭 이벤트
         adapter.setItemClickListner(new OnRestaurantItemClickListner() {

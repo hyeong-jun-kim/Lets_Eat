@@ -1,6 +1,5 @@
 package org.techtown.letseat.order;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -25,11 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
-import org.techtown.letseat.restaurant.info.RestInfoMain;
-import org.techtown.letseat.restaurant.list.OnRestaurantItemClickListner;
-import org.techtown.letseat.restaurant.list.RestListAdapter;
-import org.techtown.letseat.restaurant.list.RestListData;
-import org.techtown.letseat.restaurant.list.RestListRecycleItem;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
@@ -48,7 +42,7 @@ public class Fragment_order extends Fragment {
         AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
         progressBar = view.findViewById(R.id.loading);
         progressBar.setVisibility(View.VISIBLE);
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.review_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
         get_Restaurant();

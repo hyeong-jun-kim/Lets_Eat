@@ -5,11 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
     android:orientation="vertical"
     tools:context=".photo.PhotoList">
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ProgressBar
             android:id="@+id/loading"
             android:layout_width="101dp"
@@ -17,47 +20,111 @@
             android:layout_gravity="center"
             android:indeterminateTint="#ED6868"
             android:visibility="gone" />
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topMain"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:backgroundTint="#ffffff"
-                app:navigationIcon="@drawable/home"
-                app:navigationIconTint="#ED6868"
                 android:background="#ffffff"
-                app:menu="@menu/main">
+                android:backgroundTint="#ffffff"
+                app:menu="@menu/main"
+                app:navigationIcon="@drawable/home"
+                app:navigationIconTint="#ED6868">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/notosansbold"
                     android:includeFontPadding="false"
+                    android:text="사진"
                     android:textColor="#ED6868"
-                    android:textSize="20dp"
-                    android:text="사진"/>
+                    android:textSize="20dp" />
             </com.google.android.material.appbar.MaterialToolbar>
+
+
+
         </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/menu_tag1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="TextView"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/menu_tag2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="TextView"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/menu_tag3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="TextView"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/menu_tag4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="TextView"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/menu_tag5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="TextView"
+                        android:textSize="16sp" />
+                </LinearLayout>
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/photoRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp" />
 
                     <FrameLayout
                         android:id="@+id/photoFragment"

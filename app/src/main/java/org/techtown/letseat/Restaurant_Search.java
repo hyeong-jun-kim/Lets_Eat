@@ -49,7 +49,7 @@ public class Restaurant_Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_search_recycler);
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.review_recycler_view);
 
         Intent intent = getIntent();
         text = intent.getStringExtra("text");
