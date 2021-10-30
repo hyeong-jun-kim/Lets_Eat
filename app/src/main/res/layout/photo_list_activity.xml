@@ -61,61 +61,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="dssafssafsfasfa"
+                            android:id="@+id/menu_tag1"/>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="dsdasafsfasfasfas"
+                            android:id="@+id/menu_tag2"/>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="dssfasfasfasfafsa"
+                            android:id="@+id/menu_tag3"/>
 
-                    <Button
-                        android:id="@+id/menu_tag1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:backgroundTint="#FFFFFF"
-                        android:text="TextView"
-                        android:textSize="16sp" />
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="ds"
+                            android:id="@+id/menu_tag4"/>
 
-                    <Button
-                        android:id="@+id/menu_tag2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:backgroundTint="#FFFFFF"
-                        android:text="TextView"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/menu_tag3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:backgroundTint="#FFFFFF"
-                        android:text="TextView"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/menu_tag4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:backgroundTint="#FFFFFF"
-                        android:text="TextView"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/menu_tag5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:backgroundTint="#FFFFFF"
-                        android:text="TextView"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="dsaffsas"
+                            android:id="@+id/menu_tag5"/>
+                    </LinearLayout>
+                </HorizontalScrollView>>
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
