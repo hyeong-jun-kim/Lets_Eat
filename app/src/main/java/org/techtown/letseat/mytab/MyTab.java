@@ -101,6 +101,7 @@ public class MyTab extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), waiting_Layout.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });

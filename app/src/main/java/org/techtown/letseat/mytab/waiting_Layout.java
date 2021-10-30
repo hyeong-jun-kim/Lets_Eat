@@ -33,10 +33,13 @@ import java.util.Date;
 
 public class waiting_Layout extends AppCompatActivity {
     TextView peopleNumtv,waitingIdtv,nametv,waitingNumbertv,datetv;
+    int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mytab_waiting);
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("userId",0);
         waitingIdtv = findViewById(R.id.waitingIdtv);
         nametv = findViewById(R.id.nametv);
         waitingNumbertv = findViewById(R.id.waitingNumbertv);
@@ -45,7 +48,7 @@ public class waiting_Layout extends AppCompatActivity {
         getWatingOrderList();
     }
     void getWatingOrderList() {
-        String url = "http://125.132.62.150:8000/letseat/waiting/user/load?userId=1";
+        String url = "http://125.132.62.150:8000/letseat/waiting/user/load?userId="+userId;
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

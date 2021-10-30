@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     private IntentIntegrator qrScan;
-    private double latitude;
+    public double latitude;
     static public MainActivity mainActivity;
-    private double longitude;
+    public double longitude;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<MainRecyclerData> list = new ArrayList<>();
@@ -262,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PhotoList.class);
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
                 startActivity(intent);
             }
         });
@@ -287,9 +289,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
-            } else {
+            if (result.getContents().contains("resId") && result.getContents().contains("tableNumber")) {   //주문 qr일때
                 Toast.makeText(MainActivity.this, "스캔완료" + result.getContents(), Toast.LENGTH_SHORT).show();
                 try{
                     JSONObject obj = new JSONObject(result.getContents());
@@ -303,10 +303,19 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            } else if(result.getContents().contains("resId")){      //웨이팅 qr일때
+                try{
+                    JSONObject obj = new JSONObject(result.getContents());
+                    int resId = obj.getInt("resId");
                     Intent intent = new Intent(getApplicationContext(), WaitingActivity.class);
                     intent.putExtra("resId",resId);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "오류발생", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -672,7 +681,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void get_Review() {
-        String url = "http://125.132.62.150:8000/letseat/review/load/res?resId=1";
+        String url = "http://125.132.62.150:8000/letseat/review/load/all";
 
 
         JSONArray getData = new JSONArray();
@@ -685,7 +694,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String image;
+                            String image,location;
                             Bitmap bitmap;
 
                             for(int i = 0; i < response.length(); i++){
@@ -698,12 +707,26 @@ public class MainActivity extends AppCompatActivity {
                                 content = jsonObject.getString("content");
                                 get_rate = jsonObject.getDouble("rate");
                                 rate = get_rate.floatValue();
+                                location = res_jsonObject.getString("location");
 
-                                reviewNameList.add(res_name);
-                                reviewImageList.add(bitmap);
-                                contentList.add(content);
-                                rateList.add(rate);
-                                Log.d("ds","ds");
+                                Geocoder geocoder = new Geocoder(getBaseContext());
+                                List<Address> addresses = null;
+                                try {
+                                    addresses = geocoder.getFromLocationName(location, 3);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Address address = addresses.get(0);
+                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
+                                double lat = place.latitude;
+                                double lon = place.longitude;
+                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
+                                    reviewNameList.add(res_name);
+                                    reviewImageList.add(bitmap);
+                                    contentList.add(content);
+                                    rateList.add(rate);
+                                    Log.d("ds","ds");
+                                }
                             }
                             init();
                             Log.d("응답", response.toString());
