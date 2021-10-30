@@ -19,14 +19,14 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="160dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -47,7 +47,7 @@
                     android:textColor="#656565"
                     android:includeFontPadding="false"
                     android:textSize="10dp"
-                    android:text="뜨끈한 미역국 아주 쥑이네예! 강추드립니다잉" />
+                    android:text="뜨끈한 미역국 " />
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
