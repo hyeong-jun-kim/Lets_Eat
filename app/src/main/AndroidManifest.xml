@@ -39,6 +39,12 @@
             android:name=".ZzimActivity"
             android:exported="true" />
         <activity
+            android:name=".ReviewSearch"
+            android:exported="true" />
+        <activity
+            android:name=".Review_Search"
+            android:exported="true" />
+        <activity
             android:name=".MyReview"
             android:exported="true" />
         <activity
