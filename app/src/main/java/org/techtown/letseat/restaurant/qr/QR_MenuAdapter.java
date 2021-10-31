@@ -42,6 +42,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
         viewHolder.imageView.setImageBitmap(item.getBitmap());
         viewHolder.name.setText(item.getName());
         viewHolder.price.setText(item.getPrice() + "원");
+        viewHolder.excription.setText(item.getExcription());
         viewHolder.amount.setText("0");
         viewHolder.upButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +138,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView price;
+        TextView excription;
         TextView amount;
         ImageView imageView;
         ImageButton upButton, downButton;
@@ -144,6 +146,7 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
             super(itemView);
             amount = itemView.findViewById(R.id.amount);
             name = itemView.findViewById(R.id.name);
+            excription = itemView.findViewById(R.id.excription);
             price = itemView.findViewById(R.id.price);
             imageView = itemView.findViewById(R.id.image);
             upButton = itemView.findViewById(R.id.up_button);

@@ -39,15 +39,17 @@
                     android:includeFontPadding="false"
                     android:text="Name"
                     android:textSize="20dp" />
+
                 <TextView
+                    android:id="@+id/excription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/notosansregular"
-                    android:textColor="#656565"
                     android:includeFontPadding="false"
-                    android:textSize="10dp"
-                    android:text="뜨끈한 미역국 " />
+                    android:text="뜨끈한 미역국 "
+                    android:textColor="#656565"
+                    android:textSize="10dp" />
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"

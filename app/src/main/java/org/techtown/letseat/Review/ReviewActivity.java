@@ -17,6 +17,7 @@ import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.login.Login;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
+
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -28,6 +29,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+
 import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
@@ -57,6 +59,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
@@ -79,6 +82,7 @@ public class ReviewActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
     private int userId = MainActivity.userId;
     private int resId;
+    private int orderId;
     private Intent intent;
     private ImageView imageView;
     private RatingBar review_grade;
@@ -105,6 +109,7 @@ public class ReviewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         resId = bundle.getInt("resId");
+        orderId = bundle.getInt("orderId");
         setContentView(R.layout.order_review);
 
         checkSelfPermission();
@@ -122,7 +127,7 @@ public class ReviewActivity extends AppCompatActivity {
         upload_photo_btn = findViewById(R.id.upload_photo_btn);
         MaterialToolbar toolbar = findViewById(R.id.topMain);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -139,9 +144,9 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-        save_review_btn.setOnClickListener(new View.OnClickListener(){
+        save_review_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 registerReview();
             }
         });
@@ -200,15 +205,15 @@ public class ReviewActivity extends AppCompatActivity {
                     selectedImageUri = data.getData();
                     Glide.with(getApplicationContext()).load(selectedImageUri).apply(RequestOptions.bitmapTransform(option)).into(imageView);
                     if (Build.VERSION.SDK_INT >= 29) {
-                        ImageDecoder.Source source= ImageDecoder.createSource(getApplicationContext().getContentResolver(), selectedImageUri);
+                        ImageDecoder.Source source = ImageDecoder.createSource(getApplicationContext().getContentResolver(), selectedImageUri);
                         try {
-                            bitmap= ImageDecoder.decodeBitmap(source).copy(Bitmap.Config.RGBA_F16, true);
+                            bitmap = ImageDecoder.decodeBitmap(source).copy(Bitmap.Config.RGBA_F16, true);
                             image_file = bitmap;
                             Image_Compile();
                             ByteBuffer();
                             Labeling();
                             Resources res = getResources();
-                            Bitmap change_image_size = PhotoSave.reviewResize(image_file,res);
+                            Bitmap change_image_size = PhotoSave.reviewResize(image_file, res);
                             save_image = PhotoSave.BitmapToString(change_image_size);
 
                         } catch (IOException e) {
@@ -216,13 +221,13 @@ public class ReviewActivity extends AppCompatActivity {
                         }
                     } else {
                         try {
-                            bitmap= MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), selectedImageUri);
+                            bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), selectedImageUri);
                             image_file = bitmap;
                             Image_Compile();
                             ByteBuffer();
                             Labeling();
                             Resources res = getResources();
-                            Bitmap change_image_size = PhotoSave.reviewResize(image_file,res);
+                            Bitmap change_image_size = PhotoSave.reviewResize(image_file, res);
                             save_image = PhotoSave.BitmapToString(change_image_size);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -233,7 +238,7 @@ public class ReviewActivity extends AppCompatActivity {
         }
     }
 
-    public void LoadTFliteModel(){
+    public void LoadTFliteModel() {
         // 모델 배포(기기에 모델 다운로드 및 TFLite 인터프리터 초기화)
         CustomModelDownloadConditions conditions = new CustomModelDownloadConditions.Builder()
                 .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
@@ -245,24 +250,23 @@ public class ReviewActivity extends AppCompatActivity {
                     public void onSuccess(CustomModel model) {
                         // Download complete. Depending on your app, you could enable the ML
                         // feature, or switch from the local model to the remote model, etc.
-                        Log.d("TFLite Model Download","Model Success!");
+                        Log.d("TFLite Model Download", "Model Success!");
                         // The CustomModel object contains the local path of the model file,
                         // which you can use to instantiate a TensorFlow Lite interpreter.
                         FirebaseModelDownloader interpreter_test = FirebaseModelDownloader.getInstance();
                         File modelFile = model.getFile();
                         if (modelFile != null || interpreter_test != null) {
                             interpreter = new Interpreter(modelFile);
-                            Log.d("TFLite Model Download","Model Success!");
-                        }
-                        else{
-                            Log.d("TFLite Model Download","Model Fail!");
+                            Log.d("TFLite Model Download", "Model Success!");
+                        } else {
+                            Log.d("TFLite Model Download", "Model Fail!");
                         }
                     }
                 });
     }
 
     // 이미지 전처리
-    public void Image_Compile(){
+    public void Image_Compile() {
         Bitmap bitmap = Bitmap.createScaledBitmap(image_file, 224, 224, true);
         ByteBuffer input = ByteBuffer.allocateDirect(224 * 224 * 3 * 4).order(ByteOrder.nativeOrder());
         for (int x = 0; x < 224; x++) {
@@ -289,7 +293,7 @@ public class ReviewActivity extends AppCompatActivity {
         this.input = input;
     }
 
-    public void ByteBuffer(){
+    public void ByteBuffer() {
         int bufferSize = 152 * java.lang.Float.SIZE / java.lang.Byte.SIZE;
         ByteBuffer modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder());
         interpreter.run(input, modelOutput);
@@ -297,7 +301,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     // 이미지 라벨링
-    public void Labeling(){
+    public void Labeling() {
         modelOutput.rewind();
         FloatBuffer probabilities = modelOutput.asFloatBuffer();
         try {
@@ -310,13 +314,13 @@ public class ReviewActivity extends AppCompatActivity {
                 String label = reader.readLine();
                 labels.add(label);
                 float probability = probabilities.get(i);
-                if(max < probability){
+                if (max < probability) {
                     max = probability;
                     idx = i;
                 }
                 Log.i(TAG, String.format("%s: %1.4f", label, probability));
             }
-            float probability = Math.round((probabilities.get(idx) * 1000)/10.0);
+            float probability = Math.round((probabilities.get(idx) * 1000) / 10.0);
             String label = labels.get(idx);
             String percent = String.valueOf(probability);
             menu_name.setText(label);
@@ -326,7 +330,7 @@ public class ReviewActivity extends AppCompatActivity {
         }
     }
 
-    public void registerReview(){
+    public void registerReview() {
         String url = "http://125.132.62.150:8000/letseat/review/register";
         String menuName = menu_name.getText().toString();
         String content = edit_review_text.getText().toString();
@@ -346,10 +350,10 @@ public class ReviewActivity extends AppCompatActivity {
             postData.put("image", image);
             resData.put("resId", resId);
             userData.put("userId", userId);
-            postData.put("restaurant",resData);
-            postData.put("user",userData);
-        }catch (JSONException e){
-            Log.d("error",e.toString());
+            postData.put("restaurant", resData);
+            postData.put("user", userData);
+        } catch (JSONException e) {
+            Log.d("error", e.toString());
         }
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -358,6 +362,7 @@ public class ReviewActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        setReviewYN();
                         finish();
                         Toast.makeText(getApplicationContext(), "성공적으로 리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show();
                     }
@@ -371,6 +376,28 @@ public class ReviewActivity extends AppCompatActivity {
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
         AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
+
+    public void setReviewYN() {
+        String url = "http://125.132.62.150:8000/letseat/order/list/set/reviewYN?orderId=" + orderId;
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("error", error.toString());
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
         AppHelper.requestQueue.add(request);
     }
 }

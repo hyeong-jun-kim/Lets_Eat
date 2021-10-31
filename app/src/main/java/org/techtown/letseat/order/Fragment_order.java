@@ -79,6 +79,7 @@ public class Fragment_order extends Fragment {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 ArrayList<String> menuList = new ArrayList<String>();
                                 int resId = jsonObject.getInt("resId");
+                                int orderId = jsonObject.getInt("orderId");
                                 String image = jsonObject.getString("image");
                                 String orderTime = jsonObject.getString("servingTime") + " 주문 완료";
                                 String resName = jsonObject.getString("resName");
@@ -102,7 +103,7 @@ public class Fragment_order extends Fragment {
                                         menus += "," + menuList.get(j) + " " + amount + "개 ";
                                     }
                                 }
-                                OrderItem orderItem = new OrderItem(resId, bitmap, menus, "총액:" + sum + "원", resName, orderTime, reviewYN);
+                                OrderItem orderItem = new OrderItem(orderId, resId, bitmap, menus, "총액:" + sum + "원", resName, orderTime, reviewYN);
                                 items.add(orderItem);
                             }
                             Log.d("응답", response.toString());
