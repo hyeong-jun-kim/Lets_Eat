@@ -49,6 +49,10 @@ implements OnReviewItemClickListner{
     @Override
     public void onBindViewHolder(@NonNull Order_recycle_adapter.ViewHolder viewHolder, int position) {
         OrderItem item = items.get(position);
+        if(!item.getReviewYN().equals("N")){
+            viewHolder.btnReview.setVisibility(View.VISIBLE);
+            viewHolder.btnReview.setEnabled(false);
+        }
         viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getResName());
         viewHolder.tvmenuName.setText(item.getMenuName());
@@ -94,7 +98,10 @@ implements OnReviewItemClickListner{
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
-            });
+            });/* // 여기서부터 작업해야함
+            public void checkReviewYN(){
+
+            }*/
         }
     }
 }

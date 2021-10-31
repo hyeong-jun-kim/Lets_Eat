@@ -128,6 +128,7 @@ public class qr_restActivity extends AppCompatActivity {
             postData.put("user",userData);
             postData.put("servingYN","N");
             postData.put("checkYN","N");
+            postData.put("reviewYN","N");
             postData.put("orderYN","Y");
             postData.put("request", request_string);
             postData.put("restaurant",restData);
