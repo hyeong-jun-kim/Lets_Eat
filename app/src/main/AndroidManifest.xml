@@ -39,10 +39,10 @@
             android:name=".ZzimActivity"
             android:exported="true" />
         <activity
-            android:name=".photo.ReviewSearch"
+            android:name=".photo.Review_Search"
             android:exported="true" />
         <activity
-            android:name=".photo.ReviewSearchAdapter"
+            android:name=".ReviewSearch"
             android:exported="true" />
         <activity
             android:name=".MyReview"

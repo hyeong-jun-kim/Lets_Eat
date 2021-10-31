@@ -19,7 +19,6 @@ import android.widget.TextView;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.ReviewSearch;
-import org.techtown.letseat.Review_Search;
 
 // 사진 탭에서 사진 클릭 시 나오는 플래그먼트
 public class PhotoFragment extends Fragment {

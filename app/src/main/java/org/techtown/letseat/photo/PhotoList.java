@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.ReviewSearch;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
@@ -70,7 +71,7 @@ public class PhotoList extends AppCompatActivity {
         menu_tag1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ReviewSearchAdapter.class);
+                Intent intent = new Intent(getApplicationContext(), Review_Search.class);
                 intent.putExtra("text",menu_tag1.getText().toString());
                 startActivity(intent);
             }

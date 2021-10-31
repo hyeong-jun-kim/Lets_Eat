@@ -28,12 +28,12 @@ import org.techtown.letseat.util.PhotoSave;
 
 import java.util.ArrayList;
 
-public class ReviewSearchAdapter extends AppCompatActivity {
+public class Review_Search extends AppCompatActivity {
 
     private final Double latitude = MainActivity.mainActivity.latitude;
     private final Double longitude = MainActivity.mainActivity.longitude;
 
-    static public ReviewSearchAdapter review_Search;
+    static public Review_Search review_Search;
     private PhotoRecyclerAdapter adapter;
     public boolean check = false;
     PhotoFragment photoFragment;
