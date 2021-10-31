@@ -11,7 +11,6 @@ public class RestItemReviewItem {
     private String date;
 
     public RestItemReviewItem(String email, float rate, String content, Bitmap bitmap,String date){
-
         this.email = email;
         this.rate = rate;
         this.content = content;

@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.photo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
+
+import org.techtown.letseat.R;
 
 public class ReviewSearch extends AppCompatActivity {
 
@@ -34,11 +36,12 @@ public class ReviewSearch extends AppCompatActivity {
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(getApplicationContext(),Review_Search.class);
+                Intent intent2 = new Intent(getApplicationContext(), ReviewSearchAdapter.class);
                 text = editText.getText().toString();
                 intent2.putExtra("text",text);
                 startActivity(intent2);
             }
         });
     }
+
 }

@@ -1,9 +1,7 @@
-package org.techtown.letseat;
+package org.techtown.letseat.photo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -20,34 +17,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.photo.OnPhotoItemClickListener;
-import org.techtown.letseat.photo.PhotoData;
-import org.techtown.letseat.photo.PhotoFragment;
-import org.techtown.letseat.photo.PhotoList;
-import org.techtown.letseat.photo.PhotoRecyclerAdapter;
-import org.techtown.letseat.restaurant.info.RestInfoMain;
-import org.techtown.letseat.restaurant.list.OnRestaurantItemClickListner;
-import org.techtown.letseat.restaurant.list.RestListAdapter;
-import org.techtown.letseat.restaurant.list.RestListData;
-import org.techtown.letseat.restaurant.list.RestListRecycleItem;
+import org.techtown.letseat.MainActivity;
+import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Review_Search extends AppCompatActivity {
+public class ReviewSearchAdapter extends AppCompatActivity {
 
     private final Double latitude = MainActivity.mainActivity.latitude;
     private final Double longitude = MainActivity.mainActivity.longitude;
 
-    static public Review_Search review_Search;
+    static public ReviewSearchAdapter review_Search;
     private PhotoRecyclerAdapter adapter;
     public boolean check = false;
     PhotoFragment photoFragment;
@@ -66,7 +52,6 @@ public class Review_Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_search_recycler);
-
         review_Search = this;
         Intent intent = getIntent();
         text = intent.getStringExtra("text");
@@ -77,10 +62,7 @@ public class Review_Search extends AppCompatActivity {
 
     void get_Restaurant() {
         String url = "http://125.132.62.150:8000/letseat/review/load/menuName?menuName="+text;
-
-
         JSONArray getData = new JSONArray();
-
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
