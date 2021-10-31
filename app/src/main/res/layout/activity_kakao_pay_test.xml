@@ -7,27 +7,20 @@
     android:orientation="vertical"
     tools:context=".pay_test.Kakao_pay_test">
 
-    <EditText
-        android:id="@+id/editName"
+    <TextView
+        android:id="@+id/Price_textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_height="37dp"
+        android:hint="상품가격"
         android:inputType="textPersonName"
-        android:text="상품 이름" />
-
-    <EditText
-        android:id="@+id/editPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="상품 가격"
+        android:textSize="20sp"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/kakaopay_test_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="결제"
+        android:textSize="16sp" />
 
 </LinearLayout>

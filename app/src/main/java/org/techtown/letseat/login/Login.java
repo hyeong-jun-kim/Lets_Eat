@@ -3,23 +3,25 @@ package org.techtown.letseat.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -30,24 +32,15 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
-import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
+import org.techtown.letseat.Kakao_Login_userInfo;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.MessageDigest;
 
 
@@ -56,8 +49,11 @@ import java.security.MessageDigest;
 public class Login extends AppCompatActivity {
     private Button  btn_register, login_button, sub_login_button;
     private LoginButton kakao_login_button;
+    private ImageView fakeKakao;
     private EditText input_email, input_password;
-    private String email_string, pwd_string;
+    private String email_string, pwd_string,kakao_email_string;
+
+
 
     private KaKaoCallBack kaKaoCallBack;
 
@@ -69,6 +65,7 @@ public class Login extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
+        fakeKakao = findViewById(R.id.fake_kakao);
 
         // 임시로그인용
         sub_login_button = findViewById(R.id.sub_login_button);
@@ -108,9 +105,10 @@ public class Login extends AppCompatActivity {
 
         kakao_login_button = findViewById(R.id.kakao_login_button);
 
-        kakao_login_button.setOnClickListener(new View.OnClickListener() {
+        fakeKakao.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                kakao_login_button.performClick();
             }
         });
 
@@ -176,6 +174,8 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), needsScopeAutority + "에 대한 권한이 허용되지 않았습니다. 개인정보 제공에 동의해주세요.", Toast.LENGTH_SHORT).show(); // 개인정보 제공에 동의해달라는 Toast 메세지 띄움
 
                         // 회원탈퇴 처리
+
+
                         UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
                             @Override
                             public void onFailure(ErrorResult errorResult) {
@@ -200,45 +200,79 @@ public class Login extends AppCompatActivity {
 
                             @Override
                             public void onSuccess(Long result) {
+
                             }
                         });
                     }
 
                     else{
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
-                        if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
-                            intent.putExtra("email", result.getKakaoAccount().getEmail());
-                        else
-                            intent.putExtra("email", "none");
-                        startActivity(intent);
-                        finish();
+                        kakao_email_string = result.getKakaoAccount().getEmail().toString();
+                        sendLoginCheckRequest();
                     }
                 }
-
             });
         }
-
         @Override
         public void onSessionOpenFailed (KakaoException e){
             kakaoError("로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요.");
         }
+
     }
 
     //카카오 로그인 여기까지
+
+    // 이메일 중복 확인 GET
+    public void sendLoginCheckRequest() {
+        String url = "http://125.132.62.150:8000/letseat/register/email/check?email=" + kakao_email_string;
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
+                    @Override // 응답 잘 받았을 때
+                    public void onResponse(String response) {
+                        if (response.equals("emailCheckFail")) // 중복된값이 있다는 뜻이있으니까 이미 등록되어있다는뜻
+                        {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else  //DB에 아이디가 없으니까 등록해야함
+                            {
+                            Intent intent = new Intent(getApplicationContext(), Kakao_Login_userInfo.class);
+                            intent.putExtra("send",kakao_email_string);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override // 에러 발생 시
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Tag_Error",error.toString());
+                        println("연결 상태 불량");
+                        Log.d("error",error.toString());
+                    }
+
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
+
 
 
     private void HashKey() {
         try {
             PackageInfo pkinfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
             for (Signature signature : pkinfo.signatures) {
-                MessageDigest messageDigest = MessageDigest.getInstance("SHA");
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
                 messageDigest.update(signature.toByteArray());
                 String result = new String(Base64.encode(messageDigest.digest(), 0));
                 Log.d("해시", result);
             }
         }
         catch (Exception e) {
+
         }
     }
     public void println(String text) {
@@ -247,7 +281,7 @@ public class Login extends AppCompatActivity {
 
     // 일반 로그인 POST 요청
     void login(){
-        String url = "http://220.70.169.23:8000/letseat/login/normal";
+        String url = "http://125.132.62.150:8000/letseat/login/normal";
         JSONObject postData = new JSONObject();
         try {
             postData.put("email", email_string);
@@ -262,6 +296,10 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override // 응답 잘 받았을 때
                     public void onResponse(JSONObject response) {
+                        SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("email",email_string);
+                        editor.commit();
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -279,4 +317,6 @@ public class Login extends AppCompatActivity {
         AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
+
+
 }

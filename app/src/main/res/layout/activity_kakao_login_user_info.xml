@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".Kakao_Login_userInfo">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/notosansbold"
+            android:gravity="center|bottom"
+            android:text="추가정보를 입력해주세요"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#FFFF0000" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosansregular"
+                android:text="닉네임"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/nickName"
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#ED6868"
+                        android:fontFamily="@font/notosansregular"
+                        android:hint="닉네임을 입력해주세요."
+                        android:textColor="#000000"
+                        android:textColorHint="#939393"
+                        android:textSize="13dp" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosansregular"
+                android:text="생년월일"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#ED6868"
+                        android:fontFamily="@font/notosansregular"
+                        android:hint="생년월일을 입력해주세요."
+                        android:textColor="#000000"
+                        android:textColorHint="#939393"
+                        android:textSize="13dp" />
+
+                    <Button
+                        android:id="@+id/register_birthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:background="@drawable/circle_design2"
+                        android:fontFamily="@font/notosansbold"
+                        android:text="생일입력"
+                        android:textColor="#ED6868" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosansregular"
+                android:text="성별"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <RadioGroup
+                android:id="@+id/register_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/register_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#ED6868"
+                    android:checked="true"
+                    android:fontFamily="@font/notosansregular"
+                    android:text="여성"
+                    android:textColor="#000000"
+                    android:textSize="13dp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <RadioButton
+                    android:id="@+id/register_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:buttonTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"
+                    android:text="남성"
+                    android:textColor="#000000"
+                    android:textSize="13dp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_circle3"
+        android:fontFamily="@font/notosansbold"
+        android:text="확인"
+        android:textColor="#ffffff"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</LinearLayout>

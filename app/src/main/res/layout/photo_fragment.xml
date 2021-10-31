@@ -55,40 +55,17 @@
             android:textColor="#090707"
             android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/one_star"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:id="@+id/two_star"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:id="@+id/three_star"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:id="@+id/four_star"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:src="@drawable/star" />
-
-        <ImageView
-            android:id="@+id/five_star"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:src="@drawable/star" />
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:max="5"
+            android:numStars="5"
+            android:progressTint="#ED6868"
+            android:rating="3"
+            android:stepSize="0.5"
+            android:secondaryProgressTint="#ED6868"/>
 
     </LinearLayout>
 
@@ -111,9 +88,10 @@
             android:text="맛이정말 끝내줍니다 ^^"
             android:textColor="#090707"
             android:textSize="16sp" />
+
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/photo_cancel"
         android:layout_width="25dp"
         android:layout_height="25dp"

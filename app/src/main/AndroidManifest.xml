@@ -13,10 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <uses-feature android:name="android.hardware.camera" />
-
-
 
     <application
         android:name=".KakaoSDKInit"
@@ -24,19 +21,69 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat"
-        android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".map.Naver_map"
+            android:name=".settingActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".idActivity"
+            android:exported="true" />
+        <activity
+            android:name=".passwordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".zzimActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReviewSearch"
+            android:exported="true" />
+        <activity
+            android:name=".Review_Search"
+            android:exported="true" />
+        <activity
+            android:name=".MyReview"
+            android:exported="true" />
+        <activity
+            android:name=".MytabreviewManage"
+            android:exported="true" />
+        <activity
+            android:name=".RestSearch2"
+            android:exported="true" />
+        <activity
+            android:name=".Kakao_Login_userInfo"
+            android:exported="true" />
+        <activity
+            android:name=".Restaurant_Search"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_onemanFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_westernFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_japanFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_chinaFood"
+            android:exported="true" />
+        <activity
+            android:name=".restaurant.list.RestList_KoreanFood"
+            android:exported="true" />
+        <activity
+            android:name=".Review.ReviewActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="d8aeb3d2d3af0540824e12d6ba383ba4" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDwi28qhFQzZBAfyCvLbkkPRG5zSEiGmHY" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -46,6 +93,9 @@
             android:name=".mytab.information_fix"
             android:exported="true" />
         <activity
+            android:name=".restaurant.qr.qr_restActivity"
+            android:exported="true" />
+        <activity
             android:name=".mytab.waiting_Layout"
             android:exported="true" />
         <activity
@@ -53,17 +103,17 @@
             android:exported="true" />
         <activity android:name=".pay_test.PayActivity" />
         <activity android:name=".pay_test.Kakao_pay_test" />
-        <activity android:name=".menu.menu_sample" />
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList" />
         <activity
-            android:name=".ReviewActivity"
+            android:name=".Review.ReviewActivity"
             android:exported="true" />
+        <activity
+            android:name=".Review.ReviewImage1"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".order.OrderActivity"
-            android:exported="true" />
-        <activity
-            android:name=".menu.MenuActivity"
             android:exported="true" />
         <activity android:name=".login.RegisterActivity" />
         <activity
@@ -71,6 +121,12 @@
             android:exported="true" />
         <activity
             android:name=".login.Login"
+            android:exported="true" />
+        <activity
+            android:name=".waiting.WaitingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".map.Map_MainActivity"
             android:exported="true" />
         <activity android:name=".SplashActivity">
             <intent-filter>

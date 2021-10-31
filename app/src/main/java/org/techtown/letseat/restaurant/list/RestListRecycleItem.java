@@ -1,23 +1,22 @@
 package org.techtown.letseat.restaurant.list;
 
-public class RestListRecycleItem {
+import android.graphics.Bitmap;
 
-    private int src;
+public class RestListRecycleItem{
+
+    private Bitmap bitmap;
     private String genre;
     private String name;
-    private String adress;
 
-    public RestListRecycleItem(int src, String genre, String name, String adress) {
+    public RestListRecycleItem(Bitmap bitmap, String genre, String name) {
 
-        this.src = src;
+        this.bitmap = bitmap;
         this.genre = genre;
         this.name = name;
-        this.adress = adress;
-
     }
 
-    public int getSrc() {
-        return src;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
     public String getGenre() {
@@ -28,7 +27,5 @@ public class RestListRecycleItem {
         return name;
     }
 
-    public String getAdress() {
-        return adress;
-    }
+
 }

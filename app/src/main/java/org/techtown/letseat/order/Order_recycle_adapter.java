@@ -2,10 +2,12 @@ package org.techtown.letseat.order;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,14 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.ReviewActivity;
+import org.techtown.letseat.Review.ReviewActivity;
 
 import java.util.ArrayList;
 
 public class Order_recycle_adapter extends RecyclerView.Adapter<Order_recycle_adapter.ViewHolder>
 implements OnReviewItemClickListner{
 
-    private ArrayList<Order_recycle_item> items = new ArrayList<>();
+    private ArrayList<OrderItem> items = new ArrayList<>();
     private Context context;
     OnReviewItemClickListner listner;
 
@@ -46,14 +48,12 @@ implements OnReviewItemClickListner{
     }
     @Override
     public void onBindViewHolder(@NonNull Order_recycle_adapter.ViewHolder viewHolder, int position) {
-
-        Order_recycle_item item = items.get(position);
-
-        viewHolder.ivRest.setImageResource(item.getSrc());
-        viewHolder.tvName.setText(item.getName());
+        OrderItem item = items.get(position);
+        viewHolder.ivRest.setImageBitmap(item.getBitmap());
+        viewHolder.tvName.setText(item.getResName());
         viewHolder.tvmenuName.setText(item.getMenuName());
         viewHolder.tvPrice.setText(item.getPrice());
-        viewHolder.tvOrder.setText(item.getOrder());
+        viewHolder.tvOrder.setText(item.getOrderTime());
     }
 
     @Override
@@ -61,7 +61,7 @@ implements OnReviewItemClickListner{
         return items.size();
     }
 
-    public void setItems(ArrayList<Order_recycle_item> items) {
+    public void setItems(ArrayList<OrderItem> items) {
         this.items = items;
     }
 
@@ -69,7 +69,7 @@ implements OnReviewItemClickListner{
 
         ImageView ivRest;
         TextView tvName, tvmenuName, tvPrice, tvOrder;
-        Button btnReview;
+        ImageButton btnReview;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -88,7 +88,10 @@ implements OnReviewItemClickListner{
                     if(listner != null){
                         listner.OnItemClick(ViewHolder.this,v,position);
                     }
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("resId",items.get(position).getResId());
                     Intent intent = new Intent(context, ReviewActivity.class);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
 import java.util.HashMap;
@@ -39,13 +41,14 @@ public class PayActivity extends AppCompatActivity {
     String tidPin;
     String pgToken;
 
-    public PayActivity() {
+    public PayActivity(){
 
     }
 
-    public PayActivity(String productName, String productPrice) {
-        PayActivity.productName = productName;
-        PayActivity.productPrice = productPrice;
+    public PayActivity(String productPrice, String productName) {
+        this.productPrice = productPrice;
+        this.productName = productName;
+        Log.d("ds","ds");
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,7 @@ public class PayActivity extends AppCompatActivity {
                 params.put("cancel_url", "https://www.naver.com/cancel"); // 결제 취소시 돌려 받을 url 주소
                 params.put("fail_url", "https://www.naver.com/fali"); // 결제 실패시 돌려 받을 url 주소
                 return params;
+
             }
 
             @Override
@@ -158,18 +162,24 @@ public class PayActivity extends AppCompatActivity {
             Log.e("Debug", "url" + url);
 
             if (url != null && url.contains("pg_token=")) {
+                if(url.startsWith("https://www.naver.com/success")){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplication(), "결제가 성공적으로 완료되었습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return true;
+                }
                 String pg_Token = url.substring(url.indexOf("pg_token=") + 9);
                 pgToken = pg_Token;
-
                 requestQueue.add(approvalRequest);
 
             } else if (url != null && url.startsWith("intent://")) {
                 try {
                     Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                     Intent existPackage = getPackageManager().getLaunchIntentForPackage(intent.getPackage());
-                    if (existPackage != null) {
-                        startActivity(intent);
-                    }
+
+                    startActivity(intent);
+
                     return true;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -180,4 +190,3 @@ public class PayActivity extends AppCompatActivity {
         }
     }
 }
-

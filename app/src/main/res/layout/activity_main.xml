@@ -7,20 +7,52 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">v
 
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="101dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="#ED6868"
+            android:visibility="gone" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ED6868"
+                app:titleTextColor="#ffffff"
+                app:menu="@menu/menumain"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:text="Let's Eat"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
-
+                android:layout_height="200dp">
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/sliderViewPager"
                     android:layout_width="match_parent"
@@ -29,14 +61,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <View
                     android:id="@+id/viewFadingEdge"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:background="@drawable/bg_fading_edge"
                     app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
-
                 <LinearLayout
                     android:id="@+id/layoutIndicators"
                     android:layout_width="0dp"
@@ -47,134 +77,147 @@
                     app:layout_constraintBottom_toBottomOf="@id/viewFadingEdge"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <FrameLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:text="주변 식당"
+                android:paddingLeft="8dp"
+                android:fontFamily="@font/notosansbold"
+                android:textSize="30dp"
+                android:textColor="#000000"/>
 
-                <Button
-                    android:id="@+id/btnQR"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_design"
-                    android:fontFamily="@font/notosansbold"
-                    android:text="QR"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        android:id="@+id/mainRestRecycler"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="리뷰 사진"
+                android:paddingLeft="8dp"
+                android:fontFamily="@font/notosansbold"
+                android:textSize="30dp"
+                android:textColor="#000000"/>
 
-                <GridLayout
-                    android:layout_width="359dp"
-                    android:layout_height="match_parent"
-                    android:columnCount="2"
-                    android:orientation="vertical"
-                    android:rowCount="2">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <Button
-                        android:id="@+id/btnRest"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/main_icon1_border"
-                        android:drawableTop="@drawable/restaurant"
-                        android:fontFamily="@font/notosansbold"
-                        android:padding="25dp"
-                        android:text="식당"
-                        android:textColor="#000000"
-                        android:textSize="20sp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mainphotoRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal" />
 
-                    <Button
-                        android:id="@+id/btnPhoto"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_row="0"
-                        android:layout_column="1"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/main_icon2_border"
-                        android:drawableTop="@drawable/food"
-                        android:fontFamily="@font/notosansbold"
-                        android:padding="10dp"
-                        android:text="사진"
-                        android:textColor="#000000"
-                        android:textSize="20sp" />
+                <FrameLayout
+                    android:id="@+id/photoFragment"
+                    android:layout_width="350dp"
+                    android:layout_height="451dp"
+                    android:layout_gravity="center_horizontal" />
 
-                    <Button
-                        android:id="@+id/btnOrder"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_row="1"
-                        android:layout_column="0"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/main_icon3_border"
-                        android:drawableTop="@drawable/order"
-                        android:fontFamily="@font/notosansbold"
-                        android:padding="20dp"
-                        android:text="주문 내역"
-                        android:textColor="#000000"
-                        android:textSize="20sp" />
-
-                    <Button
-                        android:id="@+id/btnMY"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_row="1"
-                        android:layout_column="1"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/main_icon4_border"
-                        android:drawableTop="@drawable/mytab"
-                        android:fontFamily="@font/notosansbold"
-                        android:padding="20dp"
-                        android:text="MY"
-                        android:textColor="#000000"
-                        android:textSize="20sp" />
-                </GridLayout>
             </FrameLayout>
 
-            <Button
-                android:id="@+id/pay_test_button"
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="20dp"
-                android:background="#F4D7D7"
-                android:text="결제 테스트"
-                android:textColor="#000000"
+                android:layout_height="60dp"
+                android:visibility="invisible"
                 android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="TextView"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/map_test"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="#8AB1E1"
-                android:text="네이버 지도 테스트"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/kakao_logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="#C5EF93"
-                android:text="카카오 로그아웃"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="#ffffff"
+            android:paddingBottom="8dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/btnRest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/rest"
+                    android:background="#ffffff"
+                    app:tint="#ED6868"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnPhoto"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageButton
+                    android:id="@+id/btnPhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/photo"
+                    android:background="#ffffff"
+                    app:tint="#ED6868"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnRest"
+                    app:layout_constraintEnd_toStartOf="@+id/blank"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/btnRest" />
+
+                <View
+                    android:id="@+id/blank"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnRest"
+                    app:layout_constraintEnd_toStartOf="@+id/btnOrder"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/btnPhoto"
+                    app:layout_constraintTop_toTopOf="@+id/btnRest" />
+
+                <ImageButton
+                    android:id="@+id/btnOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/list"
+                    android:background="#ffffff"
+                    app:tint="#ED6868"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnRest"
+                    app:layout_constraintEnd_toStartOf="@+id/btnMY"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/blank" />
+
+                <ImageButton
+                    android:id="@+id/btnMY"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    app:tint="#ED6868"
+                    android:src="@drawable/my"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnRest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/btnOrder"
+                    app:layout_constraintTop_toTopOf="@+id/btnRest" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ED6868"
+            app:borderWidth="0dp"
+            app:srcCompat="@drawable/qr"
+            app:tint="@null"
+            app:layout_anchor="@id/bottomAppBar"
+            android:id="@+id/btnQR"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

@@ -1,31 +1,36 @@
 package org.techtown.letseat.restaurant.list;
 
+import android.graphics.Bitmap;
+
 import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 
 public class RestListData {
 
+
     ArrayList<RestListRecycleItem> items = new ArrayList<>();
 
-    public ArrayList<RestListRecycleItem> getItems() {
+    RestListRecycleItem rest[] = new RestListRecycleItem[100];
 
-        RestListRecycleItem rest1 = new RestListRecycleItem(R.drawable.image1,
-                "중식", "하오탕", "경기도 용인시 수지구 147-2");
 
-        RestListRecycleItem rest2 = new RestListRecycleItem(R.drawable.image2,
-                "한식", "뼈대있는가문", "경기도 용인시 기흥구 282-2");
+    int p = 0;
 
-        RestListRecycleItem rest3 = new RestListRecycleItem(R.drawable.image3,
-                "한식", "곱순네 순대국", "경기도 성남시 수정구 182-1");
+    public ArrayList<RestListRecycleItem> getItems(ArrayList list) {
 
-        items.add(rest1);
-        items.add(rest2);
-        items.add(rest3);
 
+
+        for(int i = 0; i < list.size()/3; i++){
+            rest[i+1] = new RestListRecycleItem((Bitmap) list.get(p),
+                    list.get(p+1).toString(), (String) list.get(p+2));
+            items.add(rest[i+1]);
+            p += 3;
+        }
 
 
         return items;
     }
 
+
 }
+

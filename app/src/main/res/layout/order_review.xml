@@ -4,105 +4,210 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ED6868"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".ReviewActivity" >
-
-    <TextView
-        android:id="@+id/textView7"
+    tools:context=".Review.ReviewActivity">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="리뷰"
-        android:textSize="24sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView8"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="별점"
-            android:textSize="24sp" />
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ffffff"
+                app:navigationIcon="@drawable/back"
+                app:navigationIconTint="#ED6868"
+                android:background="#ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ED6868"
+                    android:textSize="20dp"
+                    android:text="리뷰 쓰기"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ic_baseline_photo_24"/>
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:numStars="5"
-            android:stepSize="1"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </LinearLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/upload_photo_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:fontFamily="@font/notosansbold"
+                    android:background="@drawable/round_circle3"
+                    android:text="사진 업로드"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
 
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="match_parent"
-        android:layout_height="243dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/login_border1"
-        android:ems="10"
-        android:gravity="top"
-        android:inputType="textPersonName"
-        android:text="리뷰를 남겨주세요!"
-        android:textSize="18sp" />
+                    android:orientation="horizontal">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="20dp"
-        android:background="#FFFFFF" />
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:text="메뉴 :"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/menu_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:hint="메뉴 이름"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/login_border1"
-            app:srcCompat="@drawable/camera" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="정확도 :"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/accuracy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#E8E6E6" />
+                <EditText
+                    android:id="@+id/review_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="159dp"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="리뷰를 남겨주세요!"
+                    android:backgroundTint="#ED6868"
+                    android:fontFamily="@font/notosansregular"
+                    android:includeFontPadding="false"
+                    android:inputType="textPersonName"
+                    android:textSize="18sp" />
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#E8E6E6" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/login_border1"
-            app:srcCompat="@drawable/camera" />
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="별점"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/login_border1"
-            app:srcCompat="@drawable/camera" />
+                    <RatingBar
+                        android:id="@+id/review_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="5dp"
+                        android:progressTint="#ED6868"
+                        android:gravity="center|center_horizontal"
+                        android:numStars="5"
+                        android:stepSize="1"
+                        android:secondaryProgressTint="#ED6868"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
-    </LinearLayout>
+                </LinearLayout>
 
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#E8E6E6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/save_review_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/notosansbold"
+                        android:background="@drawable/round_circle3"
+                        android:backgroundTint="#FF6F68"
+                        android:text="저장" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/cancel_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/notosansbold"
+                        android:background="@drawable/round_circle3"
+                        android:backgroundTint="#FF6F68"
+                        android:text="취소" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

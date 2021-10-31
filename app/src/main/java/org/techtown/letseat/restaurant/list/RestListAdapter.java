@@ -1,5 +1,7 @@
 package org.techtown.letseat.restaurant.list;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.techtown.letseat.R;
-import org.techtown.letseat.restaurant.info.RestInfoRecycleItem;
+
 
 import java.util.ArrayList;
 
@@ -19,6 +23,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 {
 
     private ArrayList<RestListRecycleItem> items = new ArrayList<>();
+
     private ArrayList<RestInfoRecycleItem> RestInfoRecycleItems = new ArrayList<>();
 
     OnRestaurantItemClickListner listner;
@@ -34,13 +39,12 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RestListAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         RestListRecycleItem item = items.get(position);
 
-        viewHolder.ivRest.setImageResource(item.getSrc());
+        viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvAdress.setText(item.getAdress());
         viewHolder.tvGenre.setText(item.getGenre());
 
     }
@@ -55,6 +59,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
         this.items = items;
     }
 
+
     public void OnItemClick(ViewHolder holder, View view, int position){
         if(listner != null){
             listner.OnItemClick(holder,view,position);
@@ -65,27 +70,21 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
         this.listner = listner;
     }
 
-    public RestListRecycleItem getItemData(int num){
-        return items.get(num);
-    }
-
 
     public RestListRecycleItem getItem(int position){
         return items.get(position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivRest;
-        TextView tvName, tvAdress, tvGenre;
+        TextView tvName,tvGenre;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             ivRest = itemView.findViewById(R.id.iv_item_res);
-
             tvName = itemView.findViewById(R.id.tv_item_res_name);
-            tvAdress = itemView.findViewById(R.id.tv_item_res_adress);
             tvGenre = itemView.findViewById(R.id.tv_item_food_genre);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +95,6 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
                     if(listner !=null){
                         listner.OnItemClick(ViewHolder.this,v,position);
                     }
-
                 }
             });
 

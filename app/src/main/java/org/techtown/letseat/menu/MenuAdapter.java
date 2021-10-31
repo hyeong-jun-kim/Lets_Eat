@@ -3,6 +3,7 @@ package org.techtown.letseat.menu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +14,10 @@ import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>implements OnMenuItemClickListner{
     ArrayList<Menu> items = new ArrayList<Menu>();
+
+    OnMenuItemClickListner listner;
 
     @NonNull
     @Override
@@ -28,26 +31,37 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Menu item = items.get(position);
-        viewHolder.setItem(item);
+        viewHolder.name.setText(item.getName());
+        viewHolder.price.setText(item.getPrice()+"원");
+        viewHolder.imageView.setImageBitmap(item.getBitmap());
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-    public void addItem(Menu item){
-        items.add(item);
-    }
+
     public void setItems(ArrayList<Menu> items){
         this.items = items;
     }
+
+
+    public void OnItemClick(ViewHolder holder, View view, int position){
+        if(listner != null){
+            listner.OnItemClick(holder,view,position);
+        }
+    }
+
+
+    public void setItemClickListner(OnMenuItemClickListner listner){
+        this.listner = listner;
+    }
+
     public Menu getItem(int position){
         return items.get(position);
     }
-    public void setItem(int position, Menu item){
-        items.set(position, item);
-    }
-    static class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView price;
         ImageView imageView;
@@ -57,11 +71,18 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
             name = itemView.findViewById(R.id.name);
             price = itemView.findViewById(R.id.price);
             imageView = itemView.findViewById(R.id.image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position =getAdapterPosition();
+                    if(listner !=null){
+                        listner.OnItemClick(ViewHolder.this,v,position);
+                    }
+
+                }
+            });
         }
-        public void setItem(Menu item){
-            name.setText(item.getName());
-            price.setText(item.getPrice());
-            imageView.setImageResource(item.getResId());
-        }
+
     }
 }

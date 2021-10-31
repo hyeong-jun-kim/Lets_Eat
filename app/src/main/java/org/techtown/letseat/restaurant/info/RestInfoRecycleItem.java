@@ -1,7 +1,6 @@
 package org.techtown.letseat.restaurant.info;
 
 public class RestInfoRecycleItem {
-
     private int src;
     private String title;
     private String subtitle;
@@ -49,3 +48,4 @@ public class RestInfoRecycleItem {
         return parking;
     }
 }
+
