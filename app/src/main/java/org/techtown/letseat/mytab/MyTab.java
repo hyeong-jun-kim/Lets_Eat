@@ -47,19 +47,6 @@ public class MyTab extends AppCompatActivity {
             }
         });
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.actionsearch:
-                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
-                        startActivity(settingIntent);
-                        break;
-                }
-                return true;
-            }
-        });
-
         ImageButton settingBtn = findViewById(R.id.settingBtn);
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
