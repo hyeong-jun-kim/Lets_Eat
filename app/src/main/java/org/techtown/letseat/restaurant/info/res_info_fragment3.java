@@ -79,7 +79,7 @@ public class res_info_fragment3 extends Fragment {
 
 
     void get_Review() {
-        String url = "http://125.132.62.150:8000/letseat/review/load/all";
+        String url = "http://125.132.62.150:8000/letseat/review/load/res?resId="+resId;
 
 
         JSONArray getData = new JSONArray();
@@ -92,7 +92,7 @@ public class res_info_fragment3 extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String email,image,content,location;
+                            String email,image,content;
                             Double getrate;
                             float rate;
                             Bitmap bitmap;
@@ -101,7 +101,6 @@ public class res_info_fragment3 extends Fragment {
                             for(int i = 0; i < response.length(); i++){
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 JSONObject userobject = jsonObject.getJSONObject("user");
-                                JSONObject res_jsonObject = jsonObject.getJSONObject("restaurant");
                                 email = userobject.getString("email");//user 이메일
                                 date = jsonObject.getString("date");
                                 getrate = jsonObject.getDouble("rate");   //별점
@@ -109,26 +108,11 @@ public class res_info_fragment3 extends Fragment {
                                 content = jsonObject.getString("content");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
-                                location = res_jsonObject.getString("location");
-
-                                Geocoder geocoder = new Geocoder(getContext());
-                                List<Address> addresses = null;
-                                try {
-                                    addresses = geocoder.getFromLocationName(location, 3);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                Address address = addresses.get(0);
-                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
-                                double lat = place.latitude;
-                                double lon = place.longitude;
-                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
                                     list.add(email);
                                     list.add(rate);
                                     list.add(content);
                                     list.add(bitmap);
                                     list.add(date);
-                                }
                             }
                             adapter.setItems(new RestItemReviewData().getItems(list));
                             adapter.notifyDataSetChanged();

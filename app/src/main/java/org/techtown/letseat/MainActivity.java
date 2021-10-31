@@ -682,10 +682,7 @@ public class MainActivity extends AppCompatActivity {
 
     void get_Review() {
         String url = "http://125.132.62.150:8000/letseat/review/load/all";
-
-
         JSONArray getData = new JSONArray();
-
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -694,39 +691,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String image,location;
+                            String image;
                             Bitmap bitmap;
-
                             for(int i = 0; i < response.length(); i++){
+                                if(reviewNameList.size() > 9)
+                                    break;
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 JSONObject res_jsonObject = jsonObject.getJSONObject("restaurant");
-
                                 res_name = res_jsonObject.getString("resName");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
                                 content = jsonObject.getString("content");
                                 get_rate = jsonObject.getDouble("rate");
                                 rate = get_rate.floatValue();
-                                location = res_jsonObject.getString("location");
-
-                                Geocoder geocoder = new Geocoder(getBaseContext());
-                                List<Address> addresses = null;
-                                try {
-                                    addresses = geocoder.getFromLocationName(location, 3);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                Address address = addresses.get(0);
-                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
-                                double lat = place.latitude;
-                                double lon = place.longitude;
-                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
-                                    reviewNameList.add(res_name);
-                                    reviewImageList.add(bitmap);
-                                    contentList.add(content);
-                                    rateList.add(rate);
-                                    Log.d("ds","ds");
-                                }
+                                reviewNameList.add(res_name);
+                                reviewImageList.add(bitmap);
+                                contentList.add(content);
+                                rateList.add(rate);
+                                Log.d("ds","ds");
                             }
                             init();
                             Log.d("응답", response.toString());

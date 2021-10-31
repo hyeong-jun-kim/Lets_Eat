@@ -89,7 +89,7 @@ public class Review_Search extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String image,location;
+                            String image;
                             Bitmap bitmap;
 
                             for(int i = 0; i < response.length(); i++){
@@ -102,26 +102,11 @@ public class Review_Search extends AppCompatActivity {
                                 content = jsonObject.getString("content");
                                 get_rate = jsonObject.getDouble("rate");
                                 rate = get_rate.floatValue();
-                                location = res_jsonObject.getString("location");
-
-                                Geocoder geocoder = new Geocoder(getBaseContext());
-                                List<Address> addresses = null;
-                                try {
-                                    addresses = geocoder.getFromLocationName(location, 3);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                Address address = addresses.get(0);
-                                LatLng place = new LatLng(address.getLatitude(), address.getLongitude());
-                                double lat = place.latitude;
-                                double lon = place.longitude;
-                                if((latitude < lat+0.05 && lat-0.05 < latitude) || (longitude < lon+0.07 && lon-0.07 < longitude)){
                                     reviewNameList.add(res_name);
                                     reviewImageList.add(bitmap);
                                     contentList.add(content);
                                     rateList.add(rate);
                                     Log.d("ds","ds");
-                                }
                             }
                             init();
                             Log.d("응답", response.toString());
