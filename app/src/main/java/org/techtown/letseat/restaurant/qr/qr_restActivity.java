@@ -266,7 +266,7 @@ public class qr_restActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         try {
                             int menuId;
-                            String menuPrice,menuName,image;
+                            String menuPrice,menuName,image,excription;
                             Bitmap bitmap;
 
                             for(int i = 0; i < response.length(); i++){
@@ -275,8 +275,9 @@ public class qr_restActivity extends AppCompatActivity {
                                 menuPrice = jsonObject.getString("price");
                                 menuName = jsonObject.getString("name");
                                 image = jsonObject.getString("photo");
+                                excription = jsonObject.getString("excription");
                                 bitmap = PhotoSave.StringToBitmap(image);
-                                QR_Menu menu = new QR_Menu(bitmap, menuName, menuPrice);
+                                QR_Menu menu = new QR_Menu(bitmap, menuName, menuPrice, excription);
                                 list.add(menu);
                                 menus_id.add(menuId);
                             }

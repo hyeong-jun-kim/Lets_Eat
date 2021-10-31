@@ -69,43 +69,46 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Action"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:text="dssafssafsfasfa"
-                            android:id="@+id/menu_tag1"/>
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Action"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:text="dsdasafsfasfasfas"
-                            android:id="@+id/menu_tag2"/>
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Action"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:text="dssfasfasfasfafsa"
-                            android:id="@+id/menu_tag3"/>
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/menu_tag1"
                             style="@style/Widget.MaterialComponents.Chip.Action"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="2dp"
-                            android:text="ds"
-                            android:id="@+id/menu_tag4"/>
+                            android:text="          " />
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/menu_tag2"
                             style="@style/Widget.MaterialComponents.Chip.Action"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="2dp"
-                            android:text="dsaffsas"
-                            android:id="@+id/menu_tag5"/>
+                            android:text="          " />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/menu_tag3"
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="          " />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/menu_tag4"
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="          " />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/menu_tag5"
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:text="          " />
                     </LinearLayout>
                 </HorizontalScrollView>>
                 <FrameLayout
