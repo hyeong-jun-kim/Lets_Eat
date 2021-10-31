@@ -85,7 +85,11 @@ public class WaitingActivity extends AppCompatActivity {
         minus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                person--;
+                if(person>=2){
+                    person--;
+                }else {
+                    Toast.makeText(getApplicationContext(),"1명 이상부터 입장가능합니다.",Toast.LENGTH_SHORT).show();
+                }
                 person_number.setText(""+person);
             }
         });

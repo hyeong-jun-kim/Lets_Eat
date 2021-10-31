@@ -28,7 +28,7 @@
                     android:includeFontPadding="false"
                     android:textColor="#ED6868"
                     android:textSize="20dp"
-                    android:text="식당 검색"/>
+                    android:text="검색"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
@@ -48,34 +48,25 @@
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/search_text"
-                        android:layout_width="match_parent"
+                        android:layout_width="288dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:backgroundTint="#ED6868"
-                        android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_baseline_search_24"
                         android:hint="검색어를 입력해주세요" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/round_circle3"
-                        android:fontFamily="@font/notosansbold"
-                        android:includeFontPadding="false"
-                        android:textColor="#ffffff"
-                        android:textSize="15sp"
-                        android:text="검색" />
+                        android:text="Button" />
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/review_search_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/review_recycler_view"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -48,9 +48,6 @@
             android:name=".MyReview"
             android:exported="true" />
         <activity
-            android:name=".MytabreviewManage"
-            android:exported="true" />
-        <activity
             android:name=".RestSearch2"
             android:exported="true" />
         <activity

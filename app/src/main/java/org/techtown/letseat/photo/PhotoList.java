@@ -75,6 +75,38 @@ public class PhotoList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        menu_tag2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Review_Search.class);
+                intent.putExtra("text",menu_tag2.getText().toString());
+                startActivity(intent);
+            }
+        });
+        menu_tag3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Review_Search.class);
+                intent.putExtra("text",menu_tag3.getText().toString());
+                startActivity(intent);
+            }
+        });
+        menu_tag4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Review_Search.class);
+                intent.putExtra("text",menu_tag4.getText().toString());
+                startActivity(intent);
+            }
+        });
+        menu_tag5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Review_Search.class);
+                intent.putExtra("text",menu_tag5.getText().toString());
+                startActivity(intent);
+            }
+        });
         get_Review();
         get_ReviewTag();
         fm = getSupportFragmentManager();
