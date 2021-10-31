@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.ReviewSearch;
 import org.techtown.letseat.Review_Search;
 
 // 사진 탭에서 사진 클릭 시 나오는 플래그먼트
@@ -33,7 +34,7 @@ public class PhotoFragment extends Fragment {
     private float resrate;
     PhotoList photoList;
     MainActivity mainActivity;
-    Review_Search review_Search;
+    ReviewSearch reviewSearch;
     public View onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.photo_fragment, container, false);
     }
@@ -50,7 +51,7 @@ public class PhotoFragment extends Fragment {
         review.setText(review_text);
         photoList = PhotoList.photoList;
         mainActivity = MainActivity.mainActivity;
-        review_Search = Review_Search.review_Search;
+        reviewSearch = ReviewSearch.reviewSearch;
         PhotoFragment photoFragment = this;
         cancelButton = view.findViewById(R.id.photo_cancel);
         ratingBar2 = view.findViewById(R.id.ratingBar2);
@@ -69,8 +70,8 @@ public class PhotoFragment extends Fragment {
                 else if(photoList.check == true){
                     photoList.check = false;
                 }
-                else if(review_Search.check == true){
-                    review_Search.check = false;
+                else if(reviewSearch.check == true){
+                    reviewSearch.check = false;
                 }
 
                 getActivity().getSupportFragmentManager().beginTransaction().remove(photoFragment).commit();

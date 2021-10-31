@@ -60,14 +60,16 @@ public class MyReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_review);
-
-
-        recyclerView = findViewById(R.id.recyclerView);
-
-
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        recyclerView = findViewById(R.id.myTabReviewrecycler);
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId",0);
-
         get_Restaurant();
 
     }
@@ -87,7 +89,7 @@ public class MyReview extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String email,image,content;
+                            String email,image,content,date;
                             Double getrate;
                             float rate;
                             Bitmap bitmap;
@@ -102,13 +104,13 @@ public class MyReview extends AppCompatActivity {
                                 content = jsonObject.getString("content");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
-
+                                date = jsonObject.getString("date");
 
                                 list.add(email);
                                 list.add(rate);
                                 list.add(content);
                                 list.add(bitmap);
-
+                                list.add(date);
                             }
 
                             adapter.setItems(new RestItemReviewData().getItems(list));

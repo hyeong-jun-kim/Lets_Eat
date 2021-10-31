@@ -95,6 +95,8 @@ public class RestListMain extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.actionsearch:
                         Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
+                        settingIntent.putExtra("latitude",latitude);
+                        settingIntent.putExtra("longitude",longitude);
                         startActivity(settingIntent);
                         break;
                 }
