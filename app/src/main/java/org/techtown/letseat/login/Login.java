@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -47,7 +48,7 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button, sub_login_button;
+    private Button  btn_register, login_button;
     private LoginButton kakao_login_button;
     private ImageView fakeKakao;
     private EditText input_email, input_password;
@@ -65,17 +66,8 @@ public class Login extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
+        input_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         fakeKakao = findViewById(R.id.fake_kakao);
-
-        // 임시로그인용
-        sub_login_button = findViewById(R.id.sub_login_button);
-        sub_login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //로그인기능
         login_button.setOnClickListener(new View.OnClickListener() {

@@ -166,17 +166,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.911" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sub_login_button"
-        android:layout_width="336dp"
-        android:layout_height="61dp"
-        android:text="임시 로그인(서버없을시)"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button17"
-        tools:ignore="TouchTargetSizeCheck" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
