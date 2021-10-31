@@ -48,11 +48,12 @@
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/search_text"
-                        android:layout_width="288dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:backgroundTint="#ED6868"
                         android:drawableLeft="@drawable/ic_baseline_search_24"
                         android:hint="검색어를 입력해주세요" />
@@ -61,7 +62,16 @@
                         android:id="@+id/search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Button" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_circle3"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:text="검색" />
                 </LinearLayout>
                 <FrameLayout
                     android:layout_width="match_parent"
