@@ -1,24 +1,19 @@
 package org.techtown.letseat.mytab;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
-import org.techtown.letseat.RestSearch2;
-import org.techtown.letseat.idActivity;
-import org.techtown.letseat.order.OrderActivity;
-import org.techtown.letseat.passwordActivity;
+import org.techtown.letseat.IdActivity;
+import org.techtown.letseat.PasswordActivity;
 
-public class information_fix extends AppCompatActivity {
+public class Information_Fix extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +33,7 @@ public class information_fix extends AppCompatActivity {
         idIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), idActivity.class);
+                Intent intent = new Intent(getApplicationContext(), IdActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,7 +41,7 @@ public class information_fix extends AppCompatActivity {
         passwordIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), passwordActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PasswordActivity.class);
                 startActivity(intent);
             }
         });

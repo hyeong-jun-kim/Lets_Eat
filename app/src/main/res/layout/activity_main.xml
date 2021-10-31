@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">v
+        android:layout_height="match_parent">
 
         <ProgressBar
             android:id="@+id/loading"

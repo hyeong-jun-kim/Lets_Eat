@@ -55,11 +55,11 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                     }
                 }
                 int price = Integer.parseInt(item.getPrice());
+                menuNames.put(position, name+(num+1)+"개 ");
                 sum += price;
                 qr_restActivity.sumTextView.setText(sum + "원");
                 viewHolder.amount.setText("" + (num + 1));
                 amount_map.put(position, num+1);
-                menuNames.put(position, name+(num+1)+"개 ");
             }
         });
         viewHolder.downButton.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +73,15 @@ public class QR_MenuAdapter extends RecyclerView.Adapter<QR_MenuAdapter.ViewHold
                             selectMenu.remove(position+"");
                         if(amount_map.containsKey(position)){
                             amount_map.remove(position);
+                        }
+                        if(menuNames.containsKey(position)){
                             menuNames.remove(position);
                         }
+                        int price = Integer.parseInt(item.getPrice());
+                        sum -= price;
+                        qr_restActivity.sumTextView.setText(sum + "원");
+                        viewHolder.amount.setText("" + (num - 1));
+                        return;
                     }
                     int price = Integer.parseInt(item.getPrice());
                     sum -= price;

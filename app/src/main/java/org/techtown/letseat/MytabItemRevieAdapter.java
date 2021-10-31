@@ -10,31 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.techtown.letseat.R;
-import org.techtown.letseat.restaurant.review.RestItemReviewItem;
-
 import java.util.ArrayList;
 
-public class mytabitemreviewadapter extends RecyclerView.Adapter<org.techtown.letseat.mytabitemreviewadapter.ViewHolder> {
+public class MytabItemRevieAdapter extends RecyclerView.Adapter<MytabItemRevieAdapter.ViewHolder> {
 
-    private ArrayList<mytabreviewitem> items = new ArrayList<>();
+    private ArrayList<MyTabreViewItem> items = new ArrayList<>();
     private Context context;
 
     @NonNull
     @Override
-    public org.techtown.letseat.mytabitemreviewadapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public MytabItemRevieAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.mytabreview_recycler, parent, false);
-        org.techtown.letseat.mytabitemreviewadapter.ViewHolder viewHolder = new org.techtown.letseat.mytabitemreviewadapter.ViewHolder(itemView);
+        MytabItemRevieAdapter.ViewHolder viewHolder = new MytabItemRevieAdapter.ViewHolder(itemView);
         context = parent.getContext();
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull org.techtown.letseat.mytabitemreviewadapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull MytabItemRevieAdapter.ViewHolder viewHolder, int position) {
 
-        mytabreviewitem item = items.get(position);
+        MyTabreViewItem item = items.get(position);
 
         viewHolder.dateTv.setText(item.getDate());
         viewHolder.idTv.setText(item.getId());
@@ -46,7 +43,7 @@ public class mytabitemreviewadapter extends RecyclerView.Adapter<org.techtown.le
         return items.size();
     }
 
-    public void setItems(ArrayList<mytabreviewitem> items) {
+    public void setItems(ArrayList<MyTabreViewItem> items) {
         this.items = items;
     }
 

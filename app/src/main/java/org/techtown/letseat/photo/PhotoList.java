@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.chip.Chip;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +51,7 @@ import java.util.List;
 public class PhotoList extends AppCompatActivity {
     ProgressBar progressBar;
     private PhotoRecyclerAdapter adapter;
-    private Button menu_tag1,menu_tag2,menu_tag3,menu_tag4,menu_tag5;
+    private Chip menu_tag1,menu_tag2,menu_tag3,menu_tag4,menu_tag5;
     static public PhotoList photoList;
     public boolean check = false;
     PhotoFragment photoFragment;
