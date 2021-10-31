@@ -28,7 +28,7 @@
                     android:includeFontPadding="false"
                     android:textColor="#ED6868"
                     android:textSize="20dp"
-                    android:text="검색"/>
+                    android:text="식당 검색"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
@@ -64,7 +64,8 @@
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:id="@+id/review_recycler_view"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

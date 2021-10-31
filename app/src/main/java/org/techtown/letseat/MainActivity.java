@@ -156,24 +156,6 @@ public class MainActivity extends AppCompatActivity {
         layoutIndicator = findViewById(R.id.layoutIndicators);
         qrScan = new IntentIntegrator(this);
 
-        MaterialToolbar toolbar = findViewById(R.id.topMain);
-
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.actionsearch:
-                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
-                        settingIntent.putExtra("latitude",latitude);
-                        settingIntent.putExtra("longitude",longitude);
-                        startActivity(settingIntent);
-                        break;
-                }
-                return true;
-            }
-        });
-
-
         recyclerView = (RecyclerView) findViewById(R.id.mainRestRecycler);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);

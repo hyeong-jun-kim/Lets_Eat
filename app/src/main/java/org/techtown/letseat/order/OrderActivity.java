@@ -53,19 +53,6 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.actionsearch:
-                        Intent settingIntent = new Intent(getApplicationContext(), RestSearch2.class);
-                        startActivity(settingIntent);
-                        break;
-                }
-                return true;
-            }
-        });
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(fragment_order,"주문 내역");
         viewPagerAdapter.addFragment(fragment_order2,"준비중");
