@@ -48,11 +48,12 @@
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/search_text"
-                        android:layout_width="288dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:backgroundTint="#ED6868"
                         android:drawableLeft="@drawable/ic_baseline_search_24"
                         android:hint="검색어를 입력해주세요" />
