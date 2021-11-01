@@ -21,7 +21,7 @@ import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 
 public class waiting_Layout extends AppCompatActivity {
-    TextView peopleNumtv,resNameIdtv,nametv,waitingNumbertv,datetv;
+    TextView peopleNumtv,resNameIdtv,nametv,waitingNumbertv,datetv, infotv;
     int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class waiting_Layout extends AppCompatActivity {
         waitingNumbertv = findViewById(R.id.waitingNumbertv);
         peopleNumtv = findViewById(R.id.peopleNum);
         datetv = findViewById(R.id.datetv);
+        infotv = findViewById(R.id.res_parking);
         getWatingOrderList();
     }
     void getWatingOrderList() {
@@ -54,6 +55,9 @@ public class waiting_Layout extends AppCompatActivity {
                             String date = response.getString("date");     //접수시간
                             String resName = resObject.getString("resName");
                             resNameIdtv.setText(resName);
+                            if(Integer.parseInt(waitingNumber) == 0){
+                                infotv.setText("웨이팅 인원이 0명입니다. 식당으로 입장이 가능하십니다.");
+                            }
                             nametv.setText(name+"님의 대기현황");
                             waitingNumbertv.setText(waitingNumber);
                             peopleNumtv.setText("접수인원: "+peopleNum+"명");
