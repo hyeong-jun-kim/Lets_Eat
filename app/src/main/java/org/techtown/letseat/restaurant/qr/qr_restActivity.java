@@ -52,7 +52,7 @@ public class qr_restActivity extends AppCompatActivity {
     private ArrayList<QR_Menu> list = new ArrayList<>();
     private ArrayList<Integer> menus_id = new ArrayList<>();
     private ImageView resImage;
-    private int resId, tableNumber, orderId;
+    private int resId, tableNumber, orderId, ownerId;
     private QR_MenuAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
@@ -196,7 +196,7 @@ public class qr_restActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        DatabaseReference myRef = mRoootRef.child("ownerId_1");
+                        DatabaseReference myRef = mRoootRef.child("ownerId_"+ownerId);
                         myRef.setValue(orderId);
                         Log.d("OrderMenu","성공");
                     }
@@ -215,7 +215,6 @@ public class qr_restActivity extends AppCompatActivity {
     // 레스토랑 정보 가져오기
     void get_Restaurant() {
         String url = "http://125.132.62.150:8000/letseat/store/findOne?resId="+resId;
-        JsonObject jsonObject = new JsonObject();
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -226,6 +225,8 @@ public class qr_restActivity extends AppCompatActivity {
                         Bitmap bitmap = null;
                         String image = null;
                         try {
+                            JSONObject jsonObject = response.getJSONObject("owner");
+                            ownerId = jsonObject.getInt("ownerId");
                             title = response.getString("resName");
                             image = response.getString("image");
 

@@ -44,7 +44,7 @@ import java.util.List;
 public class WaitingActivity extends AppCompatActivity {
 
     DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
-    int num, resId;
+    int ownerId, resId;
     private TextView waiting_queue, person_number, waiting_res_title, waiting_res_resInfo;
     private Button waiting_btn1, waiting_btn2;
     private ImageButton minus_btn, plus_btn;
@@ -137,6 +137,8 @@ public class WaitingActivity extends AppCompatActivity {
                         Bitmap bitmap;
                         String image,resName,resIntro;
                         try {
+                            JSONObject jsonObject = response.getJSONObject("owner");
+                            ownerId = jsonObject.getInt("ownerId");
                             image = response.getString("image");
                             bitmap = PhotoSave.StringToBitmap(image);
                             resName = response.getString("resName");
@@ -190,7 +192,7 @@ public class WaitingActivity extends AppCompatActivity {
                         int waitingId;
                         try {
                             waitingId = response.getInt("waitingId");
-                            DatabaseReference myRef = mRoootRef.child("waiting_ownerId_1");
+                            DatabaseReference myRef = mRoootRef.child("waiting_ownerId_"+ownerId);
                             myRef.setValue(waitingId);
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(intent);
