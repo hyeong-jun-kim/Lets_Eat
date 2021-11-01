@@ -58,24 +58,26 @@
                             android:paddingLeft="15dp"
                             android:paddingTop="10dp"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:id="@+id/textView4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="대기번호"
-                                android:textColor="#000000"
                                 android:fontFamily="@font/notosansbold"
                                 android:includeFontPadding="false"
+                                android:text="장소 : "
+                                android:textColor="#000000"
                                 android:textSize="13dp" />
+
                             <TextView
-                                android:id="@+id/waitingIdtv"
+                                android:id="@+id/resNameIdtv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="17"
-                                android:paddingLeft="7dp"
-                                android:textColor="#000000"
                                 android:fontFamily="@font/notosansbold"
                                 android:includeFontPadding="false"
+                                android:paddingLeft="7dp"
+                                android:text="쩡이네 분식"
+                                android:textColor="#000000"
                                 android:textSize="13dp" />
                         </LinearLayout>
                     </FrameLayout>

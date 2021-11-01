@@ -634,7 +634,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView2.setAdapter(adapter2);
         getData();
     }
-
     // 처음 시작 시 리사이클러뷰 불러오기
     private void getData() {
         for (int i = 0; i < reviewImageList.size(); i++) {
@@ -661,7 +660,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     void get_Review() {
         String url = "http://125.132.62.150:8000/letseat/review/load/all";
         JSONArray getData = new JSONArray();
@@ -676,7 +674,7 @@ public class MainActivity extends AppCompatActivity {
                             String image;
                             Bitmap bitmap;
                             for(int i = 0; i < response.length(); i++){
-                                if(reviewNameList.size() > 9)
+                                if(reviewNameList.size() > 8)
                                     break;
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 JSONObject res_jsonObject = jsonObject.getJSONObject("restaurant");
