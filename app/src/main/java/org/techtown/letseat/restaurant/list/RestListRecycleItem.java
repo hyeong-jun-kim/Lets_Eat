@@ -7,12 +7,14 @@ public class RestListRecycleItem{
     private Bitmap bitmap;
     private String genre;
     private String name;
+    private float rate;
 
-    public RestListRecycleItem(Bitmap bitmap, String genre, String name) {
+    public RestListRecycleItem(Bitmap bitmap, String genre, String name,float rate) {
 
         this.bitmap = bitmap;
         this.genre = genre;
         this.name = name;
+        this.rate = rate;
     }
 
     public Bitmap getBitmap() {
@@ -27,5 +29,7 @@ public class RestListRecycleItem{
         return name;
     }
 
-
+    public float getRate() {
+        return rate;
+    }
 }

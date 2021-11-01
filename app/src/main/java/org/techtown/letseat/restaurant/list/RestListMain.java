@@ -217,6 +217,8 @@ public class RestListMain extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         try {
                             String restype,resName,location,image;
+                            int get_rate;
+                            float rate;
                             Bitmap bitmap;
 
                             for(int i = 0; i < response.length(); i++){
@@ -242,11 +244,14 @@ public class RestListMain extends AppCompatActivity {
                                     resName = jsonObject.getString("resName");
                                     image = jsonObject.getString("image");
                                     bitmap = PhotoSave.StringToBitmap(image);
+                                    get_rate = jsonObject.getInt("rate");
+                                    rate = (float) get_rate;
                                     resId = jsonObject.getInt("resId");
 
                                     list.add(bitmap);
                                     list.add(restype);
                                     list.add(resName);
+                                    list.add(rate);
                                     resIdList.add(resId);
                                 }
                             }

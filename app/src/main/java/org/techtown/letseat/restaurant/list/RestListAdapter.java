@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
         viewHolder.ivRest.setImageBitmap(item.getBitmap());
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvGenre.setText(item.getGenre());
-
+        viewHolder.ratingBar.setRating(item.getRate());
     }
 
     @Override
@@ -79,6 +80,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
 
         ImageView ivRest;
         TextView tvName,tvGenre;
+        RatingBar ratingBar;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -86,6 +88,7 @@ public class RestListAdapter extends RecyclerView.Adapter<RestListAdapter.ViewHo
             ivRest = itemView.findViewById(R.id.iv_item_res);
             tvName = itemView.findViewById(R.id.tv_item_res_name);
             tvGenre = itemView.findViewById(R.id.tv_item_food_genre);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
