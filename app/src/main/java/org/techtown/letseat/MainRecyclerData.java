@@ -8,11 +8,13 @@ public class MainRecyclerData extends ArrayList<MainRecyclerData> {
     private String restNameTv;
     private Bitmap bitmap;
     private Double differ;
+    private float rate;
 
-    public MainRecyclerData(Double differ, String restNameTv, Bitmap bitmap) {
+    public MainRecyclerData(Double differ, String restNameTv, Bitmap bitmap,float rate) {
         this.restNameTv = restNameTv;
         this.bitmap = bitmap;
         this.differ = differ;
+        this.rate = rate;
     }
 
     public String getRestNameTv() {
@@ -29,6 +31,10 @@ public class MainRecyclerData extends ArrayList<MainRecyclerData> {
 
     public Double getDiffer() {
         return differ;
+    }
+
+    public float getRate() {
+        return rate;
     }
 
 }

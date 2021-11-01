@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
         holder.restNameTv.setText(item.getRestNameTv());
         holder.restIv.setImageBitmap(item.getBitmap());
-
+        holder.ratingBar.setRating(item.getRate());
     }
     public interface OnItemClickListener
     {
@@ -64,12 +65,13 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         public TextView restNameTv;
         public View view1;
         public ImageView restIv;
+        public RatingBar ratingBar;
 
         public ViewHolder(View view){
             super(view);
             restNameTv = (TextView) view.findViewById(R.id.restNameTv);
             restIv = (ImageView) view.findViewById(R.id.restIv);
-
+            ratingBar = view.findViewById(R.id.ratingBar);
 
             view.setOnClickListener(new View.OnClickListener()
             {

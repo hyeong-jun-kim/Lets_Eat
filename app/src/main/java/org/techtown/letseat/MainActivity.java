@@ -475,6 +475,8 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             String resName,location,image;
                             Bitmap bitmap;
+                            int get_rate;
+                            float rate;
 
                             for(int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
@@ -483,6 +485,8 @@ public class MainActivity extends AppCompatActivity {
                                 location = jsonObject.getString("location");
                                 image = jsonObject.getString("image");
                                 bitmap = PhotoSave.StringToBitmap(image);
+                                get_rate = jsonObject.getInt("rate");
+                                rate = (float) get_rate;
                                 resId = jsonObject.getInt("resId");
 
 
@@ -500,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
                                 double lon = place.longitude;
                                 if ((latitude < lat + 0.05 && lat - 0.05 < latitude) || (longitude < lon + 0.07 && lon - 0.07 < longitude)) {
                                     Double differ = Math.abs(latitude - lat) + Math.abs(longitude - lon);    //현재위치와의 거리차이
-                                    MainRecyclerData item = new MainRecyclerData(differ,resName, bitmap);
+                                    MainRecyclerData item = new MainRecyclerData(differ,resName, bitmap,rate);
                                     items.add(item);
                                     resIdList.add(resId);
                                     differList.add(differ);
